@@ -6,22 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://niconiconi233.github.io">
-  <title>剑指offer 11 | NICO</title>
+  <title>剑指offer 01 | NICO</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="旋转数组的最小数字题目把一个数组最开始的若干数字搬到数组的末尾，称之为数组的旋转，输入一个递增排序的数组的一个旋转，输出旋转数组的最小元素">
+  <meta name="description" content="赋值运算符函数题目如下类型CMyString的声明，为该类型添加赋值运算函数">
 <meta name="keywords" content="剑指offer">
 <meta property="og:type" content="article">
-<meta property="og:title" content="剑指offer 11">
-<meta property="og:url" content="https://niconiconi233.github.io/2019/10/15/剑指offer-11/index.html">
+<meta property="og:title" content="剑指offer 01">
+<meta property="og:url" content="https://niconiconi233.github.io/2019/10/16/剑指offer-1/index.html">
 <meta property="og:site_name" content="NICO">
-<meta property="og:description" content="旋转数组的最小数字题目把一个数组最开始的若干数字搬到数组的末尾，称之为数组的旋转，输入一个递增排序的数组的一个旋转，输出旋转数组的最小元素">
+<meta property="og:description" content="赋值运算符函数题目如下类型CMyString的声明，为该类型添加赋值运算函数">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-15T15:13:29.940Z">
+<meta property="og:updated_time" content="2019-10-16T04:53:17.062Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="剑指offer 11">
-<meta name="twitter:description" content="旋转数组的最小数字题目把一个数组最开始的若干数字搬到数组的末尾，称之为数组的旋转，输入一个递增排序的数组的一个旋转，输出旋转数组的最小元素">
+<meta name="twitter:title" content="剑指offer 01">
+<meta name="twitter:description" content="赋值运算符函数题目如下类型CMyString的声明，为该类型添加赋值运算函数">
   
   
     <link rel="icon" href="/img/logo.ico">
@@ -196,14 +196,14 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-剑指offer-11" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-剑指offer-1" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      剑指offer 11
+      剑指offer 01
     </h1>
   
 
@@ -215,8 +215,8 @@
               <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
         </span>
 
-<a href="/2019/10/15/剑指offer-11/" class="archive-article-date">
-        <time datetime="2019-10-15T15:03:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-15</time>
+<a href="/2019/10/16/剑指offer-1/" class="archive-article-date">
+        <time datetime="2019-10-16T04:05:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-16</time>
 </a>
 
   
@@ -229,7 +229,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">213字</span>
+      <span class="post-count">124字</span>
     </span>
   </span>
 
@@ -249,10 +249,14 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="旋转数组的最小数字"><a href="#旋转数组的最小数字" class="headerlink" title="旋转数组的最小数字"></a>旋转数组的最小数字</h1><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>把一个数组最开始的若干数字搬到数组的末尾，称之为数组的旋转，输入一个递增排序的数组的一个旋转，输出旋转数组的最小元素</p>
+    <h1 id="赋值运算符函数"><a href="#赋值运算符函数" class="headerlink" title="赋值运算符函数"></a>赋值运算符函数</h1><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>如下类型CMyString的声明，为该类型添加赋值运算函数</p>
 <a id="more"></a>
 
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">minInOrder</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; arr, <span class="keyword">size_t</span> idx1, <span class="keyword">size_t</span> idx2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> res = arr[idx1];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">size_t</span> i = idx1 + <span class="number">1</span>; i &lt; idx2; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(res &gt; arr[i])</span><br><span class="line">            res = arr[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//右两个有序的子数组</span></span><br><span class="line"><span class="comment">//二分法查找最小的元素</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">func1</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; arr)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(arr.size() == <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> exception();</span><br><span class="line">    <span class="keyword">size_t</span> idx1 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">size_t</span> idx2 = arr.size() - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (arr[idx1] &gt;= arr[idx2])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(idx2 - idx1 == <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">size_t</span> mid = (idx1 + idx2) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(arr[idx1] == arr[idx2] &amp;&amp; arr[idx1] == arr[mid])<span class="comment">//只能顺序查找</span></span><br><span class="line">            <span class="keyword">return</span> minInOrder(arr, idx1, idx2);</span><br><span class="line">        <span class="keyword">if</span>(arr[mid] &gt;= arr[idx1])</span><br><span class="line">            idx1 = mid;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(arr[mid] &lt;= arr[idx2])</span><br><span class="line">            idx2 = mid;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> arr[idx2];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CMyString</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  CMyString(<span class="keyword">char</span>* data = <span class="literal">nullptr</span>);</span><br><span class="line">  CMyString(<span class="keyword">const</span> CMyString&amp; str);</span><br><span class="line">  ~CMyString();</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">  <span class="keyword">char</span>* data;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="解法一"><a href="#解法一" class="headerlink" title="解法一"></a>解法一</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">CMyString&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> CMyString&amp; <span class="built_in">string</span>)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">this</span> == &amp;<span class="built_in">string</span>)</span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">  <span class="keyword">int</span> length = <span class="built_in">strlen</span>(<span class="built_in">string</span>.data);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">char</span>* ptr = (<span class="keyword">char</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">char</span>)* length + <span class="number">1</span>);</span><br><span class="line">  <span class="keyword">if</span>(ptr == <span class="literal">nullptr</span>)</span><br><span class="line">    <span class="keyword">throw</span> <span class="built_in">std</span>::exception(<span class="string">"malloc error"</span>);</span><br><span class="line">  <span class="built_in">memcpy</span>(ptr, <span class="built_in">string</span>.data, length);</span><br><span class="line">  <span class="built_in">free</span>(data);</span><br><span class="line">  data = ptr;</span><br><span class="line">  <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="解法二"><a href="#解法二" class="headerlink" title="解法二"></a>解法二</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">CMyString&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> CMyString&amp; <span class="built_in">string</span>)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">this</span> != &amp;<span class="built_in">string</span>)</span><br><span class="line">  &#123;</span><br><span class="line">    CMyString tmp(<span class="built_in">string</span>);</span><br><span class="line">    swap(tmp.data, data);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
     
@@ -268,7 +272,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="https://niconiconi233.github.io/2019/10/15/剑指offer-11/" title="剑指offer 11" target="_blank">https://niconiconi233.github.io/2019/10/15/剑指offer-11/</a>
+          <a href="https://niconiconi233.github.io/2019/10/16/剑指offer-1/" title="剑指offer 01" target="_blank">https://niconiconi233.github.io/2019/10/16/剑指offer-1/</a>
         </li>
         <li>
           <strong>版权声明： </strong>
@@ -354,7 +358,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://niconiconi233.github.io/2019/10/15/剑指offer-11/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://niconiconi233.github.io/2019/10/16/剑指offer-1/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -369,18 +373,18 @@
 
 <nav id="article-nav">
   
-    <a href="/2019/10/16/剑指offer-12/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/10/16/剑指offer-2/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          剑指offer 12
+          剑指offer 02
         
       </div>
     </a>
   
   
-    <a href="/2019/10/15/剑指offer-10/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">剑指offer 10</div>
+    <a href="/2019/10/16/剑指offer-16/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">剑指offer 16</div>
       <i class="icon-circle-right"></i>
     </a>
   

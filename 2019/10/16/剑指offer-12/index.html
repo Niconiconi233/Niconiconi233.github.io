@@ -6,22 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://niconiconi233.github.io">
-  <title>剑指offer 11 | NICO</title>
+  <title>剑指offer 12 | NICO</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="旋转数组的最小数字题目把一个数组最开始的若干数字搬到数组的末尾，称之为数组的旋转，输入一个递增排序的数组的一个旋转，输出旋转数组的最小元素">
+  <meta name="description" content="矩阵中的路径题目设计一个函数，用来判断在矩阵中是否存在一条包含某字符串所有字符的路径，路径可以从矩阵中任意一格开始，可以向上下左右移动一格，如果经过了矩阵的某一格，那么不能再次进入该格子。">
 <meta name="keywords" content="剑指offer">
 <meta property="og:type" content="article">
-<meta property="og:title" content="剑指offer 11">
-<meta property="og:url" content="https://niconiconi233.github.io/2019/10/15/剑指offer-11/index.html">
+<meta property="og:title" content="剑指offer 12">
+<meta property="og:url" content="https://niconiconi233.github.io/2019/10/16/剑指offer-12/index.html">
 <meta property="og:site_name" content="NICO">
-<meta property="og:description" content="旋转数组的最小数字题目把一个数组最开始的若干数字搬到数组的末尾，称之为数组的旋转，输入一个递增排序的数组的一个旋转，输出旋转数组的最小元素">
+<meta property="og:description" content="矩阵中的路径题目设计一个函数，用来判断在矩阵中是否存在一条包含某字符串所有字符的路径，路径可以从矩阵中任意一格开始，可以向上下左右移动一格，如果经过了矩阵的某一格，那么不能再次进入该格子。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-15T15:13:29.940Z">
+<meta property="og:updated_time" content="2019-10-16T01:53:52.340Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="剑指offer 11">
-<meta name="twitter:description" content="旋转数组的最小数字题目把一个数组最开始的若干数字搬到数组的末尾，称之为数组的旋转，输入一个递增排序的数组的一个旋转，输出旋转数组的最小元素">
+<meta name="twitter:title" content="剑指offer 12">
+<meta name="twitter:description" content="矩阵中的路径题目设计一个函数，用来判断在矩阵中是否存在一条包含某字符串所有字符的路径，路径可以从矩阵中任意一格开始，可以向上下左右移动一格，如果经过了矩阵的某一格，那么不能再次进入该格子。">
   
   
     <link rel="icon" href="/img/logo.ico">
@@ -196,14 +196,14 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-剑指offer-11" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-剑指offer-12" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      剑指offer 11
+      剑指offer 12
     </h1>
   
 
@@ -215,8 +215,8 @@
               <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
         </span>
 
-<a href="/2019/10/15/剑指offer-11/" class="archive-article-date">
-        <time datetime="2019-10-15T15:03:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-15</time>
+<a href="/2019/10/16/剑指offer-12/" class="archive-article-date">
+        <time datetime="2019-10-16T01:11:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-16</time>
 </a>
 
   
@@ -229,7 +229,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">213字</span>
+      <span class="post-count">306字</span>
     </span>
   </span>
 
@@ -249,10 +249,10 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="旋转数组的最小数字"><a href="#旋转数组的最小数字" class="headerlink" title="旋转数组的最小数字"></a>旋转数组的最小数字</h1><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>把一个数组最开始的若干数字搬到数组的末尾，称之为数组的旋转，输入一个递增排序的数组的一个旋转，输出旋转数组的最小元素</p>
+    <h1 id="矩阵中的路径"><a href="#矩阵中的路径" class="headerlink" title="矩阵中的路径"></a>矩阵中的路径</h1><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>设计一个函数，用来判断在矩阵中是否存在一条包含某字符串所有字符的路径，路径可以从矩阵中任意一格开始，可以向上下左右移动一格，如果经过了矩阵的某一格，那么不能再次进入该格子。</p>
 <a id="more"></a>
 
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">minInOrder</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; arr, <span class="keyword">size_t</span> idx1, <span class="keyword">size_t</span> idx2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> res = arr[idx1];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">size_t</span> i = idx1 + <span class="number">1</span>; i &lt; idx2; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(res &gt; arr[i])</span><br><span class="line">            res = arr[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//右两个有序的子数组</span></span><br><span class="line"><span class="comment">//二分法查找最小的元素</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">func1</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; arr)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(arr.size() == <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> exception();</span><br><span class="line">    <span class="keyword">size_t</span> idx1 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">size_t</span> idx2 = arr.size() - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (arr[idx1] &gt;= arr[idx2])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(idx2 - idx1 == <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">size_t</span> mid = (idx1 + idx2) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(arr[idx1] == arr[idx2] &amp;&amp; arr[idx1] == arr[mid])<span class="comment">//只能顺序查找</span></span><br><span class="line">            <span class="keyword">return</span> minInOrder(arr, idx1, idx2);</span><br><span class="line">        <span class="keyword">if</span>(arr[mid] &gt;= arr[idx1])</span><br><span class="line">            idx1 = mid;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(arr[mid] &lt;= arr[idx2])</span><br><span class="line">            idx2 = mid;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> arr[idx2];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">hasPath</span><span class="params">(<span class="keyword">char</span>* matrix, <span class="keyword">int</span> rows, <span class="keyword">int</span> cols, <span class="keyword">char</span>* str)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(matrix == <span class="literal">nullptr</span> || str == <span class="literal">nullptr</span> ||rows &lt;= <span class="number">0</span> || cols &lt;= <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt; visited = <span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt;(rows * cols, <span class="literal">false</span>);</span><br><span class="line">  <span class="keyword">int</span> length = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;rows; ++i)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; cols; ++j)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">if</span>(hasPathCore(matrix, rows, cols, i, j, str, length, visited))</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">hasPathCore</span><span class="params">(<span class="keyword">char</span>* matrix, <span class="keyword">int</span> rows, <span class="keyword">int</span> cols, <span class="keyword">int</span> i, <span class="keyword">int</span> j, <span class="keyword">char</span>* str, <span class="keyword">int</span>&amp; length, <span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt;&amp; visited)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(str[length] == <span class="string">'\0'</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">bool</span> hasPath = <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">if</span>(i &gt;= <span class="number">0</span> &amp;&amp; i &lt; rows &amp;&amp; j &gt;= <span class="number">0</span> &amp;&amp; j &lt;= cols &amp;&amp; matrix[i * cols + j] == str[length] &amp;&amp; !visited[i * rows + j])<span class="comment">//该字符相同</span></span><br><span class="line">  &#123;</span><br><span class="line">    ++length;</span><br><span class="line">    visited[i * cols + j] = <span class="literal">true</span>;</span><br><span class="line">    hasPath = hasPathCore(matrix, rows, cols, i - <span class="number">1</span>, j, str, length, visited)||hasPathCore(matrix, rows, cols, i + <span class="number">1</span>, j, str, length, visited)<span class="comment">//判断上下左右</span></span><br><span class="line">    ||hasPathCore(matrix, rows, cols, i, j - <span class="number">1</span>, str, length, visited)||hasPathCore(matrix, rows, cols, i, j + <span class="number">1</span>, str, length, visited);</span><br><span class="line">    <span class="keyword">if</span>(!hasPath)<span class="comment">//不相同，重置</span></span><br><span class="line">    &#123;</span><br><span class="line">      --length;</span><br><span class="line">      visited[i * rows + j] = <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> hasPath;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
     
@@ -268,7 +268,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="https://niconiconi233.github.io/2019/10/15/剑指offer-11/" title="剑指offer 11" target="_blank">https://niconiconi233.github.io/2019/10/15/剑指offer-11/</a>
+          <a href="https://niconiconi233.github.io/2019/10/16/剑指offer-12/" title="剑指offer 12" target="_blank">https://niconiconi233.github.io/2019/10/16/剑指offer-12/</a>
         </li>
         <li>
           <strong>版权声明： </strong>
@@ -354,7 +354,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://niconiconi233.github.io/2019/10/15/剑指offer-11/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://niconiconi233.github.io/2019/10/16/剑指offer-12/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -369,18 +369,18 @@
 
 <nav id="article-nav">
   
-    <a href="/2019/10/16/剑指offer-12/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/10/16/剑指offer-13/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          剑指offer 12
+          剑指offer 13
         
       </div>
     </a>
   
   
-    <a href="/2019/10/15/剑指offer-10/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">剑指offer 10</div>
+    <a href="/2019/10/15/剑指offer-11/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">剑指offer 11</div>
       <i class="icon-circle-right"></i>
     </a>
   
