@@ -10,18 +10,18 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="合并两个排序的链表题目输入两个递增排序的链表，合并两个链表，并是新链表中的节点任然是递增排序的   123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657ListNode* mergeList()&amp;#123;	ListNode* list1Pt">
+  <meta name="description" content="合并两个排序的链表题目输入两个递增排序的链表，合并两个链表，并是新链表中的节点任然是递增排序的">
 <meta name="keywords" content="剑指offer">
 <meta property="og:type" content="article">
 <meta property="og:title" content="剑指offer 25">
 <meta property="og:url" content="https://niconiconi233.github.io/2019/10/17/剑指offer-25/index.html">
 <meta property="og:site_name" content="NICO">
-<meta property="og:description" content="合并两个排序的链表题目输入两个递增排序的链表，合并两个链表，并是新链表中的节点任然是递增排序的   123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657ListNode* mergeList()&amp;#123;	ListNode* list1Pt">
+<meta property="og:description" content="合并两个排序的链表题目输入两个递增排序的链表，合并两个链表，并是新链表中的节点任然是递增排序的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-17T07:35:30.904Z">
+<meta property="og:updated_time" content="2019-10-29T13:43:50.394Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="剑指offer 25">
-<meta name="twitter:description" content="合并两个排序的链表题目输入两个递增排序的链表，合并两个链表，并是新链表中的节点任然是递增排序的   123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657ListNode* mergeList()&amp;#123;	ListNode* list1Pt">
+<meta name="twitter:description" content="合并两个排序的链表题目输入两个递增排序的链表，合并两个链表，并是新链表中的节点任然是递增排序的">
   
   
     <link rel="icon" href="/img/logo.ico">
@@ -250,7 +250,7 @@
   <div class="article-entry" itemprop="articleBody">
     
     <h1 id="合并两个排序的链表"><a href="#合并两个排序的链表" class="headerlink" title="合并两个排序的链表"></a>合并两个排序的链表</h1><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>输入两个递增排序的链表，合并两个链表，并是新链表中的节点任然是递增排序的</p>
-<!--nore-->
+<a id="more"></a>
 
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ListNode* <span class="title">mergeList</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ListNode* list1Ptr = list1.getHead();</span><br><span class="line">	ListNode* list2Ptr = list2.getHead();</span><br><span class="line"></span><br><span class="line">  <span class="comment">//其中任何一个为空，直接返回对方</span></span><br><span class="line">	<span class="keyword">if</span> (list1Ptr == <span class="literal">nullptr</span>)</span><br><span class="line">		<span class="keyword">return</span> list2Ptr;</span><br><span class="line">	<span class="keyword">if</span> (list2Ptr == <span class="literal">nullptr</span>)</span><br><span class="line">		<span class="keyword">return</span> list1Ptr;</span><br><span class="line"></span><br><span class="line">	ListNode* ptr = <span class="literal">nullptr</span>;</span><br><span class="line">	ListNode* newhead = <span class="literal">nullptr</span>;</span><br><span class="line">  <span class="comment">//判断新头结点</span></span><br><span class="line">	<span class="keyword">if</span> (list1Ptr-&gt;value &lt; list2Ptr-&gt;value)</span><br><span class="line">	&#123;</span><br><span class="line">		ptr = list1Ptr;</span><br><span class="line">		list1Ptr = list1Ptr-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		ptr = list2Ptr;</span><br><span class="line">		list2Ptr = list2Ptr-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line">	newhead = ptr;</span><br><span class="line">	<span class="keyword">while</span> (list1Ptr != <span class="literal">nullptr</span> &amp;&amp; list2Ptr != <span class="literal">nullptr</span>)</span><br><span class="line">	&#123;</span><br><span class="line">    <span class="comment">//排序</span></span><br><span class="line">		<span class="keyword">if</span> (list1Ptr-&gt;value &lt; list2Ptr-&gt;value)</span><br><span class="line">		&#123;</span><br><span class="line">			ptr-&gt;next = list1Ptr;</span><br><span class="line">			list1Ptr = list1Ptr-&gt;next;</span><br><span class="line">			ptr = ptr-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			ptr-&gt;next = list2Ptr;</span><br><span class="line">			list2Ptr = list2Ptr-&gt;next;</span><br><span class="line">			ptr = ptr-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">  <span class="comment">//有剩下的节点</span></span><br><span class="line">	<span class="keyword">if</span> (list1Ptr != <span class="literal">nullptr</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		ptr-&gt;next = list1Ptr;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (list2Ptr != <span class="literal">nullptr</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		ptr-&gt;next = list2Ptr;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (newhead == list1.getHead())</span><br><span class="line">		list2.setHead(<span class="literal">nullptr</span>);</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		list1.setHead(<span class="literal">nullptr</span>);</span><br><span class="line">	<span class="keyword">return</span> newhead;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -568,6 +568,14 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">原理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">调试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">TCP</a>
               </li>
             
             <div class="clearfix"></div>
