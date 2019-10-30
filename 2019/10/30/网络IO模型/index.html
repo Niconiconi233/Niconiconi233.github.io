@@ -6,22 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://niconiconi233.github.io">
-  <title>剑指offer 20 | NICO</title>
+  <title>网络IO模型 | NICO</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="表示数值的字符串题目请实现一个函数用来判断字符串是否表示数值(包括整数和小数)，列如字符串+100,5e2,-123,3.1316,及-1E-16都表示数值，表示数字的字符串遵循模式A[.[B]][e|[EC]],其中A为数值的整数部分，B紧跟着的为小数部分，C部分为指数部分">
-<meta name="keywords" content="剑指offer">
+  <meta name="description" content="4种网络IO模型阻塞IO模型">
+<meta name="keywords" content="IO">
 <meta property="og:type" content="article">
-<meta property="og:title" content="剑指offer 20">
-<meta property="og:url" content="https://niconiconi233.github.io/2019/10/17/剑指offer-20/index.html">
+<meta property="og:title" content="网络IO模型">
+<meta property="og:url" content="https://niconiconi233.github.io/2019/10/30/网络IO模型/index.html">
 <meta property="og:site_name" content="NICO">
-<meta property="og:description" content="表示数值的字符串题目请实现一个函数用来判断字符串是否表示数值(包括整数和小数)，列如字符串+100,5e2,-123,3.1316,及-1E-16都表示数值，表示数字的字符串遵循模式A[.[B]][e|[EC]],其中A为数值的整数部分，B紧跟着的为小数部分，C部分为指数部分">
+<meta property="og:description" content="4种网络IO模型阻塞IO模型">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-17T04:17:08.238Z">
+<meta property="og:image" content="https://niconiconi233.github.io/2019/10/30/网络IO模型/%E9%98%BB%E5%A1%9E.PNG">
+<meta property="og:image" content="https://niconiconi233.github.io/2019/10/30/网络IO模型/%E9%9D%9E%E9%98%BB%E5%A1%9E.PNG">
+<meta property="og:image" content="https://niconiconi233.github.io/2019/10/30/网络IO模型/%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8.PNG">
+<meta property="og:image" content="https://niconiconi233.github.io/2019/10/30/网络IO模型/%E5%BC%82%E6%AD%A5.PNG">
+<meta property="og:updated_time" content="2019-10-30T07:30:37.666Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="剑指offer 20">
-<meta name="twitter:description" content="表示数值的字符串题目请实现一个函数用来判断字符串是否表示数值(包括整数和小数)，列如字符串+100,5e2,-123,3.1316,及-1E-16都表示数值，表示数字的字符串遵循模式A[.[B]][e|[EC]],其中A为数值的整数部分，B紧跟着的为小数部分，C部分为指数部分">
+<meta name="twitter:title" content="网络IO模型">
+<meta name="twitter:description" content="4种网络IO模型阻塞IO模型">
+<meta name="twitter:image" content="https://niconiconi233.github.io/2019/10/30/网络IO模型/%E9%98%BB%E5%A1%9E.PNG">
   
   
     <link rel="icon" href="/img/logo.ico">
@@ -196,14 +201,14 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-剑指offer-20" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-网络IO模型" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      剑指offer 20
+      网络IO模型
     </h1>
   
 
@@ -215,8 +220,8 @@
               <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
         </span>
 
-<a href="/2019/10/17/剑指offer-20/" class="archive-article-date">
-        <time datetime="2019-10-17T03:59:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-17</time>
+<a href="/2019/10/30/网络IO模型/" class="archive-article-date">
+        <time datetime="2019-10-30T05:22:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-30</time>
 </a>
 
   
@@ -229,7 +234,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">285字</span>
+      <span class="post-count">646字</span>
     </span>
   </span>
 
@@ -238,7 +243,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">1分</span>
+      <span class="post-count">2分</span>
     </span>
   </span>
 </div>
@@ -249,11 +254,99 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="表示数值的字符串"><a href="#表示数值的字符串" class="headerlink" title="表示数值的字符串"></a>表示数值的字符串</h1><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>请实现一个函数用来判断字符串是否表示数值(包括整数和小数)，列如字符串+100,5e2,-123,3.1316,及-1E-16都表示数值，表示数字的字符串遵循模式A[.[B]][e|[EC]],其中A为数值的整数部分，B紧跟着的为小数部分，C部分为指数部分</p>
+    <h1 id="4种网络IO模型"><a href="#4种网络IO模型" class="headerlink" title="4种网络IO模型"></a>4种网络IO模型</h1><h2 id="阻塞IO模型"><a href="#阻塞IO模型" class="headerlink" title="阻塞IO模型"></a>阻塞IO模型</h2><p><img src="/2019/10/30/网络IO模型/%E9%98%BB%E5%A1%9E.PNG" alt></p>
 <a id="more"></a>
 
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">scanUnsignedInteger</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>** str)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">char</span>* before = *str;</span><br><span class="line">	<span class="keyword">while</span> (**str != <span class="string">'\0'</span> &amp;&amp; **str &gt;= <span class="string">'0'</span> &amp;&amp; **str &lt;= <span class="string">'9'</span>)</span><br><span class="line">		++*str;</span><br><span class="line">	<span class="keyword">return</span> *str &gt; before;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">scanInteger</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>** str)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (**str == <span class="string">'+'</span> || **str == <span class="string">'-'</span>)</span><br><span class="line">		++*str;</span><br><span class="line">	<span class="keyword">return</span> scanUnsignedInteger(str);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	A[.B][e|EC] 或 .B[e|EC]</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isNumber</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp; number)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (number.size() == <span class="number">0</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">char</span>* str = number.c_str();</span><br><span class="line"></span><br><span class="line">  <span class="comment">//是否有整数</span></span><br><span class="line">	<span class="keyword">bool</span> numeric = scanInteger(&amp;str);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (*str == <span class="string">'.'</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		++str;</span><br><span class="line">		<span class="comment">//使用||原因 .号前可以没有整数 0.233 == .233</span></span><br><span class="line">		<span class="comment">//.号后可以没有整数233.</span></span><br><span class="line">		<span class="comment">//.号前后都可以有整数</span></span><br><span class="line">		numeric = scanUnsignedInteger(&amp;str) || numeric;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (*str == <span class="string">'e'</span> || *str == <span class="string">'E'</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		++str;</span><br><span class="line">		<span class="comment">//使用&amp;&amp;的原因 e前必须要有数字 e123不能表示数字</span></span><br><span class="line">		<span class="comment">//e后没有数字不能表示数字 123.e 或123.e2.5</span></span><br><span class="line">		numeric = scanInteger(&amp;str) &amp;&amp; numeric;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> numeric &amp;&amp; *str == <span class="string">'\0'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="非阻塞IO模型"><a href="#非阻塞IO模型" class="headerlink" title="非阻塞IO模型"></a>非阻塞IO模型</h2><p><img src="/2019/10/30/网络IO模型/%E9%9D%9E%E9%98%BB%E5%A1%9E.PNG" alt></p>
+<h2 id="多路IO复用模型"><a href="#多路IO复用模型" class="headerlink" title="多路IO复用模型"></a>多路IO复用模型</h2><p><img src="/2019/10/30/网络IO模型/%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8.PNG" alt></p>
+<h2 id="异步IO模型"><a href="#异步IO模型" class="headerlink" title="异步IO模型"></a>异步IO模型</h2><p><img src="/2019/10/30/网络IO模型/%E5%BC%82%E6%AD%A5.PNG" alt></p>
+<h2 id="select"><a href="#select" class="headerlink" title="select"></a>select</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">select</span><span class="params">(<span class="keyword">int</span> maxfd, fd_set* rfds, fd_set* wfds, fd_set* efds, timeval* timeout)</span></span>;</span><br><span class="line">fd_set <span class="built_in">set</span>;<span class="comment">//fd集合</span></span><br><span class="line">FD_ZERO(&amp;<span class="built_in">set</span>);<span class="comment">//清零</span></span><br><span class="line">FD_SET(fd, &amp;<span class="built_in">set</span>);<span class="comment">//将fd加入set</span></span><br><span class="line">FD_CLR(fd, &amp;<span class="built_in">set</span>);<span class="comment">//将fd清除</span></span><br><span class="line">FD_ISSET(fd, &amp;<span class="built_in">set</span>);<span class="comment">//如果fd在set中为真</span></span><br></pre></td></tr></table></figure>
 
+<ul>
+<li>timeout为超时时间,如果为NULL,则为阻塞状态，一直等到有某个文件描述符发生变化为止</li>
+<li>若timeout为0，则变为非阻塞函数，不管是否有变化，都立刻继续执行，无变化返回0，有变化返回正数</li>
+<li>timeout大于0，这就是等待的超时时间，如果在超时时间内有事件到达，就返回，否则超时后立刻返回</li>
+<li>返回值，返回就绪的描述符数，若超时返回0，出错返回-1</li>
+</ul>
+<h2 id="poll"><a href="#poll" class="headerlink" title="poll"></a>poll</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;pool.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">poll</span><span class="params">(struct pollfd* fds, <span class="keyword">unsigned</span> <span class="keyword">int</span> nfds, <span class="keyword">int</span> timeout)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">pollfd</span>&#123;</span></span><br><span class="line">  <span class="keyword">int</span> fd;</span><br><span class="line">  <span class="keyword">short</span> events;<span class="comment">//等待的事件</span></span><br><span class="line">  <span class="keyword">short</span> revents;<span class="comment">//实际发生的事件</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>事件分类</th>
+<th>事件代码</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>合法事件</td>
+<td>POLLIN</td>
+<td>有数据可读</td>
+</tr>
+<tr>
+<td></td>
+<td>POLLRDNORM</td>
+<td>普通数据可读</td>
+</tr>
+<tr>
+<td></td>
+<td>POLLRDBAND</td>
+<td>优先数据可读</td>
+</tr>
+<tr>
+<td></td>
+<td>POLLPRI</td>
+<td>有紧迫数据可读</td>
+</tr>
+<tr>
+<td></td>
+<td>POLLOUT</td>
+<td>可写</td>
+</tr>
+<tr>
+<td></td>
+<td>POLLWRNORM</td>
+<td>普通数据可写</td>
+</tr>
+<tr>
+<td></td>
+<td>POLLMSGSIGPOLL</td>
+<td>消息可用</td>
+</tr>
+<tr>
+<td>非法事件</td>
+<td>POLLER</td>
+<td>指定描述符错误</td>
+</tr>
+<tr>
+<td></td>
+<td>POLLHUP</td>
+<td>指定描述符挂起错误</td>
+</tr>
+<tr>
+<td></td>
+<td>POLLNVAL</td>
+<td>指定描述符非法</td>
+</tr>
+</tbody></table>
+<p>成功时返回结构体中revents域不为0的文件描述符个数，如果在超时前没有任何事件发生，返回0，失败是返回-1,并设置errno为下列值:</p>
+<ol>
+<li>EBADF:一个或多个结构体中指定的文件描述符无效</li>
+<li>EFAULTfds:指针指向的地址超所进程的地址空间</li>
+<li>EINTR:被信号中断，可以重新发起调用</li>
+<li>EINVALnfds:参数超出PLIMIT_NOFILE值</li>
+<li>ENOMEM:可用内存不足</li>
+</ol>
+<h2 id="epoll"><a href="#epoll" class="headerlink" title="epoll"></a>epoll</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/epoll.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">epoll_create</span><span class="params">(<span class="keyword">int</span> size)</span></span>;<span class="comment">//创建epoll句柄，size表示内核监听数量</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">epoll_ctl</span><span class="params">(<span class="keyword">int</span> epfd, <span class="keyword">int</span> op, <span class="keyword">int</span> fd, struct epoll_event* event)</span></span>;</span><br><span class="line"><span class="comment">//EPOLL_CTL_ADD 添加fd到epoll中，EPOLL_CTL_MOD,修改已经注册的监听事件，EPOLL_CTL_DEL，从epoll中删除一个fd</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">epoll_wait</span><span class="params">(<span class="keyword">int</span> epfd, struct epoll_event* events, <span class="keyword">int</span> maxevents, <span class="keyword">int</span> timeout)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">epoll_event</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">__uint32_t</span> events;</span><br><span class="line">  <span class="keyword">epoll_data_t</span> data;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>EPOLLIN表示对应的文件描述符可读(包括对端socket正常关闭)</li>
+<li>EPOLLOUT表示对应文件描述符可写</li>
+<li>EPOLLPRI表示对应的文件描述符有紧急数据可读</li>
+<li>EPOLLHUP表示对应的文件描述符被挂断</li>
+<li>EPOLLET将epoll设为边缘触发模式，相对于水平触发</li>
+<li>EPOLLONESHOT只监听一次事件，当监听完事件后，如果还要继续监听，需要再次将fd加入到epoll队列里</li>
+</ul>
 
     
 
@@ -268,7 +361,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="https://niconiconi233.github.io/2019/10/17/剑指offer-20/" title="剑指offer 20" target="_blank">https://niconiconi233.github.io/2019/10/17/剑指offer-20/</a>
+          <a href="https://niconiconi233.github.io/2019/10/30/网络IO模型/" title="网络IO模型" target="_blank">https://niconiconi233.github.io/2019/10/30/网络IO模型/</a>
         </li>
         <li>
           <strong>版权声明： </strong>
@@ -287,7 +380,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">剑指offer</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">IO</a>
         		</li>
       		
 		</ul>
@@ -299,7 +392,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/算法//" class="article-tag-list-link color3">算法</a>
+        			<a href="/categories/网络//" class="article-tag-list-link color3">网络</a>
         		</li>
       		
 		</ul>
@@ -354,7 +447,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://niconiconi233.github.io/2019/10/17/剑指offer-20/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://niconiconi233.github.io/2019/10/30/网络IO模型/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -369,18 +462,9 @@
 
 <nav id="article-nav">
   
-    <a href="/2019/10/17/剑指offer-21/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          剑指offer 21
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/10/17/剑指offer-19/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">剑指offer 19</div>
+    <a href="/2019/10/29/TCP协议/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">TCP协议</div>
       <i class="icon-circle-right"></i>
     </a>
   
