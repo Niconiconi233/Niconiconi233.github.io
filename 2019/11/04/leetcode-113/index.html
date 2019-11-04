@@ -6,22 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://niconiconi233.github.io">
-  <title>剑指offer 41 | NICO</title>
+  <title>leetcode-113 | NICO</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="数据流中的中位数题目如何得到一个数据流中的中位数，如果从数据流中读出奇数个数值，则为中间数值，如果是偶数，则是中间的两数的平均数">
-<meta name="keywords" content="剑指offer">
+  <meta name="description" content="leetcode-113 路径总和II题目描述给定一个二叉树和一个目标和，找到所有从根节点到叶子节点路径总和等于给定目标和的路径。 说明: 叶子节点是指没有子节点的节点。 示例:给定如下二叉树，以及目标和 sum = 22，       5      / \     4   8    /   / \   11  13  4  /  \    / \ 7    2  5   1返回: [   [5,">
+<meta name="keywords" content="leetcode,二叉树">
 <meta property="og:type" content="article">
-<meta property="og:title" content="剑指offer 41">
-<meta property="og:url" content="https://niconiconi233.github.io/2019/10/27/剑指offer-41/index.html">
+<meta property="og:title" content="leetcode-113">
+<meta property="og:url" content="https://niconiconi233.github.io/2019/11/04/leetcode-113/index.html">
 <meta property="og:site_name" content="NICO">
-<meta property="og:description" content="数据流中的中位数题目如何得到一个数据流中的中位数，如果从数据流中读出奇数个数值，则为中间数值，如果是偶数，则是中间的两数的平均数">
+<meta property="og:description" content="leetcode-113 路径总和II题目描述给定一个二叉树和一个目标和，找到所有从根节点到叶子节点路径总和等于给定目标和的路径。 说明: 叶子节点是指没有子节点的节点。 示例:给定如下二叉树，以及目标和 sum = 22，       5      / \     4   8    /   / \   11  13  4  /  \    / \ 7    2  5   1返回: [   [5,">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-27T09:00:09.606Z">
+<meta property="og:updated_time" content="2019-11-04T12:29:41.947Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="剑指offer 41">
-<meta name="twitter:description" content="数据流中的中位数题目如何得到一个数据流中的中位数，如果从数据流中读出奇数个数值，则为中间数值，如果是偶数，则是中间的两数的平均数">
+<meta name="twitter:title" content="leetcode-113">
+<meta name="twitter:description" content="leetcode-113 路径总和II题目描述给定一个二叉树和一个目标和，找到所有从根节点到叶子节点路径总和等于给定目标和的路径。 说明: 叶子节点是指没有子节点的节点。 示例:给定如下二叉树，以及目标和 sum = 22，       5      / \     4   8    /   / \   11  13  4  /  \    / \ 7    2  5   1返回: [   [5,">
   
   
     <link rel="icon" href="/img/logo.ico">
@@ -196,14 +196,14 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-剑指offer-41" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-leetcode-113" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      剑指offer 41
+      leetcode-113
     </h1>
   
 
@@ -215,8 +215,8 @@
               <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
         </span>
 
-<a href="/2019/10/27/剑指offer-41/" class="archive-article-date">
-        <time datetime="2019-10-27T08:48:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-27</time>
+<a href="/2019/11/04/leetcode-113/" class="archive-article-date">
+        <time datetime="2019-11-04T12:00:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-04</time>
 </a>
 
   
@@ -229,7 +229,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">279字</span>
+      <span class="post-count">235字</span>
     </span>
   </span>
 
@@ -249,12 +249,57 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="数据流中的中位数"><a href="#数据流中的中位数" class="headerlink" title="数据流中的中位数"></a>数据流中的中位数</h1><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>如何得到一个数据流中的中位数，如果从数据流中读出奇数个数值，则为中间数值，如果是偶数，则是中间的两数的平均数</p>
+    <h1 id="leetcode-113-路径总和II"><a href="#leetcode-113-路径总和II" class="headerlink" title="leetcode-113 路径总和II"></a>leetcode-113 路径总和II</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个二叉树和一个目标和，找到所有从根节点到叶子节点路径总和等于给定目标和的路径。</p>
+<p>说明: 叶子节点是指没有子节点的节点。</p>
+<p>示例:<br>给定如下二叉树，以及目标和 sum = 22，</p>
+<pre><code>      5
+     / \
+    4   8
+   /   / \
+  11  13  4
+ /  \    / \
+7    2  5   1</code></pre><p>返回:</p>
+<p>[<br>   [5,4,11,2],<br>   [5,8,4,5]<br>]</p>
 <a id="more"></a>
-
-<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><p>使用一个最大堆，一个最小堆，为了实现平均分配，在总数为偶数时插入最小堆，否则插入最大堆，还要保证最大堆所有元素都比最小堆小，所以需要调整数值</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> MinHeap = <span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;;</span><br><span class="line"><span class="keyword">using</span> MaxHeap = <span class="built_in">set</span>&lt;<span class="keyword">int</span>, greater&lt;<span class="keyword">int</span>&gt; &gt;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DynamicArray</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> value)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(((minHeap_.size() + maxHeap_.size()) &amp; <span class="number">1</span>) == <span class="number">0</span>)<span class="comment">//偶数 插入到最小堆</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//保证最小堆中每个数都比最大堆大</span></span><br><span class="line">            <span class="keyword">if</span>(maxHeap_.size() &gt; <span class="number">0</span> &amp;&amp; value &lt; *maxHeap_.begin())</span><br><span class="line">            &#123;</span><br><span class="line">                maxHeap_.emplace(value);</span><br><span class="line">                value = *maxHeap_.begin();</span><br><span class="line">                maxHeap_.erase(maxHeap_.begin());</span><br><span class="line">                <span class="comment">//minHeap_.emplace(tmp);</span></span><br><span class="line">            &#125;</span><br><span class="line">            minHeap_.emplace(value);</span><br><span class="line">        &#125;<span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(minHeap_.size() &gt; <span class="number">0</span> &amp;&amp; value &gt; *minHeap_.begin())</span><br><span class="line">            &#123;</span><br><span class="line">                minHeap_.emplace(value);</span><br><span class="line">                value = *minHeap_.begin();</span><br><span class="line">                minHeap_.erase(minHeap_.begin());</span><br><span class="line">            &#125;</span><br><span class="line">            maxHeap_.emplace(value);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getMedian</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> size = minHeap_.size() + maxHeap_.size();</span><br><span class="line">        <span class="keyword">if</span>(size == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(size &amp; <span class="number">1</span> == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> (*minHeap_.begin() + *maxHeap_.begin()) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span> *minHeap_.begin();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    MinHeap minHeap_;</span><br><span class="line">    MaxHeap maxHeap_;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
+<h2 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h2><p>/**</p>
+<ul>
+<li><p>Definition for a binary tree node.</p>
+</li>
+<li><p>struct TreeNode {</p>
+</li>
+<li><p>int val;</p>
+</li>
+<li><p>TreeNode *left;</p>
+</li>
+<li><p>TreeNode *right;</p>
+</li>
+<li><p>TreeNode(int x) : val(x), left(NULL), right(NULL) {}</p>
+</li>
+<li><p>};</p>
+</li>
+<li><p>/<br>class Solution {<br>public:<br>  vector&lt;vector<int>&gt; pathSum(TreeNode* root, int sum) {</int></p>
+<pre><code>vector&lt;vector&lt;int&gt;&gt; res;
+if(root == nullptr)
+    return res;
+vector&lt;int&gt; curr;
+helper(root, sum, res, curr);
+return res;</code></pre><p>  }</p>
+<p>  void helper(TreeNode* root, int sum, vector&lt;vector<int>&gt;&amp; res, vector<int>&amp; curr)<br>  {</int></int></p>
+<pre><code>if(root == nullptr)
+    return;
+sum -= root-&gt;val;
+curr.emplace_back(root-&gt;val);
+if(root-&gt;left == nullptr &amp;&amp; root-&gt;right == nullptr)
+    if(sum == 0)
+        res.emplace_back(curr);
+if(root-&gt;left)
+    helper(root-&gt;left, sum, res, curr);
+if(root-&gt;right)
+    helper(root-&gt;right, sum, res, curr);
+curr.pop_back();
+return;</code></pre><p>  }<br>};</p>
+</li>
+</ul>
 
     
 
@@ -269,7 +314,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="https://niconiconi233.github.io/2019/10/27/剑指offer-41/" title="剑指offer 41" target="_blank">https://niconiconi233.github.io/2019/10/27/剑指offer-41/</a>
+          <a href="https://niconiconi233.github.io/2019/11/04/leetcode-113/" title="leetcode-113" target="_blank">https://niconiconi233.github.io/2019/11/04/leetcode-113/</a>
         </li>
         <li>
           <strong>版权声明： </strong>
@@ -288,7 +333,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">剑指offer</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">二叉树</a>
         		</li>
       		
 		</ul>
@@ -355,7 +404,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://niconiconi233.github.io/2019/10/27/剑指offer-41/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://niconiconi233.github.io/2019/11/04/leetcode-113/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -370,18 +419,9 @@
 
 <nav id="article-nav">
   
-    <a href="/2019/10/29/调试工具/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          调试工具
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/10/27/剑指offer-40/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">剑指offer 40</div>
+    <a href="/2019/11/04/leetcode-106/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">leetcode-106</div>
       <i class="icon-circle-right"></i>
     </a>
   

@@ -6,22 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://niconiconi233.github.io">
-  <title>剑指offer 41 | NICO</title>
+  <title>leetcode-106 | NICO</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="数据流中的中位数题目如何得到一个数据流中的中位数，如果从数据流中读出奇数个数值，则为中间数值，如果是偶数，则是中间的两数的平均数">
-<meta name="keywords" content="剑指offer">
+  <meta name="description" content="leetcode-106 从中序和后序遍历构造二叉树题目描述根据一棵树的中序遍历与后序遍历构造二叉树。 注意:你可以假设树中没有重复的元素。 例如，给出 中序遍历 inorder = [9,3,15,20,7]后序遍历 postorder = [9,15,7,20,3]返回如下的二叉树：   3  / \ 9  20   /  \  15   7">
+<meta name="keywords" content="leetcode,二叉树">
 <meta property="og:type" content="article">
-<meta property="og:title" content="剑指offer 41">
-<meta property="og:url" content="https://niconiconi233.github.io/2019/10/27/剑指offer-41/index.html">
+<meta property="og:title" content="leetcode-106">
+<meta property="og:url" content="https://niconiconi233.github.io/2019/11/04/leetcode-106/index.html">
 <meta property="og:site_name" content="NICO">
-<meta property="og:description" content="数据流中的中位数题目如何得到一个数据流中的中位数，如果从数据流中读出奇数个数值，则为中间数值，如果是偶数，则是中间的两数的平均数">
+<meta property="og:description" content="leetcode-106 从中序和后序遍历构造二叉树题目描述根据一棵树的中序遍历与后序遍历构造二叉树。 注意:你可以假设树中没有重复的元素。 例如，给出 中序遍历 inorder = [9,3,15,20,7]后序遍历 postorder = [9,15,7,20,3]返回如下的二叉树：   3  / \ 9  20   /  \  15   7">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-27T09:00:09.606Z">
+<meta property="og:updated_time" content="2019-11-04T11:43:39.035Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="剑指offer 41">
-<meta name="twitter:description" content="数据流中的中位数题目如何得到一个数据流中的中位数，如果从数据流中读出奇数个数值，则为中间数值，如果是偶数，则是中间的两数的平均数">
+<meta name="twitter:title" content="leetcode-106">
+<meta name="twitter:description" content="leetcode-106 从中序和后序遍历构造二叉树题目描述根据一棵树的中序遍历与后序遍历构造二叉树。 注意:你可以假设树中没有重复的元素。 例如，给出 中序遍历 inorder = [9,3,15,20,7]后序遍历 postorder = [9,15,7,20,3]返回如下的二叉树：   3  / \ 9  20   /  \  15   7">
   
   
     <link rel="icon" href="/img/logo.ico">
@@ -196,14 +196,14 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-剑指offer-41" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-leetcode-106" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      剑指offer 41
+      leetcode-106
     </h1>
   
 
@@ -215,8 +215,8 @@
               <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
         </span>
 
-<a href="/2019/10/27/剑指offer-41/" class="archive-article-date">
-        <time datetime="2019-10-27T08:48:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-27</time>
+<a href="/2019/11/04/leetcode-106/" class="archive-article-date">
+        <time datetime="2019-11-04T09:09:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-04</time>
 </a>
 
   
@@ -229,7 +229,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">279字</span>
+      <span class="post-count">240字</span>
     </span>
   </span>
 
@@ -249,11 +249,17 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="数据流中的中位数"><a href="#数据流中的中位数" class="headerlink" title="数据流中的中位数"></a>数据流中的中位数</h1><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>如何得到一个数据流中的中位数，如果从数据流中读出奇数个数值，则为中间数值，如果是偶数，则是中间的两数的平均数</p>
-<a id="more"></a>
+    <h1 id="leetcode-106-从中序和后序遍历构造二叉树"><a href="#leetcode-106-从中序和后序遍历构造二叉树" class="headerlink" title="leetcode-106 从中序和后序遍历构造二叉树"></a>leetcode-106 从中序和后序遍历构造二叉树</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>根据一棵树的中序遍历与后序遍历构造二叉树。</p>
+<p>注意:<br>你可以假设树中没有重复的元素。</p>
+<p>例如，给出</p>
+<p>中序遍历 inorder = [9,3,15,20,7]<br>后序遍历 postorder = [9,15,7,20,3]<br>返回如下的二叉树：</p>
+<pre><code>  3
+ / \
+9  20
+  /  \
+ 15   7</code></pre><a id="more"></a>
 
-<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><p>使用一个最大堆，一个最小堆，为了实现平均分配，在总数为偶数时插入最小堆，否则插入最大堆，还要保证最大堆所有元素都比最小堆小，所以需要调整数值</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> MinHeap = <span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;;</span><br><span class="line"><span class="keyword">using</span> MaxHeap = <span class="built_in">set</span>&lt;<span class="keyword">int</span>, greater&lt;<span class="keyword">int</span>&gt; &gt;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DynamicArray</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> value)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(((minHeap_.size() + maxHeap_.size()) &amp; <span class="number">1</span>) == <span class="number">0</span>)<span class="comment">//偶数 插入到最小堆</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//保证最小堆中每个数都比最大堆大</span></span><br><span class="line">            <span class="keyword">if</span>(maxHeap_.size() &gt; <span class="number">0</span> &amp;&amp; value &lt; *maxHeap_.begin())</span><br><span class="line">            &#123;</span><br><span class="line">                maxHeap_.emplace(value);</span><br><span class="line">                value = *maxHeap_.begin();</span><br><span class="line">                maxHeap_.erase(maxHeap_.begin());</span><br><span class="line">                <span class="comment">//minHeap_.emplace(tmp);</span></span><br><span class="line">            &#125;</span><br><span class="line">            minHeap_.emplace(value);</span><br><span class="line">        &#125;<span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(minHeap_.size() &gt; <span class="number">0</span> &amp;&amp; value &gt; *minHeap_.begin())</span><br><span class="line">            &#123;</span><br><span class="line">                minHeap_.emplace(value);</span><br><span class="line">                value = *minHeap_.begin();</span><br><span class="line">                minHeap_.erase(minHeap_.begin());</span><br><span class="line">            &#125;</span><br><span class="line">            maxHeap_.emplace(value);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getMedian</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> size = minHeap_.size() + maxHeap_.size();</span><br><span class="line">        <span class="keyword">if</span>(size == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(size &amp; <span class="number">1</span> == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> (*minHeap_.begin() + *maxHeap_.begin()) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span> *minHeap_.begin();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    MinHeap minHeap_;</span><br><span class="line">    MaxHeap maxHeap_;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">//类似leetcode105</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">buildTree</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; inorder, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; postorder)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> createTree(postorder, <span class="number">0</span>, postorder.size(), inorder, <span class="number">0</span>, inorder.size());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">TreeNode* <span class="title">createTree</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; postorder, <span class="keyword">size_t</span> pstart, <span class="keyword">size_t</span> pend, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; inorder, <span class="keyword">size_t</span> istart, <span class="keyword">size_t</span> iend)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(pstart &gt;= pend || istart &gt;= iend)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> val = postorder[pend - <span class="number">1</span>];</span><br><span class="line">        TreeNode* ptr = <span class="keyword">new</span> TreeNode(val);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> idx = istart;</span><br><span class="line">        <span class="keyword">for</span>(; idx &lt; iend; ++idx)</span><br><span class="line">            <span class="keyword">if</span>(inorder[idx] == val)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> left = idx - istart;</span><br><span class="line">        ptr-&gt;left = createTree(postorder, pstart, pstart + left, inorder, istart, idx);</span><br><span class="line">        ptr-&gt;right = createTree(postorder, pstart + left, --pend, inorder, idx + <span class="number">1</span>, iend);</span><br><span class="line">        <span class="keyword">return</span> ptr;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 
     
@@ -269,7 +275,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="https://niconiconi233.github.io/2019/10/27/剑指offer-41/" title="剑指offer 41" target="_blank">https://niconiconi233.github.io/2019/10/27/剑指offer-41/</a>
+          <a href="https://niconiconi233.github.io/2019/11/04/leetcode-106/" title="leetcode-106" target="_blank">https://niconiconi233.github.io/2019/11/04/leetcode-106/</a>
         </li>
         <li>
           <strong>版权声明： </strong>
@@ -288,7 +294,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">剑指offer</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">二叉树</a>
         		</li>
       		
 		</ul>
@@ -355,7 +365,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://niconiconi233.github.io/2019/10/27/剑指offer-41/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://niconiconi233.github.io/2019/11/04/leetcode-106/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -370,18 +380,18 @@
 
 <nav id="article-nav">
   
-    <a href="/2019/10/29/调试工具/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/11/04/leetcode-113/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          调试工具
+          leetcode-113
         
       </div>
     </a>
   
   
-    <a href="/2019/10/27/剑指offer-40/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">剑指offer 40</div>
+    <a href="/2019/11/04/leetcode-105/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">leetcode-105</div>
       <i class="icon-circle-right"></i>
     </a>
   
