@@ -18,7 +18,7 @@
 <meta property="og:site_name" content="NICO">
 <meta property="og:description" content="pingping(因特网包探索器)是windows,unix,linux系统下的一个命令,ping属于一个通信协议，是TCP/IP协议的一部分，利用ping命令可以检查网络是否连通，，可以很好的帮助分析和判断网络故障ping发送一个IMCP(因特网信报控制协议)请求消息给目的地并报告是否收到希望的IMCP应答，他是用来检查网络是否畅通或者网络连接速度的命令原理是，利用网络上机器ip地址的唯一性，给">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-30T14:29:22.766Z">
+<meta property="og:updated_time" content="2019-11-10T07:48:41.106Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网络分析工具">
 <meta name="twitter:description" content="pingping(因特网包探索器)是windows,unix,linux系统下的一个命令,ping属于一个通信协议，是TCP/IP协议的一部分，利用ping命令可以检查网络是否连通，，可以很好的帮助分析和判断网络故障ping发送一个IMCP(因特网信报控制协议)请求消息给目的地并报告是否收到希望的IMCP应答，他是用来检查网络是否畅通或者网络连接速度的命令原理是，利用网络上机器ip地址的唯一性，给">
@@ -229,7 +229,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">489字</span>
+      <span class="post-count">1.7k字</span>
     </span>
   </span>
 
@@ -238,7 +238,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">1分</span>
+      <span class="post-count">6分</span>
     </span>
   </span>
 </div>
@@ -251,7 +251,49 @@
     
     <h2 id="ping"><a href="#ping" class="headerlink" title="ping"></a>ping</h2><p>ping(因特网包探索器)是windows,unix,linux系统下的一个命令,ping属于一个通信协议，是TCP/IP协议的一部分，利用ping命令可以检查网络是否连通，，可以很好的帮助分析和判断网络故障<br>ping发送一个IMCP(因特网信报控制协议)请求消息给目的地并报告是否收到希望的IMCP应答，他是用来检查网络是否畅通或者网络连接速度的命令<br>原理是，利用网络上机器ip地址的唯一性，给目标ip地址发送一个数据包，再要求对方返回一个同样大小的数据包来确定两台机器是否想连接</p>
 <h2 id="tcpdump"><a href="#tcpdump" class="headerlink" title="tcpdump"></a>tcpdump</h2><p>tcpdump可以将网络中传输的数据包的头完全截获下来，支持对协议，主机，网络或端口的过滤，并提供and or not等逻辑语句来帮助去掉无用的信息</p>
-<h3 id="tcpdump使用"><a href="#tcpdump使用" class="headerlink" title="tcpdump使用"></a>tcpdump使用</h3><p>tcpdump [-adeflnNopqStvx] [-c 数量] [-F 文件名] [-i 网络接口] [-r 文件名] [-s snaplen] [-T 类型] [-w 文件名] [表达式]<br>表达式是一个正则表达式，tcpdump利用他作为过滤报文的条件，如果满足表达式的条件，则这个报文将会被捕获。如果没有给出任何条件，则所有将会被截获<br>1.关于类型的关键字，主要包括host,net,port等，例如host 210.27.48.2指明210.27.48.2是一台主机，net 202.0.0.0指明202.0.0.0是一个网络地址，port 23指明端口号是23,如果没有指定类型，默认类型是host<br>2. 确定传输方向的关键字，主要包括src,dst,dst or src等，指明了传输的方向。举列说明，src 210.27.48.2,指明ip包中源地址是210.27.48.2,dst net202.0.0.0指明网络地址是202.0.0.0,如果没有指明方向，则默认是src or dst</p>
+<h3 id="tcpdump使用"><a href="#tcpdump使用" class="headerlink" title="tcpdump使用"></a>tcpdump使用</h3><p>tcpdump [-adeflnNopqStvx] [-c 数量] [-F 文件名] [-i 网络接口] [-r 文件名] [-s snaplen] [-T 类型] [-w 文件名] [表达式]<br>表达式是一个正则表达式，tcpdump利用他作为过滤报文的条件，如果满足表达式的条件，则这个报文将会被捕获。如果没有给出任何条件，则所有将会被截获<br>1.关于类型的关键字，主要包括host,net,port等，例如host 210.27.48.2指明210.27.48.2是一台主机，net 202.0.0.0指明202.0.0.0是一个网络地址，port 23指明端口号是23,如果没有指定类型，默认类型是host<br>2. 确定传输方向的关键字，主要包括src,dst,dst or src等，指明了传输的方向。举列说明，src 210.27.48.2,指明ip包中源地址是210.27.48.2,dst net202.0.0.0指明网络地址是202.0.0.0,如果没有指明方向，则默认是src or dst<br>3. 协议的关键字，主要包括fddi,arp,rarp,tcp,udp等类型。如果没有指定任何协议，则会监听所有协议的信息包</p>
+<p>想要截获主机210.27.48.1收到的和发出的所有数据包，使用以下命令:<br>tcpdump host 210.27.48.1</p>
+<p>想要截获主机210.27.48.1和主机210.27.48.2或210.27.48.3的通信，可以使用如下命令,在命令行中使用括号是一定要添加’&#39;<br>tcpdump host 210.27.48.1 and (210.27.48.2 or 210.27.48.3)</p>
+<p>截取除了xxx和xxx以外的所以ip包使用<br>tcpdump ip host xxx and !xxx</p>
+<p>如果想要获取主机xxx接收或发出的telnet包 使用如下命令<br>tcpdump tcp port 23 xxxx</p>
+<p>截取某端口相关的包<br>tcpdump port 6666</p>
+<p>截取网卡的包<br>tcpdump -ieth1</p>
+<h2 id="netstat"><a href="#netstat" class="headerlink" title="netstat"></a>netstat</h2><p>netstat用于显示ip,tcp,udp,和icmp协议相关的统计数据，一般用于检测各个端口的网络连接情况。netstat是在内核中访问网络和相关信息的程序，能提供tcp连接，对tcp,udp的监听及获取进程内存管理的相关报告<br>计算机有时候会因为受到的数据报导致出错数据或故障，tcp/ip可以容许这些类型的错误，并能够自动重发数据包。但如果累计的出错情况数目占到所接收的ip数据报相当大的百分比，或者它的数目正迅速增加，那么就应该使用netstat查一查</p>
+<p>netstat的命令格式如下:<br>netstat [-acCeFghilMnNoprstuvVwx][-A&lt;网络类型&gt;][–ip]</p>
+<ul>
+<li>active internet connections称为有源tcp连接，其中recv-q和send-q指的是接收队列和发送队列，这些数字一般都应该是0,如果不是0则表示请求包和回包正在队列中堆积</li>
+<li>active unix domain sockets称为有源unix域套接口</li>
+</ul>
+<p>proto显示连接使用的协议，refcnt表示连接到本套接口上的进程号，types显示套接口的类型，state显示套接口当前的状态，path显示连接到套接口的其他进程使用的路径名。</p>
+<p>常见参数</p>
+<ul>
+<li>-a 显示所有选项 默认不显示listen相关</li>
+<li>-t 仅显示tcp相关选项</li>
+<li>-u 仅显示udp相关选项</li>
+<li>-n 拒绝显示别名，能显示数字的全部转化为数字</li>
+<li>-l 仅列出又在listen的服务状态</li>
+<li>-p 显示建立相关连接的程序名</li>
+<li>-r 显示路由信息，路由表</li>
+<li>-e 显示拓展信息，如uid等</li>
+<li>-s 按各个协议进行统计</li>
+<li>-c 每隔一个固定时间，执行该netstat命令</li>
+</ul>
+<p>使用实例<br>列出所有端口(包括监听和未监听的) netstat -a<br>列出所有tcp端口 netstat -at<br>列出所有udp端口 netstat -au<br>列出所有处于监听状态的socket netstat -l<br>列出所有监听tcp端口的socket netstat -lt<br>列出所有监听udp端口的socket netstat -lu<br>列出所有监听unix端口的socket netstat -lx<br>在netstat输出显示pid和进程名称 netstat -p<br>持续输出 netstat -c<br>找出程序运行的端口 netstat -ap | grep ssh<br>找出运行在指定端口的进程 netstat -an | grep ‘:80’<br>显示网络接口列表 netstat -i</p>
+<h2 id="lsof"><a href="#lsof" class="headerlink" title="lsof"></a>lsof</h2><p>lsof是一个列出当前系统打开文件的工具<br>每行显示一个打开的文件，若不指定条件将显示所有进程打开的所有文件</p>
+<ol>
+<li>command 进程的名称</li>
+<li>pid 进程描述符</li>
+<li>user 进程所有者</li>
+<li>fd 文件描述符，应用程序通过文件描述符识别该文件如cwd,txt等</li>
+<li>type 文件类型，如dir reg等</li>
+<li>device 指定磁盘的名称</li>
+<li>size 文件的大小</li>
+<li>node 引索节点</li>
+<li>name 打开文件的确切名称</li>
+</ol>
+<p>lsof的语法格式是:<br>lsof [options] filename</p>
+<p>lsof filename 显示打开指定文件的所有进程<br>lsof -a 表示两个参数都必须满足是才显示结果<br>lsof -c string 显示command列中包含指定字符的进程所有打开的文件<br>lsof -u username 显示所属user进程打开的文件<br>lsof -g gid 显示所属gid的进程情况<br>lsof +d /DIR/ 显示目录下被进程打开的文件<br>lsof +D /DIR/同上<br>lsof -d fd 显示指定的文件描述符<br>lsof -n 不将ip转化为hostname<br>lsof -i 用以显示符合条件的进程情况</p>
+<p>常用命令<br>查看端口运行情况<br>lsof -i :6666<br>查看root用户所打开文件,类型为txt<br>lsof -a -u root -d txt<br>监控打开的文件和设备,查看/dev/tty1被那些进程占用<br>lsof /dev/tty1<br>监控程序，查看指定程序server打开的文件<br>lsof -c server<br>监控用户,查看指定用户sharexu打开的文件<br>lsof -u sharexu</p>
 
     
 
@@ -573,10 +615,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
               </li>
              
@@ -589,15 +627,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">原码</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">链表</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">原码</a>
               </li>
              
               <li class="article-tag-list-item">
