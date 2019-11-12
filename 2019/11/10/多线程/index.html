@@ -18,7 +18,7 @@
 <meta property="og:site_name" content="NICO">
 <meta property="og:description" content="在创建一个新的线程是，需要为这个线程建一个新的栈，每个栈对应一个线程，当某个栈执行到全部弹出时，对应线程完成任务，所以，多线程的进程在内存中有多个栈，多个栈之间以一定的空白区域隔开，以备栈的增长，并与其他线程共享内存中的text,heap,和global data区域 多线程创建 123456789#include &amp;lt;pthread.h&amp;gt;int pthread_create(pthre">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-11T13:18:39.196Z">
+<meta property="og:updated_time" content="2019-11-12T02:18:28.445Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="多线程">
 <meta name="twitter:description" content="在创建一个新的线程是，需要为这个线程建一个新的栈，每个栈对应一个线程，当某个栈执行到全部弹出时，对应线程完成任务，所以，多线程的进程在内存中有多个栈，多个栈之间以一定的空白区域隔开，以备栈的增长，并与其他线程共享内存中的text,heap,和global data区域 多线程创建 123456789#include &amp;lt;pthread.h&amp;gt;int pthread_create(pthre">
@@ -295,7 +295,10 @@
 <p>SCHED_FIFO：如果调用进程具有有效用户的id为0，则争用范围为系统的先入先出线程属于实时调度类，如果这些线程未被优先级更高的线程抢占，则会继续处理该线程，直到该线程放弃或阻塞为止<br>SCHED_RR：如果调用进程具有有效地用户id0,则争用范围为系统的循环线程，属于实时调度类。如果这些线程未被优先级更高的线程抢占，并且这些线程没有放弃或阻塞，则在系统确定的时间段内将一直执行这些线程</p>
 <h2 id="多线程同步"><a href="#多线程同步" class="headerlink" title="多线程同步"></a>多线程同步</h2><h3 id="互斥锁"><a href="#互斥锁" class="headerlink" title="互斥锁"></a>互斥锁</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutex_init</span><span class="params">(<span class="keyword">pthread_mutex_t</span>* mutex, <span class="keyword">const</span> <span class="keyword">pthread_mutexattr_t</span> *attr)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutex_lock</span><span class="params">(<span class="keyword">pthread_mutex_t</span> *mutex)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutex_unlock</span><span class="params">(<span class="keyword">pthread_mutex_t</span> *mutex)</span></span>;</span><br><span class="line">int pthread_mutex_trylock(pthread)mutex_t *mutex);</span><br></pre></td></tr></table></figure>
 
-<h3 id="条件变量"><a href="#条件变量" class="headerlink" title="条件变量"></a>条件变量</h3><ol>
+<h3 id="条件变量"><a href="#条件变量" class="headerlink" title="条件变量"></a>条件变量</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">pthread_cond_t</span> cond = PTHREAD_COND_INITIALIZER</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> pthread_cond_init(<span class="keyword">pthread_cond_t</span> *cond, <span class="keyword">pthread_condattr_t</span> *cond_attr);</span><br><span class="line"><span class="comment">//当attr为null时，使用默认属性</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_cond_destroy</span><span class="params">(<span class="keyword">pthread_cond_t</span> *cond)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_cond_wait</span><span class="params">(<span class="keyword">pthread_cond_t</span> *cond, <span class="keyword">pthread_mutex_t</span> *mutex)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_cond_timedwait</span><span class="params">(<span class="keyword">pthread_cond_t</span> *cond, <span class="keyword">pthread_mutex_t</span> *mutex, <span class="keyword">const</span> struct timespec *abstime)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>激发：激发条件有两种形式，pthread_cond_signal()激活一个等待该条件的线程，存在多个等待线程是按入队顺序激活其中一个,而pthread_cond_broadcast()则激活所有等待线程<br>pthread_cond_signal函数的作用是发送一个信号给另一个正在处于阻塞等待状态的线程，使其脱离阻塞状态，继续执行。如果没有线程处在阻塞状态，也会成功返回，不会有惊群现象，它最多只给一个线程发信号，加入有多个线程正在阻塞等待着这个条件变量，那么根据各等待线程优先级的高低来确定那个线程会收到信号并继续执行，如果优先级相同，则根据等待时间的长短来确定那个线程获得信号</p>
+<h3 id="读写锁"><a href="#读写锁" class="headerlink" title="读写锁"></a>读写锁</h3><ol>
 <li>读写锁比起互斥锁具有更高的适用性和并行性，可以有多个线程同时占用读模式的读写锁，但是只能有一个线程占用写模式的读写锁</li>
 </ol>
 <ul>
@@ -341,10 +344,7 @@
 <li>函数体内调用了malloc或free函数</li>
 <li>函数体内调用了其他标准IO函数</li>
 </ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">pthread_cond_t</span> cond = PTHREAD_COND_INITIALIZER</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> pthread_cond_init(<span class="keyword">pthread_cond_t</span> *cond, <span class="keyword">pthread_condattr_t</span> *cond_attr);</span><br><span class="line"><span class="comment">//当attr为null时，使用默认属性</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_cond_destroy</span><span class="params">(<span class="keyword">pthread_cond_t</span> *cond)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_cond_wait</span><span class="params">(<span class="keyword">pthread_cond_t</span> *cond, <span class="keyword">pthread_mutex_t</span> *mutex)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_cond_timedwait</span><span class="params">(<span class="keyword">pthread_cond_t</span> *cond, <span class="keyword">pthread_mutex_t</span> *mutex, <span class="keyword">const</span> struct timespec *abstime)</span></span>;</span><br></pre></td></tr></table></figure>
 
-<p>激发：激发条件有两种形式，pthread_cond_signal()激活一个等待该条件的线程，存在多个等待线程是按入队顺序激活其中一个,而pthread_cond_broadcast()则激活所有等待线程<br>pthread_cond_signal函数的作用是发送一个信号给另一个正在处于阻塞等待状态的线程，使其脱离阻塞状态，继续执行。如果没有线程处在阻塞状态，也会成功返回，不会有惊群现象，它最多只给一个线程发信号，加入有多个线程正在阻塞等待着这个条件变量，那么根据各等待线程优先级的高低来确定那个线程会收到信号并继续执行，如果优先级相同，则根据等待时间的长短来确定那个线程获得信号</p>
-<h3 id="读写锁"><a href="#读写锁" class="headerlink" title="读写锁"></a>读写锁</h3>
     
 
     
@@ -670,11 +670,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
+                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
