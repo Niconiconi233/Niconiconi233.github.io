@@ -201,6 +201,204 @@
             
 
   
+    <article id="post-Linux设备模型-Kobject" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2019/11/14/Linux设备模型-Kobject/" target="_blank">Linux设备模型_Kobject</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2019/11/14/Linux设备模型-Kobject/" class="archive-article-date">
+        <time datetime="2019-11-14T07:31:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-14</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="Kobject原型"><a href="#Kobject原型" class="headerlink" title="Kobject原型"></a>Kobject原型</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">kobject</span> &#123;</span></span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">char</span>		*name;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">list_head</span>	<span class="title">entry</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">kobject</span>		*<span class="title">parent</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">kset</span>		*<span class="title">kset</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">kobj_type</span>	*<span class="title">ktype</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">sysfs_dirent</span>	*<span class="title">sd</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">kref</span>		<span class="title">kref</span>;</span></span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">int</span> state_initialized:<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">int</span> state_in_sysfs:<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">int</span> state_add_uevent_sent:<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">int</span> state_remove_uevent_sent:<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">int</span> uevent_suppress:<span class="number">1</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+    
+    <a class="article-more-a" href="/2019/11/14/Linux设备模型-Kobject/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设备模型</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/LINUX//" class="article-tag-list-link color1">LINUX</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2019/11/14/Linux设备模型-Kobject/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-内核中的list" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2019/11/14/内核中的list/" target="_blank">内核中的list</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2019/11/14/内核中的list/" class="archive-article-date">
+        <time datetime="2019-11-14T06:11:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-14</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="list-entry宏"><a href="#list-entry宏" class="headerlink" title="list_entry宏"></a>list_entry宏</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//ptr链表节点指针，type链表侵入节点类型，member链表插入的名称</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> list_entry(ptr, type, member)\</span></span><br><span class="line">  container_of(ptr, type, member)</span><br></pre></td></tr></table></figure>
+    
+    <a class="article-more-a" href="/2019/11/14/内核中的list/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">链表</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/LINUX//" class="article-tag-list-link color1">LINUX</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2019/11/14/内核中的list/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-java自定义注解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1042,211 +1240,6 @@
 
 
   
-    <article id="post-leetcode-1114" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2019/11/06/leetcode-1114/" target="_blank">leetcode-1114</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2019/11/06/leetcode-1114/" class="archive-article-date">
-        <time datetime="2019-11-06T05:26:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-06</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="leetcode-1114-按序打印"><a href="#leetcode-1114-按序打印" class="headerlink" title="leetcode-1114 按序打印"></a>leetcode-1114 按序打印</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>我们提供了一个类：<br>    public class Foo {<br>      public void one() { print(“one”); }<br>      public void two() { print(“two”); }<br>      public void three() { print(“three”); }<br>    }<br>三个不同的线程将会共用一个 Foo 实例。</p>
-<p>线程 A 将会调用 one() 方法<br>线程 B 将会调用 two() 方法<br>线程 C 将会调用 three() 方法<br>请设计修改程序，以确保 two() 方法在 one() 方法之后被执行，three() 方法在 two() 方法之后被执行。</p>
-    
-    <a class="article-more-a" href="/2019/11/06/leetcode-1114/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">多线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/算法//" class="article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2019/11/06/leetcode-1114/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-leetcode-168" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2019/11/05/leetcode-168/" target="_blank">leetcode-168</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2019/11/05/leetcode-168/" class="archive-article-date">
-        <time datetime="2019-11-05T13:16:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-05</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="leetcode-168-表列名称"><a href="#leetcode-168-表列名称" class="headerlink" title="leetcode-168 表列名称"></a>leetcode-168 表列名称</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个正整数，返回它在 Excel 表中相对应的列名称。</p>
-<p>例如，<br>    1 -&gt; A<br>    2 -&gt; B<br>    3 -&gt; C<br>    …<br>    26 -&gt; Z<br>    27 -&gt; AA<br>    28 -&gt; AB<br>    …<br>示例 1:</p>
-<p>输入: 1<br>输出: “A”</p>
-    
-    <a class="article-more-a" href="/2019/11/05/leetcode-168/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/算法//" class="article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2019/11/05/leetcode-168/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1413,6 +1406,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">IO</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
               </li>
              
@@ -1421,15 +1418,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IO</a>
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">链表</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1438,6 +1431,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">原码</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设备模型</a>
               </li>
              
               <li class="article-tag-list-item">

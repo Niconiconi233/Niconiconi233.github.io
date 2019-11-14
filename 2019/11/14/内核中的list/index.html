@@ -6,22 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://niconiconi233.github.io">
-  <title>剑指offer 30 | NICO</title>
+  <title>内核中的list | NICO</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="包含main函数的栈题目定义栈的数据结构，请在该类型中实现一个能够得到栈的最小元素的main函数，调用main,push,pop的时间复杂度都是O(1)">
-<meta name="keywords" content="剑指offer">
+  <meta name="description" content="list_entry宏123//ptr链表节点指针，type链表侵入节点类型，member链表插入的名称#define list_entry(ptr, type, member)\  container_of(ptr, type, member)">
+<meta name="keywords" content="链表">
 <meta property="og:type" content="article">
-<meta property="og:title" content="剑指offer 30">
-<meta property="og:url" content="https://niconiconi233.github.io/2019/10/17/剑指offer-30/index.html">
+<meta property="og:title" content="内核中的list">
+<meta property="og:url" content="https://niconiconi233.github.io/2019/11/14/内核中的list/index.html">
 <meta property="og:site_name" content="NICO">
-<meta property="og:description" content="包含main函数的栈题目定义栈的数据结构，请在该类型中实现一个能够得到栈的最小元素的main函数，调用main,push,pop的时间复杂度都是O(1)">
+<meta property="og:description" content="list_entry宏123//ptr链表节点指针，type链表侵入节点类型，member链表插入的名称#define list_entry(ptr, type, member)\  container_of(ptr, type, member)">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-17T11:31:10.385Z">
+<meta property="og:updated_time" content="2019-11-14T07:27:59.792Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="剑指offer 30">
-<meta name="twitter:description" content="包含main函数的栈题目定义栈的数据结构，请在该类型中实现一个能够得到栈的最小元素的main函数，调用main,push,pop的时间复杂度都是O(1)">
+<meta name="twitter:title" content="内核中的list">
+<meta name="twitter:description" content="list_entry宏123//ptr链表节点指针，type链表侵入节点类型，member链表插入的名称#define list_entry(ptr, type, member)\  container_of(ptr, type, member)">
   
   
     <link rel="icon" href="/img/logo.ico">
@@ -196,14 +196,14 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-剑指offer-30" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-内核中的list" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      剑指offer 30
+      内核中的list
     </h1>
   
 
@@ -215,8 +215,8 @@
               <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
         </span>
 
-<a href="/2019/10/17/剑指offer-30/" class="archive-article-date">
-        <time datetime="2019-10-17T11:24:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-17</time>
+<a href="/2019/11/14/内核中的list/" class="archive-article-date">
+        <time datetime="2019-11-14T06:11:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-14</time>
 </a>
 
   
@@ -229,7 +229,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">186字</span>
+      <span class="post-count">337字</span>
     </span>
   </span>
 
@@ -249,11 +249,20 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="包含main函数的栈"><a href="#包含main函数的栈" class="headerlink" title="包含main函数的栈"></a>包含main函数的栈</h1><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>定义栈的数据结构，请在该类型中实现一个能够得到栈的最小元素的main函数，调用main,push,pop的时间复杂度都是O(1)</p>
-<a id="more"></a>
+    <h2 id="list-entry宏"><a href="#list-entry宏" class="headerlink" title="list_entry宏"></a>list_entry宏</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//ptr链表节点指针，type链表侵入节点类型，member链表插入的名称</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> list_entry(ptr, type, member)\</span></span><br><span class="line">  container_of(ptr, type, member)</span><br></pre></td></tr></table></figure>
 
-<h3 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h3><p>使用两个栈保存元素，一个保存最小元素，一个保存数据，如果当前值小于前最小值，更新元素，否则压如原最小值</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StackWithMin</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">const</span> T&amp; value)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(mainStack_.size() == <span class="number">0</span> &amp;&amp; secStack_.size() == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            mainStack_.emplace(value);</span><br><span class="line">            secStack_.emplace(value);</span><br><span class="line">        &#125;<span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            mainStack_.emplace(value);</span><br><span class="line">            <span class="keyword">if</span>(value &lt; secStack_.top())</span><br><span class="line">                secStack_.emplace(value);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                secStack_.emplace(secStack_.top());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">pop</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        mainStack_.pop();</span><br><span class="line">        secStack_.pop();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">const</span> T&amp; <span class="title">min</span><span class="params">()</span> <span class="keyword">const</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> secStack_.top();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">stack</span>&lt;T&gt; mainStack_;</span><br><span class="line">    <span class="built_in">stack</span>&lt;T&gt; secStack_;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="container-of宏"><a href="#container-of宏" class="headerlink" title="container_of宏"></a>container_of宏</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//通过获取链表节点相对于结构体的偏移来获取结构体的地址</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> container_of(ptr, type, member) (&#123;			\</span></span><br><span class="line">	<span class="function"><span class="keyword">const</span> <span class="title">typeof</span><span class="params">( ((type *)<span class="number">0</span>)-&gt;member )</span> *__mptr </span>= (ptr);	\</span><br><span class="line">	(type *)( (<span class="keyword">char</span> *)__mptr - offsetof(type,member) );&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="offsetof宏"><a href="#offsetof宏" class="headerlink" title="offsetof宏"></a>offsetof宏</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取偏移量</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> offsetof(TYPE, MEMBER) ((size_t) &amp;((TYPE *)0)-&gt;MEMBER)</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="list-add函数"><a href="#list-add函数" class="headerlink" title="list_add函数"></a>list_add函数</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//插入过程中保证了链表的完整性，安全性高</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">inline</span> <span class="keyword">void</span> __list_add(struct list_head *<span class="keyword">new</span>, struct list_head *prev, struct list_head *next)</span><br><span class="line">&#123;</span><br><span class="line">  next-&gt;prev = <span class="keyword">new</span>;</span><br><span class="line">  <span class="keyword">new</span>-&gt;next = next;</span><br><span class="line">  <span class="keyword">new</span>-&gt;prev = prev;</span><br><span class="line">  prev-&gt;next = <span class="keyword">new</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//头插</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">list_add_tail</span><span class="params">(struct list_head *<span class="keyword">new</span>, struct list_head *head)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	__list_add(<span class="keyword">new</span>, head-&gt;prev, head);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="list-replace函数"><a href="#list-replace函数" class="headerlink" title="list_replace函数"></a>list_replace函数</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">list_replace</span><span class="params">(struct list_head *old, struct list_head *<span class="keyword">new</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">new</span>-&gt;next = old-&gt;next;</span><br><span class="line">  <span class="keyword">new</span>-&gt;next-&gt;next = <span class="keyword">new</span>;</span><br><span class="line">  <span class="keyword">new</span>-&gt;prev = old-&gt;prev;</span><br><span class="line">  nre-&gt;prev-&gt;next = <span class="keyword">new</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="list-cut-position函数"><a href="#list-cut-position函数" class="headerlink" title="list_cut_position函数"></a>list_cut_position函数</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//将链表一分为二,前半段为list,后半段为head,以entry开始分割</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">inline</span> <span class="keyword">void</span> __list_cut_position(struct list_head *<span class="built_in">list</span>,</span><br><span class="line">        struct list_head *head, struct list_head *entry)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">list_head</span> *<span class="title">new_first</span> = <span class="title">entry</span>-&gt;<span class="title">next</span>;</span></span><br><span class="line">  <span class="built_in">list</span>-&gt;next = head-&gt;next;</span><br><span class="line">  <span class="built_in">list</span>-&gt;next-&gt;prev = <span class="built_in">list</span>;</span><br><span class="line">  <span class="built_in">list</span>-&gt;prev = entry;</span><br><span class="line">  entry-&gt;next = <span class="built_in">list</span>;</span><br><span class="line">  head-&gt;next = new_first;</span><br><span class="line">  new_first-&gt;prev = head;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="list-splice函数"><a href="#list-splice函数" class="headerlink" title="list_splice函数"></a>list_splice函数</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//在prev和next中加入list</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">inline</span> <span class="keyword">void</span> __list_splice(<span class="keyword">const</span> struct list_head *<span class="built_in">list</span>,</span><br><span class="line">        struct list_head *prev, struct list_head *next)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">list_head</span> *<span class="title">first</span> = <span class="title">list</span>-&gt;<span class="title">next</span>;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">list_head</span> *<span class="title">last</span> = <span class="title">list</span>-&gt;<span class="title">prev</span>;</span></span><br><span class="line"></span><br><span class="line">  first-&gt;prev = prev;</span><br><span class="line">  prev-&gt;next = first;</span><br><span class="line"></span><br><span class="line">  last-&gt;next = next;</span><br><span class="line">  next-&gt;prev = last;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
     
@@ -269,7 +278,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="https://niconiconi233.github.io/2019/10/17/剑指offer-30/" title="剑指offer 30" target="_blank">https://niconiconi233.github.io/2019/10/17/剑指offer-30/</a>
+          <a href="https://niconiconi233.github.io/2019/11/14/内核中的list/" title="内核中的list" target="_blank">https://niconiconi233.github.io/2019/11/14/内核中的list/</a>
         </li>
         <li>
           <strong>版权声明： </strong>
@@ -288,7 +297,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">剑指offer</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">链表</a>
         		</li>
       		
 		</ul>
@@ -300,7 +309,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/算法//" class="article-tag-list-link color3">算法</a>
+        			<a href="/categories/LINUX//" class="article-tag-list-link color1">LINUX</a>
         		</li>
       		
 		</ul>
@@ -355,7 +364,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://niconiconi233.github.io/2019/10/17/剑指offer-30/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://niconiconi233.github.io/2019/11/14/内核中的list/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -370,18 +379,18 @@
 
 <nav id="article-nav">
   
-    <a href="/2019/10/17/剑指offer-31/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/11/14/Linux设备模型-Kobject/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          剑指offer 31
+          Linux设备模型_Kobject
         
       </div>
     </a>
   
   
-    <a href="/2019/10/17/剑指offer-29/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">剑指offer 29</div>
+    <a href="/2019/11/11/java自定义注解/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">java自定义注解</div>
       <i class="icon-circle-right"></i>
     </a>
   
