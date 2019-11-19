@@ -10,18 +10,18 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="std::array与 std::vector 不同，std::array 对象的大小是固定的，如果容器大小是固定的，那么可以优先考虑使用 std::array 容器。 另外由于 std::vector 是自动扩容的，当存入大量的数据后，并且对容器进行了删除操作， 容器并不会自动归还被删除元素相应的内存，这时候就需要手动运行 shrink_to_fit() 释放这部分内存。 12345678910">
+  <meta name="description" content="std::array与 std::vector 不同，std::array 对象的大小是固定的，如果容器大小是固定的，那么可以优先考虑使用 std::array 容器。 另外由于 std::vector 是自动扩容的，当存入大量的数据后，并且对容器进行了删除操作， 容器并不会自动归还被删除元素相应的内存，这时候就需要手动运行 shrink_to_fit() 释放这部分内存。">
 <meta name="keywords" content="YangWan,YangWan_技术博客">
 <meta property="og:type" content="article">
 <meta property="og:title" content="c++11&#x2F;14&#x2F;17&#x2F;20(三)">
 <meta property="og:url" content="https://niconiconi233.github.io/2019/11/19/c-11-14-17-20-3/index.html">
 <meta property="og:site_name" content="NICO">
-<meta property="og:description" content="std::array与 std::vector 不同，std::array 对象的大小是固定的，如果容器大小是固定的，那么可以优先考虑使用 std::array 容器。 另外由于 std::vector 是自动扩容的，当存入大量的数据后，并且对容器进行了删除操作， 容器并不会自动归还被删除元素相应的内存，这时候就需要手动运行 shrink_to_fit() 释放这部分内存。 12345678910">
+<meta property="og:description" content="std::array与 std::vector 不同，std::array 对象的大小是固定的，如果容器大小是固定的，那么可以优先考虑使用 std::array 容器。 另外由于 std::vector 是自动扩容的，当存入大量的数据后，并且对容器进行了删除操作， 容器并不会自动归还被删除元素相应的内存，这时候就需要手动运行 shrink_to_fit() 释放这部分内存。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-19T06:22:46.039Z">
+<meta property="og:updated_time" content="2019-11-19T06:25:38.534Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="c++11&#x2F;14&#x2F;17&#x2F;20(三)">
-<meta name="twitter:description" content="std::array与 std::vector 不同，std::array 对象的大小是固定的，如果容器大小是固定的，那么可以优先考虑使用 std::array 容器。 另外由于 std::vector 是自动扩容的，当存入大量的数据后，并且对容器进行了删除操作， 容器并不会自动归还被删除元素相应的内存，这时候就需要手动运行 shrink_to_fit() 释放这部分内存。 12345678910">
+<meta name="twitter:description" content="std::array与 std::vector 不同，std::array 对象的大小是固定的，如果容器大小是固定的，那么可以优先考虑使用 std::array 容器。 另外由于 std::vector 是自动扩容的，当存入大量的数据后，并且对容器进行了删除操作， 容器并不会自动归还被删除元素相应的内存，这时候就需要手动运行 shrink_to_fit() 释放这部分内存。">
   
   
     <link rel="icon" href="/img/logo.ico">
@@ -250,6 +250,7 @@
   <div class="article-entry" itemprop="articleBody">
     
     <h2 id="std-array"><a href="#std-array" class="headerlink" title="std::array"></a>std::array</h2><p>与 std::vector 不同，std::array 对象的大小是固定的，如果容器大小是固定的，那么可以优先考虑使用 std::array 容器。 另外由于 std::vector 是自动扩容的，当存入大量的数据后，并且对容器进行了删除操作， 容器并不会自动归还被删除元素相应的内存，这时候就需要手动运行 shrink_to_fit() 释放这部分内存。</p>
+<a id="more"></a>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"size:"</span> &lt;&lt; v.size() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;         <span class="comment">// 输出 0</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"capacity:"</span> &lt;&lt; v.capacity() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>; <span class="comment">// 输出 0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 如下可看出 std::vector 的存储是自动管理的，按需自动扩张</span></span><br><span class="line"><span class="comment">// 但是如果空间不足，需要重新分配更多内存，而重分配内存通常是性能上有开销的操作</span></span><br><span class="line">v.push_back(<span class="number">1</span>);</span><br><span class="line">v.push_back(<span class="number">2</span>);</span><br><span class="line">v.push_back(<span class="number">3</span>);</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"size:"</span> &lt;&lt; v.size() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;         <span class="comment">// 输出 3</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"capacity:"</span> &lt;&lt; v.capacity() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>; <span class="comment">// 输出 4</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 这里的自动扩张逻辑与 Golang 的 slice 很像</span></span><br><span class="line">v.push_back(<span class="number">4</span>);</span><br><span class="line">v.push_back(<span class="number">5</span>);</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"size:"</span> &lt;&lt; v.size() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;         <span class="comment">// 输出 5</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"capacity:"</span> &lt;&lt; v.capacity() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>; <span class="comment">// 输出 8</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 如下可看出容器虽然清空了元素，但是被清空元素的内存并没有归还</span></span><br><span class="line">v.clear();</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"size:"</span> &lt;&lt; v.size() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;         <span class="comment">// 输出 0</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"capacity:"</span> &lt;&lt; v.capacity() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>; <span class="comment">// 输出 8</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 额外内存可通过 shrink_to_fit() 调用返回给系统</span></span><br><span class="line">v.shrink_to_fit();</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"size:"</span> &lt;&lt; v.size() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;         <span class="comment">// 输出 0</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"capacity:"</span> &lt;&lt; v.capacity() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>; <span class="comment">// 输出 0</span></span><br></pre></td></tr></table></figure>
 
 <p>而第二个问题就更加简单，使用 std::array 能够让代码变得更加“现代化”，而且封装了一些操作函数，比如获取数组大小以及检查是否非空，同时还能够友好的使用标准库中的容器算法，比如 std::sort。</p>
@@ -591,6 +592,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">IO</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
@@ -600,10 +605,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IO</a>
               </li>
              
               <li class="article-tag-list-item">
