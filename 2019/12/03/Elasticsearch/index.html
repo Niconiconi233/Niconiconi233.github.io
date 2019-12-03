@@ -20,7 +20,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://niconiconi233.github.io/2019/12/03/Elasticsearch/1.png">
 <meta property="og:image" content="https://niconiconi233.github.io/2019/12/03/Elasticsearch/2.png">
-<meta property="og:updated_time" content="2019-12-03T08:35:32.113Z">
+<meta property="og:updated_time" content="2019-12-03T08:53:13.890Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Elasticsearch">
 <meta name="twitter:description" content="Spring Data 是的使命是给各种数据访问提供统一的编程接口，不管是关系型数据库（如MySQL），还是非关系数据库（如Redis），或者类似Elasticsearch这样的索引数据库。从而简化开发人员的代码，提高开发效率。 包含很多不同数据操作的模块：">
@@ -232,7 +232,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">2.5k字</span>
+      <span class="post-count">2.8k字</span>
     </span>
   </span>
 
@@ -241,7 +241,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">10分</span>
+      <span class="post-count">11分</span>
     </span>
   </span>
 </div>
@@ -296,6 +296,12 @@
 <li>store：是否存储，布尔类型，默认是false</li>
 <li>analyzer：分词器名称，这里的ik_max_word即使用ik分词器</li>
 </ul>
+<p>@Document</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Document &#123;</span><br><span class="line"></span><br><span class="line"><span class="function">String <span class="title">indexName</span><span class="params">()</span></span>; <span class="comment">//索引库的名称，个人建议以项目的名称命名</span></span><br><span class="line"></span><br><span class="line"><span class="function">String <span class="title">type</span><span class="params">()</span> <span class="keyword">default</span> ""</span>; <span class="comment">//类型，个人建议以实体的名称命名</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">short</span> <span class="title">shards</span><span class="params">()</span> <span class="keyword">default</span> 5</span>; <span class="comment">//默认分区数</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">short</span> <span class="title">replicas</span><span class="params">()</span> <span class="keyword">default</span> 1</span>; <span class="comment">//每个分区默认的备份数</span></span><br><span class="line"></span><br><span class="line"><span class="function">String <span class="title">refreshInterval</span><span class="params">()</span> <span class="keyword">default</span> "1s"</span>; <span class="comment">//刷新间隔</span></span><br><span class="line"></span><br><span class="line"><span class="function">String <span class="title">indexStoreType</span><span class="params">()</span> <span class="keyword">default</span> "fs"</span>; <span class="comment">//索引文件存储类型</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>@Field</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Field &#123;</span><br><span class="line"></span><br><span class="line"><span class="function">FieldType <span class="title">type</span><span class="params">()</span> <span class="keyword">default</span> FieldType.Auto</span>; <span class="comment">//自动检测属性的类型，可以根据实际情况自己设置</span></span><br><span class="line"></span><br><span class="line"><span class="function">FieldIndex <span class="title">index</span><span class="params">()</span> <span class="keyword">default</span> FieldIndex.analyzed</span>; <span class="comment">//默认情况下分词，一般默认分词就好，除非这个字段你确定查询时不会用到</span></span><br><span class="line"></span><br><span class="line"><span class="function">DateFormat <span class="title">format</span><span class="params">()</span> <span class="keyword">default</span> DateFormat.none</span>; <span class="comment">//时间类型的格式化</span></span><br><span class="line"></span><br><span class="line"><span class="function">String <span class="title">pattern</span><span class="params">()</span> <span class="keyword">default</span> ""</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">store</span><span class="params">()</span> <span class="keyword">default</span> <span class="keyword">false</span></span>; <span class="comment">//默认情况下不存储原文</span></span><br><span class="line"> </span><br><span class="line"><span class="function">String <span class="title">searchAnalyzer</span><span class="params">()</span> <span class="keyword">default</span> ""</span>; <span class="comment">//指定字段搜索时使用的分词器</span></span><br><span class="line"></span><br><span class="line"><span class="function">String <span class="title">indexAnalyzer</span><span class="params">()</span> <span class="keyword">default</span> ""</span>; <span class="comment">//指定字段建立索引时指定的分词器</span></span><br><span class="line"></span><br><span class="line">String[] ignoreFields() <span class="keyword">default</span> &#123;&#125;; <span class="comment">//如果某个字段需要被忽略</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">includeInParent</span><span class="params">()</span> <span class="keyword">default</span> <span class="keyword">false</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h2 id="Repository接口"><a href="#Repository接口" class="headerlink" title="Repository接口"></a>Repository接口</h2><p>ElasticsearchCrudRepository接口：<br><img src="/2019/12/03/Elasticsearch/2.png" alt></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ItemRepository</span> <span class="keyword">extends</span> <span class="title">ElasticsearchRepository</span>&lt;<span class="title">Item</span>,<span class="title">Long</span>&gt; </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -735,6 +741,14 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">调试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
               </li>
              
@@ -743,15 +757,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">链表</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">调试</a>
               </li>
              
               <li class="article-tag-list-item">
