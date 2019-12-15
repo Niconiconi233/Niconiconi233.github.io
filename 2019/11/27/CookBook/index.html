@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://niconiconi233.github.io/2019/11/27/CookBook/bm10.jpg">
 <meta property="og:image" content="https://niconiconi233.github.io/2019/11/27/CookBook/bm11.jpg">
 <meta property="og:image" content="https://niconiconi233.github.io/2019/11/27/CookBook/bm12.jpg">
-<meta property="og:updated_time" content="2019-11-28T09:59:10.188Z">
+<meta property="og:updated_time" content="2019-12-15T11:44:14.162Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CookBook">
 <meta name="twitter:description" content="保持对std::vector实例的排序12345void insert_sorted(vector&amp;lt;string&amp;gt;&amp;amp; v, const string&amp;amp; word)&amp;#123;  const auto pos(lower_bound(begin(v), end(v), word));  v.insert(pos, word);&amp;#125;">
@@ -243,7 +243,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">5.3k字</span>
+      <span class="post-count">8k字</span>
     </span>
   </span>
 
@@ -252,7 +252,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">20分</span>
+      <span class="post-count">30分</span>
     </span>
   </span>
 </div>
@@ -439,6 +439,77 @@
 <h2 id="std-merge"><a href="#std-merge" class="headerlink" title="std::merge"></a>std::merge</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">merge(begin(dict1), end(dict1), begin(dict2), end(dict2), ostream_iterator&lt;dict_entry&gt;&#123;<span class="built_in">cout</span>, <span class="string">"\n"</span>&#125;);</span><br></pre></td></tr></table></figure>
 
 <p>std::meger算法接受两对begin/end迭代器，这两对迭代器确定了输入范围。这两对迭代器所提供的输入范围也必须是已排序的。第五个参数就是输出容器的迭代器，其接受两段范围合并的元素。<br>其有一个变体std::inplace_merge。两个算法几乎一样，不过这个变体只需要一对迭代器，并且没有输出，和其名字一样，其会直接在输入范围上进行操作。比如对{A, C, B, D}这个序列来说，可以将第一个子序列定义为{A, C}，第二个子序列定义为{B, D}。使用std::inplace_merge算法将两个序列进行合并，其结果为{A, B, C, D}。</p>
+<h2 id="std-ratio"><a href="#std-ratio" class="headerlink" title="std::ratio"></a>std::ratio</h2><p>chrono::duration经常用来表示所用时间的长度，其为秒的倍数或小数，所有STL的程序都由整型类型进行特化。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> second = chrono::duration&lt;<span class="keyword">double</span>&gt;;</span><br></pre></td></tr></table></figure>
+
+<p>1毫秒为1/1000秒，可以用这个单位来定义秒。ratio_multiply模板参数可以使用STL预定义的milli用来表示seconds::period，其会给我们相应的小数。ratio_multiply为基本时间的倍数：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> milliseconds = chrono::duration&lt;<span class="keyword">double</span>, ratio_multiply&lt;seconds::period, milli&gt;&gt;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> microseconds = chrono::duration&lt;<span class="keyword">double</span>, ratio_multiply&lt;seconds::period, micro&gt;&gt;;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>时钟类型</th>
+<th>特性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>system_clock</td>
+<td>表示系统级别的实时挂钟，想要获取本地时间的话，是个正确的选择</td>
+</tr>
+<tr>
+<td>steady_clock</td>
+<td>表示单调型的时间，这个时间是不可能倒退的，而时间倒退可能会在其他时钟上发生，比如：其最小精度不同，或是在冬令时和夏令时交替时。</td>
+</tr>
+<tr>
+<td>high_resolution_clock</td>
+<td>STL中可统计最细粒度时钟周期的时钟</td>
+</tr>
+</tbody></table>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Rep</span>,</span></span><br><span class="line"><span class="class">    <span class="title">class</span> <span class="title">Period</span> = <span class="title">std</span>:</span>:ratio&lt;<span class="number">1</span>&gt;</span><br><span class="line">&gt; <span class="class"><span class="keyword">class</span> <span class="title">duration</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> seconds = chrono::duration&lt;<span class="keyword">double</span>&gt;;</span><br><span class="line"><span class="keyword">using</span> milliseconds = chrono::duration&lt;<span class="keyword">double</span>,</span><br><span class="line">    ratio_multiply&lt;seconds::period, milli&gt;&gt;;</span><br><span class="line"><span class="keyword">using</span> microseconds = chrono::duration&lt;<span class="keyword">double</span>,</span><br><span class="line">    ratio_multiply&lt;seconds::period, micro&gt;&gt;;</span><br><span class="line"><span class="comment">//等价于</span></span><br><span class="line"><span class="keyword">using</span> seconds = chrono::duration&lt;<span class="keyword">double</span>, ratio&lt;<span class="number">1</span>, <span class="number">1</span>&gt;&gt;;</span><br><span class="line"><span class="keyword">using</span> milliseconds = chrono::duration&lt;<span class="keyword">double</span>, ratio&lt;<span class="number">1</span>, <span class="number">1000</span>&gt;&gt;;</span><br><span class="line"><span class="keyword">using</span> microseconds = chrono::duration&lt;<span class="keyword">double</span>, ratio&lt;<span class="number">1</span>, <span class="number">1000000</span>&gt;&gt;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="std-chrono"><a href="#std-chrono" class="headerlink" title="std::chrono"></a>std::chrono</h2><p>我们可以通过std::chrono::system_clock来获取当前时间点。这个STL时钟类是唯一一个能将时间点的值转换成一个时间结构体的类型，其能将时间点以能够看懂的方式进行输出。<br>为了打印这样的时间点，我们可以对operator&lt;&lt;操作符进行重载：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ostream&amp; <span class="keyword">operator</span>&lt;&lt;(ostream &amp;os,</span><br><span class="line">                   <span class="keyword">const</span> chrono::time_point&lt;chrono::system_clock&gt; &amp;t)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">const</span> <span class="keyword">auto</span> <span class="title">tt</span> <span class="params">(chrono::system_clock::<span class="keyword">to_time_t</span>(t))</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">const</span> <span class="keyword">auto</span> <span class="title">loct</span> <span class="params">(<span class="built_in">std</span>::localtime(&amp;tt))</span></span>;</span><br><span class="line">    <span class="keyword">return</span> os &lt;&lt; put_time(loct, <span class="string">"%c"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>首先，将chrono::time_point<a href="chrono::system_clock">chrono::system_clock</a>转换为std::time_t。然后，使用std::localtime将这个时间值进行转换，这样就能获取到一个本地时钟的相对时间值。这个函数会给我们返回一个转换后的指针(对于这个指针背后的内存不用我们多操心，因为其是一个静态对象，并不是从堆上分配的内存)，这样我们就能完成最终的打印。</p>
+<p>除了打印，我们也会为我们的时间点添加偏移。这也很简单，比如：12小时15分钟就可以表示为12h+15min。chrono_literals命名空间为我们提供了字面类型：hours(h), minutes(min), seconds(s), milliseconds(ms), microseconds(us), nanoseconds(ns)。<br>通过对两个时间间隔的相加，我们会得到一个新的时间点。要实现这样的操作就需要对左加operator+和左减operator-操作符进行重载，这样对时间偏移的操作就会变得非常简单。</p>
+<h2 id="std-optional"><a href="#std-optional" class="headerlink" title="std::optional"></a>std::optional</h2><p>当程序与外界的联系只依赖于一些变量时，那么各种失败都可能发生。<br>也就是，我们写了一个函数，其会返回一个值，但是当函数接口进行变更后，可能就无法获取这个返回值了。我们来看下对一个返回字符串的函数，怎样的接口会容易出现失败的情况：</p>
+<ul>
+<li>使用引用值作为返回值：bool get_string(string&amp;);</li>
+<li>返回一个可以被设置为nullptr的指针(或智能指针)：string* get_string();</li>
+<li>当函数出错时，直接抛出异常：string get_string();<br>以上的方式有缺点，也有优点。在C++17之后，我们会使用一种新类型来解决这个问题：std::optional。可选值的概念来自于纯函数式编程语言(在纯函数式语言中，这个类型为Maybe类型)，并且可以让代码看上去很优雅。</li>
+</ul>
+<p>optional非常简单易用。其可以帮助我们对错误的情况进行处理，当我们所需要的类型为T时，可以将其特化std::optional<T>版本类型进行封装。<br>当需要从一些地方获取一些值时，我们可以用其来检查我们是否成功的获取了对应的数值。bool optional::has_value()可以帮助我们完成这件事。当其包含值时，其会返回true，我们就能直接对数值进行访问，对可选类型的值访问也可以通过函数T&amp; optional::value()进行。<br>使用if (x) {…}和*x来替代if (x.has_value()) {…}和x.value()。std::optonal类型可以隐式的转换成bool类型，并且使用解引用操作符的方式和普通指针差不多。<br>另一个方便辅助操作符就是对optional的operator-&gt;操作符进行重载。当有一个结构体struct Foo { int a; string b; }类型，并且我们想要通过一个optional<Foo>来访问其成员变量x，那么就可以写成x-&gt;a或x-&gt;b。当然，需要对x和b进行检查，确定其是否有值。<br>当可选变量中没有值时，我们还要对其进行访问，其就会抛出一个std::logic_error异常。这样，就可以对大量的可选值在不进行检查的情况下进行使用。try-catch块的代码如下：</Foo></T></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"Please enter 3 numbers:\n"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Sum: "</span></span><br><span class="line">        &lt;&lt; (*read_int() + *read_int() + *read_int())</span><br><span class="line">        &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">&#125; <span class="keyword">catch</span> (<span class="keyword">const</span> <span class="built_in">std</span>::bad_optional_access &amp;) &#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Unfortunately you did not enter 3 numbers\n"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>std::optional具有一个有趣的optional::value_or操作。当我们想要在失败的时候，可选变量包含一个默认值进行返回时，这个操作就很有用了。x = optional_var.value_or(123)就能将123作为可选变量失败时的默认数值。</p>
+<h2 id="std-tuple"><a href="#std-tuple" class="headerlink" title="std::tuple"></a>std::tuple</h2><p>C++11中，STL添加了std::tuple，这种类型可以用来将多个不同类型的值捆绑在一起。元组这种类型已经存在与很多编程语言中，本书的一些章节已经在使用这种类型，这种类型的用途很广泛。<br>不过，我们有时会将一些值捆绑在一个元组中，然后我们需要调用函数来获取其中每一个元素。对于元素的解包的代码看起来非常的冗长(并且易于出错)。其冗长的方式类似这样：func(get&lt;0&gt;(tup), get&lt;1&gt;(tup), get&lt;2&gt;(tup), …);。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">auto</span>&amp; [x, y, z] = tuple;</span><br></pre></td></tr></table></figure>
+
+<p><strong>当然可以做的更好，我们无需知道print_student的参数的个数，或学生元组中元素的个数，我们使用std::apply对直接将元组应用于函数。这个函数能够接受一个函数指针或一个函数对象和一个元组，然后会将元组进行解包，然后与函数参数进行对应，并传入函数：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span>&amp; tmp : tuples)</span><br><span class="line">&#123;</span><br><span class="line">  apply(some_func, tmp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>std::apply是一个编译时辅助函数，可以帮助我们处理不确定的类型参数。apply方法会返回func的返回值</p>
+<h2 id="使用元组快速构成数据结构"><a href="#使用元组快速构成数据结构" class="headerlink" title="使用元组快速构成数据结构"></a>使用元组快速构成数据结构</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Foo</span> &#123;</span></span><br><span class="line">  <span class="keyword">int</span> a;</span><br><span class="line">  <span class="built_in">string</span> b;</span><br><span class="line">  <span class="keyword">float</span> c;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>为了替代定义结构体，我们可以定义一个元组：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> Foo = tuple&lt;<span class="keyword">int</span>, <span class="built_in">string</span>, <span class="keyword">float</span>&gt;;</span><br></pre></td></tr></table></figure>
+
+<p>我们可以根据类型列表中的索引，从而获取相应变量的具体值。如要访问元组他的第一个类型变量，可以使用std::get&lt;0&gt;(t)，第二个类型变量为std::get&lt;1&gt;(t)，以此类推。如果索引值过大，编译器会在编译时进行报错。<br>之前的章节中已经展示了C++17对元组的分解能力，允许我们使用如下的方式快速分解元素，并能对单独元素进行访问：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> [a, b, c] = some_tuple;</span><br></pre></td></tr></table></figure>
+
+<p>对tupe解包</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> ... Ts&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print_args</span><span class="params">(ostream &amp;os, <span class="keyword">const</span> T &amp;v, <span class="keyword">const</span> Ts &amp;...vs)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    os &lt;&lt; v;</span><br><span class="line"></span><br><span class="line">    (<span class="keyword">void</span>)<span class="built_in">initializer_list</span>&lt;<span class="keyword">int</span>&gt;&#123;((os &lt;&lt; <span class="string">", "</span> &lt;&lt; vs), <span class="number">0</span>)...&#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> ... Ts&gt;</span><br><span class="line">ostream&amp; <span class="keyword">operator</span>&lt;&lt;(ostream &amp;os, <span class="keyword">const</span> tuple&lt;Ts...&gt; &amp;t)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">auto</span> <span class="title">capt_tup</span> <span class="params">([&amp;os](<span class="keyword">const</span> <span class="keyword">auto</span> &amp;...xs) &#123;</span></span></span><br><span class="line"><span class="function"><span class="params">        print_args(os, xs...);</span></span></span><br><span class="line"><span class="function"><span class="params">    &#125;)</span></span>;</span><br><span class="line"></span><br><span class="line">    os &lt;&lt; <span class="string">"("</span>;</span><br><span class="line">    apply(capt_tup, t);</span><br><span class="line">    <span class="keyword">return</span> os &lt;&lt; <span class="string">")"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>元素的zip函数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T1, <span class="keyword">typename</span> T2&gt;</span><br><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">zip</span><span class="params">(<span class="keyword">const</span> T1 &amp;a, <span class="keyword">const</span> T2 &amp;b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">auto</span> <span class="title">z</span> <span class="params">([](<span class="keyword">auto</span> ...xs) &#123;</span></span></span><br><span class="line"><span class="function"><span class="params">        <span class="keyword">return</span> [xs...](<span class="keyword">auto</span> ...ys) &#123;</span></span></span><br><span class="line"><span class="function"><span class="params">            <span class="keyword">return</span> tuple_cat(make_tuple(xs, ys) ...);</span></span></span><br><span class="line"><span class="function"><span class="params">        &#125;;</span></span></span><br><span class="line"><span class="function"><span class="params">    &#125;)</span></span>;</span><br><span class="line">    <span class="keyword">return</span> apply(apply(z, a), b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>例程中，我们调用了apply(z, a)，也就相当于调用函数z(1, 2, 3)，其会构造一个哈数对象将这些参数捕获后进行返回，这样1，2，3就被放入参数包xs中了。这里会再次调用，apply(z(1, 2, 3), b)，会将’a’, ‘b’, ‘c’放入参数包ys中。<br>首先，xs和ys中的成员将会被zip到一起，也就是交叉配对在一起。这个交叉配对发生在make_tuple(xs, ys)…部分，这会将两个元组组成一个元组。为了获得一个大元组，我们使用了tuple_cat，通过对元组的级联获取一个大的元组，其包含了所有元组中的成员，并进行了交叉配对。</p>
+<h2 id="std-any"><a href="#std-any" class="headerlink" title="std::any"></a>std::any</h2><p>有时我们会需要将一个变量保存在一个未知类型中。对于这样的变量，我们通常会对其进行检查，以确保其是否包含一些信息，如果是包括，那我们将会去判别所包含的内容。以上的所有操作，都需要在一个类型安全的方法中进行。<br>以前，我们会将可变对象存与void*指针当中。void类型的指针无法告诉我们其所指向的对象类型，所以我们需要将其进行手动转换成我们期望的类型。这样的代码看起来很诡异，并且不安全。<br>C++17在STL中添加了一个新的类型——std::any。其设计就是用来持有任意类型的变量，并且能提供类型的安全检查和安全访问。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!a.has_value()) &#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Nothing.\n"</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (a.type() == <span class="keyword">typeid</span>(<span class="built_in">string</span>)) &#123;</span><br><span class="line">   <span class="built_in">cout</span> &lt;&lt; <span class="string">"It's a string: "</span></span><br><span class="line">       &lt;&lt; quoted(any_cast&lt;<span class="keyword">const</span> <span class="built_in">string</span>&amp;&gt;(a)) &lt;&lt; <span class="string">'\n'</span>;</span><br></pre></td></tr></table></figure>
+
+<p>我们可以使用大括号对来构建一个空的any变量，或是直接输入字符串“abc”，或是一个整数。因为std::any可以由任何类型隐式转换而成，这里并没有语法上的开销。我们也可以直接构造一个列表，然后丢入函数中：<br>当我们想要传入的参数比较大，那么拷贝到any变量中就会花费很长的时间，这是可以使用立即构造的方式。in_place_type_t<int_list>{}表示一个空的对象，对于any来说其就能够知道应该如何去构建对象了。第二个参数为{1,2,3}其为一个初始化列表，其会用来初始化int_list对象，然后被转换成any变量。这样，我们就避免了不必要的拷贝和移动：</int_list></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print_anything(any(<span class="keyword">in_place_type_t</span>&lt;int_list&gt;&#123;&#125;, &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;));</span><br></pre></td></tr></table></figure>
+
 
     
 
@@ -749,11 +820,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
+                <a href="javascript:void(0)" class="js-tag color3">IO</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -761,7 +828,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IO</a>
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
               </li>
              
               <li class="article-tag-list-item">
