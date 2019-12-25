@@ -18,7 +18,7 @@
 <meta property="og:site_name" content="NICO">
 <meta property="og:description" content="找出二叉树中最远结点的距离(即两个叶节点之间的距离最大)123456789101112131415161718192021int maxDistance()&amp;#123;  if(root == nullptr)    return 0;  int max = 0;  _maxDistance(root, max);  return max;&amp;#125;int _maxDistance(node*">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-12T12:09:17.201Z">
+<meta property="og:updated_time" content="2019-12-25T13:43:51.548Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="二叉树经典面试题">
 <meta name="twitter:description" content="找出二叉树中最远结点的距离(即两个叶节点之间的距离最大)123456789101112131415161718192021int maxDistance()&amp;#123;  if(root == nullptr)    return 0;  int max = 0;  _maxDistance(root, max);  return max;&amp;#125;int _maxDistance(node*">
@@ -268,7 +268,7 @@
 <h2 id="判断一棵二叉树是否为完全二叉树"><a href="#判断一棵二叉树是否为完全二叉树" class="headerlink" title="判断一棵二叉树是否为完全二叉树"></a>判断一棵二叉树是否为完全二叉树</h2><p>首先需要知道的是什么是满二叉树。若设二叉树的深度为h，除第 h 层外，其它各层 (1～h-1) 的结点数都达到最大个数，第 h 层所有的结点都连续集中在最左边，这就是完全二叉树。<br>判断一棵树是不是满二叉树，就不能再像之前那样，递归去遍历，因为递归是在走深度，所以解决这一问题，需要借助queue完成层序遍历。</p>
 <p>我们简单的层序遍历是先将根节点入队列，之后依次访问队列的front结点，访问完成，将front结点pop，同时将左右不为空的子节点入队列，直到队列为空。这一点应该没有太大问题。回想一下，我们在简单层序遍历的时候，注意了什么问题？如果子结点为NULL，则不入队列，防止下次对空结点进行访问 。</p>
 <p>回到我们一开始的问题，判断一棵二叉树是否为满二叉树。这里在简单层序遍历上做一些处理，先不考虑队列的问题，当我们简单地在走层序遍历过程中，当碰到一个结点为NULL时，如果之后都是空结点，那么该二叉树为完全二叉树，否则，不满足完全二叉树。<br>因此，要实现这个逻辑，就不能只是简单地把非空结点入队列，所有结点都需要入队列，当front变为NULL时，表示读取到了一个空结点，此时，它的子节点之前的所有结点都已经入队列，当队列中还存在空结点，则该树不满足满二叉树。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isFullBinaryTree</span><span class="params">(node* root)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(root == <span class="literal">nullptr</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="built_in">queue</span>&lt;node*&gt; queue_;</span><br><span class="line">  queue_.push(root);</span><br><span class="line">  node* front = <span class="literal">nullptr</span>;</span><br><span class="line">  <span class="keyword">while</span>(front = queue_.front())<span class="comment">//只要左边节点非空就能一直运行</span></span><br><span class="line">  &#123;</span><br><span class="line">    queue_.push(front-&gt;left);</span><br><span class="line">    queue_.push(front-&gt;right);</span><br><span class="line">    queue_.pop()l</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">while</span>(!queue_.empty())<span class="comment">//走到这一步的都是左边有空节点的或子节点全为null的节点，此时为完全二叉树</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span>(queue_.front() != <span class="literal">nullptr</span>)</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    queue_.pop();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isFullBinaryTree</span><span class="params">(node* root)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(root == <span class="literal">nullptr</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="built_in">queue</span>&lt;node*&gt; queue_;</span><br><span class="line">  queue_.push(root);</span><br><span class="line">  node* front = <span class="literal">nullptr</span>;</span><br><span class="line">  <span class="keyword">while</span>(front = queue_.front())<span class="comment">//只要左边节点非空就能一直运行</span></span><br><span class="line">  &#123;</span><br><span class="line">    queue_.push(front-&gt;left);</span><br><span class="line">    queue_.push(front-&gt;right);</span><br><span class="line">    queue_.pop();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">while</span>(!queue_.empty())<span class="comment">//走到这一步的都是左边有空节点的或子节点全为null的节点，此时为完全二叉树</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span>(queue_.front() != <span class="literal">nullptr</span>)</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    queue_.pop();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="求二叉树中两个结点的最近公共祖先"><a href="#求二叉树中两个结点的最近公共祖先" class="headerlink" title="求二叉树中两个结点的最近公共祖先"></a>求二叉树中两个结点的最近公共祖先</h2><p>情况一：搜索二叉树<br>搜索二叉树始终满足根结点大于左孩子，小于右孩子。那他们的公共祖先的key值就必然介于两个结点之间。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">node* <span class="title">findParent_SearchTree</span><span class="params">(node* node1, node* node2, node* root)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(root == <span class="literal">nullptr</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">  <span class="keyword">if</span>(node1 == <span class="literal">nullptr</span>)</span><br><span class="line">    <span class="keyword">return</span> node2;</span><br><span class="line">  <span class="keyword">if</span>(node2 == <span class="literal">nullptr</span>)</span><br><span class="line">    <span class="keyword">return</span> node1;</span><br><span class="line">  <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span>(root == <span class="literal">nullptr</span>)</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">    <span class="keyword">if</span>((root-&gt;val &gt;= node1-&gt;val &amp;&amp; root-&gt;val &lt;= node2-&gt;val) || (root-&gt;val &lt;= node1-&gt;val &amp;&amp; root-&gt;val &gt;= node2-&gt;val))</span><br><span class="line">      <span class="keyword">return</span> root;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(root-&gt;val &gt; node1-&gt;val)</span><br><span class="line">      root = root-&gt;left;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      root = root-&gt;right;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -377,6 +377,15 @@
 
 
 <nav id="article-nav">
+  
+    <a href="/2019/12/25/物理地址和虚拟地址的分布/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          物理地址和虚拟地址的分布
+        
+      </div>
+    </a>
   
   
     <a href="/2019/12/12/c-对象模型/" id="article-nav-older" class="article-nav-link-wrap">
@@ -575,10 +584,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IO</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
@@ -588,6 +593,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">IO</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -10,18 +10,18 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="注解的基础1.注解的定义：Java文件叫做Annotation，用@interface表示。 2.元注解：@interface上面按需要注解上一些东西，包括@Retention、@Target、@Document、@Inherited四种。 3.注解的保留策略： 　　@Retention(RetentionPolicy.SOURCE)   // 注解仅存在于源码中，在class字节码文件中不包含">
+  <meta name="description" content="注解的基础1.注解的定义：Java文件叫做Annotation，用@interface表示。 2.元注解：@interface上面按需要注解上一些东西，包括@Retention(生命周期)、@Target(注解能放在什么位置)、@Document(会出现在注释说明中)、@Inherited(注解具有继承性)四种。 3.注解的保留策略： 　　@Retention(RetentionPolicy.SO">
 <meta name="keywords" content="YangWan,YangWan_技术博客">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java自定义注解">
 <meta property="og:url" content="https://niconiconi233.github.io/2019/11/11/java自定义注解/index.html">
 <meta property="og:site_name" content="NICO">
-<meta property="og:description" content="注解的基础1.注解的定义：Java文件叫做Annotation，用@interface表示。 2.元注解：@interface上面按需要注解上一些东西，包括@Retention、@Target、@Document、@Inherited四种。 3.注解的保留策略： 　　@Retention(RetentionPolicy.SOURCE)   // 注解仅存在于源码中，在class字节码文件中不包含">
+<meta property="og:description" content="注解的基础1.注解的定义：Java文件叫做Annotation，用@interface表示。 2.元注解：@interface上面按需要注解上一些东西，包括@Retention(生命周期)、@Target(注解能放在什么位置)、@Document(会出现在注释说明中)、@Inherited(注解具有继承性)四种。 3.注解的保留策略： 　　@Retention(RetentionPolicy.SO">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-11T07:55:30.757Z">
+<meta property="og:updated_time" content="2019-12-18T11:49:43.113Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java自定义注解">
-<meta name="twitter:description" content="注解的基础1.注解的定义：Java文件叫做Annotation，用@interface表示。 2.元注解：@interface上面按需要注解上一些东西，包括@Retention、@Target、@Document、@Inherited四种。 3.注解的保留策略： 　　@Retention(RetentionPolicy.SOURCE)   // 注解仅存在于源码中，在class字节码文件中不包含">
+<meta name="twitter:description" content="注解的基础1.注解的定义：Java文件叫做Annotation，用@interface表示。 2.元注解：@interface上面按需要注解上一些东西，包括@Retention(生命周期)、@Target(注解能放在什么位置)、@Document(会出现在注释说明中)、@Inherited(注解具有继承性)四种。 3.注解的保留策略： 　　@Retention(RetentionPolicy.SO">
   
   
     <link rel="icon" href="/img/logo.ico">
@@ -229,7 +229,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">678字</span>
+      <span class="post-count">716字</span>
     </span>
   </span>
 
@@ -250,7 +250,7 @@
   <div class="article-entry" itemprop="articleBody">
     
     <h2 id="注解的基础"><a href="#注解的基础" class="headerlink" title="注解的基础"></a>注解的基础</h2><p>1.注解的定义：Java文件叫做Annotation，用@interface表示。</p>
-<p>2.元注解：@interface上面按需要注解上一些东西，包括@Retention、@Target、@Document、@Inherited四种。</p>
+<p>2.元注解：@interface上面按需要注解上一些东西，包括@Retention(生命周期)、@Target(注解能放在什么位置)、@Document(会出现在注释说明中)、@Inherited(注解具有继承性)四种。</p>
 <p>3.注解的保留策略：</p>
 <p>　　@Retention(RetentionPolicy.SOURCE)   // 注解仅存在于源码中，在class字节码文件中不包含</p>
 <p>　　@Retention(RetentionPolicy.CLASS)     // 默认的保留策略，注解会在class字节码文件中存在，但运行时无法获得</p>
@@ -266,6 +266,7 @@
 <p>　　@Target(ElementType.LOCAL_VARIABLE)  // 局部变量</p>
 <p>　　@Target(ElementType.ANNOTATION_TYPE) // 注解</p>
 <p>　　@Target(ElementType.PACKAGE)         // 包</p>
+<p>可以联合使用：<br>    @Target({METHOD,TYPE})</p>
 <p>5.注解包含在javadoc中：</p>
 <p>　　@Documented</p>
 <p>6.注解可以被继承：</p>
@@ -587,10 +588,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IO</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
@@ -600,6 +597,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">IO</a>
               </li>
              
               <li class="article-tag-list-item">
