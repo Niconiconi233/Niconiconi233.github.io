@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://niconiconi233.github.io/2019/11/27/CookBook/bm10.jpg">
 <meta property="og:image" content="https://niconiconi233.github.io/2019/11/27/CookBook/bm11.jpg">
 <meta property="og:image" content="https://niconiconi233.github.io/2019/11/27/CookBook/bm12.jpg">
-<meta property="og:updated_time" content="2019-12-22T11:44:27.628Z">
+<meta property="og:updated_time" content="2020-01-12T06:09:56.434Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CookBook">
 <meta name="twitter:description" content="保持对std::vector实例的排序12345void insert_sorted(vector&amp;lt;string&amp;gt;&amp;amp; v, const string&amp;amp; word)&amp;#123;  const auto pos(lower_bound(begin(v), end(v), word));  v.insert(pos, word);&amp;#125;">
@@ -243,7 +243,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">12.1k字</span>
+      <span class="post-count">12.3k字</span>
     </span>
   </span>
 
@@ -252,7 +252,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">46分</span>
+      <span class="post-count">47分</span>
     </span>
   </span>
 </div>
@@ -615,6 +615,18 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> F&gt;</span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">auto</span> <span class="title">fut_unwrap</span><span class="params">(F f)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> [f](<span class="keyword">auto</span> ... xs) &#123;</span><br><span class="line">        <span class="keyword">return</span> f(xs.get()...);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>fut_unwrap会将函数f转换为一个可调用对象，其能接受一组参数。函数对象执行之后可以对所有的future对象调用.get()，从而获得f函数实际的执行结果。</p>
+<h1 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a>文件系统</h1><h2 id="列出目录下所有文件"><a href="#列出目录下所有文件" class="headerlink" title="列出目录下所有文件"></a>列出目录下所有文件</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">path dir&#123;argv[<span class="number">1</span>]&#125;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">const</span> directory_entry&amp; e : directory_iterator&#123;dir&#125;)&#123;</span><br><span class="line">  <span class="comment">//do some</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>可以对输入路径直接遍历，会对文件夹中的每个文件都访问一次，文件中元素的遍历顺序未定义，.和..都已经被过滤</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span> &amp;entry : resursive_directory_iterator&#123;current_path()&#125;)&#123;</span><br><span class="line">  <span class="comment">//do some</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>resursive_directory_iterator对工作目录下的所有文件进行迭代，不过会对子目录进行迭代</strong><br>recursive_directory_iterator具有一些有趣的成员函数：</p>
+<ul>
+<li>depth()代表我们需要迭代多少层子文件夹。</li>
+<li>recursion_pending()代表在进行当前迭代器后，是否会在进行对子文件夹进行迭代。</li>
+<li>disable_recursion_pending()当迭代器需要再对子文件夹进行迭代时，提前调用这个函数，则会让递归停止。</li>
+<li>pop()将会终止当前级别的迭代，并返回上一级目录。</li>
+</ul>
 
     
 
