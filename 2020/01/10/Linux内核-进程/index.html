@@ -10,18 +10,20 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="进程的目的就是担当分配系统资源(cpu时间，内存等)的实体。当一个进程创建时，几乎与父进程相同，它接收父进程地址空间的一个(逻辑)拷贝，并从进程创建系统调用的下一条指令开始执行与父进程相同的代码，尽管父子进程可以共享程序代码的页，但是他们各有独自独立的数据拷贝(堆和栈)，因此子进程对一个内存单元的修改父进程是不可见的">
+  <meta name="description" content="&amp;emsp;进程的目的就是担当分配系统资源(cpu时间，内存等)的实体。&amp;emsp;当一个进程创建时，几乎与父进程相同，它接收父进程地址空间的一个(逻辑)拷贝，并从进程创建系统调用的下一条指令开始执行与父进程相同的代码，尽管父子进程可以共享程序代码的页，但是他们各有独自独立的数据拷贝(堆和栈)，因此子进程对一个内存单元的修改父进程是不可见的">
 <meta name="keywords" content="进程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux内核-进程">
 <meta property="og:url" content="https://niconiconi233.github.io/2020/01/10/Linux内核-进程/index.html">
 <meta property="og:site_name" content="NICO">
-<meta property="og:description" content="进程的目的就是担当分配系统资源(cpu时间，内存等)的实体。当一个进程创建时，几乎与父进程相同，它接收父进程地址空间的一个(逻辑)拷贝，并从进程创建系统调用的下一条指令开始执行与父进程相同的代码，尽管父子进程可以共享程序代码的页，但是他们各有独自独立的数据拷贝(堆和栈)，因此子进程对一个内存单元的修改父进程是不可见的">
+<meta property="og:description" content="&amp;emsp;进程的目的就是担当分配系统资源(cpu时间，内存等)的实体。&amp;emsp;当一个进程创建时，几乎与父进程相同，它接收父进程地址空间的一个(逻辑)拷贝，并从进程创建系统调用的下一条指令开始执行与父进程相同的代码，尽管父子进程可以共享程序代码的页，但是他们各有独自独立的数据拷贝(堆和栈)，因此子进程对一个内存单元的修改父进程是不可见的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-01-10T14:43:17.691Z">
+<meta property="og:image" content="https://niconiconi233.github.io/2020/01/10/Linux内核-进程/TSS.jfif">
+<meta property="og:updated_time" content="2020-01-13T14:50:04.929Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux内核-进程">
-<meta name="twitter:description" content="进程的目的就是担当分配系统资源(cpu时间，内存等)的实体。当一个进程创建时，几乎与父进程相同，它接收父进程地址空间的一个(逻辑)拷贝，并从进程创建系统调用的下一条指令开始执行与父进程相同的代码，尽管父子进程可以共享程序代码的页，但是他们各有独自独立的数据拷贝(堆和栈)，因此子进程对一个内存单元的修改父进程是不可见的">
+<meta name="twitter:description" content="&amp;emsp;进程的目的就是担当分配系统资源(cpu时间，内存等)的实体。&amp;emsp;当一个进程创建时，几乎与父进程相同，它接收父进程地址空间的一个(逻辑)拷贝，并从进程创建系统调用的下一条指令开始执行与父进程相同的代码，尽管父子进程可以共享程序代码的页，但是他们各有独自独立的数据拷贝(堆和栈)，因此子进程对一个内存单元的修改父进程是不可见的">
+<meta name="twitter:image" content="https://niconiconi233.github.io/2020/01/10/Linux内核-进程/TSS.jfif">
   
   
     <link rel="icon" href="/img/logo.ico">
@@ -229,7 +231,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">2.5k字</span>
+      <span class="post-count">5.3k字</span>
     </span>
   </span>
 
@@ -238,7 +240,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">9分</span>
+      <span class="post-count">19分</span>
     </span>
   </span>
 </div>
@@ -249,7 +251,7 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <p>进程的目的就是担当分配系统资源(cpu时间，内存等)的实体。<br>当一个进程创建时，几乎与父进程相同，它接收父进程地址空间的一个(逻辑)拷贝，并从进程创建系统调用的下一条指令开始执行与父进程相同的代码，尽管父子进程可以共享程序代码的页，但是他们各有独自独立的数据拷贝(堆和栈)，因此子进程对一个内存单元的修改父进程是不可见的</p>
+    <p>&emsp;进程的目的就是担当分配系统资源(cpu时间，内存等)的实体。<br>&emsp;当一个进程创建时，几乎与父进程相同，它接收父进程地址空间的一个(逻辑)拷贝，并从进程创建系统调用的下一条指令开始执行与父进程相同的代码，尽管父子进程可以共享程序代码的页，但是他们各有独自独立的数据拷贝(堆和栈)，因此子进程对一个内存单元的修改父进程是不可见的</p>
 <a id="more"></a>
 
 <h2 id="进程状态"><a href="#进程状态" class="headerlink" title="进程状态"></a>进程状态</h2><ul>
@@ -268,8 +270,8 @@
 <li><p>僵死撤销状态(EXIT_DEAD)<br>最终状态，由于父进程调用wait4或waitpid系统调用，因而进程由系统删除。为了防止其他执行线程在同一个进程上也执行wait类系统调用(这是一种竞争条件)而把进程的状态由僵死改为僵死撤销状态</p>
 </li>
 </ul>
-<p>Linux引入线程组的表示，一个线程组中的所有线程使用和该线程组的领头线程相同的PID，也就是该组中的第一个轻量级进程的PID，getpid()系统调用返回当前进程的tgid值而不是pid值</p>
-<h2 id="pidhash表和链表"><a href="#pidhash表和链表" class="headerlink" title="pidhash表和链表"></a>pidhash表和链表</h2><p>为了在系统调用时快速查询对应的进程描述符，映入了4个散列表，需要4个散列表是因为进程描述符包含了表示不同类型PID的字段，而且每种类型的PID需要它自己的散列表</p>
+<p>&emsp;Linux引入线程组的表示，一个线程组中的所有线程使用和该线程组的领头线程相同的PID，也就是该组中的第一个轻量级进程的PID，getpid()系统调用返回当前进程的tgid值而不是pid值</p>
+<h2 id="pidhash表和链表"><a href="#pidhash表和链表" class="headerlink" title="pidhash表和链表"></a>pidhash表和链表</h2><p>&emsp;为了在系统调用时快速查询对应的进程描述符，映入了4个散列表，需要4个散列表是因为进程描述符包含了表示不同类型PID的字段，而且每种类型的PID需要它自己的散列表</p>
 <table>
 <thead>
 <tr>
@@ -299,30 +301,30 @@
 <td>会话领头进程的PID</td>
 </tr>
 </tbody></table>
-<p>Linux利用链表来处理冲突的PID</p>
-<p>为了能快速返回组中其他所有进程，内核就必须为每个线程组保留一个进程链表，在查找给定登录会话或进程组的进程时也会有同样的情形</p>
-<h2 id="等待队列"><a href="#等待队列" class="headerlink" title="等待队列"></a>等待队列</h2><p>进程必须经常等待某些事件的发送，等待队列实现了在事件上的等待条件，希望等待特定事件的进程把自己放进合适的等待队列，并放弃控制权，因此等待队列表示一组睡眠的进程当某一条件变为真时，由内核唤醒他们</p>
-<p>等待队列由双向链表实现，其元素包括指向进程描述符的指针，每个等待队列都有一个等待头</p>
+<p>&emsp;Linux利用链表来处理冲突的PID</p>
+<p>&emsp;为了能快速返回组中其他所有进程，内核就必须为每个线程组保留一个进程链表，在查找给定登录会话或进程组的进程时也会有同样的情形</p>
+<h2 id="等待队列"><a href="#等待队列" class="headerlink" title="等待队列"></a>等待队列</h2><p>&emsp;进程必须经常等待某些事件的发送，等待队列实现了在事件上的等待条件，希望等待特定事件的进程把自己放进合适的等待队列，并放弃控制权，因此等待队列表示一组睡眠的进程当某一条件变为真时，由内核唤醒他们</p>
+<p>&emsp;等待队列由双向链表实现，其元素包括指向进程描述符的指针，每个等待队列都有一个等待头</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> __<span class="title">wait_queue_head</span>&#123;</span></span><br><span class="line">  <span class="keyword">spinlock_t</span> lock;</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">list_head</span> <span class="title">task_list</span></span></span><br><span class="line"><span class="class">&#125;;</span></span><br></pre></td></tr></table></figure>
 
 <p>等待队列链表中的元素类型为wait_queue_t</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> __<span class="title">wait_queue</span>&#123;</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> flags;</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">task_struct</span> *<span class="title">task</span>;</span></span><br><span class="line">  <span class="keyword">wait_queue_func_t</span> func;</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">list_head</span> <span class="title">task_list</span>;</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<p>等待队列中的每个元素代表一个睡眠进程。该进程等待某一事件的发送，它的描述符地址放在task字段中</p>
-<p>有两种睡眠进程：互斥进程(等待队列元素的flags字段为1)由内核有选择地唤醒，而非互斥进程(flags为0)总是由内核在事件发生时唤醒<br>等待队列元素的func字段用来表示等待队列中睡眠进程应该用什么方式唤醒。</p>
-<h2 id="等待队列的操作"><a href="#等待队列的操作" class="headerlink" title="等待队列的操作"></a>等待队列的操作</h2><p>非互斥进程p将由default_wake_function唤醒</p>
+<p>&emsp;等待队列中的每个元素代表一个睡眠进程。该进程等待某一事件的发送，它的描述符地址放在task字段中</p>
+<p>&emsp;有两种睡眠进程：互斥进程(等待队列元素的flags字段为1)由内核有选择地唤醒，而非互斥进程(flags为0)总是由内核在事件发生时唤醒<br>&emsp;等待队列元素的func字段用来表示等待队列中睡眠进程应该用什么方式唤醒。</p>
+<h2 id="等待队列的操作"><a href="#等待队列的操作" class="headerlink" title="等待队列的操作"></a>等待队列的操作</h2><p>&emsp;非互斥进程p将由default_wake_function唤醒</p>
 <p>要等待特定条件的进程可以调用如下函数</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">sleep_on</span><span class="params">(<span class="keyword">wait_queue_head_t</span> *wq)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">wait_queue_t</span> wait;</span><br><span class="line">  init_waitqueue_entry(&amp;wait, current);</span><br><span class="line">  current-&gt;state = TASK_UNINTERRUPTIBLE;</span><br><span class="line">  add_wait_queue(wq, &amp;wait)</span><br><span class="line">  schedule();</span><br><span class="line">  remove_wait_queue(wq, &amp;wait);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>该函数吧当前进程的状态设置为TASK_UNINTERRUPTIBLE，并把它插入到特定的等待队列，然后重新调度程序，而调度程序重新开始另一个程序的执行，当睡眠进程被唤醒时，调度程序重新开始执行sleep_on函数，吧该进程从等待队列中删除</p>
+<p>&emsp;该函数吧当前进程的状态设置为TASK_UNINTERRUPTIBLE，并把它插入到特定的等待队列，然后重新调度程序，而调度程序重新开始另一个程序的执行，当睡眠进程被唤醒时，调度程序重新开始执行sleep_on函数，吧该进程从等待队列中删除</p>
 <p>interruptible_sleep_on和sleep_on函数是一样的，前者将状态设置为TASK_INTERRUPTIBLE而不是TASK_UNINTERRUPTIBLE，因此接收一个信号就可以唤醒当前进程</p>
 <p>sleep_on_timeout和interruptible_sleep_on_timeout与前面函数类似，但他们允许调用者定义一个时间间隔，过了之后，进程将由内核唤醒</p>
 <p>Linux2.6引入了prepare_to_wait，prepare_to_wait_exclusive和finish_wait函数提供了另外一种途径来使当前进程在一个等待队列中睡眠，</p>
 <p>进程一旦被唤醒就执行finish_wait函数，他把进程的状态再次设置为TASK_RUNNING(仅发生在调用schedule()之前，唤醒条件变为真的情况下)，并从等待队列中删除等待元素</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">wake_up</span><span class="params">(<span class="keyword">wait_queue_head_t</span> *q)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">list_head</span> *<span class="title">tmp</span>;</span></span><br><span class="line">  <span class="keyword">wait_queue_t</span> *curr;</span><br><span class="line"></span><br><span class="line">  list_for_each(tmp, &amp;q-&gt;task_list)&#123;</span><br><span class="line">    curr = list_entry(tmp, <span class="keyword">wait_queue_t</span>, task_list);</span><br><span class="line">    <span class="keyword">if</span>(curr-&gt;func(curr, TASK_INTERRUPTIBLE|TASK_UNINTERRUPTIBLE, <span class="number">0</span>, <span class="literal">NULL</span>) &amp;&amp; curr-&gt;flags)</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>list_for_each扫描双向链表q-&gt;task_list中的所有项，如果一个进程已经被有效地唤醒(函数返回1)并且进程时互斥的，循环结束<br><strong>因为所有的非互斥进程总是在双向链表的开始位置，而所有的互斥进程在双向链表的尾部，所以函数总是先唤醒非互斥进程再唤醒互斥进程</strong></p>
-<h2 id="进程资源限制"><a href="#进程资源限制" class="headerlink" title="进程资源限制"></a>进程资源限制</h2><p>每个进程都有一组相关的资源限制，限制指定了进程能使用的系统资源数量，当前进程的资源限制存放在current-&gt;signal-&gt;rlim字段，即进程的信号描述符的一个字段，该字段类型是类型为rlimit结构的数组</p>
+<p>&emsp;list_for_each扫描双向链表q-&gt;task_list中的所有项，如果一个进程已经被有效地唤醒(函数返回1)并且进程时互斥的，循环结束<br><strong>因为所有的非互斥进程总是在双向链表的开始位置，而所有的互斥进程在双向链表的尾部，所以函数总是先唤醒非互斥进程再唤醒互斥进程</strong></p>
+<h2 id="进程资源限制"><a href="#进程资源限制" class="headerlink" title="进程资源限制"></a>进程资源限制</h2><p>&emsp;每个进程都有一组相关的资源限制，限制指定了进程能使用的系统资源数量，当前进程的资源限制存放在current-&gt;signal-&gt;rlim字段，即进程的信号描述符的一个字段，该字段类型是类型为rlimit结构的数组</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">rlimit</span>&#123;</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">long</span> rlim_cur;</span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">long</span> rlim_max;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>资源限制</p>
@@ -387,14 +389,107 @@
 </tr>
 </tbody></table>
 <p>rlim_cur字段是资源的当前资源限制，例如current-&gt;signal-&gt;rlim[RLIMIT_CPU],表示正在运行进程所占用CPU时间的当前限制<br>rlim_max字段是资源限制所允许的最大值。利用getrlimit和setrlimit系统调用用户能把一些资源的rlim_cur限制增加到rlim_max,只有root才能扩充rlim_max的值</p>
-<h1 id="进程切换"><a href="#进程切换" class="headerlink" title="进程切换"></a>进程切换</h1><p>为了控制进程的执行，内核必须有能力挂起正在CPU上运行的进程，并恢复以前挂起的某个进程的执行。这种行为被称为进程切换，或上下文切换</p>
-<h2 id="硬件上下文"><a href="#硬件上下文" class="headerlink" title="硬件上下文"></a>硬件上下文</h2><p>每个进程可以拥有属于自己的地址空间，但所有进程必须共享CPU寄存器，因此在恢复一个进程的执行前，内核必须确保每个寄存器装入了挂起进程时的值<br>进程恢复执行前必须装入寄存器的一组数据称为硬件上下文，硬件上下文是进程可执行上下文的一个子集，因为可执行上下文包含进程执行时需要的所有信息，在Linux中，进程硬件上下文的一部分保存着TSS段，而剩余部分存放在内核态堆栈中</p>
-<p>早起Linux版本利用80X86体系结构所提供的硬件支持，并通过far jmp指令跳到next进程TSS描述符的选择符来执行进程切换，当执行这条指令时，自动保存原来的硬件上下文，装入新的硬件上下文，但基于以下原因，Linux2.6使用软件执行进程切换：</p>
+<h1 id="进程切换"><a href="#进程切换" class="headerlink" title="进程切换"></a>进程切换</h1><p>&emsp;为了控制进程的执行，内核必须有能力挂起正在CPU上运行的进程，并恢复以前挂起的某个进程的执行。这种行为被称为进程切换，或上下文切换</p>
+<h2 id="硬件上下文"><a href="#硬件上下文" class="headerlink" title="硬件上下文"></a>硬件上下文</h2><p>&emsp;每个进程可以拥有属于自己的地址空间，但所有进程必须共享CPU寄存器，因此在恢复一个进程的执行前，内核必须确保每个寄存器装入了挂起进程时的值<br>&emsp;进程恢复执行前必须装入寄存器的一组数据称为硬件上下文，硬件上下文是进程可执行上下文的一个子集，因为可执行上下文包含进程执行时需要的所有信息，在Linux中，进程硬件上下文的一部分保存着TSS段，而剩余部分存放在内核态堆栈中</p>
+<p>&emsp;早期Linux版本利用80X86体系结构所提供的硬件支持，并通过far jmp指令跳到next进程TSS描述符的选择符来执行进程切换，当执行这条指令时，自动保存原来的硬件上下文，装入新的硬件上下文，但基于以下原因，Linux2.6使用软件执行进程切换：</p>
 <ol>
 <li>通过一组mov指令逐步执行切换，这样能较好的控制装入数据的合法性，尤其是着使检查ds和es段寄存器称为可能，当用far jmp不可能进行这类检查</li>
 <li>新旧方法所需时间大致相同，尽管当前切换代码还有改进余地，却不能对硬件上下文切换进行优化</li>
 </ol>
-<p>进程切换只发生在内核态，在执行进程切换前，用户态进程所使用的所有寄存器内容都以保存在内核态堆上，这也包括ss和esp这对寄存器的内容</p>
+<p>&emsp;进程切换只发生在内核态，在执行进程切换前，用户态进程所使用的所有寄存器内容都以保存在内核态堆上，这也包括ss和esp这对寄存器的内容</p>
+<h2 id="任务状态段"><a href="#任务状态段" class="headerlink" title="任务状态段"></a>任务状态段</h2><p>&emsp;80x86体系结构包括了一个特殊的段类型，叫任务状态段(TSS),来存放硬件上下文，但是强制它为系统中每个不同的CPU创建一个TSS：</p>
+<ul>
+<li>当80X86的一个CPU从用户态切换到内核态时，就从TSS中获取内核态堆栈的地址</li>
+<li>当用户态进程试图通过in或out指令访问一个I/O端口时，CPU需要访问存放在TSS中的I/O许可权位图，以检查该进程是否有访问端口的权力<ol>
+<li>检查eflags寄存器中的2位IOPL字段，如果该字段值为3，控制单元就执行I/O指令，否则进行下一个检查</li>
+<li>访问tr寄存器以确定当前的TSS和相应I/O许可权位图</li>
+<li>检查I/O指令中指定的I/O端口在权位图中对应的位，如果改位清0，这条I/O指令就执行，否则控制单元产生一个”Generan protection”异常</li>
+</ol>
+</li>
+</ul>
+<p>&emsp;tss_struct结构描述TSS的格式，init_tss数组为系统上每个不同的CPU存放一个TSS,在每次切换进程时，内核都要更新TSS的某些字段以便相应的CPU控制单元可以安全的检索到它需要的信息。</p>
+<p>工作细节：<br>&emsp;TSS在任务切换过程中起着重要作用，通过它实现任务的挂起和恢复。所谓任务切换是指，挂起当前正在执行的任务，恢复或启动另一任务的执行。在任务切换过程中，首先，处理器中各寄存器的当前值被自动保存到TR（任务寄存器）所指定的TSS中；然后，下一任务的TSS的选择子被装入TR；最后，从TR所指定的TSS中取出各寄存器的值送到处理器的各寄存器中。由此可见，通过在TSS中保存任务现场各寄存器状态的完整映象，实现任务的切换。<br><img src="/2020/01/10/Linux内核-进程/TSS.jfif" alt></p>
+<ul>
+<li>寄存器保存区域<br>&emsp;寄存器保存区域位于TSS内偏移20H至5FH处，用于保存通用寄存器、段寄存器、指令指针和标志寄存器。当TSS对应的任务正在执行时，保存区域是未定义的；在当前任务被切换出时，这些寄存器的当前值就保存在该区域。当下次切换回原任务时，再从保存区域恢复出这些寄存器的值，从而，使处理器恢复成该任务换出前的状态，最终使任务能够恢复执行。</li>
+<li>内层堆栈指针区域<br>&emsp;为了有效地实现保护，同一个任务在不同的特权级下使用不同的堆栈。例如，当从外层特权级3变换到内层特权级0时，任务使用的堆栈也同时从3级变换到0级堆栈；当从内层特权级0变换到外层特权级3时，任务使用的堆栈也同时从0级堆栈变换到3级堆栈。所以，一个任务可能具有四个堆栈，对应四个特权级。四个堆栈需要四个堆栈指针。<br>&emsp;TSS的内层堆栈指针区域中有三个堆栈指针，它们都是48位的全指针(16位的选择子和32位的偏移)，分别指向0级、1级和2级堆栈的栈顶，依次存放在TSS中偏移为4、12及20开始的位置。当发生向内层转移时，把适当的堆栈指针装入SS及ESP寄存器以变换到内层堆栈，外层堆栈的指针保存在内层堆栈中。没有指向3级堆栈的指针，因为3级是最外层，所以任何一个向内层的转移都不可能转移到3级。<br>&emsp;但是，当特权级由内层向外层变换时，并不把内层堆栈的指针保存到TSS的内层堆栈指针区域。实际上，处理器从不向该区域进行写入，除非程序设计者认为改变该区域的值。这表明向内层转移时，总是把内层堆栈认为是一个空栈。因此，不允许发生同级内层转移的递归，一旦发生向某级内层的转移，那么返回到外层的正常途径是相匹配的向外层返回。</li>
+<li>地址映射寄存器区域<br>&emsp;从虚拟地址空间到线性地址空间的映射由GDT和LDT确定，与特定任务相关的部分由LDT确定，而LDT又由LDTR确定。如果采用分页机制，那么由线性地址空间到物理地址空间的映射由包含页目录表起始物理地址的控制寄存器CR3确定。所以，与特定任务相关的虚拟地址空间到物理地址空间的映射由LDTR和CR3确定。显然，随着任务的切换，地址映射关系也要切换。<br>&emsp;TSS的地址映射寄存器区域由位于偏移1CH处的双字字段(CR3)和位于偏移60H处的字字段(LDTR)组成。在任务切换时，处理器自动从要执行任务的TSS中取出这两个字段，分别装入到寄存器CR3和LDTR。这样就改变了虚拟地址空间到物理地址空间的映射。<br>&emsp;但是，在任务切换时，处理器并不把换出任务当时的寄存器CR3和LDTR的内容保存到TSS中的地址映射寄存器区域。事实上，处理器也从来不向该区域自动写入。因此，如果程序改变了LDTR或CR3，那么必须把新值人为地保存到TSS中的地址映射寄存器区域相应字段中。可以通过别名技术实现此功能。</li>
+<li>链接字段<br>&emsp;链接字段安排在TSS内偏移0开始的双字中，其高16位未用。在起链接作用时，地16位保存前一任务的TSS描述符的选择子。<br>&emsp;如果当前的任务由段间调用指令CALL或中断/异常而激活，那么链接字段保存被挂起任务的 TSS的选择子，并且标志寄存器EFLAGS中的NT位被置1，使链接字段有效。在返回时，由于NT标志位为1，返回指令RET或中断返回指令IRET将使得控制沿链接字段所指恢复到链上的前一个任务。</li>
+<li>其它字段<br>&emsp;为了实现输入/输出保护，要使用I/O许可位图。任务使用的I/O许可位图也存放在TSS中，作为TSS的扩展部分。在TSS内偏移66H处的字用于存放I/O许可位图在TSS内的偏移(从TSS开头开始计算)。</li>
+</ul>
+<h2 id="thread字段"><a href="#thread字段" class="headerlink" title="thread字段"></a>thread字段</h2><p>&emsp;在每次切换进程时，被替换进程的硬件上下文必须保持在别处。不能把它保持在TSS中，因为Linux为每个处理器而不是每个进程使用TSS.<br>&emsp;因此，每个task_struct包含一个类型为thread_struct的thread字段，只要进程被切换出去，内核就把其硬件上下文保持在这个结构中，这个数据结构包含的字段涉及大部分CPU寄存器，但不包括诸如eax,ebx等通用寄存器，他们的值保存在内核堆栈中。</p>
+<h2 id="执行进程切换"><a href="#执行进程切换" class="headerlink" title="执行进程切换"></a>执行进程切换</h2><p>&emsp;进程切换肯只发生在schedule()函数<br>&emsp;每个进程切换由两步组成：</p>
+<ol>
+<li>切换页全局目录以安装一个新的地址空间</li>
+<li>切换内核态堆栈和硬件上下文</li>
+</ol>
+<h2 id="switch-to宏"><a href="#switch-to宏" class="headerlink" title="switch_to宏"></a>switch_to宏</h2><p>&emsp;该宏有三个参数，prev, next, last表示被替换进程和新进程的进程描述符在内存中的位置，last是输出参数，表示宏吧进程c的描述符写在内存的什么位置了，在切换进程前，宏把第一个输入参数prev表示的变量内容写入eax寄存器，在完成切换，a已经恢复执行时，宏把cpu的eax寄存器的内容写入第三个输出参数<br><strong>当从c切换到a时，a内核栈中的prev和next变成了a,b于是失去了对c的引用，于是使用last保存了前prev的地址</strong></p>
+<ol>
+<li><p>在eax和edx寄存器中保存prev,next的值</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">movl prev, %eax</span><br><span class="line">movl next, %edx</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>把eflags和ebp寄存器的内容保存在prev内核栈中</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pushf1</span><br><span class="line">push1 %ebp</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>把esp的内容保存到prev-&gt;thread.esp中</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">movl %esp, <span class="number">484</span>(%eax)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>吧next-&gt;thread.esp装入esp</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">movl <span class="number">484</span>(%edx). %esp</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>把标记为1的地址存入prev-&gt;thread.eip.当被替换的进程重新恢复执行时，进程执行被标记为1那条指令</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">movl $<span class="number">1f</span>, <span class="number">480</span>(%eax)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>宏把next-&gt;thread.eip的值压入next的内核栈</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">push1 <span class="number">480</span>(%edx)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>跳到__switch_to函数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jmp__switch_to</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>被进程b替换的进程a再次获得cpu,执行一些保存eflags和ebp寄存器的内容的指令</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pop1 %ebp</span><br><span class="line">popf1</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>拷贝eax寄存器内容到last参数的内存区域中</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mov1 %eax, last</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="switch-to函数"><a href="#switch-to函数" class="headerlink" title="__switch_to函数"></a>__switch_to函数</h2><ol>
+<li><p>执行由__unlazy_fpu宏产生的代码，以有选择的保存prev_p进程的FPU, MMX及XMM寄存器的内容</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__unlazy_fpu(prev_p)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>执行smp_processor_id获取本地CPU的下标，即执行代码的cpu,该宏从当前进程的thread_info结构的cpu字段获得下标并保存到cpu局部变量</p>
+</li>
+<li><p>把next_p-&gt;thread.esp0装入对应于本地cpu的TSS的esp0字段</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">init_tss[cpu].esp0 = next_p-&gt;thread.esp0</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>把next_p进程使用的线程局部存储段(TLS)装入本地cpu的全局描述符表</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cup_gdt_table[cpu][<span class="number">6</span>] = next_p-&gt;thread.tls_array[<span class="number">0</span>];</span><br><span class="line">cup_gdt_table[cpu][<span class="number">7</span>] = next_p-&gt;thread.tls_array[<span class="number">1</span>];</span><br><span class="line">cup_gdt_table[cpu][<span class="number">8</span>] = next_p-&gt;thread.tls_array[<span class="number">2</span>];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>把fs和gs段寄存器的内容分别存放在prev_p-&gt;thread.fs和prev_p-&gt;thread.gs中</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">movl %fs, <span class="number">40</span>(%esi)</span><br><span class="line">movl %gs, <span class="number">44</span>(%esi)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果fs或gs段寄存器已经被prev_p或next_p进程中的任意一个使用，则将next_p进程的thread_struct描述符中保存的值装入这些寄存器中</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">movl <span class="number">40</span>(%ebx), %fs</span><br><span class="line">movl <span class="number">44</span>(%ebx), %gs</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>用next_p-&gt;thread.debugreg数组中的内容装载dr0….dr7中的6个调试寄存器</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(next_p-&gt;thread.debugreg[<span class="number">7</span>])&#123;</span><br><span class="line">  loaddebug(&amp;next_p-&gt;thread, <span class="number">0</span>);</span><br><span class="line">  loaddebug(&amp;next_p-&gt;thread, <span class="number">1</span>);</span><br><span class="line">  loaddebug(&amp;next_p-&gt;thread, <span class="number">2</span>);</span><br><span class="line">  loaddebug(&amp;next_p-&gt;thread, <span class="number">3</span>);</span><br><span class="line">  <span class="comment">//没有4,5</span></span><br><span class="line">  loaddebug(&amp;next_p-&gt;thread, <span class="number">6</span>);</span><br><span class="line">  loaddebug(&amp;next_p-&gt;thread, <span class="number">7</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果必要，更新TSS中的I/O位图</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(prev_p-&gt;thread.io_bitmap_ptr || next_p-&gt;thread.io_bitmap_ptr)</span><br><span class="line">  handle_io_bitmap(&amp;next_p-&gt;thread, &amp;init_tss[cpu])</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>当且仅当一个进程在当前时间片内实际访问I/O端口时，真实位图才被拷贝到本地CPU的TSS中，进程的定制I/O位图被保存在thread_info结构的io_bitmap_ptr字段指向的缓冲区中。handle_io_bitmap函数为next_p进程设置本地CPU使用的TSS的io_bitmap字段如下：</p>
+<ol>
+<li><p>如果next_p进程不拥有自己的I/O权限位图，则TSS的io_bitmap字段被设置为0x8000</p>
+</li>
+<li><p>如果拥有，被设置为0x9000<br>TSS的io_bitmap字段应当包含一个在TSS中的偏移量，其中存放实际位图</p>
+</li>
+<li><p>终止 __switch_to函数通过以下声明结束</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> prev_p</span><br><span class="line"><span class="comment">//汇编</span></span><br><span class="line">movl %edi %eax</span><br><span class="line">ret</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
 
     
 
