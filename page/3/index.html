@@ -123,7 +123,7 @@
     <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
       
       
-      <a class="forkMe" style="position:absolute;z-index:999;top:0;right:0.5em" href="http://github.com/Niconiconi233/Niconiconi233.github.io"
+      <a class="forkMe" style="position:absolute;z-index:999;top:0;right:0.5em" href="https://github.com/Niconiconi233/Niconiconi233.github.io.git"
         target="_blank"><img width="149" height="149" src="/img/forkme.png"
           class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
       
@@ -201,7 +201,7 @@
             
 
   
-    <article id="post-java自定义注解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-dns-udp" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -209,7 +209,7 @@
   
     <h1 itemprop="name">
 	
-	  <a class="article-title" href="/2019/11/11/java自定义注解/" target="_blank">java自定义注解</a>
+	  <a class="article-title" href="/2020/02/03/dns-udp/" target="_blank">为什么 DNS 使用 UDP 协议</a>
   
     </h1>
   
@@ -217,8 +217,8 @@
 
   
   
-<a href="/2019/11/11/java自定义注解/" class="archive-article-date">
-        <time datetime="2019-11-11T07:08:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-11</time>
+<a href="/2020/02/03/dns-udp/" class="archive-article-date">
+        <time datetime="2020-02-03T11:26:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-03</time>
 </a>
 
   
@@ -230,192 +230,9 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h2 id="注解的基础"><a href="#注解的基础" class="headerlink" title="注解的基础"></a>注解的基础</h2><p>1.注解的定义：Java文件叫做Annotation，用@interface表示。</p>
-<p>2.元注解：@interface上面按需要注解上一些东西，包括@Retention(生命周期)、@Target(注解能放在什么位置)、@Document(会出现在注释说明中)、@Inherited(注解具有继承性)四种。</p>
-<p>3.注解的保留策略：</p>
-<p>　　@Retention(RetentionPolicy.SOURCE)   // 注解仅存在于源码中，在class字节码文件中不包含</p>
-<p>　　@Retention(RetentionPolicy.CLASS)     // 默认的保留策略，注解会在class字节码文件中存在，但运行时无法获得</p>
-<p>　　@Retention(RetentionPolicy.RUNTIME)  // 注解会在class字节码文件中存在，在运行时可以通过反射获取到</p>
+    <p>相信 DNS 使用 UDP 协议已经成为了软件工程师的常识，对计算机网络稍有了解的人都知道 DNS 会使用 UDP 协议传输数据，但是这一观点其实不是完全正确的，我们在这里就会详细分析『为什么 DNS 会使用 UDP 传输数据』以及『为什么 DNS 不止会使用 UDP 传输数据』两个问题</p>
     
-    <a class="article-more-a" href="/2019/11/11/java自定义注解/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JAVA//" class="article-tag-list-link color5">JAVA</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2019/11/11/java自定义注解/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-多线程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2019/11/10/多线程/" target="_blank">多线程</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2019/11/10/多线程/" class="archive-article-date">
-        <time datetime="2019-11-10T08:20:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-10</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>在创建一个新的线程是，需要为这个线程建一个新的栈，每个栈对应一个线程，当某个栈执行到全部弹出时，对应线程完成任务，所以，多线程的进程在内存中有多个栈，多个栈之间以一定的空白区域隔开，以备栈的增长，并与其他线程共享内存中的text,heap,和global data区域</p>
-<p>多线程创建</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_create</span><span class="params">(<span class="keyword">pthread_t</span> thread, <span class="keyword">const</span> <span class="keyword">pthread_attr_t</span> arrt, <span class="keyword">void</span>* (*func)(<span class="keyword">void</span>*), <span class="keyword">void</span>* arg)</span></span>;</span><br><span class="line"><span class="comment">//成功返回0，失败返回错误编号</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//pthread_join用来等待一个线程的结束，其函数原型为</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_join</span><span class="params">(pthread thread, <span class="keyword">void</span>** retval)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//pthread_exit函数，一个线程的结束有2中途径，1函数已经结束，调用他的线程也就结束了。2通过pthread_exit来实现</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pthread_exit</span><span class="params">(<span class="keyword">void</span>* retval)</span></span>;</span><br></pre></td></tr></table></figure>
-    
-    <a class="article-more-a" href="/2019/11/10/多线程/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/多线程//" class="article-tag-list-link color4">多线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2019/11/10/多线程/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-allocators" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2019/11/06/allocators/" target="_blank">STL 内存分配函数</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2019/11/06/allocators/" class="archive-article-date">
-        <time datetime="2019-11-06T09:31:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-06</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="内存分配失败处理函数"><a href="#内存分配失败处理函数" class="headerlink" title="内存分配失败处理函数"></a>内存分配失败处理函数</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> _STLP_THREADS<span class="comment">//多线程下的锁</span></span></span><br><span class="line">_STLP_mutex __oom_handler_lock;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">设定用户定义的处理函数，同时返回原来的处理函数</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">__oom_handler_type _STLP_CALL __malloc_alloc::set_malloc_handler(__oom_handler_type __f)</span><br><span class="line">&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> _STLP_THREADS</span></span><br><span class="line">  _STLP_auto_lock _l( __oom_handler_lock );</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">  __oom_handler_type __old = __oom_handler;</span><br><span class="line">  __oom_handler = __f;</span><br><span class="line">  <span class="keyword">return</span> __old;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-    
-    <a class="article-more-a" href="/2019/11/06/allocators/#more">more >></a>
+    <a class="article-more-a" href="/2020/02/03/dns-udp/#more">more >></a>
     
     
 
@@ -432,134 +249,21 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">原码</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/C-C//" class="article-tag-list-link color1">C/C++</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2019/11/06/allocators/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-leetcode-1226" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2019/11/06/leetcode-1226/" target="_blank">leetcode-1226</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2019/11/06/leetcode-1226/" class="archive-article-date">
-        <time datetime="2019-11-06T07:55:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-06</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="leetcode-1226-哲学家进餐"><a href="#leetcode-1226-哲学家进餐" class="headerlink" title="leetcode-1226 哲学家进餐"></a>leetcode-1226 哲学家进餐</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>5 个沉默寡言的哲学家围坐在圆桌前，每人面前一盘意面。叉子放在哲学家之间的桌面上。（5 个哲学家，5 根叉子）</p>
-<p>所有的哲学家都只会在思考和进餐两种行为间交替。哲学家只有同时拿到左边和右边的叉子才能吃到面，而同一根叉子在同一时间只能被一个哲学家使用。每个哲学家吃完面后都需要把叉子放回桌面以供其他哲学家吃面。只要条件允许，哲学家可以拿起左边或者右边的叉子，但在没有同时拿到左右叉子时不能进食。</p>
-<p>假设面的数量没有限制，哲学家也能随便吃，不需要考虑吃不吃得下。</p>
-<p>设计一个进餐规则（并行算法）使得每个哲学家都不会挨饿；也就是说，在没有人知道别人什么时候想吃东西或思考的情况下，每个哲学家都可以在吃饭和思考之间一直交替下去。</p>
-    
-    <a class="article-more-a" href="/2019/11/06/leetcode-1226/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">UDP</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">多线程</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DNS</a>
         		</li>
       		
 		</ul>
 	</div>
 
     
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/算法//" class="article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
 
     
     <p class="article-more-link">
-      <a class="article-more-a" href="/2019/11/06/leetcode-1226/">展开全文 >></a>
+      <a class="article-more-a" href="/2020/02/03/dns-udp/">展开全文 >></a>
     </p>
     
 
@@ -589,7 +293,7 @@
 
 
   
-    <article id="post-leetcode-1195" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-mysql-b-plus-tree" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -597,7 +301,7 @@
   
     <h1 itemprop="name">
 	
-	  <a class="article-title" href="/2019/11/06/leetcode-1195/" target="_blank">leetcode-1195</a>
+	  <a class="article-title" href="/2020/02/03/mysql-b-plus-tree/" target="_blank">为什么 MySQL 使用 B+ 树</a>
   
     </h1>
   
@@ -605,8 +309,8 @@
 
   
   
-<a href="/2019/11/06/leetcode-1195/" class="archive-article-date">
-        <time datetime="2019-11-06T07:30:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-06</time>
+<a href="/2020/02/03/mysql-b-plus-tree/" class="archive-article-date">
+        <time datetime="2020-02-03T07:47:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-03</time>
 </a>
 
   
@@ -618,23 +322,9 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="leetco-1195-交替打印字符串"><a href="#leetco-1195-交替打印字符串" class="headerlink" title="leetco-1195 交替打印字符串"></a>leetco-1195 交替打印字符串</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>编写一个可以从 1 到 n 输出代表这个数字的字符串的程序，但是：</p>
-<p>如果这个数字可以被 3 整除，输出 “fizz”。<br>如果这个数字可以被 5 整除，输出 “buzz”。<br>如果这个数字可以同时被 3 和 5 整除，输出 “fizzbuzz”。<br>例如，当 n = 15，输出： 1, 2, fizz, 4, buzz, fizz, 7, 8, fizz, buzz, 11, fizz, 13, 14, fizzbuzz。</p>
-<p>假设有这么一个类：</p>
-<pre><code>class FizzBuzz {
-  public FizzBuzz(int n) { ... }               // constructor
-  public void fizz(printFizz) { ... }          // only output &quot;fizz&quot;
-  public void buzz(printBuzz) { ... }          // only output &quot;buzz&quot;
-  public void fizzbuzz(printFizzBuzz) { ... }  // only output &quot;fizzbuzz&quot;
-  public void number(printNumber) { ... }      // only output the numbers
-}</code></pre><p>请你实现一个有四个线程的多线程版  FizzBuzz， 同一个 FizzBuzz 实例会被如下四个线程使用：</p>
-<ol>
-<li>线程A将调用 fizz() 来判断是否能被 3 整除，如果可以，则输出 fizz。</li>
-<li>线程B将调用 buzz() 来判断是否能被 5 整除，如果可以，则输出 buzz。</li>
-<li>线程C将调用 fizzbuzz() 来判断是否同时能被 3 和 5 整除，如果可以，则输出 fizzbuzz。</li>
-<li>线程D将调用 number() 来实现输出既不能被 3 整除也不能被 5 整除的数字。</li></ol>
+    <p>为什么 MySQL 使用 B+ 树是面试中经常会出现的问题，很多人对于这个问题可能都有一些自己的理解，但是多数的回答都不够完整和准确，大多数人都只会简单说一下 B+ 树和 B 树的区别，但是都没有真正回答 MySQL 为什么选择使用 B+ 树这个问题，我们在这篇文章中就会深入分析 MySQL 选择 B+ 树背后的一些原因。</p>
     
-    <a class="article-more-a" href="/2019/11/06/leetcode-1195/#more">more >></a>
+    <a class="article-more-a" href="/2020/02/03/mysql-b-plus-tree/#more">more >></a>
     
     
 
@@ -651,32 +341,21 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MYSQL</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">多线程</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">B+树</a>
         		</li>
       		
 		</ul>
 	</div>
 
     
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/算法//" class="article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
 
     
     <p class="article-more-link">
-      <a class="article-more-a" href="/2019/11/06/leetcode-1195/">展开全文 >></a>
+      <a class="article-more-a" href="/2020/02/03/mysql-b-plus-tree/">展开全文 >></a>
     </p>
     
 
@@ -706,7 +385,7 @@
 
 
   
-    <article id="post-leetcode-1117" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-redis-bgsave-fork" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -714,7 +393,7 @@
   
     <h1 itemprop="name">
 	
-	  <a class="article-title" href="/2019/11/06/leetcode-1117/" target="_blank">leetcode-1117</a>
+	  <a class="article-title" href="/2020/02/03/redis-bgsave-fork/" target="_blank">为什么Redis快照使用子进程</a>
   
     </h1>
   
@@ -722,8 +401,8 @@
 
   
   
-<a href="/2019/11/06/leetcode-1117/" class="archive-article-date">
-        <time datetime="2019-11-06T07:08:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-06</time>
+<a href="/2020/02/03/redis-bgsave-fork/" class="archive-article-date">
+        <time datetime="2020-02-03T07:23:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-03</time>
 </a>
 
   
@@ -735,15 +414,9 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="leetcode-1117-H2O生成"><a href="#leetcode-1117-H2O生成" class="headerlink" title="leetcode-1117 H2O生成"></a>leetcode-1117 H2O生成</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>现在有两种线程，氢 oxygen 和氧 hydrogen，你的目标是组织这两种线程来产生水分子。</p>
-<p>存在一个屏障（barrier）使得每个线程必须等候直到一个完整水分子能够被产生出来。</p>
-<p>氢和氧线程会被分别给予 releaseHydrogen 和 releaseOxygen 方法来允许它们突破屏障。</p>
-<p>这些线程应该三三成组突破屏障并能立即组合产生一个水分子。</p>
-<p>你必须保证产生一个水分子所需线程的结合必须发生在下一个水分子产生之前。</p>
-<p>换句话说:</p>
-<p>如果一个氧线程到达屏障时没有氢线程到达，它必须等候直到两个氢线程到达。<br>如果一个氢线程到达屏障时没有其它线程到达，它必须等候直到一个氧线程和另一个氢线程到达。<br>书写满足这些限制条件的氢、氧线程同步代码。</p>
+    <p>虽然我们经常将 Redis 看做一个纯内存的键值存储系统，但是我们也会用到它的持久化功能，RDB 和 AOF 就是 Redis 为我们提供的两种持久化工具，其中 RDB 就是 Redis 的数据快照，我们在这篇文章想要分析 Redis 为什么在对数据进行快照持久化时会需要使用子进程，而不是将内存中的数据结构直接导出到磁盘上进行存储。</p>
     
-    <a class="article-more-a" href="/2019/11/06/leetcode-1117/#more">more >></a>
+    <a class="article-more-a" href="/2020/02/03/redis-bgsave-fork/#more">more >></a>
     
     
 
@@ -760,32 +433,17 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">多线程</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
         		</li>
       		
 		</ul>
 	</div>
 
     
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/算法//" class="article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
 
     
     <p class="article-more-link">
-      <a class="article-more-a" href="/2019/11/06/leetcode-1117/">展开全文 >></a>
+      <a class="article-more-a" href="/2020/02/03/redis-bgsave-fork/">展开全文 >></a>
     </p>
     
 
@@ -815,7 +473,7 @@
 
 
   
-    <article id="post-leetcode-1116" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-mongodb-b-tree" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -823,7 +481,7 @@
   
     <h1 itemprop="name">
 	
-	  <a class="article-title" href="/2019/11/06/leetcode-1116/" target="_blank">leetcode-1116</a>
+	  <a class="article-title" href="/2020/02/03/mongodb-b-tree/" target="_blank">为什么 MongoDB 使用 B 树</a>
   
     </h1>
   
@@ -831,8 +489,8 @@
 
   
   
-<a href="/2019/11/06/leetcode-1116/" class="archive-article-date">
-        <time datetime="2019-11-06T06:30:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-06</time>
+<a href="/2020/02/03/mongodb-b-tree/" class="archive-article-date">
+        <time datetime="2020-02-03T06:47:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-03</time>
 </a>
 
   
@@ -844,16 +502,9 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="leetcode-1116-打印零与奇偶数"><a href="#leetcode-1116-打印零与奇偶数" class="headerlink" title="leetcode-1116 打印零与奇偶数"></a>leetcode-1116 打印零与奇偶数</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>假设有这么一个类：</p>
-<pre><code>class ZeroEvenOdd {
-  public ZeroEvenOdd(int n) { ... }      // 构造函数
-  public void zero(printNumber) { ... }  // 仅打印出 0
-  public void even(printNumber) { ... }  // 仅打印出 偶数
-  public void odd(printNumber) { ... }   // 仅打印出 奇数
-}</code></pre><p>相同的一个 ZeroEvenOdd 类实例将会传递给三个不同的线程：</p>
-<p>线程 A 将调用 zero()，它只输出 0 。<br>线程 B 将调用 even()，它只输出偶数。<br>线程 C 将调用 odd()，它只输出奇数。<br>每个线程都有一个 printNumber 方法来输出一个整数。请修改给出的代码以输出整数序列 010203040506… ，其中序列的长度必须为 2n。</p>
+    <p>MySQL 和 MongoDB 两种不同类型的数据库使用了相似却不同的数据结构，为什么 MySQL 选择使用 B+ 树而 MongoDB 使用 B 树呢？</p>
     
-    <a class="article-more-a" href="/2019/11/06/leetcode-1116/#more">more >></a>
+    <a class="article-more-a" href="/2020/02/03/mongodb-b-tree/#more">more >></a>
     
     
 
@@ -870,32 +521,17 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">多线程</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">MongoDB</a>
         		</li>
       		
 		</ul>
 	</div>
 
     
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/算法//" class="article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
 
     
     <p class="article-more-link">
-      <a class="article-more-a" href="/2019/11/06/leetcode-1116/">展开全文 >></a>
+      <a class="article-more-a" href="/2020/02/03/mongodb-b-tree/">展开全文 >></a>
     </p>
     
 
@@ -925,7 +561,7 @@
 
 
   
-    <article id="post-leetcode-1115" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-numpy" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -933,7 +569,7 @@
   
     <h1 itemprop="name">
 	
-	  <a class="article-title" href="/2019/11/06/leetcode-1115/" target="_blank">leetcode-1115</a>
+	  <a class="article-title" href="/2020/01/25/numpy/" target="_blank">numpy的axis理解</a>
   
     </h1>
   
@@ -941,8 +577,8 @@
 
   
   
-<a href="/2019/11/06/leetcode-1115/" class="archive-article-date">
-        <time datetime="2019-11-06T05:47:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-06</time>
+<a href="/2020/01/25/numpy/" class="archive-article-date">
+        <time datetime="2020-01-25T06:19:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-25</time>
 </a>
 
   
@@ -954,23 +590,11 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="leetcode-1115-交替打印foobar"><a href="#leetcode-1115-交替打印foobar" class="headerlink" title="leetcode-1115 交替打印foobar"></a>leetcode-1115 交替打印foobar</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>我们提供一个类：</p>
-<pre><code>class FooBar {
-  public void foo() {
-    for (int i = 0; i &lt; n; i++) {
-      print(&quot;foo&quot;);
-    }
-  }
+    <h1 id="一、多维数据的形象表示"><a href="#一、多维数据的形象表示" class="headerlink" title="一、多维数据的形象表示"></a>一、多维数据的形象表示</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 一维数据不用赘言</span></span><br><span class="line">data_1d = np.array([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 二维数据作为 m 行 n 列的表格，例如 2 行 3 列</span></span><br><span class="line">data_2d = np.arange(<span class="number">6</span>).reshape(<span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 三维数据作为 k 层 m 行 n 列 的积木块， 例如 2 层 3 行 4 列</span></span><br><span class="line">data_3d = np.arange(<span class="number">24</span>).reshape(<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)</span><br></pre></td></tr></table></figure>
 
-  public void bar() {
-    for (int i = 0; i &lt; n; i++) {
-      print(&quot;bar&quot;);
-    }
-  }
-}</code></pre><p>两个不同的线程将会共用一个 FooBar 实例。其中一个线程将会调用 foo() 方法，另一个线程将会调用 bar() 方法。</p>
-<p>请设计修改程序，以确保 “foobar” 被输出 n 次。</p>
+<p><img src="/2020/01/25/numpy/1.jpg" alt></p>
     
-    <a class="article-more-a" href="/2019/11/06/leetcode-1115/#more">more >></a>
+    <a class="article-more-a" href="/2020/01/25/numpy/#more">more >></a>
     
     
 
@@ -982,37 +606,11 @@
   <div class="article-info article-info-index">
     
     
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">多线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
     
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/算法//" class="article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
 
     
     <p class="article-more-link">
-      <a class="article-more-a" href="/2019/11/06/leetcode-1115/">展开全文 >></a>
+      <a class="article-more-a" href="/2020/01/25/numpy/">展开全文 >></a>
     </p>
     
 
@@ -1042,7 +640,7 @@
 
 
   
-    <article id="post-leetcode-1114" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-机器学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -1050,7 +648,7 @@
   
     <h1 itemprop="name">
 	
-	  <a class="article-title" href="/2019/11/06/leetcode-1114/" target="_blank">leetcode-1114</a>
+	  <a class="article-title" href="/2020/01/16/机器学习/" target="_blank">机器学习-绪论</a>
   
     </h1>
   
@@ -1058,8 +656,8 @@
 
   
   
-<a href="/2019/11/06/leetcode-1114/" class="archive-article-date">
-        <time datetime="2019-11-06T05:26:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-06</time>
+<a href="/2020/01/16/机器学习/" class="archive-article-date">
+        <time datetime="2020-01-16T08:00:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-16</time>
 </a>
 
   
@@ -1071,10 +669,10 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="leetcode-1114-按序打印"><a href="#leetcode-1114-按序打印" class="headerlink" title="leetcode-1114 按序打印"></a>leetcode-1114 按序打印</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>我们提供了一个类：<br>    public class Foo {<br>      public void one() { print(“one”); }<br>      public void two() { print(“two”); }<br>      public void three() { print(“three”); }<br>    }<br>三个不同的线程将会共用一个 Foo 实例。</p>
-<p>线程 A 将会调用 one() 方法<br>线程 B 将会调用 two() 方法<br>线程 C 将会调用 three() 方法<br>请设计修改程序，以确保 two() 方法在 one() 方法之后被执行，three() 方法在 two() 方法之后被执行。</p>
+    <h1 id="基本术语"><a href="#基本术语" class="headerlink" title="基本术语"></a>基本术语</h1><p>&emsp;数据的集合称为数据集，反映事件或对象在某方面的表现或性质的事项叫属性或特性，属性上的取值称为属性值，属性张成的空间称为属性空间，样本空间或输入空间</p>
+<p>&emsp;若预测的是离散值(例如好瓜，坏瓜)，称此类学习任务为“分类”；若欲预测的是连续值(例如西瓜成熟度0.95…),此类的学习任务称为“回归”，对只涉及两个类别的“二分类”任务，通常称其中一种类为正类，另一种为反类，涉及多个类别时，则称为“多分类”。</p>
     
-    <a class="article-more-a" href="/2019/11/06/leetcode-1114/#more">more >></a>
+    <a class="article-more-a" href="/2020/01/16/机器学习/#more">more >></a>
     
     
 
@@ -1086,37 +684,11 @@
   <div class="article-info article-info-index">
     
     
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">多线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
     
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/算法//" class="article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
 
     
     <p class="article-more-link">
-      <a class="article-more-a" href="/2019/11/06/leetcode-1114/">展开全文 >></a>
+      <a class="article-more-a" href="/2020/01/16/机器学习/">展开全文 >></a>
     </p>
     
 
@@ -1146,7 +718,7 @@
 
 
   
-    <article id="post-leetcode-168" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Linux内核-进程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -1154,7 +726,7 @@
   
     <h1 itemprop="name">
 	
-	  <a class="article-title" href="/2019/11/05/leetcode-168/" target="_blank">leetcode-168</a>
+	  <a class="article-title" href="/2020/01/10/Linux内核-进程/" target="_blank">Linux内核-进程</a>
   
     </h1>
   
@@ -1162,8 +734,8 @@
 
   
   
-<a href="/2019/11/05/leetcode-168/" class="archive-article-date">
-        <time datetime="2019-11-05T13:16:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-05</time>
+<a href="/2020/01/10/Linux内核-进程/" class="archive-article-date">
+        <time datetime="2020-01-10T03:07:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-10</time>
 </a>
 
   
@@ -1175,11 +747,9 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="leetcode-168-表列名称"><a href="#leetcode-168-表列名称" class="headerlink" title="leetcode-168 表列名称"></a>leetcode-168 表列名称</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个正整数，返回它在 Excel 表中相对应的列名称。</p>
-<p>例如，<br>    1 -&gt; A<br>    2 -&gt; B<br>    3 -&gt; C<br>    …<br>    26 -&gt; Z<br>    27 -&gt; AA<br>    28 -&gt; AB<br>    …<br>示例 1:</p>
-<p>输入: 1<br>输出: “A”</p>
+    <p>&emsp;进程的目的就是担当分配系统资源(cpu时间，内存等)的实体。<br>&emsp;当一个进程创建时，几乎与父进程相同，它接收父进程地址空间的一个(逻辑)拷贝，并从进程创建系统调用的下一条指令开始执行与父进程相同的代码，尽管父子进程可以共享程序代码的页，但是他们各有独自独立的数据拷贝(堆和栈)，因此子进程对一个内存单元的修改父进程是不可见的</p>
     
-    <a class="article-more-a" href="/2019/11/05/leetcode-168/#more">more >></a>
+    <a class="article-more-a" href="/2020/01/10/Linux内核-进程/#more">more >></a>
     
     
 
@@ -1196,7 +766,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">进程</a>
         		</li>
       		
 		</ul>
@@ -1208,7 +778,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/算法//" class="article-tag-list-link color3">算法</a>
+        			<a href="/categories/Linux//" class="article-tag-list-link color1">Linux</a>
         		</li>
       		
 		</ul>
@@ -1217,7 +787,268 @@
 
     
     <p class="article-more-link">
-      <a class="article-more-a" href="/2019/11/05/leetcode-168/">展开全文 >></a>
+      <a class="article-more-a" href="/2020/01/10/Linux内核-进程/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-golang学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2019/12/30/golang学习/" target="_blank">Go指南学习</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2019/12/30/golang学习/" class="archive-article-date">
+        <time datetime="2019-12-30T14:22:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-30</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">add</span><span class="params">(x <span class="keyword">int</span>, y <span class="keyword">int</span>)</span> <span class="title">int</span></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> x + y</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当两个或多个连续的参数是同一类型，则除了最后一个类型之外，其他都可以忽略</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x <span class="keyword">int</span>, y <span class="keyword">int</span></span><br><span class="line"><span class="comment">//缩写为</span></span><br><span class="line">x, y <span class="keyword">int</span></span><br></pre></td></tr></table></figure>
+    
+    <a class="article-more-a" href="/2019/12/30/golang学习/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/golang//" class="article-tag-list-link color3">-golang</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2019/12/30/golang学习/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Dockerfile" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2019/12/26/Dockerfile/" target="_blank">Dockerfile</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2019/12/26/Dockerfile/" class="archive-article-date">
+        <time datetime="2019-12-26T01:20:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-26</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="Dockerfile"><a href="#Dockerfile" class="headerlink" title="Dockerfile"></a>Dockerfile</h2><p>虽然我们可以通过docker commit命令来手动创建镜像，但是通过Dockerfile文件，可以帮助我们自动创建镜像，并且能够自定义创建过程。本质上，Dockerfile就是由一系列命令和参数构成的脚本，这些命令应用于基础镜像并最终创建一个新的镜像。它简化了从头到尾的构建流程并极大的简化了部署工作。使用dockerfile构建镜像有以下好处：</p>
+<ul>
+<li>像编程一样构建镜像，支持分层构建及缓存</li>
+<li>可以快熟而精确地重新创建镜像以便维护和升级</li>
+<li>便于持续集成</li>
+<li>可以在任何地方快速构建镜像</li></ul>
+    
+    <a class="article-more-a" href="/2019/12/26/Dockerfile/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Docker</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2019/12/26/Dockerfile/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Linux内核内存管理算法Buddy和Slab" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2019/12/25/Linux内核内存管理算法Buddy和Slab/" target="_blank">Linux内核内存管理算法Buddy和Slab</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2019/12/25/Linux内核内存管理算法Buddy和Slab/" class="archive-article-date">
+        <time datetime="2019-12-25T08:48:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-25</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="Buddy分配算法"><a href="#Buddy分配算法" class="headerlink" title="Buddy分配算法"></a>Buddy分配算法</h2><p><img src="/2019/12/25/Linux内核内存管理算法Buddy和Slab/1.jpg" alt><br>假设这是一段连续的页框，阴影部分表示已经被使用的页框，现在需要申请一个连续的5个页框。这个时候，在这段内存上不能找到连续的5个空闲的页框，就会去另一段内存上去寻找5个连续的页框，这样子，久而久之就形成了页框的浪费。为了避免出现这种情况，Linux内核中引入了伙伴系统算法(Buddy system)。把所有的空闲页框分组为11个块链表，每个块链表分别包含大小为1，2，4，8，16，32，64，128，256，512和1024个连续页框的页框块。最大可以申请1024个连续页框，对应4MB大小的连续内存。每个页框块的第一个页框的物理地址是该块大小的整数倍，如图：<br><img src="/2019/12/25/Linux内核内存管理算法Buddy和Slab/2.jpg" alt></p>
+    
+    <a class="article-more-a" href="/2019/12/25/Linux内核内存管理算法Buddy和Slab/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2019/12/25/Linux内核内存管理算法Buddy和Slab/">展开全文 >></a>
     </p>
     
 
@@ -1249,7 +1080,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
     </nav>
   
 
@@ -1417,15 +1248,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1441,6 +1272,26 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">MongoDB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Golang</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">-TCP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">原码</a>
               </li>
              
@@ -1449,7 +1300,51 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">MYSQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">B+树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">UDP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">DNS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Kubernetes</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Kuberentes</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CPP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">动态规划</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">进程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Innodb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
              
               <li class="article-tag-list-item">
