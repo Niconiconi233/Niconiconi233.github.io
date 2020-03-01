@@ -201,6 +201,83 @@
             
 
   
+    <article id="post-Linux内核内存管理算法Buddy和Slab" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2019/12/25/Linux内核内存管理算法Buddy和Slab/" target="_blank">Linux内核内存管理算法Buddy和Slab</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2019/12/25/Linux内核内存管理算法Buddy和Slab/" class="archive-article-date">
+        <time datetime="2019-12-25T08:48:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-25</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="Buddy分配算法"><a href="#Buddy分配算法" class="headerlink" title="Buddy分配算法"></a>Buddy分配算法</h2><p><img src="/2019/12/25/Linux内核内存管理算法Buddy和Slab/1.jpg" alt><br>假设这是一段连续的页框，阴影部分表示已经被使用的页框，现在需要申请一个连续的5个页框。这个时候，在这段内存上不能找到连续的5个空闲的页框，就会去另一段内存上去寻找5个连续的页框，这样子，久而久之就形成了页框的浪费。为了避免出现这种情况，Linux内核中引入了伙伴系统算法(Buddy system)。把所有的空闲页框分组为11个块链表，每个块链表分别包含大小为1，2，4，8，16，32，64，128，256，512和1024个连续页框的页框块。最大可以申请1024个连续页框，对应4MB大小的连续内存。每个页框块的第一个页框的物理地址是该块大小的整数倍，如图：<br><img src="/2019/12/25/Linux内核内存管理算法Buddy和Slab/2.jpg" alt></p>
+    
+    <a class="article-more-a" href="/2019/12/25/Linux内核内存管理算法Buddy和Slab/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2019/12/25/Linux内核内存管理算法Buddy和Slab/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-物理地址和虚拟地址的分布" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -960,94 +1037,6 @@
 
 
   
-    <article id="post-c-11-14-17-20-2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2019/11/19/c-11-14-17-20-2/" target="_blank">c++11/14/17/20(二)</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2019/11/19/c-11-14-17-20-2/" class="archive-article-date">
-        <time datetime="2019-11-19T00:50:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-19</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a>lambda表达式</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[捕获列表](参数列表) <span class="keyword">mutable</span>(可选) 异常属性 -&gt; 返回类型&#123;</span><br><span class="line">  <span class="comment">//函数体</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-    
-    <a class="article-more-a" href="/2019/11/19/c-11-14-17-20-2/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/C//" class="article-tag-list-link color4">C++</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2019/11/19/c-11-14-17-20-2/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
@@ -1214,11 +1203,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IO</a>
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
+                <a href="javascript:void(0)" class="js-tag color3">IO</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1262,19 +1251,19 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CPP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">动态规划</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">原码</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Docker</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MYSQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">B+树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1286,11 +1275,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color1">MYSQL</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Kubernetes</a>
+                <a href="javascript:void(0)" class="js-tag color4">B+树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1298,11 +1291,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CPP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">动态规划</a>
+                <a href="javascript:void(0)" class="js-tag color1">Kubernetes</a>
               </li>
              
               <li class="article-tag-list-item">

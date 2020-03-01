@@ -201,6 +201,80 @@
             
 
   
+    <article id="post-log-algorithm-struct" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/03/01/log-algorithm-struct/" target="_blank">log-algorithm-struct</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/03/01/log-algorithm-struct/" class="archive-article-date">
+        <time datetime="2020-03-01T07:47:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-01</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/03/01/log-algorithm-struct/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-log-sql" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1027,98 +1101,6 @@ trie.search(&quot;app&quot;);     // 返回 true</code></pre>
 
 
   
-    <article id="post-cpp-template-deduction" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/02/22/cpp-template-deduction/" target="_blank">模板类型推导</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/02/22/cpp-template-deduction/" class="archive-article-date">
-        <time datetime="2020-02-22T06:46:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-22</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="参数类型为引用或指针"><a href="#参数类型为引用或指针" class="headerlink" title="参数类型为引用或指针"></a>参数类型为引用或指针</h2><ol>
-<li><strong>如果表达式类型是引用，忽略引用部分</strong></li>
-<li>表达式类型匹配T和paramType</li>
-</ol>
-<h3 id="例子一："><a href="#例子一：" class="headerlink" title="例子一："></a>例子一：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(T&amp; param)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> x = <span class="number">27</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> cx = x;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span>&amp; rx = x;</span><br><span class="line"></span><br><span class="line">f(x);<span class="comment">//  T is int param is int&amp;</span></span><br><span class="line">f(cx);<span class="comment">// T is const int param is const int&amp;</span></span><br><span class="line">f(rx);<span class="comment">// T is const int param is const int&amp;</span></span><br></pre></td></tr></table></figure>
-    
-    <a class="article-more-a" href="/2020/02/22/cpp-template-deduction/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CPP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/02/22/cpp-template-deduction/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1285,11 +1267,11 @@ trie.search(&quot;app&quot;);     // 返回 true</code></pre>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IO</a>
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
+                <a href="javascript:void(0)" class="js-tag color3">IO</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1333,19 +1315,19 @@ trie.search(&quot;app&quot;);     // 返回 true</code></pre>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CPP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">动态规划</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">原码</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Docker</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MYSQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">B+树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1357,11 +1339,15 @@ trie.search(&quot;app&quot;);     // 返回 true</code></pre>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color1">MYSQL</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Kubernetes</a>
+                <a href="javascript:void(0)" class="js-tag color4">B+树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1369,11 +1355,7 @@ trie.search(&quot;app&quot;);     // 返回 true</code></pre>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CPP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">动态规划</a>
+                <a href="javascript:void(0)" class="js-tag color1">Kubernetes</a>
               </li>
              
               <li class="article-tag-list-item">

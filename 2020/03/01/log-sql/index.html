@@ -18,7 +18,7 @@
 <meta property="og:site_name" content="NICO">
 <meta property="og:description" content="说一说数据库索引索引是对数据库表中一列或多列的值进行排序的一种结构，使用索引可快速访问数据库表中的特定信息。如果想按特定职员的姓来查找他或她，则与在表中搜索所有的行相比，索引有助于更快地获取信息。索引的一个主要目的就是加快检索表中数据的方法，亦即能协助信息搜索者尽快的找到符合限制条件的记录ID的辅助数据结构。 数据库事务数据库事务(Database Transaction) ，是指作为单个逻辑工作">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-03-01T07:15:32.982Z">
+<meta property="og:updated_time" content="2020-03-01T07:45:03.291Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="笔记-数据库">
 <meta name="twitter:description" content="说一说数据库索引索引是对数据库表中一列或多列的值进行排序的一种结构，使用索引可快速访问数据库表中的特定信息。如果想按特定职员的姓来查找他或她，则与在表中搜索所有的行相比，索引有助于更快地获取信息。索引的一个主要目的就是加快检索表中数据的方法，亦即能协助信息搜索者尽快的找到符合限制条件的记录ID的辅助数据结构。 数据库事务数据库事务(Database Transaction) ，是指作为单个逻辑工作">
@@ -229,7 +229,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">4.3k字</span>
+      <span class="post-count">6.1k字</span>
     </span>
   </span>
 
@@ -238,7 +238,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">14分</span>
+      <span class="post-count">21分</span>
     </span>
   </span>
 </div>
@@ -362,7 +362,7 @@
 <p><strong>支持事务。</strong></p>
 <p><strong>可以从灾难中恢复（通过bin-log日志等）。</strong></p>
 <p><strong>外键约束。只有他支持外键。</strong></p>
-<p>支持自动增加列属性auto_increment。</p>
+<p><strong>支持自动增加列属性auto_increment。</strong></p>
 <p>索引结构：</p>
 <p><strong>InnoDB也是B+Treee索引结构。Innodb的索引文件本身就是数据文件，即B+Tree的数据域存储的就是实际的数据，这种索引就是聚集索引。这个索引的key就是数据表的主键，因此InnoDB表数据文件本身就是主索引。</strong></p>
 <p><strong>InnoDB的辅助索引数据域存储的也是相应记录主键的值而不是地址，所以当以辅助索引查找时，会先根据辅助索引找到主键，再根据主键索引找到实际的数据。</strong>所以Innodb不建议使用过长的主键，否则会使辅助索引变得过大。建议使用自增的字段作为主键，这样B+Tree的每一个结点都会被顺序的填满，而不会频繁的分裂调整，会有效的提升插入数据的效率。</p>
@@ -370,12 +370,45 @@
 <p>MyIASM是MySQL默认的引擎，但是它没有提供对数据库事务的支持，也不支持行级锁和外键，因此当INSERT或UPDATE数据时即写操作需要锁定整个表，效率便会低一些。MyIsam 存储引擎独立于操作系统，也就是可以在windows上使用，也可以比较简单的将数据转移到linux操作系统上去。</p>
 <p>适用场景：</p>
 <p>不支持事务的设计，但是并不代表着有事务操作的项目不能用MyIsam存储引擎，可以在service层进行根据自己的业务需求进行相应的控制。</p>
-<p>不支持外键的表设计。</p>
-<p>查询速度很快，如果数据库insert和update的操作比较多的话比较适用。</p>
+<p><strong>不支持外键的表设计。</strong></p>
+<p><strong>查询速度很快，如果数据库insert和update的操作比较多的话比较适用。</strong></p>
 <p>整天对表进行加锁的场景。</p>
 <p>MyISAM极度强调快速读取操作。</p>
 <p>MyIASM中存储了表的行数，于是SELECT COUNT(*) FROM TABLE时只需要直接读取已经保存好的值而不需要进行全表扫描。如果表的读操作远远多于写操作且不需要数据库事务的支持，那么MyIASM也是很好的选择。</p>
 <p>缺点：就是不能在表损坏后主动恢复数据。</p>
+<p>索引结构：</p>
+<p>MyISAM索引结构：<strong>MyISAM索引用的B+ tree来储存数据，MyISAM索引的指针指向的是键值的地址，地址存储的是数据。B+Tree的数据域存储的内容为实际数据的地址，也就是说它的索引和实际的数据是分开的，只不过是用索引指向了实际的数据，这种索引就是所谓的非聚集索引。</strong></p>
+<p>3、InnoDB和Mylsam的区别：</p>
+<p>1）事务：<strong>MyISAM类型不支持事务处理等高级处理，而InnoDB类型支持，提供事务支持已经外部键等高级数据库功能。</strong></p>
+<p>2）性能：<strong>MyISAM类型的表强调的是性能，其执行数度比InnoDB类型更快。</strong></p>
+<p>3）行数保存：<strong>InnoDB 中不保存表的具体行数，也就是说，执行select count() fromtable时，InnoDB要扫描一遍整个表来计算有多少行，但是MyISAM只要简单的读出保存好的行数即可。注意的是，当count()语句包含where条件时，两种表的操作是一样的。</strong></p>
+<p>4）索引存储：<strong>对于AUTO_INCREMENT类型的字段，InnoDB中必须包含只有该字段的索引，但是在MyISAM表中，可以和其他字段一起建立联合索引。MyISAM支持全文索引（FULLTEXT）、压缩索引，InnoDB不支持。</strong></p>
+<p>MyISAM的索引和数据是分开的，并且索引是有压缩的，内存使用率就对应提高了不少。能加载更多索引，而Innodb是索引和数据是紧密捆绑的，没有使用压缩从而会造成Innodb比MyISAM体积庞大不小。</p>
+<p>InnoDB存储引擎被完全与MySQL服务器整合，InnoDB存储引擎为在主内存中缓存数据和索引而维持它自己的缓冲池。InnoDB存储它的表＆索引在一个表空间中，表空间可以包含数个文件（或原始磁盘分区）。这与MyISAM表不同，比如在MyISAM表中每个表被存在分离的文件中。InnoDB 表可以是任何尺寸，即使在文件尺寸被限制为2GB的操作系统上。</p>
+<p>5）服务器数据备份：<strong>InnoDB必须导出SQL来备份，LOAD TABLE FROM MASTER操作对InnoDB是不起作用的，解决方法是首先把InnoDB表改成MyISAM表，导入数据后再改成InnoDB表，但是对于使用的额外的InnoDB特性(例如外键)的表不适用。</strong></p>
+<p>MyISAM应对错误编码导致的数据恢复速度快。MyISAM的数据是以文件的形式存储，所以在跨平台的数据转移中会很方便。在备份和恢复时可单独针对某个表进行操作。</p>
+<p>InnoDB是拷贝数据文件、备份 binlog，或者用 mysqldump，在数据量达到几十G的时候就相对痛苦了。</p>
+<p>6）锁的支持：<strong>MyISAM只支持表锁。InnoDB支持表锁、行锁 行锁大幅度提高了多用户并发操作的新能。但是InnoDB的行锁，只是在WHERE的主键是有效的，非主键的WHERE都会锁全表的。</strong></p>
+<h2 id="mongodb和redis的区别"><a href="#mongodb和redis的区别" class="headerlink" title="mongodb和redis的区别"></a>mongodb和redis的区别</h2><p>内存管理机制上：Redis 数据全部存在内存，定期写入磁盘，当内存不够时，可以选择指定的 LRU 算法删除数据。MongoDB 数据存在内存，由 linux系统 mmap 实现，当内存不够时，只将热点数据放入内存，其他数据存在磁盘。</p>
+<p>支持的数据结构上：Redis 支持的数据结构丰富，包括hash、set、list等。</p>
+<p>MongoDB 数据结构比较单一，但是支持丰富的数据表达，索引，最类似关系型数据库，支持的查询语言非常丰富</p>
+<h2 id="Redis的定时机制怎么实现的"><a href="#Redis的定时机制怎么实现的" class="headerlink" title="Redis的定时机制怎么实现的"></a>Redis的定时机制怎么实现的</h2><p>Redis服务器是一个事件驱动程序，服务器需要处理以下两类事件：文件事件（服务器对套接字操作的抽象）和时间事件（服务器对定时操作的抽象）。Redis的定时机制就是借助时间事件实现的。<br>一个时间事件主要由以下三个属性组成：id：时间事件标识号；when：记录时间事件的到达时间；timeProc：时间事件处理器，当时间事件到达时，服务器就会调用相应的处理器来处理时间。一个时间事件根据时间事件处理器的返回值来判断是定时事件还是周期性事件(timer_fd)</p>
+<p>一个时间事件主要由以下三个属性组成：id：时间事件标识号；when：记录时间事件的到达时间；timeProc：时间事件处理器，当时间事件到达时，服务器就会调用相应的处理器来处理时间。一个时间事件根据时间事件处理器的返回值来判断是定时事件还是周期性事件。</p>
+<h2 id="Redis的数据类型有哪些，底层怎么实现"><a href="#Redis的数据类型有哪些，底层怎么实现" class="headerlink" title="Redis的数据类型有哪些，底层怎么实现?"></a>Redis的数据类型有哪些，底层怎么实现?</h2><p>1）字符串：整数值、embstr编码的简单动态字符串、简单动态字符串（SDS)</p>
+<p>2）列表：压缩列表、双端链表</p>
+<p>3）哈希：压缩列表、字典</p>
+<p>4）集合：整数集合、字典</p>
+<p>5）有序集合：压缩列表、跳跃表和字典</p>
+<h2 id="Redis的rehash怎么做的，为什么要渐进rehash，渐进rehash又是怎么实现的"><a href="#Redis的rehash怎么做的，为什么要渐进rehash，渐进rehash又是怎么实现的" class="headerlink" title="Redis的rehash怎么做的，为什么要渐进rehash，渐进rehash又是怎么实现的?"></a>Redis的rehash怎么做的，为什么要渐进rehash，渐进rehash又是怎么实现的?</h2><p>因为redis是单线程，当K很多时，如果一次性将键值对全部rehash，庞大的计算量会影响服务器性能，甚至可能会导致服务器在一段时间内停止服务。不可能一步完成整个rehash操作，所以redis是分多次、渐进式的rehash。渐进性哈希分为两种：<br>1）操作redis时，额外做一步rehash</p>
+<p>对redis做读取、插入、删除等操作时，会把位于table[dict-&gt;rehashidx]位置的链表移动到新的dictht中，然后把rehashidx做加一操作，移动到后面一个槽位。</p>
+<p>2）后台定时任务调用rehash</p>
+<p>后台定时任务rehash调用链，同时可以通过server.hz控制rehash调用频率</p>
+<h2 id="Redis和memcached的区别"><a href="#Redis和memcached的区别" class="headerlink" title="Redis和memcached的区别"></a>Redis和memcached的区别</h2><p>1）数据类型 ：redis数据类型丰富，支持set liset等类型；memcache支持简单数据类型，需要客户端自己处理复杂对象</p>
+<p>2）持久性：redis支持数据落地持久化存储；memcache不支持数据持久存储。)</p>
+<p>3）分布式存储：redis支持master-slave复制模式；memcache可以使用一致性hash做分布式。</p>
+<p>4）value大小不同：memcache是一个内存缓存，key的长度小于250字符，单个item存储要小于1M，不适合虚拟机使用</p>
+<p>5）数据一致性不同：redis使用的是单线程模型，保证了数据按顺序提交；memcache需要使用cas保证数据一致性。CAS（Check and Set）是一个确保并发一致性的机制，属于“乐观锁”范畴；原理很简单：拿版本号，操作，对比版本号，如果一致就操作，不一致就放弃任何操作</p>
+<p>6）cpu利用：redis单线程模型只能使用一个cpu，可以开启多个redis进程</p>
 
     
 
@@ -479,6 +512,15 @@
 
 
 <nav id="article-nav">
+  
+    <a href="/2020/03/01/log-algorithm-struct/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          log-algorithm-struct
+        
+      </div>
+    </a>
   
   
     <a href="/2020/02/29/leetcode-house-robber/" id="article-nav-older" class="article-nav-link-wrap">
@@ -677,11 +719,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IO</a>
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
+                <a href="javascript:void(0)" class="js-tag color3">IO</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -725,19 +767,19 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CPP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">动态规划</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">原码</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Docker</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MYSQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">B+树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -749,11 +791,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color1">MYSQL</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Kubernetes</a>
+                <a href="javascript:void(0)" class="js-tag color4">B+树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -761,11 +807,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CPP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">动态规划</a>
+                <a href="javascript:void(0)" class="js-tag color1">Kubernetes</a>
               </li>
              
               <li class="article-tag-list-item">
