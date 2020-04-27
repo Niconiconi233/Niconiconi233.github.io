@@ -18,7 +18,7 @@
 <meta property="og:site_name" content="NICO">
 <meta property="og:description" content="求区间和ex:[5….19] cnt = (19 + 5) * (19 - 5 + 1) &amp;gt;&amp;gt; 1;">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-03-09T16:27:56.026Z">
+<meta property="og:updated_time" content="2020-03-21T07:01:30.906Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="杂项公式">
 <meta name="twitter:description" content="求区间和ex:[5….19] cnt = (19 + 5) * (19 - 5 + 1) &amp;gt;&amp;gt; 1;">
@@ -229,7 +229,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">321字</span>
+      <span class="post-count">955字</span>
     </span>
   </span>
 
@@ -238,7 +238,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">1分</span>
+      <span class="post-count">4分</span>
     </span>
   </span>
 </div>
@@ -253,7 +253,7 @@
 <p>cnt = (19 + 5) * (19 - 5 + 1) &gt;&gt; 1;</p>
 <a id="more"></a>
 <h2 id="四平方定理"><a href="#四平方定理" class="headerlink" title="四平方定理"></a>四平方定理</h2><p>四平方定理： 任何一个正整数都可以表示成不超过四个整数的平方之和。 推论：满足四数平方和定理的数n（四个整数的情况），必定满足 n=4^a(8b+7)</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">numSquares</span><span class="params">(self, n)</span>:</span></span><br><span class="line">       <span class="string">"""</span></span><br><span class="line"><span class="string">       :type n: int</span></span><br><span class="line"><span class="string">       :rtype: int</span></span><br><span class="line"><span class="string">       """</span></span><br><span class="line">       <span class="keyword">while</span> n % <span class="number">4</span> == <span class="number">0</span>:</span><br><span class="line">           n /= <span class="number">4</span></span><br><span class="line">       <span class="keyword">if</span> n % <span class="number">8</span> == <span class="number">7</span>: <span class="comment">#满足定理</span></span><br><span class="line">           <span class="keyword">return</span> <span class="number">4</span></span><br><span class="line">       a = <span class="number">0</span></span><br><span class="line">       <span class="keyword">while</span> a**<span class="number">2</span> &lt;= n:</span><br><span class="line">           b = int((n - a**<span class="number">2</span>)**<span class="number">0.5</span>)</span><br><span class="line">           <span class="keyword">if</span> a**<span class="number">2</span> + b**<span class="number">2</span> == n:</span><br><span class="line">               <span class="keyword">return</span> (<span class="keyword">not</span> <span class="keyword">not</span> a) + (<span class="keyword">not</span> <span class="keyword">not</span> b)</span><br><span class="line">           a += <span class="number">1</span></span><br><span class="line">       <span class="keyword">return</span> <span class="number">3</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">numSquares</span><span class="params">(n)</span>:</span></span><br><span class="line">       <span class="keyword">while</span> n % <span class="number">4</span> == <span class="number">0</span>:</span><br><span class="line">           n /= <span class="number">4</span></span><br><span class="line">       <span class="keyword">if</span> n % <span class="number">8</span> == <span class="number">7</span>: <span class="comment">#满足定理</span></span><br><span class="line">           <span class="keyword">return</span> <span class="number">4</span></span><br><span class="line">       a = <span class="number">0</span></span><br><span class="line">       <span class="keyword">while</span> a**<span class="number">2</span> &lt;= n:</span><br><span class="line">           b = int((n - a**<span class="number">2</span>)**<span class="number">0.5</span>)</span><br><span class="line">           <span class="keyword">if</span> a**<span class="number">2</span> + b**<span class="number">2</span> == n:</span><br><span class="line">               <span class="keyword">return</span> (<span class="keyword">not</span> <span class="keyword">not</span> a) + (<span class="keyword">not</span> <span class="keyword">not</span> b)</span><br><span class="line">           a += <span class="number">1</span></span><br><span class="line">       <span class="keyword">return</span> <span class="number">3</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="约瑟夫环问题"><a href="#约瑟夫环问题" class="headerlink" title="约瑟夫环问题"></a>约瑟夫环问题</h2><p>表示n个人能够存活的位置,m为数数数量<br>f(n,m)=(f(n−1,m)+m) mod n</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">LastRemaining_Solution</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> m)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n &lt;= <span class="number">0</span> || m &lt;= <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">int</span> last = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        last = (last + m) % i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> last;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -262,6 +262,20 @@
 
 <h2 id="快速幂"><a href="#快速幂" class="headerlink" title="快速幂"></a>快速幂</h2><p>原理<br>a^11 = a^2^0+2^1+2^3<br>11的二进制为1011<br>所以将a^11转化为a^2^0 * a^2^1 * a^2^3</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">myPow</span><span class="params">(<span class="keyword">double</span> x, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">double</span> res = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> t = n;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(n&amp;<span class="number">1</span>)</span><br><span class="line">            res *= x;</span><br><span class="line">        x *= x;</span><br><span class="line">        n /= <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> t &gt; <span class="number">0</span> ? res : <span class="number">1.0</span>/res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="康托展开"><a href="#康托展开" class="headerlink" title="康托展开"></a>康托展开</h2><h3 id="康托展开-1"><a href="#康托展开-1" class="headerlink" title="康托展开"></a>康托展开</h3><p>比如2143 这个数，求其展开：</p>
+<p>从头判断，至尾结束,<br>① 比 2（第一位数）小的数有多少个-&gt;1个就是1，1<em>3!<br>② 比 1（第二位数）小的数有多少个-&gt;0个0</em>2!<br>③ 比 4（第三位数）小的数有多少个-&gt;3个就是1,2,3，但是1,2之前已经出现，所以是  1*1!<br>将所有乘积相加=7<br>比该数小的数有7个，所以该数排第8的位置。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//打表 0-9的阶乘</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> fact[<span class="number">10</span>] = &#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">6</span>, <span class="number">24</span>, <span class="number">120</span>, <span class="number">720</span>, <span class="number">5040</span>, <span class="number">40320</span>, <span class="number">362880</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">contor</span><span class="params">(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; permutation)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">int</span> len = permutation.size();</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; ++i)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">int</span> cnt = <span class="number">0</span>;<span class="comment">// 在 i 之后，比 i 还小的有几个</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; len; ++j)</span><br><span class="line">      <span class="keyword">if</span>(permutation[j] &lt; permutation[i])</span><br><span class="line">        ++cnt;</span><br><span class="line">    num += cnt * fact[len - i];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> num + <span class="number">1</span>;<span class="comment">//如果排名是从 1 开始的话，最终结果应当再 + 1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="逆康托展开"><a href="#逆康托展开" class="headerlink" title="逆康托展开"></a>逆康托展开</h3><p>康托展开是一个全排列到自然数的双射，可以作为哈希函数。</p>
+<p>所以当然也可以求逆运算了。</p>
+<p>逆运算的方法：</p>
+<p>假设求4位数中第19个位置的数字。</p>
+<p>① 19减去1  → 18<br>② 18 对3！作除法 → 得3余0<br>③  0对2！作除法 → 得0余0<br>④  0对1！作除法 → 得0余0<br>据上面的可知：<br>我们第一位数（最左面的数），比第一位数小的数有3个，显然 第一位数为→ 4<br>比第二位数小的数字有0个，所以 第二位数为→1<br>比第三位数小的数字有0个，因为1已经用过，所以第三位数为→2<br>第四位数剩下 3<br>该数字为  4123  (正解)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//打表 0-9的阶乘</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> fact[<span class="number">10</span>] = &#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">6</span>, <span class="number">24</span>, <span class="number">120</span>, <span class="number">720</span>, <span class="number">5040</span>, <span class="number">40320</span>, <span class="number">362880</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">getPermutation</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">string</span> str = <span class="built_in">string</span>(<span class="string">"123456789"</span>).substr(<span class="number">0</span>, n);</span><br><span class="line">    <span class="built_in">string</span> res;</span><br><span class="line">    --k;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> num = k / fact[n - i];</span><br><span class="line">        res += str[num];</span><br><span class="line">        str.erase(str.begin() + num);</span><br><span class="line">        k %= fact[n - i];</span><br><span class="line">    &#125;</span><br><span class="line">    res += str;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="裴蜀定理"><a href="#裴蜀定理" class="headerlink" title="裴蜀定理"></a>裴蜀定理</h2><p>若a,b是整数，且gcd(a,b)=d,那么对于任意的整数x,y,ax+by都一定是d的倍数，特别的，一定存在整数x,y是的ax+by=d存在</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//水壶问题</span></span><br><span class="line"><span class="comment">//我们可以认为每次操作只会给水的总量带来 x 或者 y 的变化量。因此我们的目标可以改写成：找到一对整数 //a,b，使得 ax + by = z</span></span><br><span class="line"><span class="comment">//若x+y &gt;= z则成立</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">canMeasureWater</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> z)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(x + y &lt; z)</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	<span class="keyword">if</span>(x == <span class="number">0</span> || y == <span class="number">0</span>)</span><br><span class="line">		<span class="keyword">return</span> z == <span class="number">0</span> || x+y == z;</span><br><span class="line">	<span class="keyword">return</span> x % gcd(x, y) == <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
     
@@ -566,15 +580,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -646,11 +660,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Kubernetes</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Kuberentes</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Kubernetes</a>
+                <a href="javascript:void(0)" class="js-tag color2">OpenGL</a>
               </li>
              
               <li class="article-tag-list-item">

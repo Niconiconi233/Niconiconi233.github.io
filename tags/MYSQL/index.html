@@ -6,7 +6,7 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://niconiconi233.github.io">
-  <title>Tag: MySQL | NICO</title>
+  <title>Tag: MYSQL | NICO</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
@@ -14,7 +14,7 @@
 <meta name="keywords" content="YangWan,YangWan_技术博客">
 <meta property="og:type" content="website">
 <meta property="og:title" content="NICO">
-<meta property="og:url" content="https://niconiconi233.github.io/tags/MySQL/index.html">
+<meta property="og:url" content="https://niconiconi233.github.io/tags/MYSQL/index.html">
 <meta property="og:site_name" content="NICO">
 <meta property="og:description" content="YangWan_技术博客">
 <meta property="og:locale" content="zh-Hans">
@@ -213,8 +213,8 @@
     <header class="archive-article-header">
       	<div class="article-meta">
 	      	
-<a href="/2020/02/05/sql-index/" class="archive-article-date">
-        <time datetime="2020-02-05T05:36:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-05</time>
+<a href="/2020/02/03/mysql-b-plus-tree/" class="archive-article-date">
+        <time datetime="2020-02-03T07:47:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-03</time>
 </a>
 
         </div>
@@ -222,7 +222,7 @@
   
     <h1 itemprop="name">
 	
-	  <a class="archive-article-title" href="/2020/02/05/sql-index/" target="_blank">MySQL索引设计</a>
+	  <a class="archive-article-title" href="/2020/02/03/mysql-b-plus-tree/" target="_blank">为什么 MySQL 使用 B+ 树</a>
   
     </h1>
   
@@ -235,54 +235,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/02/04/mysql-innodb/" class="archive-article-date">
-        <time datetime="2020-02-04T10:50:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-04</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2020/02/04/mysql-innodb/" target="_blank">MySQL 和 Innodb</a>
-  
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MYSQL</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Innodb</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">B+树</a>
         		</li>
       		
 		</ul>
@@ -466,15 +423,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -546,11 +503,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Kubernetes</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Kuberentes</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Kubernetes</a>
+                <a href="javascript:void(0)" class="js-tag color2">OpenGL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -729,6 +690,55 @@
    * 完整配置请参考：https://l2dwidget.js.org/docs/class/src/index.js~L2Dwidget.html#instance-method-init
    */
   var pluginModelPath = "assets/", // 模型的文件路径，无需更改
+    pluginRootPath = "/live2d_models/"; // 插件的路径，无需更改
+  //特定的模型json文件名称
+  var modelPathJson = {
+    "epsilon2_1": "Epsilon2.1",
+    "gf": "Gantzert_Felixander",
+    "haru/01": "haru01",
+    "haru/02": "haru02",
+    "nietzsche": "nietzche"
+  }
+
+  
+    var modelName = "hibiki";
+  
+
+  var modelJsonPath = "";
+  if (modelPathJson[modelName]) {
+    modelJsonPath = pluginRootPath + modelName + "/" + pluginModelPath + modelPathJson[modelName] +
+      ".model.json";
+  } else {
+    modelJsonPath = pluginRootPath + modelName + "/" + pluginModelPath + modelName + ".model.json";
+  }
+  L2Dwidget.init({
+    model: {
+      jsonPath: modelJsonPath
+    },
+    display: {
+       position: "right", 
+       width: 145, 
+       height: 315, 
+       hOffset: 50, 
+      
+    },
+    mobile: {
+       show: false, 
+       scale: 0.6 
+    },
+    react: {
+       opacity: 0.8 
+    }
+  })
+
+</script>
+
+  
+  
+</body>
+
+</html>
+assets/", // 模型的文件路径，无需更改
     pluginRootPath = "/live2d_models/"; // 插件的路径，无需更改
   //特定的模型json文件名称
   var modelPathJson = {

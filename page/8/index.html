@@ -201,7 +201,7 @@
             
 
   
-    <article id="post-leetcode-112" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-leetcode-1115" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -209,7 +209,7 @@
   
     <h1 itemprop="name">
 	
-	  <a class="article-title" href="/2019/11/04/leetcode-112/" target="_blank">leetcode-112</a>
+	  <a class="article-title" href="/2019/11/06/leetcode-1115/" target="_blank">leetcode-1115</a>
   
     </h1>
   
@@ -217,8 +217,8 @@
 
   
   
-<a href="/2019/11/04/leetcode-112/" class="archive-article-date">
-        <time datetime="2019-11-04T04:40:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-04</time>
+<a href="/2019/11/06/leetcode-1115/" class="archive-article-date">
+        <time datetime="2019-11-06T05:47:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-06</time>
 </a>
 
   
@@ -230,18 +230,23 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="leetcode-112-路径总和"><a href="#leetcode-112-路径总和" class="headerlink" title="leetcode-112 路径总和"></a>leetcode-112 路径总和</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个二叉树和一个目标和，判断该树中是否存在根节点到叶子节点的路径，这条路径上所有节点值相加等于目标和。</p>
-<p>说明: 叶子节点是指没有子节点的节点。</p>
-<p>示例:<br>给定如下二叉树，以及目标和 sum = 22，</p>
-<pre><code>      5
-     / \
-    4   8
-   /   / \
-  11  13  4
- /  \      \
-7    2      1</code></pre>
+    <h1 id="leetcode-1115-交替打印foobar"><a href="#leetcode-1115-交替打印foobar" class="headerlink" title="leetcode-1115 交替打印foobar"></a>leetcode-1115 交替打印foobar</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>我们提供一个类：</p>
+<pre><code>class FooBar {
+  public void foo() {
+    for (int i = 0; i &lt; n; i++) {
+      print(&quot;foo&quot;);
+    }
+  }
+
+  public void bar() {
+    for (int i = 0; i &lt; n; i++) {
+      print(&quot;bar&quot;);
+    }
+  }
+}</code></pre><p>两个不同的线程将会共用一个 FooBar 实例。其中一个线程将会调用 foo() 方法，另一个线程将会调用 bar() 方法。</p>
+<p>请设计修改程序，以确保 “foobar” 被输出 n 次。</p>
     
-    <a class="article-more-a" href="/2019/11/04/leetcode-112/#more">more >></a>
+    <a class="article-more-a" href="/2019/11/06/leetcode-1115/#more">more >></a>
     
     
 
@@ -262,7 +267,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">二叉树</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">多线程</a>
         		</li>
       		
 		</ul>
@@ -283,7 +288,7 @@
 
     
     <p class="article-more-link">
-      <a class="article-more-a" href="/2019/11/04/leetcode-112/">展开全文 >></a>
+      <a class="article-more-a" href="/2019/11/06/leetcode-1115/">展开全文 >></a>
     </p>
     
 
@@ -313,7 +318,7 @@
 
 
   
-    <article id="post-网络分析工具" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-leetcode-1114" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -321,7 +326,7 @@
   
     <h1 itemprop="name">
 	
-	  <a class="article-title" href="/2019/10/30/网络分析工具/" target="_blank">网络分析工具</a>
+	  <a class="article-title" href="/2019/11/06/leetcode-1114/" target="_blank">leetcode-1114</a>
   
     </h1>
   
@@ -329,8 +334,8 @@
 
   
   
-<a href="/2019/10/30/网络分析工具/" class="archive-article-date">
-        <time datetime="2019-10-30T07:35:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-30</time>
+<a href="/2019/11/06/leetcode-1114/" class="archive-article-date">
+        <time datetime="2019-11-06T05:26:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-06</time>
 </a>
 
   
@@ -342,150 +347,10 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h2 id="ping"><a href="#ping" class="headerlink" title="ping"></a>ping</h2><p>ping(因特网包探索器)是windows,unix,linux系统下的一个命令,ping属于一个通信协议，是TCP/IP协议的一部分，利用ping命令可以检查网络是否连通，，可以很好的帮助分析和判断网络故障<br>ping发送一个IMCP(因特网信报控制协议)请求消息给目的地并报告是否收到希望的IMCP应答，他是用来检查网络是否畅通或者网络连接速度的命令<br>原理是，利用网络上机器ip地址的唯一性，给目标ip地址发送一个数据包，再要求对方返回一个同样大小的数据包来确定两台机器是否想连接</p>
-<h2 id="tcpdump"><a href="#tcpdump" class="headerlink" title="tcpdump"></a>tcpdump</h2><p>tcpdump可以将网络中传输的数据包的头完全截获下来，支持对协议，主机，网络或端口的过滤，并提供and or not等逻辑语句来帮助去掉无用的信息</p>
-<h3 id="tcpdump使用"><a href="#tcpdump使用" class="headerlink" title="tcpdump使用"></a>tcpdump使用</h3><p>tcpdump [-adeflnNopqStvx] [-c 数量] [-F 文件名] [-i 网络接口] [-r 文件名] [-s snaplen] [-T 类型] [-w 文件名] [表达式]<br>表达式是一个正则表达式，tcpdump利用他作为过滤报文的条件，如果满足表达式的条件，则这个报文将会被捕获。如果没有给出任何条件，则所有将会被截获<br>1.关于类型的关键字，主要包括host,net,port等，例如host 210.27.48.2指明210.27.48.2是一台主机，net 202.0.0.0指明202.0.0.0是一个网络地址，port 23指明端口号是23,如果没有指定类型，默认类型是host<br>2. 确定传输方向的关键字，主要包括src,dst,dst or src等，指明了传输的方向。举列说明，src 210.27.48.2,指明ip包中源地址是210.27.48.2,dst net202.0.0.0指明网络地址是202.0.0.0,如果没有指明方向，则默认是src or dst<br>3. 协议的关键字，主要包括fddi,arp,rarp,tcp,udp等类型。如果没有指定任何协议，则会监听所有协议的信息包</p>
-<p>想要截获主机210.27.48.1收到的和发出的所有数据包，使用以下命令:<br>tcpdump host 210.27.48.1</p>
-<p>想要截获主机210.27.48.1和主机210.27.48.2或210.27.48.3的通信，可以使用如下命令,在命令行中使用括号是一定要添加’&#39;<br>tcpdump host 210.27.48.1 and (210.27.48.2 or 210.27.48.3)</p>
-<p>截取除了xxx和xxx以外的所以ip包使用<br>tcpdump ip host xxx and !xxx</p>
-<p>如果想要获取主机xxx接收或发出的telnet包 使用如下命令<br>tcpdump tcp port 23 xxxx</p>
-<p>截取某端口相关的包<br>tcpdump port 6666</p>
-<p>截取网卡的包<br>tcpdump -ieth1</p>
-<h2 id="netstat"><a href="#netstat" class="headerlink" title="netstat"></a>netstat</h2><p>netstat用于显示ip,tcp,udp,和icmp协议相关的统计数据，一般用于检测各个端口的网络连接情况。netstat是在内核中访问网络和相关信息的程序，能提供tcp连接，对tcp,udp的监听及获取进程内存管理的相关报告<br>计算机有时候会因为受到的数据报导致出错数据或故障，tcp/ip可以容许这些类型的错误，并能够自动重发数据包。但如果累计的出错情况数目占到所接收的ip数据报相当大的百分比，或者它的数目正迅速增加，那么就应该使用netstat查一查</p>
-<p>netstat的命令格式如下:<br>netstat [-acCeFghilMnNoprstuvVwx][-A&lt;网络类型&gt;][–ip]</p>
-<ul>
-<li>active internet connections称为有源tcp连接，其中recv-q和send-q指的是接收队列和发送队列，这些数字一般都应该是0,如果不是0则表示请求包和回包正在队列中堆积</li>
-<li>active unix domain sockets称为有源unix域套接口</li>
-</ul>
-<p>proto显示连接使用的协议，refcnt表示连接到本套接口上的进程号，types显示套接口的类型，state显示套接口当前的状态，path显示连接到套接口的其他进程使用的路径名。</p>
-<p>常见参数</p>
-<ul>
-<li>-a 显示所有选项 默认不显示listen相关</li>
-<li>-t 仅显示tcp相关选项</li>
-<li>-u 仅显示udp相关选项</li>
-<li>-n 拒绝显示别名，能显示数字的全部转化为数字</li>
-<li>-l 仅列出又在listen的服务状态</li>
-<li>-p 显示建立相关连接的程序名</li>
-<li>-r 显示路由信息，路由表</li>
-<li>-e 显示拓展信息，如uid等</li>
-<li>-s 按各个协议进行统计</li>
-<li>-c 每隔一个固定时间，执行该netstat命令</li>
-</ul>
-<p>使用实例<br>列出所有端口(包括监听和未监听的) netstat -a<br>列出所有tcp端口 netstat -at<br>列出所有udp端口 netstat -au<br>列出所有处于监听状态的socket netstat -l<br>列出所有监听tcp端口的socket netstat -lt<br>列出所有监听udp端口的socket netstat -lu<br>列出所有监听unix端口的socket netstat -lx<br>在netstat输出显示pid和进程名称 netstat -p<br>持续输出 netstat -c<br>找出程序运行的端口 netstat -ap | grep ssh<br>找出运行在指定端口的进程 netstat -an | grep ‘:80’<br>显示网络接口列表 netstat -i</p>
-<h2 id="lsof"><a href="#lsof" class="headerlink" title="lsof"></a>lsof</h2><p>lsof是一个列出当前系统打开文件的工具<br>每行显示一个打开的文件，若不指定条件将显示所有进程打开的所有文件</p>
-<ol>
-<li>command 进程的名称</li>
-<li>pid 进程描述符</li>
-<li>user 进程所有者</li>
-<li>fd 文件描述符，应用程序通过文件描述符识别该文件如cwd,txt等</li>
-<li>type 文件类型，如dir reg等</li>
-<li>device 指定磁盘的名称</li>
-<li>size 文件的大小</li>
-<li>node 引索节点</li>
-<li>name 打开文件的确切名称</li>
-</ol>
-<p>lsof的语法格式是:<br>lsof [options] filename</p>
-<p>lsof filename 显示打开指定文件的所有进程<br>lsof -a 表示两个参数都必须满足是才显示结果<br>lsof -c string 显示command列中包含指定字符的进程所有打开的文件<br>lsof -u username 显示所属user进程打开的文件<br>lsof -g gid 显示所属gid的进程情况<br>lsof +d /DIR/ 显示目录下被进程打开的文件<br>lsof +D /DIR/同上<br>lsof -d fd 显示指定的文件描述符<br>lsof -n 不将ip转化为hostname<br>lsof -i 用以显示符合条件的进程情况</p>
-<p>常用命令<br>查看端口运行情况<br>lsof -i :6666<br>查看root用户所打开文件,类型为txt<br>lsof -a -u root -d txt<br>监控打开的文件和设备,查看/dev/tty1被那些进程占用<br>lsof /dev/tty1<br>监控程序，查看指定程序server打开的文件<br>lsof -c server<br>监控用户,查看指定用户sharexu打开的文件<br>lsof -u sharexu</p>
-
+    <h1 id="leetcode-1114-按序打印"><a href="#leetcode-1114-按序打印" class="headerlink" title="leetcode-1114 按序打印"></a>leetcode-1114 按序打印</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>我们提供了一个类：<br>    public class Foo {<br>      public void one() { print(“one”); }<br>      public void two() { print(“two”); }<br>      public void three() { print(“three”); }<br>    }<br>三个不同的线程将会共用一个 Foo 实例。</p>
+<p>线程 A 将会调用 one() 方法<br>线程 B 将会调用 two() 方法<br>线程 C 将会调用 three() 方法<br>请设计修改程序，以确保 two() 方法在 one() 方法之后被执行，three() 方法在 two() 方法之后被执行。</p>
     
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">网络</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/网络//" class="article-tag-list-link color3">网络</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2019/10/30/网络分析工具/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-网络IO模型" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2019/10/30/网络IO模型/" target="_blank">网络IO模型</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2019/10/30/网络IO模型/" class="archive-article-date">
-        <time datetime="2019-10-30T05:22:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-30</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="4种网络IO模型"><a href="#4种网络IO模型" class="headerlink" title="4种网络IO模型"></a>4种网络IO模型</h1><h2 id="阻塞IO模型"><a href="#阻塞IO模型" class="headerlink" title="阻塞IO模型"></a>阻塞IO模型</h2><p><img src="/2019/10/30/网络IO模型/%E9%98%BB%E5%A1%9E.PNG" alt></p>
-    
-    <a class="article-more-a" href="/2019/10/30/网络IO模型/#more">more >></a>
+    <a class="article-more-a" href="/2019/11/06/leetcode-1114/#more">more >></a>
     
     
 
@@ -502,411 +367,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">IO</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
         		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
+      		 
         		<li class="article-tag-list-item">
-        			<a href="/categories/网络//" class="article-tag-list-link color3">网络</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2019/10/30/网络IO模型/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-TCP协议" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2019/10/29/TCP协议/" target="_blank">TCP协议</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2019/10/29/TCP协议/" class="archive-article-date">
-        <time datetime="2019-10-29T14:04:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-29</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="七层网络模型"><a href="#七层网络模型" class="headerlink" title="七层网络模型"></a>七层网络模型</h2><p><img src="/2019/10/29/TCP协议/%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B.PNG" alt="网络模型"></p>
-    
-    <a class="article-more-a" href="/2019/10/29/TCP协议/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">TCP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/网络//" class="article-tag-list-link color3">网络</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2019/10/29/TCP协议/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Valgrind" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2019/10/29/Valgrind/" target="_blank">Valgrind</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2019/10/29/Valgrind/" class="archive-article-date">
-        <time datetime="2019-10-29T08:45:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-29</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="Valgrind工具"><a href="#Valgrind工具" class="headerlink" title="Valgrind工具"></a>Valgrind工具</h1><p>Valgrind包含以下工具</p>
-<ul>
-<li>memcheck，一个重量级的内存检查器，能够发现接大多数内存错误使用情况</li>
-<li>callgrind，和gprof类似的分析工具，收集程序运行时的一些数据，建立函数调用关系图</li>
-<li>cachegrind,用来检查程序缓存使用出现的问题，能够精确的指出程序中cache的丢失和命中，对优化程序有很大帮助</li>
-<li>helgrind,用来检查多线程程序中出现的进程问题，寻找内存中被多个线程访问而没有加锁的区域</li>
-<li>massif，堆栈分析器，能测量程序在堆栈中使用了多少内存，告诉堆块，堆管理和栈的大小</li>
-<li>extension，自己编写特定的内存调试工具</li></ul>
-    
-    <a class="article-more-a" href="/2019/10/29/Valgrind/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">调试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/LINUX//" class="article-tag-list-link color1">LINUX</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2019/10/29/Valgrind/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-调试工具" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2019/10/29/调试工具/" target="_blank">调试工具</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2019/10/29/调试工具/" class="archive-article-date">
-        <time datetime="2019-10-29T06:21:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-29</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h1><h2 id="strace"><a href="#strace" class="headerlink" title="strace"></a>strace</h2><p>strace是一个通过跟踪系统调用来让开发者知道一个程序在后台所做事情的工具，可以分析errno的错误元婴</p>
-<p>使用strace统计系统调用，通过参数-c将进程所有的系统调用做一个统计分析并返回<br>-o用来将结构输入到文件中-o filename 和 2&gt;filename等价<br>-t -tt -ttt参数则是记录每次熊调用发生的时间，精确到秒，微妙和unix时间戳的微秒<br>-p pid跟踪到一个现有的进程上</p>
-    
-    <a class="article-more-a" href="/2019/10/29/调试工具/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">调试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/LINUX//" class="article-tag-list-link color1">LINUX</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2019/10/29/调试工具/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-剑指offer-41" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2019/10/27/剑指offer-41/" target="_blank">剑指offer 41</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2019/10/27/剑指offer-41/" class="archive-article-date">
-        <time datetime="2019-10-27T08:48:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-27</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="数据流中的中位数"><a href="#数据流中的中位数" class="headerlink" title="数据流中的中位数"></a>数据流中的中位数</h1><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>如何得到一个数据流中的中位数，如果从数据流中读出奇数个数值，则为中间数值，如果是偶数，则是中间的两数的平均数</p>
-    
-    <a class="article-more-a" href="/2019/10/27/剑指offer-41/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">剑指offer</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">多线程</a>
         		</li>
       		
 		</ul>
@@ -927,7 +392,7 @@
 
     
     <p class="article-more-link">
-      <a class="article-more-a" href="/2019/10/27/剑指offer-41/">展开全文 >></a>
+      <a class="article-more-a" href="/2019/11/06/leetcode-1114/">展开全文 >></a>
     </p>
     
 
@@ -957,7 +422,7 @@
 
 
   
-    <article id="post-剑指offer-40" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-leetcode-168" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -965,7 +430,7 @@
   
     <h1 itemprop="name">
 	
-	  <a class="article-title" href="/2019/10/27/剑指offer-40/" target="_blank">剑指offer 40</a>
+	  <a class="article-title" href="/2019/11/05/leetcode-168/" target="_blank">leetcode-168</a>
   
     </h1>
   
@@ -973,8 +438,8 @@
 
   
   
-<a href="/2019/10/27/剑指offer-40/" class="archive-article-date">
-        <time datetime="2019-10-27T08:26:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-27</time>
+<a href="/2019/11/05/leetcode-168/" class="archive-article-date">
+        <time datetime="2019-11-05T13:16:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-05</time>
 </a>
 
   
@@ -986,9 +451,11 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="最小的k个数"><a href="#最小的k个数" class="headerlink" title="最小的k个数"></a>最小的k个数</h1><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>输入n个整数，找出最小的k个数</p>
+    <h1 id="leetcode-168-表列名称"><a href="#leetcode-168-表列名称" class="headerlink" title="leetcode-168 表列名称"></a>leetcode-168 表列名称</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个正整数，返回它在 Excel 表中相对应的列名称。</p>
+<p>例如，<br>    1 -&gt; A<br>    2 -&gt; B<br>    3 -&gt; C<br>    …<br>    26 -&gt; Z<br>    27 -&gt; AA<br>    28 -&gt; AB<br>    …<br>示例 1:</p>
+<p>输入: 1<br>输出: “A”</p>
     
-    <a class="article-more-a" href="/2019/10/27/剑指offer-40/#more">more >></a>
+    <a class="article-more-a" href="/2019/11/05/leetcode-168/#more">more >></a>
     
     
 
@@ -1005,7 +472,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">剑指offer</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
         		</li>
       		
 		</ul>
@@ -1026,7 +493,7 @@
 
     
     <p class="article-more-link">
-      <a class="article-more-a" href="/2019/10/27/剑指offer-40/">展开全文 >></a>
+      <a class="article-more-a" href="/2019/11/05/leetcode-168/">展开全文 >></a>
     </p>
     
 
@@ -1056,7 +523,7 @@
 
 
   
-    <article id="post-剑指offer-39" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-leetcode-160" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -1064,7 +531,7 @@
   
     <h1 itemprop="name">
 	
-	  <a class="article-title" href="/2019/10/27/剑指offer-39/" target="_blank">剑指offer 39</a>
+	  <a class="article-title" href="/2019/11/05/leetcode-160/" target="_blank">leetcode-160</a>
   
     </h1>
   
@@ -1072,8 +539,8 @@
 
   
   
-<a href="/2019/10/27/剑指offer-39/" class="archive-article-date">
-        <time datetime="2019-10-27T07:48:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-27</time>
+<a href="/2019/11/05/leetcode-160/" class="archive-article-date">
+        <time datetime="2019-11-05T11:49:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-05</time>
 </a>
 
   
@@ -1085,9 +552,10 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="数组中出现次数超过一半的数字"><a href="#数组中出现次数超过一半的数字" class="headerlink" title="数组中出现次数超过一半的数字"></a>数组中出现次数超过一半的数字</h1><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>数组中有一个数字出现的次数超过数组长度的一半，找出这个数字</p>
+    <h1 id="leetcode-160-相交链表"><a href="#leetcode-160-相交链表" class="headerlink" title="leetcode-160 相交链表"></a>leetcode-160 相交链表</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>编写一个程序，找到两个单链表相交的起始节点。</p>
+<p>如下面的两个链表：<br><img src="/2019/11/05/leetcode-160/160_image1.png" alt><br>在节点 c1 开始相交。</p>
     
-    <a class="article-more-a" href="/2019/10/27/剑指offer-39/#more">more >></a>
+    <a class="article-more-a" href="/2019/11/05/leetcode-160/#more">more >></a>
     
     
 
@@ -1104,7 +572,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">剑指offer</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">链表</a>
         		</li>
       		
 		</ul>
@@ -1125,7 +597,7 @@
 
     
     <p class="article-more-link">
-      <a class="article-more-a" href="/2019/10/27/剑指offer-39/">展开全文 >></a>
+      <a class="article-more-a" href="/2019/11/05/leetcode-160/">展开全文 >></a>
     </p>
     
 
@@ -1155,7 +627,7 @@
 
 
   
-    <article id="post-剑指offer-38" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-leetcode-27" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -1163,7 +635,7 @@
   
     <h1 itemprop="name">
 	
-	  <a class="article-title" href="/2019/10/27/剑指offer-38/" target="_blank">剑指offer 38</a>
+	  <a class="article-title" href="/2019/11/05/leetcode-27/" target="_blank">leetcode-27</a>
   
     </h1>
   
@@ -1171,8 +643,8 @@
 
   
   
-<a href="/2019/10/27/剑指offer-38/" class="archive-article-date">
-        <time datetime="2019-10-27T07:03:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-27</time>
+<a href="/2019/11/05/leetcode-27/" class="archive-article-date">
+        <time datetime="2019-11-05T09:07:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-05</time>
 </a>
 
   
@@ -1184,9 +656,15 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="字符串的排列"><a href="#字符串的排列" class="headerlink" title="字符串的排列"></a>字符串的排列</h1><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>输入一个字符串，打印出该字符串中所有字符的所有排列。</p>
+    <h1 id="leetcode-27-移除元素"><a href="#leetcode-27-移除元素" class="headerlink" title="leetcode-27 移除元素"></a>leetcode-27 移除元素</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个数组 nums 和一个值 val，你需要原地移除所有数值等于 val 的元素，返回移除后数组的新长度。</p>
+<p>不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。</p>
+<p>元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。</p>
+<p>示例 1:</p>
+<p>给定 nums = [3,2,2,3], val = 3,</p>
+<p>函数应该返回新的长度 2, 并且 nums 中的前两个元素均为 2。</p>
+<p>你不需要考虑数组中超出新长度后面的元素。</p>
     
-    <a class="article-more-a" href="/2019/10/27/剑指offer-38/#more">more >></a>
+    <a class="article-more-a" href="/2019/11/05/leetcode-27/#more">more >></a>
     
     
 
@@ -1203,7 +681,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">剑指offer</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
         		</li>
       		
 		</ul>
@@ -1224,7 +702,520 @@
 
     
     <p class="article-more-link">
-      <a class="article-more-a" href="/2019/10/27/剑指offer-38/">展开全文 >></a>
+      <a class="article-more-a" href="/2019/11/05/leetcode-27/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-leetcode-22" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2019/11/05/leetcode-22/" target="_blank">leetcode-22</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2019/11/05/leetcode-22/" class="archive-article-date">
+        <time datetime="2019-11-05T08:37:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-05</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="leetcode-22-括号生成"><a href="#leetcode-22-括号生成" class="headerlink" title="leetcode-22 括号生成"></a>leetcode-22 括号生成</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给出 n 代表生成括号的对数，请你写出一个函数，使其能够生成所有可能的并且有效的括号组合。</p>
+<p>例如，给出 n = 3，生成结果为：</p>
+<p>[<br>  “((()))”,<br>  “(()())”,<br>  “(())()”,<br>  “()(())”,<br>  “()()()”<br>]</p>
+    
+    <a class="article-more-a" href="/2019/11/05/leetcode-22/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/算法//" class="article-tag-list-link color3">算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2019/11/05/leetcode-22/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-leetcode-20" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2019/11/05/leetcode-20/" target="_blank">leetcode-20</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2019/11/05/leetcode-20/" class="archive-article-date">
+        <time datetime="2019-11-05T08:15:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-05</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="leetcode-20-有效的括号"><a href="#leetcode-20-有效的括号" class="headerlink" title="leetcode-20 有效的括号"></a>leetcode-20 有效的括号</h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个只包括 ‘(‘，’)’，’{‘，’}’，’[‘，’]’ 的字符串，判断字符串是否有效。</p>
+<p>有效字符串需满足：</p>
+<p>左括号必须用相同类型的右括号闭合。<br>左括号必须以正确的顺序闭合。<br>注意空字符串可被认为是有效字符串。</p>
+<p>示例 1:</p>
+<p>输入: “()”<br>输出: true<br>示例 2:</p>
+<p>输入: “()[]{}”<br>输出: true<br>示例 3:</p>
+    
+    <a class="article-more-a" href="/2019/11/05/leetcode-20/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/算法//" class="article-tag-list-link color3">算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2019/11/05/leetcode-20/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-leetcode-19" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2019/11/05/leetcode-19/" target="_blank">leetcode-19</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2019/11/05/leetcode-19/" class="archive-article-date">
+        <time datetime="2019-11-05T08:03:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-05</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="leetcode-19-删除链表的倒数第N个节点"><a href="#leetcode-19-删除链表的倒数第N个节点" class="headerlink" title="leetcode-19 删除链表的倒数第N个节点"></a>leetcode-19 删除链表的倒数第N个节点</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点。</p>
+<p>示例：</p>
+<p>给定一个链表: 1-&gt;2-&gt;3-&gt;4-&gt;5, 和 n = 2.</p>
+<p>当删除了倒数第二个节点后，链表变为 1-&gt;2-&gt;3-&gt;5.<br>说明：</p>
+<p>给定的 n 保证是有效的。</p>
+    
+    <a class="article-more-a" href="/2019/11/05/leetcode-19/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/算法//" class="article-tag-list-link color3">算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2019/11/05/leetcode-19/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-leetcode-15" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2019/11/05/leetcode-15/" target="_blank">leetcode-15</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2019/11/05/leetcode-15/" class="archive-article-date">
+        <time datetime="2019-11-05T06:56:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-05</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="leetcode-15-三数之和"><a href="#leetcode-15-三数之和" class="headerlink" title="leetcode-15 三数之和"></a>leetcode-15 三数之和</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？找出所有满足条件且不重复的三元组。</p>
+<p>注意：答案中不可以包含重复的三元组。</p>
+<p>例如, 给定数组 nums = [-1, 0, 1, 2, -1, -4]，</p>
+<p>满足要求的三元组集合为：<br>[<br>  [-1, 0, 1],<br>  [-1, -1, 2]<br>]</p>
+    
+    <a class="article-more-a" href="/2019/11/05/leetcode-15/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/算法//" class="article-tag-list-link color3">算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2019/11/05/leetcode-15/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-leetcode-9" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2019/11/05/leetcode-9/" target="_blank">leetcode-9</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2019/11/05/leetcode-9/" class="archive-article-date">
+        <time datetime="2019-11-05T06:06:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-05</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="leetcode-9-回文数"><a href="#leetcode-9-回文数" class="headerlink" title="leetcode-9 回文数"></a>leetcode-9 回文数</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。</p>
+<p>示例 1:</p>
+<p>输入: 121<br>输出: true<br>示例 2:</p>
+<p>输入: -121<br>输出: false<br>解释: 从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。<br>示例 3:</p>
+<p>输入: 10<br>输出: false<br>解释: 从右向左读, 为 01 。因此它不是一个回文数。</p>
+    
+    <a class="article-more-a" href="/2019/11/05/leetcode-9/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/算法//" class="article-tag-list-link color3">算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2019/11/05/leetcode-9/">展开全文 >></a>
     </p>
     
 
@@ -1256,7 +1247,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/7/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/9/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/7/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/9/">Next &raquo;</a>
     </nav>
   
 
@@ -1424,15 +1415,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1504,11 +1495,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Kubernetes</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Kuberentes</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Kubernetes</a>
+                <a href="javascript:void(0)" class="js-tag color2">OpenGL</a>
               </li>
              
               <li class="article-tag-list-item">
