@@ -83,11 +83,11 @@
 	        
 				<li><a href="/categories/技术笔记" >技术笔记</a></li>
 	        
-				<li><a href="/categories/随笔" >随笔</a></li>
-	        
 				<li><a href="/categories/算法" >算法</a></li>
 	        
 				<li><a href="/categories/LINUX" >LINUX</a></li>
+	        
+				<li><a href="/categories/源码" >源码</a></li>
 	        
 			</ul>
 		</nav>
@@ -178,11 +178,11 @@
 		        
 					<li style="width: 20%"><a href="/categories/技术笔记">技术笔记</a></li>
 		        
-					<li style="width: 20%"><a href="/categories/随笔">随笔</a></li>
-		        
 					<li style="width: 20%"><a href="/categories/算法">算法</a></li>
 		        
 					<li style="width: 20%"><a href="/categories/LINUX">LINUX</a></li>
+		        
+					<li style="width: 20%"><a href="/categories/源码">源码</a></li>
 		        
 				</ul>
 			</nav>
@@ -201,7 +201,7 @@
             
 
   
-    <article id="post-LearnOpenGL-06" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Redis-Source-Ziplist" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -209,7 +209,7 @@
   
     <h1 itemprop="name">
 	
-	  <a class="article-title" href="/2020/04/13/LearnOpenGL-06/" target="_blank">变换</a>
+	  <a class="article-title" href="/2020/05/02/Redis-Source-Ziplist/" target="_blank">Redis源码-ziplist.c</a>
   
     </h1>
   
@@ -217,8 +217,8 @@
 
   
   
-<a href="/2020/04/13/LearnOpenGL-06/" class="archive-article-date">
-        <time datetime="2020-04-13T13:24:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-13</time>
+<a href="/2020/05/02/Redis-Source-Ziplist/" class="archive-article-date">
+        <time datetime="2020-05-02T05:14:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-02</time>
 </a>
 
   
@@ -230,10 +230,311 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h2 id="向量"><a href="#向量" class="headerlink" title="向量"></a>向量</h2><p>向量最基本的定义就是一个方向。或者更正式的说，向量有一个方向(Direction)和大小(Magnitude，也叫做强度或长度)。你可以把向量想像成一个藏宝图上的指示：“向左走10步，向北走3步，然后向右走5步”；“左”就是方向，“10步”就是向量的长度。那么这个藏宝图的指示一共有3个向量。向量可以在任意维度(Dimension)上，但是我们通常只使用2至4维。如果一个向量有2个维度，它表示一个平面的方向(想象一下2D的图像)，当它有3个维度的时候它可以表达一个3D世界的方向。</p>
-<p>下面你会看到3个向量，每个向量在2D图像中都用一个箭头(x, y)表示。我们在2D图片中展示这些向量，因为这样子会更直观一点。你可以把这些2D向量当做z坐标为0的3D向量。由于向量表示的是方向，起始于何处并不会改变它的值。下图我们可以看到向量$\overline v$和$\overline w$是相等的，尽管他们的起始点不同：<br><img src="/2020/04/13/LearnOpenGL-06/vectors.png" alt></p>
+    <p>ziplist是为了尽可能的节约内存而设计的特殊编码双端链表。ziplist可以存储字符串和整数值，其中整数值被保存为实际的整数，而非字符串数组。ziplist允许在两端进行push和pop操作，但是这些操作需要对整个ziplist进行内存重分配，所以实际复杂度和ziplist占用的内存大小有关。</p>
+<p>ziplist相关的函数有：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span> *<span class="title">ziplistNew</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span> *<span class="title">ziplistPush</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zl, <span class="keyword">unsigned</span> <span class="keyword">char</span> *s, <span class="keyword">unsigned</span> <span class="keyword">int</span> slen, <span class="keyword">int</span> where)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span> *<span class="title">ziplistIndex</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zl, <span class="keyword">int</span> index)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span> *<span class="title">ziplistNext</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zl, <span class="keyword">unsigned</span> <span class="keyword">char</span> *p)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span> *<span class="title">ziplistPrev</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zl, <span class="keyword">unsigned</span> <span class="keyword">char</span> *p)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">ziplistGet</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *p, <span class="keyword">unsigned</span> <span class="keyword">char</span> **sval, <span class="keyword">unsigned</span> <span class="keyword">int</span> *slen, <span class="keyword">long</span> <span class="keyword">long</span> *lval)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span> *<span class="title">ziplistInsert</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zl, <span class="keyword">unsigned</span> <span class="keyword">char</span> *p, <span class="keyword">unsigned</span> <span class="keyword">char</span> *s, <span class="keyword">unsigned</span> <span class="keyword">int</span> slen)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span> *<span class="title">ziplistDelete</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zl, <span class="keyword">unsigned</span> <span class="keyword">char</span> **p)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span> *<span class="title">ziplistDeleteRange</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zl, <span class="keyword">unsigned</span> <span class="keyword">int</span> index, <span class="keyword">unsigned</span> <span class="keyword">int</span> num)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">ziplistCompare</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *p, <span class="keyword">unsigned</span> <span class="keyword">char</span> *s, <span class="keyword">unsigned</span> <span class="keyword">int</span> slen)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span> *<span class="title">ziplistFind</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *p, <span class="keyword">unsigned</span> <span class="keyword">char</span> *vstr, <span class="keyword">unsigned</span> <span class="keyword">int</span> vlen, <span class="keyword">unsigned</span> <span class="keyword">int</span> skip)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">ziplistLen</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zl)</span></span>;</span><br><span class="line"><span class="keyword">size_t</span> ziplistBlobLen(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zl);</span><br></pre></td></tr></table></figure>
     
-    <a class="article-more-a" href="/2020/04/13/LearnOpenGL-06/#more">more >></a>
+    <a class="article-more-a" href="/2020/05/02/Redis-Source-Ziplist/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/源码//" class="article-tag-list-link color3">源码</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/05/02/Redis-Source-Ziplist/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Redis-Source-Zipmap" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/05/01/Redis-Source-Zipmap/" target="_blank">Redis源码-zipmap.c</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/05/01/Redis-Source-Zipmap/" class="archive-article-date">
+        <time datetime="2020-05-01T13:01:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-01</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>redis压缩键值对的函数有：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span> *<span class="title">zipmapNew</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span> *<span class="title">zipmapSet</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zm, <span class="keyword">unsigned</span> <span class="keyword">char</span> *key, <span class="keyword">unsigned</span> <span class="keyword">int</span> klen, <span class="keyword">unsigned</span> <span class="keyword">char</span> *val, <span class="keyword">unsigned</span> <span class="keyword">int</span> vlen, <span class="keyword">int</span> *update)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span> *<span class="title">zipmapDel</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zm, <span class="keyword">unsigned</span> <span class="keyword">char</span> *key, <span class="keyword">unsigned</span> <span class="keyword">int</span> klen, <span class="keyword">int</span> *deleted)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span> *<span class="title">zipmapRewind</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zm)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span> *<span class="title">zipmapNext</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zm, <span class="keyword">unsigned</span> <span class="keyword">char</span> **key, <span class="keyword">unsigned</span> <span class="keyword">int</span> *klen, <span class="keyword">unsigned</span> <span class="keyword">char</span> **value, <span class="keyword">unsigned</span> <span class="keyword">int</span> *vlen)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">zipmapGet</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zm, <span class="keyword">unsigned</span> <span class="keyword">char</span> *key, <span class="keyword">unsigned</span> <span class="keyword">int</span> klen, <span class="keyword">unsigned</span> <span class="keyword">char</span> **value, <span class="keyword">unsigned</span> <span class="keyword">int</span> *vlen)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">zipmapExists</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zm, <span class="keyword">unsigned</span> <span class="keyword">char</span> *key, <span class="keyword">unsigned</span> <span class="keyword">int</span> klen)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">zipmapLen</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zm)</span></span>;</span><br><span class="line"><span class="keyword">size_t</span> zipmapBlobLen(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zm);</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">zipmapRepr</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *p)</span></span>;</span><br></pre></td></tr></table></figure>
+    
+    <a class="article-more-a" href="/2020/05/01/Redis-Source-Zipmap/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/源码//" class="article-tag-list-link color3">源码</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/05/01/Redis-Source-Zipmap/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Redis-Source-Zmalloc" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/05/01/Redis-Source-Zmalloc/" target="_blank">Redis源码-zmalloc.c</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/05/01/Redis-Source-Zmalloc/" class="archive-article-date">
+        <time datetime="2020-05-01T11:35:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-01</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>Redis内存分配相关的函数有：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">zmalloc</span><span class="params">(<span class="keyword">size_t</span> size)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">zcalloc</span><span class="params">(<span class="keyword">size_t</span> size)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">zrealloc</span><span class="params">(<span class="keyword">void</span> *ptr, <span class="keyword">size_t</span> size)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">zfree</span><span class="params">(<span class="keyword">void</span> *ptr)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">char</span> *<span class="title">zstrdup</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *s)</span></span>;</span><br><span class="line"><span class="keyword">size_t</span> zmalloc_used_memory(<span class="keyword">void</span>);</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">zmalloc_enable_thread_safeness</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">zmalloc_set_oom_handler</span><span class="params">(<span class="keyword">void</span> (*oom_handler)(<span class="keyword">size_t</span>))</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">float</span> <span class="title">zmalloc_get_fragmentation_ratio</span><span class="params">(<span class="keyword">size_t</span> rss)</span></span>;</span><br><span class="line"><span class="keyword">size_t</span> zmalloc_get_rss(<span class="keyword">void</span>);</span><br><span class="line"><span class="keyword">size_t</span> zmalloc_get_private_dirty(<span class="keyword">void</span>);</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">zlibc_free</span><span class="params">(<span class="keyword">void</span> *ptr)</span></span>;</span><br></pre></td></tr></table></figure>
+    
+    <a class="article-more-a" href="/2020/05/01/Redis-Source-Zmalloc/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/源码//" class="article-tag-list-link color3">源码</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/05/01/Redis-Source-Zmalloc/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-LearnOpenGL-18" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/04/30/LearnOpenGL-18/" target="_blank">模板测试</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/04/30/LearnOpenGL-18/" class="archive-article-date">
+        <time datetime="2020-04-30T12:37:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-30</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>当片段着色器处理完一个片段之后，模板测试(Stencil Test)会开始执行，和深度测试一样，它也可能会丢弃片段。接下来，被保留的片段会进入深度测试，它可能会丢弃更多的片段。模板测试是根据又一个缓冲来进行的，它叫做模板缓冲(Stencil Buffer)，我们可以在渲染的时候更新它来获得一些很有意思的效果。</p>
+<p>一个模板缓冲中，（通常）每个模板值(Stencil Value)是8位的。所以每个像素/片段一共能有256种不同的模板值。我们可以将这些模板值设置为我们想要的值，然后当某一个片段有某一个模板值的时候，我们就可以选择丢弃或是保留这个片段了。</p>
+    
+    <a class="article-more-a" href="/2020/04/30/LearnOpenGL-18/#more">more >></a>
     
     
 
@@ -271,7 +572,7 @@
 
     
     <p class="article-more-link">
-      <a class="article-more-a" href="/2020/04/13/LearnOpenGL-06/">展开全文 >></a>
+      <a class="article-more-a" href="/2020/04/30/LearnOpenGL-18/">展开全文 >></a>
     </p>
     
 
@@ -301,7 +602,7 @@
 
 
   
-    <article id="post-LearnOpenGL-05" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-LearnOpenGL-17" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -309,7 +610,7 @@
   
     <h1 itemprop="name">
 	
-	  <a class="article-title" href="/2020/04/12/LearnOpenGL-05/" target="_blank">纹理</a>
+	  <a class="article-title" href="/2020/04/29/LearnOpenGL-17/" target="_blank">深度测试</a>
   
     </h1>
   
@@ -317,8 +618,8 @@
 
   
   
-<a href="/2020/04/12/LearnOpenGL-05/" class="archive-article-date">
-        <time datetime="2020-04-12T08:36:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-12</time>
+<a href="/2020/04/29/LearnOpenGL-17/" class="archive-article-date">
+        <time datetime="2020-04-29T13:40:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-29</time>
 </a>
 
   
@@ -330,10 +631,12 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <p>我们可以为每个顶点添加颜色来增加图形的细节，从而创建出有趣的图像。但是，如果想让图形看起来更真实，我们就必须有足够多的顶点，从而指定足够多的颜色。这将会产生很多额外开销，因为每个模型都会需求更多的顶点，每个顶点又需求一个颜色属性。</p>
-<p>艺术家和程序员更喜欢使用纹理(Texture)。纹理是一个2D图片（甚至也有1D和3D的纹理），它可以用来添加物体的细节；你可以想象纹理是一张绘有砖块的纸，无缝折叠贴合到你的3D的房子上，这样你的房子看起来就像有砖墙外表了。因为我们可以在一张图片上插入非常多的细节，这样就可以让物体非常精细而不用指定额外的顶点。</p>
+    <p>在坐标系统小节中，我们渲染了一个3D箱子，并且运用了深度缓冲(Depth Buffer)来防止被阻挡的面渲染到其它面的前面。在这一节中，我们将会更加深入地讨论这些储存在深度缓冲（或z缓冲(z-buffer)）中的深度值(Depth Value)，以及它们是如何确定一个片段是处于其它片段后方的。</p>
+<p>深度缓冲就像颜色缓冲(Color Buffer)（储存所有的片段颜色：视觉输出）一样，在每个片段中储存了信息，并且（通常）和颜色缓冲有着一样的宽度和高度。深度缓冲是由窗口系统自动创建的，它会以16、24或32位float的形式储存它的深度值。在大部分的系统中，深度缓冲的精度都是24位的。</p>
+<p>当深度测试(Depth Testing)被启用的时候，OpenGL会将一个片段的的深度值与深度缓冲的内容进行对比。OpenGL会执行一个深度测试，如果这个测试通过了的话，深度缓冲将会更新为新的深度值。如果深度测试失败了，片段将会被丢弃。</p>
+<p>深度缓冲是在片段着色器运行之后（以及模板测试(Stencil Testing)运行之后，我们将在下一节中讨论）在屏幕空间中运行的。屏幕空间坐标与通过OpenGL的glViewport所定义的视口密切相关，并且可以直接使用GLSL内建变量gl_FragCoord从片段着色器中直接访问。gl_FragCoord的x和y分量代表了片段的屏幕空间坐标（其中(0, 0)位于左下角）。gl_FragCoord中也包含了一个z分量，它包含了片段真正的深度值。z值就是需要与深度缓冲内容所对比的那个值。</p>
     
-    <a class="article-more-a" href="/2020/04/12/LearnOpenGL-05/#more">more >></a>
+    <a class="article-more-a" href="/2020/04/29/LearnOpenGL-17/#more">more >></a>
     
     
 
@@ -371,7 +674,7 @@
 
     
     <p class="article-more-link">
-      <a class="article-more-a" href="/2020/04/12/LearnOpenGL-05/">展开全文 >></a>
+      <a class="article-more-a" href="/2020/04/29/LearnOpenGL-17/">展开全文 >></a>
     </p>
     
 
@@ -401,7 +704,7 @@
 
 
   
-    <article id="post-LearnOpenGL-04" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-LearnOpenGL-16" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -409,7 +712,7 @@
   
     <h1 itemprop="name">
 	
-	  <a class="article-title" href="/2020/04/12/LearnOpenGL-04/" target="_blank">着色器</a>
+	  <a class="article-title" href="/2020/04/27/LearnOpenGL-16/" target="_blank">模型</a>
   
     </h1>
   
@@ -417,8 +720,8 @@
 
   
   
-<a href="/2020/04/12/LearnOpenGL-04/" class="archive-article-date">
-        <time datetime="2020-04-12T08:07:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-12</time>
+<a href="/2020/04/27/LearnOpenGL-16/" class="archive-article-date">
+        <time datetime="2020-04-27T13:12:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-27</time>
 </a>
 
   
@@ -430,10 +733,9 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <p>着色器(Shader)是运行在GPU上的小程序。这些小程序为图形渲染管线的某个特定部分而运行。从基本意义上来说，着色器只是一种把输入转化为输出的程序。着色器也是一种非常独立的程序，因为它们之间不能相互通信；它们之间唯一的沟通只有通过输入和输出。</p>
-<p>前面的教程里我们简要地触及了一点着色器的皮毛，并了解了如何恰当地使用它们。现在我们会用一种更加广泛的形式详细解释着色器，特别是OpenGL着色器语言(GLSL)。</p>
+    <p>现在是时候接触Assimp并创建实际的加载和转换代码了。这个教程的目标是创建另一个类来完整地表示一个模型，或者说是包含多个网格，甚至是多个物体的模型。一个包含木制阳台、塔楼、甚至游泳池的房子可能仍会被加载为一个模型。我们会使用Assimp来加载模型，并将它转换(Translate)至多个在上一节中创建的Mesh对象。</p>
     
-    <a class="article-more-a" href="/2020/04/12/LearnOpenGL-04/#more">more >></a>
+    <a class="article-more-a" href="/2020/04/27/LearnOpenGL-16/#more">more >></a>
     
     
 
@@ -471,7 +773,7 @@
 
     
     <p class="article-more-link">
-      <a class="article-more-a" href="/2020/04/12/LearnOpenGL-04/">展开全文 >></a>
+      <a class="article-more-a" href="/2020/04/27/LearnOpenGL-16/">展开全文 >></a>
     </p>
     
 
@@ -501,7 +803,7 @@
 
 
   
-    <article id="post-LearnOpenGL-03" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-LearnOpenGL-15" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -509,7 +811,7 @@
   
     <h1 itemprop="name">
 	
-	  <a class="article-title" href="/2020/04/12/LearnOpenGL-03/" target="_blank">你好，三角形</a>
+	  <a class="article-title" href="/2020/04/27/LearnOpenGL-15/" target="_blank">网格</a>
   
     </h1>
   
@@ -517,8 +819,8 @@
 
   
   
-<a href="/2020/04/12/LearnOpenGL-03/" class="archive-article-date">
-        <time datetime="2020-04-12T07:05:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-12</time>
+<a href="/2020/04/27/LearnOpenGL-15/" class="archive-article-date">
+        <time datetime="2020-04-27T12:45:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-27</time>
 </a>
 
   
@@ -530,14 +832,12 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <ul>
-<li>顶点数组对象：Vertex Array Object，VAO</li>
-<li>顶点缓冲对象：Vertex Buffer Object，VBO</li>
-<li>索引缓冲对象：Element Buffer Object，EBO或Index Buffer Object，IBO</li>
-</ul>
-<p>在OpenGL中，任何事物都在3D空间中，而屏幕和窗口却是2D像素数组，这导致OpenGL的大部分工作都是关于把3D坐标转变为适应你屏幕的2D像素。3D坐标转为2D坐标的处理过程是由OpenGL的图形渲染管线（Graphics Pipeline，大多译为管线，实际上指的是一堆原始图形数据途经一个输送管道，期间经过各种变化处理最终出现在屏幕的过程）管理的。图形渲染管线可以被划分为两个主要部分：第一部分把你的3D坐标转换为2D坐标，第二部分是把2D坐标转变为实际的有颜色的像素。</p>
+    <p>通过使用Assimp，我们可以加载不同的模型到程序中，但是载入后它们都被储存为Assimp的数据结构。我们最终仍要将这些数据转换为OpenGL能够理解的格式，这样才能渲染这个物体。我们从上一节中学到，网格(Mesh)代表的是单个的可绘制实体，我们现在先来定义一个我们自己的网格类。</p>
+<p>首先我们来回顾一下我们目前学到的知识，想想一个网格最少需要什么数据。一个网格应该至少需要一系列的顶点，每个顶点包含一个位置向量、一个法向量和一个纹理坐标向量。一个网格还应该包含用于索引绘制的索引以及纹理形式的材质数据（漫反射/镜面光贴图）。</p>
+<p>既然我们有了一个网格类的最低需求，我们可以在OpenGL中定义一个顶点了：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Vertex</span> &#123;</span></span><br><span class="line">  <span class="comment">//坐标</span></span><br><span class="line">	glm::vec3 Position;</span><br><span class="line">  <span class="comment">//法向量</span></span><br><span class="line">	glm::vec3 Normal;</span><br><span class="line">  <span class="comment">//贴图坐标</span></span><br><span class="line">	glm::vec2 TexCoords;</span><br><span class="line">	glm::vec3 Tangent;</span><br><span class="line">	glm::vec3 Bitangent;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
     
-    <a class="article-more-a" href="/2020/04/12/LearnOpenGL-03/#more">more >></a>
+    <a class="article-more-a" href="/2020/04/27/LearnOpenGL-15/#more">more >></a>
     
     
 
@@ -575,7 +875,7 @@
 
     
     <p class="article-more-link">
-      <a class="article-more-a" href="/2020/04/12/LearnOpenGL-03/">展开全文 >></a>
+      <a class="article-more-a" href="/2020/04/27/LearnOpenGL-15/">展开全文 >></a>
     </p>
     
 
@@ -605,7 +905,7 @@
 
 
   
-    <article id="post-LearnOpenGL-02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-LearnOpenGL-14" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -613,7 +913,7 @@
   
     <h1 itemprop="name">
 	
-	  <a class="article-title" href="/2020/04/12/LearnOpenGL-02/" target="_blank">创建窗口</a>
+	  <a class="article-title" href="/2020/04/27/LearnOpenGL-14/" target="_blank">Assimp</a>
   
     </h1>
   
@@ -621,8 +921,8 @@
 
   
   
-<a href="/2020/04/12/LearnOpenGL-02/" class="archive-article-date">
-        <time datetime="2020-04-12T06:22:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-12</time>
+<a href="/2020/04/27/LearnOpenGL-14/" class="archive-article-date">
+        <time datetime="2020-04-27T12:37:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-27</time>
 </a>
 
   
@@ -634,11 +934,12 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="先前准备"><a href="#先前准备" class="headerlink" title="先前准备"></a>先前准备</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;glad/glad.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;GLFW/glfw3.h&gt;</span></span></span><br></pre></td></tr></table></figure>
-
-<p><strong>请确认是在包含GLFW的头文件之前包含了GLAD的头文件。GLAD的头文件包含了正确的OpenGL头文件（例如GL/gl.h），所以需要在其它依赖于OpenGL的头文件之前包含GLAD。</strong></p>
+    <p>到目前为止的所有场景中，我们一直都在滥用我们的箱子朋友，但时间久了甚至是我们最好的朋友也会感到无聊。在日常的图形程序中，通常都会使用非常复杂且好玩的模型，它们比静态的箱子要好看多了。然而，和箱子对象不同，我们不太能够对像是房子、汽车或者人形角色这样的复杂形状手工定义所有的顶点、法线和纹理坐标。我们想要的是将这些模型(Model)导入(Import)到程序当中。模型通常都由3D艺术家在Blender、3DS Max或者Maya这样的工具中精心制作。</p>
+<p>这些所谓的3D建模工具(3D Modeling Tool)可以让艺术家创建复杂的形状，并使用一种叫做UV映射(uv-mapping)的手段来应用贴图。这些工具将会在导出到模型文件的时候自动生成所有的顶点坐标、顶点法线以及纹理坐标。这样子艺术家们即使不了解图形技术细节的情况下，也能拥有一套强大的工具来构建高品质的模型了。所有的技术细节都隐藏在了导出的模型文件中。但是，作为图形开发者，我们就必须要了解这些技术细节了。</p>
+<p>所以，我们的工作就是解析这些导出的模型文件以及提取所有有用的信息，将它们储存为OpenGL能够理解的格式。一个很常见的问题是，模型的文件格式有很多种，每一种都会以它们自己的方式来导出模型数据。像是Wavefront的.obj这样的模型格式，只包含了模型数据以及材质信息，像是模型颜色和漫反射/镜面光贴图。而以XML为基础的Collada文件格式则非常的丰富，包含模型、光照、多种材质、动画数据、摄像机、完整的场景信息等等。Wavefront的.obj格式通常被认为是一个易于解析的模型格式。建议至少去Wavefront的wiki页面上看看文件格式的信息是如何封装的。这应该能让你认识到模型文件的基本结构。</p>
+<p>总而言之，不同种类的文件格式有很多，它们之间通常并没有一个通用的结构。所以如果我们想从这些文件格式中导入模型的话，我们必须要去自己对每一种需要导入的文件格式写一个导入器。很幸运的是，正好有一个库专门处理这个问题。</p>
     
-    <a class="article-more-a" href="/2020/04/12/LearnOpenGL-02/#more">more >></a>
+    <a class="article-more-a" href="/2020/04/27/LearnOpenGL-14/#more">more >></a>
     
     
 
@@ -676,7 +977,7 @@
 
     
     <p class="article-more-link">
-      <a class="article-more-a" href="/2020/04/12/LearnOpenGL-02/">展开全文 >></a>
+      <a class="article-more-a" href="/2020/04/27/LearnOpenGL-14/">展开全文 >></a>
     </p>
     
 
@@ -706,7 +1007,7 @@
 
 
   
-    <article id="post-LearnOpenGL-01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-LearnOpenGL-13" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -714,7 +1015,7 @@
   
     <h1 itemprop="name">
 	
-	  <a class="article-title" href="/2020/04/12/LearnOpenGL-01/" target="_blank">构建OpenGL前准备</a>
+	  <a class="article-title" href="/2020/04/23/LearnOpenGL-13/" target="_blank">投光物</a>
   
     </h1>
   
@@ -722,8 +1023,8 @@
 
   
   
-<a href="/2020/04/12/LearnOpenGL-01/" class="archive-article-date">
-        <time datetime="2020-04-12T05:56:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-12</time>
+<a href="/2020/04/23/LearnOpenGL-13/" class="archive-article-date">
+        <time datetime="2020-04-23T14:08:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-23</time>
 </a>
 
   
@@ -735,9 +1036,10 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="OpenGL"><a href="#OpenGL" class="headerlink" title="OpenGL"></a>OpenGL</h1><p>一般认为OpenGL是一个API(Application Programming Interface, 应用程序编程接口)，包含了一系列可以操作图形、图像的函数。然而，OpenGL本身并不是一个API，它仅仅是一个由Khronos组织制定并维护的规范(Specification)。</p>
+    <p>我们目前使用的光照都来自于空间中的一个点。它能给我们不错的效果，但现实世界中，我们有很多种类的光照，每种的表现都不同。将光投射(Cast)到物体的光源叫做投光物(Light Caster)。在这一节中，我们将会讨论几种不同类型的投光物。学会模拟不同种类的光源是又一个能够进一步丰富场景的工具。</p>
+<p>我们首先将会讨论定向光(Directional Light)，接下来是点光源(Point Light)，它是我们之前学习的光源的拓展，最后我们将会讨论聚光(Spotlight)。在下一节中我们将讨论如何将这些不同种类的光照类型整合到一个场景之中。</p>
     
-    <a class="article-more-a" href="/2020/04/12/LearnOpenGL-01/#more">more >></a>
+    <a class="article-more-a" href="/2020/04/23/LearnOpenGL-13/#more">more >></a>
     
     
 
@@ -775,7 +1077,7 @@
 
     
     <p class="article-more-link">
-      <a class="article-more-a" href="/2020/04/12/LearnOpenGL-01/">展开全文 >></a>
+      <a class="article-more-a" href="/2020/04/23/LearnOpenGL-13/">展开全文 >></a>
     </p>
     
 
@@ -805,7 +1107,7 @@
 
 
   
-    <article id="post-leetcode-decode-string" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-LearnOpenGL-12" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -813,7 +1115,7 @@
   
     <h1 itemprop="name">
 	
-	  <a class="article-title" href="/2020/03/10/leetcode-decode-string/" target="_blank">字符串解码</a>
+	  <a class="article-title" href="/2020/04/22/LearnOpenGL-12/" target="_blank">光照贴图</a>
   
     </h1>
   
@@ -821,8 +1123,8 @@
 
   
   
-<a href="/2020/03/10/leetcode-decode-string/" class="archive-article-date">
-        <time datetime="2020-03-10T07:06:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-10</time>
+<a href="/2020/04/22/LearnOpenGL-12/" class="archive-article-date">
+        <time datetime="2020-04-22T14:06:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-22</time>
 </a>
 
   
@@ -834,13 +1136,11 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <p>给定一个经过编码的字符串，返回它解码后的字符串。<br>编码规则为: k[encoded_string]，表示其中方括号内部的 encoded_string 正好重复 k 次。注意 k 保证为正整数。<br>你可以认为输入字符串总是有效的；输入字符串中没有额外的空格，且输入的方括号总是符合格式要求的。<br>此外，你可以认为原始数据不包含数字，所有的数字只表示重复的次数 k ，例如不会出现像 3a 或 2[4] 的输入。</p>
-<p>示例:</p>
-<pre><code>s = &quot;3[a]2[bc]&quot;, 返回 &quot;aaabcbc&quot;.
-s = &quot;3[a2[c]]&quot;, 返回 &quot;accaccacc&quot;.
-s = &quot;2[abc]3[cd]ef&quot;, 返回 &quot;abcabccdcdcdef&quot;.</code></pre>
+    <p>在上一节中，我们讨论了让每个物体都拥有自己独特的材质从而对光照做出不同的反应的方法。这样子能够很容易在一个光照的场景中给每个物体一个独特的外观，但是这仍不能对一个物体的视觉输出提供足够多的灵活性。</p>
+<p>在上一节中，我们将整个物体的材质定义为一个整体，但现实世界中的物体通常并不只包含有一种材质，而是由多种材质所组成。想想一辆汽车：它的外壳非常有光泽，车窗会部分反射周围的环境，轮胎不会那么有光泽，所以它没有镜面高光，轮毂非常闪亮（如果你洗车了的话）。汽车同样会有漫反射和环境光颜色，它们在整个物体上也不会是一样的，汽车有着许多种不同的环境光/漫反射颜色。总之，这样的物体在不同的部件上都有不同的材质属性。</p>
+<p>所以，上一节中的那个材质系统是肯定不够的，它只是一个最简单的模型，所以我们需要拓展之前的系统，引入漫反射和镜面光贴图(Map)。这允许我们对物体的漫反射分量（以及间接地对环境光分量，它们几乎总是一样的）和镜面光分量有着更精确的控制。</p>
     
-    <a class="article-more-a" href="/2020/03/10/leetcode-decode-string/#more">more >></a>
+    <a class="article-more-a" href="/2020/04/22/LearnOpenGL-12/#more">more >></a>
     
     
 
@@ -857,262 +1157,28 @@ s = &quot;2[abc]3[cd]ef&quot;, 返回 &quot;abcabccdcdcdef&quot;.</code></pre>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">LeetCode</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">OpenGL</a>
         		</li>
       		
 		</ul>
 	</div>
 
     
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/03/10/leetcode-decode-string/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-gs" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/03/06/gs/" target="_blank">杂项公式</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/03/06/gs/" class="archive-article-date">
-        <time datetime="2020-03-06T13:19:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-06</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="求区间和"><a href="#求区间和" class="headerlink" title="求区间和"></a>求区间和</h2><p>ex:<br>[5….19]</p>
-<p>cnt = (19 + 5) * (19 - 5 + 1) &gt;&gt; 1;</p>
-    
-    <a class="article-more-a" href="/2020/03/06/gs/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/03/06/gs/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-log-algorithm-struct" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/03/01/log-algorithm-struct/" target="_blank">笔记-算法和数据结构</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/03/01/log-algorithm-struct/" class="archive-article-date">
-        <time datetime="2020-03-01T07:47:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-01</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="红黑树和AVL树的定义，特点，以及二者区别"><a href="#红黑树和AVL树的定义，特点，以及二者区别" class="headerlink" title="红黑树和AVL树的定义，特点，以及二者区别"></a>红黑树和AVL树的定义，特点，以及二者区别</h2><p>平衡二叉树（AVL树）：<br>&emsp;平衡二叉树又称为AVL树，是一种特殊的二叉排序树。其左右子树都是平衡二叉树，且左右子树高度之差的绝对值不超过1。一句话表述为：以树中所有结点为根的树的左右子树高度之差的绝对值不超过1。将二叉树上结点的左子树深度减去右子树深度的值称为平衡因子BF，那么平衡二叉树上的所有结点的平衡因子只可能是-1、0和1。只要二叉树上有一个结点的平衡因子的绝对值大于1，则该二叉树就是不平衡的。</p>
-<p>红黑树：<br>&emsp;红黑树是一种二叉查找树，但在每个节点增加一个存储位表示节点的颜色，可以是红或黑（非红即黑）。通过对任何一条从根到叶子的路径上各个节点着色的方式的限制，红黑树确保没有一条路径会比其它路径长出两倍，因此，红黑树是一种弱平衡二叉树，相对于要求严格的AVL树来说，它的旋转次数少，所以对于搜索，插入，删除操作较多的情况下，通常使用红黑树。</p>
-    
-    <a class="article-more-a" href="/2020/03/01/log-algorithm-struct/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/03/01/log-algorithm-struct/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-log-sql" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/03/01/log-sql/" target="_blank">笔记-数据库</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/03/01/log-sql/" class="archive-article-date">
-        <time datetime="2020-03-01T05:06:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-01</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="说一说数据库索引"><a href="#说一说数据库索引" class="headerlink" title="说一说数据库索引"></a>说一说数据库索引</h2><p>&emsp;索引是对数据库表中一列或多列的值进行排序的一种结构，使用索引可快速访问数据库表中的特定信息。如果想按特定职员的姓来查找他或她，则与在表中搜索所有的行相比，索引有助于更快地获取信息。<br>&emsp;索引的一个主要目的就是加快检索表中数据的方法，亦即能协助信息搜索者尽快的找到符合限制条件的记录ID的辅助数据结构。</p>
-<h2 id="数据库事务"><a href="#数据库事务" class="headerlink" title="数据库事务"></a>数据库事务</h2><p>&emsp;数据库事务(Database Transaction) ，是指作为单个逻辑工作单元执行的一系列操作，要么完全地执行，要么完全地不执行。 事务处理可以确保除非事务性单元内的所有操作都成功完成，否则不会永久更新面向数据的资源。通过将一组相关操作组合为一个要么全部成功要么全部失败的单元，可以简化错误恢复并使应用程序更加可靠。一个逻辑工作单元要成为事务，必须满足所谓的ACID（原子性、一致性、隔离性和持久性）属性。事务是数据库运行中的逻辑工作单位，由DBMS中的事务管理子系统负责事务的处理。</p>
-    
-    <a class="article-more-a" href="/2020/03/01/log-sql/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
+        			<a href="/categories/技术笔记//" class="article-tag-list-link color5">技术笔记</a>
         		</li>
       		
 		</ul>
 	</div>
 
-    
 
     
     <p class="article-more-link">
-      <a class="article-more-a" href="/2020/03/01/log-sql/">展开全文 >></a>
+      <a class="article-more-a" href="/2020/04/22/LearnOpenGL-12/">展开全文 >></a>
     </p>
     
 
@@ -1144,7 +1210,7 @@ s = &quot;2[abc]3[cd]ef&quot;, 返回 &quot;abcabccdcdcdef&quot;.</code></pre>
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 
@@ -1308,10 +1374,6 @@ s = &quot;2[abc]3[cd]ef&quot;, 返回 &quot;abcabccdcdcdef&quot;.</code></pre>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IO</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
@@ -1321,6 +1383,10 @@ s = &quot;2[abc]3[cd]ef&quot;, 返回 &quot;abcabccdcdcdef&quot;.</code></pre>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">IO</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1340,11 +1406,11 @@ s = &quot;2[abc]3[cd]ef&quot;, 返回 &quot;abcabccdcdcdef&quot;.</code></pre>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+                <a href="javascript:void(0)" class="js-tag color2">Golang</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Golang</a>
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1361,6 +1427,10 @@ s = &quot;2[abc]3[cd]ef&quot;, 返回 &quot;abcabccdcdcdef&quot;.</code></pre>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">动态规划</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">OpenGL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1397,10 +1467,6 @@ s = &quot;2[abc]3[cd]ef&quot;, 返回 &quot;abcabccdcdcdef&quot;.</code></pre>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Kuberentes</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">OpenGL</a>
               </li>
              
               <li class="article-tag-list-item">

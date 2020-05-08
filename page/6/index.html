@@ -83,11 +83,11 @@
 	        
 				<li><a href="/categories/技术笔记" >技术笔记</a></li>
 	        
-				<li><a href="/categories/随笔" >随笔</a></li>
-	        
 				<li><a href="/categories/算法" >算法</a></li>
 	        
 				<li><a href="/categories/LINUX" >LINUX</a></li>
+	        
+				<li><a href="/categories/源码" >源码</a></li>
 	        
 			</ul>
 		</nav>
@@ -178,11 +178,11 @@
 		        
 					<li style="width: 20%"><a href="/categories/技术笔记">技术笔记</a></li>
 		        
-					<li style="width: 20%"><a href="/categories/随笔">随笔</a></li>
-		        
 					<li style="width: 20%"><a href="/categories/算法">算法</a></li>
 		        
 					<li style="width: 20%"><a href="/categories/LINUX">LINUX</a></li>
+		        
+					<li style="width: 20%"><a href="/categories/源码">源码</a></li>
 		        
 				</ul>
 			</nav>
@@ -201,7 +201,7 @@
             
 
   
-    <article id="post-二叉树经典面试题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-redis-eventloop" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -209,7 +209,7 @@
   
     <h1 itemprop="name">
 	
-	  <a class="article-title" href="/2019/12/12/二叉树经典面试题/" target="_blank">二叉树经典面试题</a>
+	  <a class="article-title" href="/2020/02/04/redis-eventloop/" target="_blank">Redis 中的事件循环</a>
   
     </h1>
   
@@ -217,8 +217,8 @@
 
   
   
-<a href="/2019/12/12/二叉树经典面试题/" class="archive-article-date">
-        <time datetime="2019-12-12T07:58:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-12</time>
+<a href="/2020/02/04/redis-eventloop/" class="archive-article-date">
+        <time datetime="2020-02-04T09:00:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-04</time>
 </a>
 
   
@@ -230,87 +230,10 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h2 id="找出二叉树中最远结点的距离-即两个叶节点之间的距离最大"><a href="#找出二叉树中最远结点的距离-即两个叶节点之间的距离最大" class="headerlink" title="找出二叉树中最远结点的距离(即两个叶节点之间的距离最大)"></a>找出二叉树中最远结点的距离(即两个叶节点之间的距离最大)</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">maxDistance</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(root == <span class="literal">nullptr</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">int</span> max = <span class="number">0</span>;</span><br><span class="line">  _maxDistance(root, max);</span><br><span class="line">  <span class="keyword">return</span> max;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> _maxDistance(node* root, <span class="keyword">int</span>&amp; max)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">if</span>(root == <span class="literal">nullptr</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">int</span> left = _maxDistance(root-&gt;left, max);</span><br><span class="line">  <span class="keyword">int</span> right = _maxDistance(root-&gt;right, max);</span><br><span class="line">  <span class="keyword">if</span>(left + right &gt; max)</span><br><span class="line">    max = left + right;</span><br><span class="line">  <span class="keyword">return</span> left &gt; right ? left + <span class="number">1</span> : right + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    <p>在目前的很多服务中，由于需要持续接受客户端或者用户的输入，所以需要一个事件循环来等待并处理外部事件，这篇文章主要会介绍 Redis 中的事件循环是如何处理事件的。</p>
+<p>在文章中，我们会先从 Redis 的实现中分析事件是如何被处理的，然后用更具象化的方式了解服务中的不同模块是如何交流的。</p>
     
-    <a class="article-more-a" href="/2019/12/12/二叉树经典面试题/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2019/12/12/二叉树经典面试题/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-c-对象模型" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2019/12/12/c-对象模型/" target="_blank">c++对象模型</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2019/12/12/c-对象模型/" class="archive-article-date">
-        <time datetime="2019-12-12T03:05:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-12</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="普通虚基类"><a href="#普通虚基类" class="headerlink" title="普通虚基类"></a>普通虚基类</h2><p>C++中虚函数的诞生，就是为了多态的实现。当子类对父类的虚函数进行了重写，在父类指针调用重写的虚函数时，如果父类指针（或引用）指向了父类的对象，则调用父类的虚函数，如果父类指针（或引用）指向了子类对象，则调用子类的虚函数。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">a</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="keyword">virtual</span> ~a() &#123;&#125;</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">funca</span><span class="params">()</span> </span>&#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"virtual funca"</span> &lt;&lt; <span class="built_in">endl</span>; &#125;</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">funcb</span><span class="params">()</span> </span>&#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"virtual funcb"</span> &lt;&lt; <span class="built_in">endl</span>; &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">int</span> a_val;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-    
-    <a class="article-more-a" href="/2019/12/12/c-对象模型/#more">more >></a>
+    <a class="article-more-a" href="/2020/02/04/redis-eventloop/#more">more >></a>
     
     
 
@@ -322,22 +245,22 @@
   <div class="article-info article-info-index">
     
     
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/C-C//" class="article-tag-list-link color1">C/C++</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
         		</li>
       		
 		</ul>
 	</div>
 
+    
 
     
     <p class="article-more-link">
-      <a class="article-more-a" href="/2019/12/12/c-对象模型/">展开全文 >></a>
+      <a class="article-more-a" href="/2020/02/04/redis-eventloop/">展开全文 >></a>
     </p>
     
 
@@ -367,7 +290,7 @@
 
 
   
-    <article id="post-Elasticsearch" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-redis-single-thread" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -375,7 +298,7 @@
   
     <h1 itemprop="name">
 	
-	  <a class="article-title" href="/2019/12/03/Elasticsearch/" target="_blank">Elasticsearch</a>
+	  <a class="article-title" href="/2020/02/04/redis-single-thread/" target="_blank">为什么 Redis 选择单线程模型</a>
   
     </h1>
   
@@ -383,8 +306,8 @@
 
   
   
-<a href="/2019/12/03/Elasticsearch/" class="archive-article-date">
-        <time datetime="2019-12-03T07:10:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-03</time>
+<a href="/2020/02/04/redis-single-thread/" class="archive-article-date">
+        <time datetime="2020-02-04T07:13:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-04</time>
 </a>
 
   
@@ -396,10 +319,10 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <p>Spring Data 是的使命是给各种数据访问提供统一的编程接口，不管是关系型数据库（如MySQL），还是非关系数据库（如Redis），或者类似Elasticsearch这样的索引数据库。从而简化开发人员的代码，提高开发效率。</p>
-<p>包含很多不同数据操作的模块：<br><img src="/2019/12/03/Elasticsearch/1.png" alt></p>
+    <p>Redis 作为广为人知的内存数据库，在玩具项目和复杂的工业级别项目中都看到它的身影，然而 Redis 却是使用单线程模型进行设计的，这与很多人固有的观念有所冲突，为什么单线程的程序能够抗住每秒几百万的请求量呢？这也是我们今天要讨论的问题之一。</p>
+<p>除此之外，Redis 4.0 之后的版本却抛弃了单线程模型这一设计，原本使用单线程运行的 Redis 也开始选择性使用多线程模型，这一看似有些矛盾的设计决策是今天需要讨论的另一个问题。</p>
     
-    <a class="article-more-a" href="/2019/12/03/Elasticsearch/#more">more >></a>
+    <a class="article-more-a" href="/2020/02/04/redis-single-thread/#more">more >></a>
     
     
 
@@ -415,7 +338,7 @@
 
     
     <p class="article-more-link">
-      <a class="article-more-a" href="/2019/12/03/Elasticsearch/">展开全文 >></a>
+      <a class="article-more-a" href="/2020/02/04/redis-single-thread/">展开全文 >></a>
     </p>
     
 
@@ -445,7 +368,7 @@
 
 
   
-    <article id="post-CookBook" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-communication-shared-memory" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -453,7 +376,7 @@
   
     <h1 itemprop="name">
 	
-	  <a class="article-title" href="/2019/11/27/CookBook/" target="_blank">CookBook</a>
+	  <a class="article-title" href="/2020/02/04/communication-shared-memory/" target="_blank">为什么使用通信来共享内存</a>
   
     </h1>
   
@@ -461,8 +384,8 @@
 
   
   
-<a href="/2019/11/27/CookBook/" class="archive-article-date">
-        <time datetime="2019-11-27T08:30:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-27</time>
+<a href="/2020/02/04/communication-shared-memory/" class="archive-article-date">
+        <time datetime="2020-02-04T06:15:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-04</time>
 </a>
 
   
@@ -474,9 +397,9 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h2 id="保持对std-vector实例的排序"><a href="#保持对std-vector实例的排序" class="headerlink" title="保持对std::vector实例的排序"></a>保持对std::vector实例的排序</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert_sorted</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; v, <span class="keyword">const</span> <span class="built_in">string</span>&amp; word)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">const</span> <span class="keyword">auto</span> <span class="title">pos</span><span class="params">(lower_bound(begin(v), end(v), word))</span></span>;</span><br><span class="line">  v.insert(pos, word);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    <p>『不要通过共享内存来通信，我们应该使用通信来共享内存』，这是一句使用 Go 语言编程的人经常能听到的观点，然而我们可能从来都没有仔细地思考过 Go 语言为什么鼓励我们遵循这一设计哲学，我们在这篇文章中就会介绍为什么我们应该更倾向于使用通信的方式交换消息，而不是使用共享内存的方式。</p>
     
-    <a class="article-more-a" href="/2019/11/27/CookBook/#more">more >></a>
+    <a class="article-more-a" href="/2020/02/04/communication-shared-memory/#more">more >></a>
     
     
 
@@ -488,22 +411,22 @@
   <div class="article-info article-info-index">
     
     
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/C//" class="article-tag-list-link color4">C++</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Golang</a>
         		</li>
       		
 		</ul>
 	</div>
 
+    
 
     
     <p class="article-more-link">
-      <a class="article-more-a" href="/2019/11/27/CookBook/">展开全文 >></a>
+      <a class="article-more-a" href="/2020/02/04/communication-shared-memory/">展开全文 >></a>
     </p>
     
 
@@ -533,7 +456,7 @@
 
 
   
-    <article id="post-c-11-14-17-20-6" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-tcp-three-way-handshake" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -541,7 +464,7 @@
   
     <h1 itemprop="name">
 	
-	  <a class="article-title" href="/2019/11/19/c-11-14-17-20-6/" target="_blank">c++11/14/17/20(六)</a>
+	  <a class="article-title" href="/2020/02/04/tcp-three-way-handshake/" target="_blank">为什么 TCP 建立连接需要三次握手</a>
   
     </h1>
   
@@ -549,8 +472,8 @@
 
   
   
-<a href="/2019/11/19/c-11-14-17-20-6/" class="archive-article-date">
-        <time datetime="2019-11-19T09:06:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-19</time>
+<a href="/2020/02/04/tcp-three-way-handshake/" class="archive-article-date">
+        <time datetime="2020-02-04T05:23:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-04</time>
 </a>
 
   
@@ -562,10 +485,10 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h2 id="并行基础"><a href="#并行基础" class="headerlink" title="并行基础"></a>并行基础</h2><p>std::thread 用于创建一个执行的线程实例，所以它是一切并发编程的基础，使用时需要包含 <thread> 头文件， 它提供了很多基本的线程操作，例如 get_id() 来获取所创建线程的线程 ID，使用 join() 来加入一个线程等等，例如：</thread></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;thread&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="function">thread <span class="title">t</span><span class="params">([]()&#123;</span></span></span><br><span class="line"><span class="function"><span class="params">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"hello world."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span></span></span><br><span class="line"><span class="function"><span class="params">    &#125;)</span></span>;</span><br><span class="line">    t.join();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    <p>TCP 协议是我们几乎每天都会接触到的网络协议，绝大多数网络连接的建立都是基于 TCP 协议的，学过计算机网络或者对 TCP 协议稍有了解的人都知道 —— 使用 TCP 协议建立连接需要经过三次握手（three-way handshake）。</p>
+<p>如果让我们简单说说 TCP 建立连接的过程，相信很多准备过面试的人都会非常了解，但是一旦想要深究『为什么 TCP 建立连接需要三次握手？』，作者相信大多数人都没有办法回答这个问题或者会给出错误的答案，这边文章就会讨论究竟为什么我们需要三次握手才能建立 TCP 连接？</p>
     
-    <a class="article-more-a" href="/2019/11/19/c-11-14-17-20-6/#more">more >></a>
+    <a class="article-more-a" href="/2020/02/04/tcp-three-way-handshake/#more">more >></a>
     
     
 
@@ -577,22 +500,22 @@
   <div class="article-info article-info-index">
     
     
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/C//" class="article-tag-list-link color4">C++</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">-TCP</a>
         		</li>
       		
 		</ul>
 	</div>
 
+    
 
     
     <p class="article-more-link">
-      <a class="article-more-a" href="/2019/11/19/c-11-14-17-20-6/">展开全文 >></a>
+      <a class="article-more-a" href="/2020/02/04/tcp-three-way-handshake/">展开全文 >></a>
     </p>
     
 
@@ -622,7 +545,7 @@
 
 
   
-    <article id="post-c-11-14-17-20-5" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-dns-udp" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -630,7 +553,7 @@
   
     <h1 itemprop="name">
 	
-	  <a class="article-title" href="/2019/11/19/c-11-14-17-20-5/" target="_blank">c++11/14/17/20(五)</a>
+	  <a class="article-title" href="/2020/02/03/dns-udp/" target="_blank">为什么 DNS 使用 UDP 协议</a>
   
     </h1>
   
@@ -638,8 +561,8 @@
 
   
   
-<a href="/2019/11/19/c-11-14-17-20-5/" class="archive-article-date">
-        <time datetime="2019-11-19T07:25:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-19</time>
+<a href="/2020/02/03/dns-udp/" class="archive-article-date">
+        <time datetime="2020-02-03T11:26:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-03</time>
 </a>
 
   
@@ -651,15 +574,9 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h2 id="正则表达式简介"><a href="#正则表达式简介" class="headerlink" title="正则表达式简介"></a>正则表达式简介</h2><p>正则表达式描述了一种字符串匹配的模式。一般使用正则表达式主要是实现下面三个需求：</p>
-<ol>
-<li>检查一个串是否包含某种形式的子串</li>
-<li>将匹配的子串替换</li>
-<li>从某个串中取出符合条件的子串</li>
-</ol>
-<p>正则表达式是由普通字符（例如 a 到 z）以及特殊字符组成的文字模式。模式描述在搜索文本时要匹配的一个或多个字符串。 正则表达式作为一个模板，将某个字符模式与所搜索的字符串进行匹配。</p>
+    <p>相信 DNS 使用 UDP 协议已经成为了软件工程师的常识，对计算机网络稍有了解的人都知道 DNS 会使用 UDP 协议传输数据，但是这一观点其实不是完全正确的，我们在这里就会详细分析『为什么 DNS 会使用 UDP 传输数据』以及『为什么 DNS 不止会使用 UDP 传输数据』两个问题</p>
     
-    <a class="article-more-a" href="/2019/11/19/c-11-14-17-20-5/#more">more >></a>
+    <a class="article-more-a" href="/2020/02/03/dns-udp/#more">more >></a>
     
     
 
@@ -671,101 +588,26 @@
   <div class="article-info article-info-index">
     
     
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2019/11/19/c-11-14-17-20-5/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-c-11-14-17-20-4" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2019/11/19/c-11-14-17-20-4/" target="_blank">c++11/14/17/20(四)</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2019/11/19/c-11-14-17-20-4/" class="archive-article-date">
-        <time datetime="2019-11-19T06:34:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-19</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="RAII与引用计数"><a href="#RAII与引用计数" class="headerlink" title="RAII与引用计数"></a>RAII与引用计数</h2><p>了解 Objective-C/Swift 的程序员应该知道引用计数的概念。引用计数这种计数是为了防止内存泄露而产生的。 基本想法是对于动态分配的对象，进行引用计数，每当增加一次对同一个对象的引用，那么引用对象的引用计数就会增加一次， 每删除一次引用，引用计数就会减一，当一个对象的引用计数减为零时，就自动删除指向的堆内存。</p>
-<p>在传统 C++ 中，『记得』手动释放资源，总不是最佳实践。因为我们很有可能就忘记了去释放资源而导致泄露。 所以通常的做法是对于一个对象而言，我们在构造函数的时候申请空间，而在析构函数（在离开作用域时调用）的时候释放空间， 也就是我们常说的 RAII 资源获取即初始化技术。</p>
-<p>凡事都有例外，我们总会有需要将对象在自由存储上分配的需求，在传统 C++ 里我们只好使用 new 和 delete 去 『记得』对资源进行释放。而 C++11 引入了智能指针的概念，使用了引用计数的想法，让程序员不再需要关心手动释放内存。 这些智能指针就包括 std::shared_ptr/std::unique_ptr/std::weak_ptr，使用它们需要包含头文件 <memory>。</memory></p>
-    
-    <a class="article-more-a" href="/2019/11/19/c-11-14-17-20-4/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/C//" class="article-tag-list-link color4">C++</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">UDP</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DNS</a>
         		</li>
       		
 		</ul>
 	</div>
 
+    
 
     
     <p class="article-more-link">
-      <a class="article-more-a" href="/2019/11/19/c-11-14-17-20-4/">展开全文 >></a>
+      <a class="article-more-a" href="/2020/02/03/dns-udp/">展开全文 >></a>
     </p>
     
 
@@ -795,7 +637,7 @@
 
 
   
-    <article id="post-c-11-14-17-20-3" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-mysql-b-plus-tree" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -803,7 +645,7 @@
   
     <h1 itemprop="name">
 	
-	  <a class="article-title" href="/2019/11/19/c-11-14-17-20-3/" target="_blank">c++11/14/17/20(三)</a>
+	  <a class="article-title" href="/2020/02/03/mysql-b-plus-tree/" target="_blank">为什么 MySQL 使用 B+ 树</a>
   
     </h1>
   
@@ -811,8 +653,8 @@
 
   
   
-<a href="/2019/11/19/c-11-14-17-20-3/" class="archive-article-date">
-        <time datetime="2019-11-19T03:20:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-19</time>
+<a href="/2020/02/03/mysql-b-plus-tree/" class="archive-article-date">
+        <time datetime="2020-02-03T07:47:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-03</time>
 </a>
 
   
@@ -824,9 +666,9 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h2 id="std-array"><a href="#std-array" class="headerlink" title="std::array"></a>std::array</h2><p>与 std::vector 不同，std::array 对象的大小是固定的，如果容器大小是固定的，那么可以优先考虑使用 std::array 容器。 另外由于 std::vector 是自动扩容的，当存入大量的数据后，并且对容器进行了删除操作， 容器并不会自动归还被删除元素相应的内存，这时候就需要手动运行 shrink_to_fit() 释放这部分内存。</p>
+    <p>为什么 MySQL 使用 B+ 树是面试中经常会出现的问题，很多人对于这个问题可能都有一些自己的理解，但是多数的回答都不够完整和准确，大多数人都只会简单说一下 B+ 树和 B 树的区别，但是都没有真正回答 MySQL 为什么选择使用 B+ 树这个问题，我们在这篇文章中就会深入分析 MySQL 选择 B+ 树背后的一些原因。</p>
     
-    <a class="article-more-a" href="/2019/11/19/c-11-14-17-20-3/#more">more >></a>
+    <a class="article-more-a" href="/2020/02/03/mysql-b-plus-tree/#more">more >></a>
     
     
 
@@ -838,22 +680,26 @@
   <div class="article-info article-info-index">
     
     
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/C//" class="article-tag-list-link color4">C++</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MYSQL</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">B+树</a>
         		</li>
       		
 		</ul>
 	</div>
 
+    
 
     
     <p class="article-more-link">
-      <a class="article-more-a" href="/2019/11/19/c-11-14-17-20-3/">展开全文 >></a>
+      <a class="article-more-a" href="/2020/02/03/mysql-b-plus-tree/">展开全文 >></a>
     </p>
     
 
@@ -883,7 +729,7 @@
 
 
   
-    <article id="post-c-11-14-17-20-2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-redis-bgsave-fork" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -891,7 +737,7 @@
   
     <h1 itemprop="name">
 	
-	  <a class="article-title" href="/2019/11/19/c-11-14-17-20-2/" target="_blank">c++11/14/17/20(二)</a>
+	  <a class="article-title" href="/2020/02/03/redis-bgsave-fork/" target="_blank">为什么Redis快照使用子进程</a>
   
     </h1>
   
@@ -899,8 +745,8 @@
 
   
   
-<a href="/2019/11/19/c-11-14-17-20-2/" class="archive-article-date">
-        <time datetime="2019-11-19T00:50:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-19</time>
+<a href="/2020/02/03/redis-bgsave-fork/" class="archive-article-date">
+        <time datetime="2020-02-03T07:23:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-03</time>
 </a>
 
   
@@ -912,9 +758,9 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h2 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a>lambda表达式</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[捕获列表](参数列表) <span class="keyword">mutable</span>(可选) 异常属性 -&gt; 返回类型&#123;</span><br><span class="line">  <span class="comment">//函数体</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    <p>虽然我们经常将 Redis 看做一个纯内存的键值存储系统，但是我们也会用到它的持久化功能，RDB 和 AOF 就是 Redis 为我们提供的两种持久化工具，其中 RDB 就是 Redis 的数据快照，我们在这篇文章想要分析 Redis 为什么在对数据进行快照持久化时会需要使用子进程，而不是将内存中的数据结构直接导出到磁盘上进行存储。</p>
     
-    <a class="article-more-a" href="/2019/11/19/c-11-14-17-20-2/#more">more >></a>
+    <a class="article-more-a" href="/2020/02/03/redis-bgsave-fork/#more">more >></a>
     
     
 
@@ -926,22 +772,22 @@
   <div class="article-info article-info-index">
     
     
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/C//" class="article-tag-list-link color4">C++</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
         		</li>
       		
 		</ul>
 	</div>
 
+    
 
     
     <p class="article-more-link">
-      <a class="article-more-a" href="/2019/11/19/c-11-14-17-20-2/">展开全文 >></a>
+      <a class="article-more-a" href="/2020/02/03/redis-bgsave-fork/">展开全文 >></a>
     </p>
     
 
@@ -971,7 +817,7 @@
 
 
   
-    <article id="post-c-11-14-17-20-1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-mongodb-b-tree" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -979,7 +825,7 @@
   
     <h1 itemprop="name">
 	
-	  <a class="article-title" href="/2019/11/18/c-11-14-17-20-1/" target="_blank">c++11/14/17/20(一)</a>
+	  <a class="article-title" href="/2020/02/03/mongodb-b-tree/" target="_blank">为什么 MongoDB 使用 B 树</a>
   
     </h1>
   
@@ -987,8 +833,8 @@
 
   
   
-<a href="/2019/11/18/c-11-14-17-20-1/" class="archive-article-date">
-        <time datetime="2019-11-18T02:27:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-18</time>
+<a href="/2020/02/03/mongodb-b-tree/" class="archive-article-date">
+        <time datetime="2020-02-03T06:47:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-03</time>
 </a>
 
   
@@ -1000,15 +846,99 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h2 id="nullptr"><a href="#nullptr" class="headerlink" title="nullptr"></a>nullptr</h2><p>nullptr出现的目的是为了代替NULL,传统c++将null,0视为同一种东西，有些编译器将null定义为(void<em>)0，有些则直接定义为0(#define NULL 0)<br>**C++ 不允许直接将 void * 隐式转换到其他类型。但如果编译器尝试把 NULL 定义为 ((void</em>)0)，那么在下面这句代码中：**</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> *ch = <span class="literal">NULL</span>;</span><br></pre></td></tr></table></figure>
-
-<p>没有了 void * 隐式转换的 C++ 只好将NULL 定义为 0。而这依然会产生新的问题，将 NULL 定义成 0 将导致 C++ 中重载特性发生混乱。考虑下面这两个 foo 函数：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">(<span class="keyword">int</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">(<span class="keyword">char</span>*)</span></span>;</span><br></pre></td></tr></table></figure>
-
-<p>会调用foo(int)<br>为了解决这个问题，C++11 引入了 nullptr 关键字，专门用来区分空指针、0。而 nullptr 的类型为 nullptr_t，能够隐式的转换为任何指针或成员指针的类型，也能和他们进行相等或者不等的比较。</p>
+    <p>MySQL 和 MongoDB 两种不同类型的数据库使用了相似却不同的数据结构，为什么 MySQL 选择使用 B+ 树而 MongoDB 使用 B 树呢？</p>
     
-    <a class="article-more-a" href="/2019/11/18/c-11-14-17-20-1/#more">more >></a>
+    <a class="article-more-a" href="/2020/02/03/mongodb-b-tree/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">MongoDB</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/02/03/mongodb-b-tree/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-numpy" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/01/25/numpy/" target="_blank">numpy的axis理解</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/01/25/numpy/" class="archive-article-date">
+        <time datetime="2020-01-25T06:19:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-25</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="一、多维数据的形象表示"><a href="#一、多维数据的形象表示" class="headerlink" title="一、多维数据的形象表示"></a>一、多维数据的形象表示</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 一维数据不用赘言</span></span><br><span class="line">data_1d = np.array([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 二维数据作为 m 行 n 列的表格，例如 2 行 3 列</span></span><br><span class="line">data_2d = np.arange(<span class="number">6</span>).reshape(<span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 三维数据作为 k 层 m 行 n 列 的积木块， 例如 2 层 3 行 4 列</span></span><br><span class="line">data_3d = np.arange(<span class="number">24</span>).reshape(<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/01/25/numpy/1.jpg" alt></p>
+    
+    <a class="article-more-a" href="/2020/01/25/numpy/#more">more >></a>
     
     
 
@@ -1021,21 +951,88 @@
     
     
     
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/C//" class="article-tag-list-link color4">C++</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
 
     
     <p class="article-more-link">
-      <a class="article-more-a" href="/2019/11/18/c-11-14-17-20-1/">展开全文 >></a>
+      <a class="article-more-a" href="/2020/01/25/numpy/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-机器学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/01/16/机器学习/" target="_blank">机器学习-绪论</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/01/16/机器学习/" class="archive-article-date">
+        <time datetime="2020-01-16T08:00:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-16</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="基本术语"><a href="#基本术语" class="headerlink" title="基本术语"></a>基本术语</h1><p>&emsp;数据的集合称为数据集，反映事件或对象在某方面的表现或性质的事项叫属性或特性，属性上的取值称为属性值，属性张成的空间称为属性空间，样本空间或输入空间</p>
+<p>&emsp;若预测的是离散值(例如好瓜，坏瓜)，称此类学习任务为“分类”；若欲预测的是连续值(例如西瓜成熟度0.95…),此类的学习任务称为“回归”，对只涉及两个类别的“二分类”任务，通常称其中一种类为正类，另一种为反类，涉及多个类别时，则称为“多分类”。</p>
+    
+    <a class="article-more-a" href="/2020/01/16/机器学习/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/01/16/机器学习/">展开全文 >></a>
     </p>
     
 
@@ -1067,7 +1064,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/5/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/7/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/5/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/7/">Next &raquo;</a>
     </nav>
   
 
@@ -1231,10 +1228,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IO</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
@@ -1244,6 +1237,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">IO</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1263,11 +1260,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+                <a href="javascript:void(0)" class="js-tag color2">Golang</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Golang</a>
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1284,6 +1281,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">动态规划</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">OpenGL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1320,10 +1321,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Kuberentes</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">OpenGL</a>
               </li>
              
               <li class="article-tag-list-item">

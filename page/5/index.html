@@ -83,11 +83,11 @@
 	        
 				<li><a href="/categories/技术笔记" >技术笔记</a></li>
 	        
-				<li><a href="/categories/随笔" >随笔</a></li>
-	        
 				<li><a href="/categories/算法" >算法</a></li>
 	        
 				<li><a href="/categories/LINUX" >LINUX</a></li>
+	        
+				<li><a href="/categories/源码" >源码</a></li>
 	        
 			</ul>
 		</nav>
@@ -178,11 +178,11 @@
 		        
 					<li style="width: 20%"><a href="/categories/技术笔记">技术笔记</a></li>
 		        
-					<li style="width: 20%"><a href="/categories/随笔">随笔</a></li>
-		        
 					<li style="width: 20%"><a href="/categories/算法">算法</a></li>
 		        
 					<li style="width: 20%"><a href="/categories/LINUX">LINUX</a></li>
+		        
+					<li style="width: 20%"><a href="/categories/源码">源码</a></li>
 		        
 				</ul>
 			</nav>
@@ -201,7 +201,7 @@
             
 
   
-    <article id="post-mysql-b-plus-tree" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-leetcode-combinations" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -209,7 +209,7 @@
   
     <h1 itemprop="name">
 	
-	  <a class="article-title" href="/2020/02/03/mysql-b-plus-tree/" target="_blank">为什么 MySQL 使用 B+ 树</a>
+	  <a class="article-title" href="/2020/02/25/leetcode-combinations/" target="_blank">组合</a>
   
     </h1>
   
@@ -217,8 +217,8 @@
 
   
   
-<a href="/2020/02/03/mysql-b-plus-tree/" class="archive-article-date">
-        <time datetime="2020-02-03T07:47:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-03</time>
+<a href="/2020/02/25/leetcode-combinations/" class="archive-article-date">
+        <time datetime="2020-02-25T14:38:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-25</time>
 </a>
 
   
@@ -230,9 +230,20 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <p>为什么 MySQL 使用 B+ 树是面试中经常会出现的问题，很多人对于这个问题可能都有一些自己的理解，但是多数的回答都不够完整和准确，大多数人都只会简单说一下 B+ 树和 B 树的区别，但是都没有真正回答 MySQL 为什么选择使用 B+ 树这个问题，我们在这篇文章中就会深入分析 MySQL 选择 B+ 树背后的一些原因。</p>
+    <h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p>给定两个整数 n 和 k，返回 1 … n 中所有可能的 k 个数的组合。</p>
+<p>示例:</p>
+<pre><code>输入: n = 4, k = 2
+输出:
+[
+  [2,4],
+  [3,4],
+  [2,3],
+  [1,2],
+  [1,3],
+  [1,4],
+]</code></pre>
     
-    <a class="article-more-a" href="/2020/02/03/mysql-b-plus-tree/#more">more >></a>
+    <a class="article-more-a" href="/2020/02/25/leetcode-combinations/#more">more >></a>
     
     
 
@@ -249,11 +260,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MYSQL</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">B+树</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">LeetCode</a>
         		</li>
       		
 		</ul>
@@ -263,7 +270,7 @@
 
     
     <p class="article-more-link">
-      <a class="article-more-a" href="/2020/02/03/mysql-b-plus-tree/">展开全文 >></a>
+      <a class="article-more-a" href="/2020/02/25/leetcode-combinations/">展开全文 >></a>
     </p>
     
 
@@ -293,7 +300,7 @@
 
 
   
-    <article id="post-redis-bgsave-fork" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-leetcode-subsets" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -301,7 +308,7 @@
   
     <h1 itemprop="name">
 	
-	  <a class="article-title" href="/2020/02/03/redis-bgsave-fork/" target="_blank">为什么Redis快照使用子进程</a>
+	  <a class="article-title" href="/2020/02/25/leetcode-subsets/" target="_blank">子集</a>
   
     </h1>
   
@@ -309,8 +316,8 @@
 
   
   
-<a href="/2020/02/03/redis-bgsave-fork/" class="archive-article-date">
-        <time datetime="2020-02-03T07:23:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-03</time>
+<a href="/2020/02/25/leetcode-subsets/" class="archive-article-date">
+        <time datetime="2020-02-25T14:17:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-25</time>
 </a>
 
   
@@ -322,9 +329,23 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <p>虽然我们经常将 Redis 看做一个纯内存的键值存储系统，但是我们也会用到它的持久化功能，RDB 和 AOF 就是 Redis 为我们提供的两种持久化工具，其中 RDB 就是 Redis 的数据快照，我们在这篇文章想要分析 Redis 为什么在对数据进行快照持久化时会需要使用子进程，而不是将内存中的数据结构直接导出到磁盘上进行存储。</p>
+    <h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p>给定一组不含重复元素的整数数组 nums，返回该数组所有可能的子集（幂集）。</p>
+<p>说明：解集不能包含重复的子集。</p>
+<p>示例:</p>
+<pre><code>输入: nums = [1,2,3]
+输出:
+[
+  [3],
+  [1],
+  [2],
+  [1,2,3],
+  [1,3],
+  [2,3],
+  [1,2],
+  []
+]</code></pre>
     
-    <a class="article-more-a" href="/2020/02/03/redis-bgsave-fork/#more">more >></a>
+    <a class="article-more-a" href="/2020/02/25/leetcode-subsets/#more">more >></a>
     
     
 
@@ -341,7 +362,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">LeetCode</a>
         		</li>
       		
 		</ul>
@@ -351,7 +372,7 @@
 
     
     <p class="article-more-link">
-      <a class="article-more-a" href="/2020/02/03/redis-bgsave-fork/">展开全文 >></a>
+      <a class="article-more-a" href="/2020/02/25/leetcode-subsets/">展开全文 >></a>
     </p>
     
 
@@ -381,7 +402,7 @@
 
 
   
-    <article id="post-mongodb-b-tree" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-leetcode-course-schedule" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -389,7 +410,7 @@
   
     <h1 itemprop="name">
 	
-	  <a class="article-title" href="/2020/02/03/mongodb-b-tree/" target="_blank">为什么 MongoDB 使用 B 树</a>
+	  <a class="article-title" href="/2020/02/22/leetcode-course-schedule/" target="_blank">课程表</a>
   
     </h1>
   
@@ -397,8 +418,8 @@
 
   
   
-<a href="/2020/02/03/mongodb-b-tree/" class="archive-article-date">
-        <time datetime="2020-02-03T06:47:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-03</time>
+<a href="/2020/02/22/leetcode-course-schedule/" class="archive-article-date">
+        <time datetime="2020-02-22T15:08:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-22</time>
 </a>
 
   
@@ -410,9 +431,13 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <p>MySQL 和 MongoDB 两种不同类型的数据库使用了相似却不同的数据结构，为什么 MySQL 选择使用 B+ 树而 MongoDB 使用 B 树呢？</p>
+    <h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p>现在你总共有 n 门课需要选，记为 0 到 n-1。</p>
+<p>在选修某些课程之前需要一些先修课程。 例如，想要学习课程 0 ，你需要先完成课程 1 ，我们用一个匹配来表示他们: [0,1]</p>
+<p>给定课程总量以及它们的先决条件，判断是否可能完成所有课程的学习？</p>
+<h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><p>  输入: 2, [[1,0]]<br>  输出: true<br>  解释: 总共有 2 门课程。学习课程 1 之前，你需要完成课程 0。所以这是可能的。</p>
+<h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><p>  输入: 2, [[1,0],[0,1]]<br>  输出: false<br>  解释: 总共有 2 门课程。学习课程 1 之前，你需要先完成​课程 0；并且学习课程 0 之前，你还应先完成课程 1。这是不可能的。</p>
     
-    <a class="article-more-a" href="/2020/02/03/mongodb-b-tree/#more">more >></a>
+    <a class="article-more-a" href="/2020/02/22/leetcode-course-schedule/#more">more >></a>
     
     
 
@@ -429,7 +454,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">MongoDB</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">LeetCode</a>
         		</li>
       		
 		</ul>
@@ -439,7 +464,7 @@
 
     
     <p class="article-more-link">
-      <a class="article-more-a" href="/2020/02/03/mongodb-b-tree/">展开全文 >></a>
+      <a class="article-more-a" href="/2020/02/22/leetcode-course-schedule/">展开全文 >></a>
     </p>
     
 
@@ -469,7 +494,7 @@
 
 
   
-    <article id="post-numpy" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-cpp-template-deduction" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -477,7 +502,7 @@
   
     <h1 itemprop="name">
 	
-	  <a class="article-title" href="/2020/01/25/numpy/" target="_blank">numpy的axis理解</a>
+	  <a class="article-title" href="/2020/02/22/cpp-template-deduction/" target="_blank">模板类型推导</a>
   
     </h1>
   
@@ -485,8 +510,8 @@
 
   
   
-<a href="/2020/01/25/numpy/" class="archive-article-date">
-        <time datetime="2020-01-25T06:19:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-25</time>
+<a href="/2020/02/22/cpp-template-deduction/" class="archive-article-date">
+        <time datetime="2020-02-22T06:46:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-22</time>
 </a>
 
   
@@ -498,166 +523,13 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="一、多维数据的形象表示"><a href="#一、多维数据的形象表示" class="headerlink" title="一、多维数据的形象表示"></a>一、多维数据的形象表示</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 一维数据不用赘言</span></span><br><span class="line">data_1d = np.array([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 二维数据作为 m 行 n 列的表格，例如 2 行 3 列</span></span><br><span class="line">data_2d = np.arange(<span class="number">6</span>).reshape(<span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 三维数据作为 k 层 m 行 n 列 的积木块， 例如 2 层 3 行 4 列</span></span><br><span class="line">data_3d = np.arange(<span class="number">24</span>).reshape(<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2020/01/25/numpy/1.jpg" alt></p>
+    <h2 id="参数类型为引用或指针"><a href="#参数类型为引用或指针" class="headerlink" title="参数类型为引用或指针"></a>参数类型为引用或指针</h2><ol>
+<li><strong>如果表达式类型是引用，忽略引用部分</strong></li>
+<li>表达式类型匹配T和paramType</li>
+</ol>
+<h3 id="例子一："><a href="#例子一：" class="headerlink" title="例子一："></a>例子一：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(T&amp; param)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> x = <span class="number">27</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> cx = x;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span>&amp; rx = x;</span><br><span class="line"></span><br><span class="line">f(x);<span class="comment">//  T is int param is int&amp;</span></span><br><span class="line">f(cx);<span class="comment">// T is const int param is const int&amp;</span></span><br><span class="line">f(rx);<span class="comment">// T is const int param is const int&amp;</span></span><br></pre></td></tr></table></figure>
     
-    <a class="article-more-a" href="/2020/01/25/numpy/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/01/25/numpy/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-机器学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/01/16/机器学习/" target="_blank">机器学习-绪论</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/01/16/机器学习/" class="archive-article-date">
-        <time datetime="2020-01-16T08:00:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-16</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="基本术语"><a href="#基本术语" class="headerlink" title="基本术语"></a>基本术语</h1><p>&emsp;数据的集合称为数据集，反映事件或对象在某方面的表现或性质的事项叫属性或特性，属性上的取值称为属性值，属性张成的空间称为属性空间，样本空间或输入空间</p>
-<p>&emsp;若预测的是离散值(例如好瓜，坏瓜)，称此类学习任务为“分类”；若欲预测的是连续值(例如西瓜成熟度0.95…),此类的学习任务称为“回归”，对只涉及两个类别的“二分类”任务，通常称其中一种类为正类，另一种为反类，涉及多个类别时，则称为“多分类”。</p>
-    
-    <a class="article-more-a" href="/2020/01/16/机器学习/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/01/16/机器学习/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Linux内核-进程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/01/10/Linux内核-进程/" target="_blank">Linux内核-进程</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/01/10/Linux内核-进程/" class="archive-article-date">
-        <time datetime="2020-01-10T03:07:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-10</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>&emsp;进程的目的就是担当分配系统资源(cpu时间，内存等)的实体。<br>&emsp;当一个进程创建时，几乎与父进程相同，它接收父进程地址空间的一个(逻辑)拷贝，并从进程创建系统调用的下一条指令开始执行与父进程相同的代码，尽管父子进程可以共享程序代码的页，但是他们各有独自独立的数据拷贝(堆和栈)，因此子进程对一个内存单元的修改父进程是不可见的</p>
-    
-    <a class="article-more-a" href="/2020/01/10/Linux内核-进程/#more">more >></a>
+    <a class="article-more-a" href="/2020/02/22/cpp-template-deduction/#more">more >></a>
     
     
 
@@ -674,28 +546,17 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">进程</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CPP</a>
         		</li>
       		
 		</ul>
 	</div>
 
     
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Linux//" class="article-tag-list-link color1">Linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
 
     
     <p class="article-more-link">
-      <a class="article-more-a" href="/2020/01/10/Linux内核-进程/">展开全文 >></a>
+      <a class="article-more-a" href="/2020/02/22/cpp-template-deduction/">展开全文 >></a>
     </p>
     
 
@@ -725,7 +586,7 @@
 
 
   
-    <article id="post-golang学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-leetcode-median-of-two-sorted-arrays" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -733,7 +594,7 @@
   
     <h1 itemprop="name">
 	
-	  <a class="article-title" href="/2019/12/30/golang学习/" target="_blank">Go指南学习</a>
+	  <a class="article-title" href="/2020/02/12/leetcode-median-of-two-sorted-arrays/" target="_blank">寻找两个有序数组的中位数</a>
   
     </h1>
   
@@ -741,8 +602,8 @@
 
   
   
-<a href="/2019/12/30/golang学习/" class="archive-article-date">
-        <time datetime="2019-12-30T14:22:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-30</time>
+<a href="/2020/02/12/leetcode-median-of-two-sorted-arrays/" class="archive-article-date">
+        <time datetime="2020-02-12T15:03:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-12</time>
 </a>
 
   
@@ -754,12 +615,15 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">add</span><span class="params">(x <span class="keyword">int</span>, y <span class="keyword">int</span>)</span> <span class="title">int</span></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> x + y</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>当两个或多个连续的参数是同一类型，则除了最后一个类型之外，其他都可以忽略</p>
-<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x <span class="keyword">int</span>, y <span class="keyword">int</span></span><br><span class="line"><span class="comment">//缩写为</span></span><br><span class="line">x, y <span class="keyword">int</span></span><br></pre></td></tr></table></figure>
+    <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定两个大小为 m 和 n 的有序数组 nums1 和 nums2。</p>
+<p>请你找出这两个有序数组的中位数，并且要求算法的时间复杂度为 O(log(m + n))。</p>
+<p>你可以假设 nums1 和 nums2 不会同时为空。</p>
+<p>###示例一<br>  nums1 = [1, 3]<br>  nums2 = [2]</p>
+<p>  则中位数是 2.0</p>
+<p>###示例二<br>  nums1 = [1, 2]<br>  nums2 = [3, 4]</p>
+<p>  则中位数是 (2 + 3)/2 = 2.5</p>
     
-    <a class="article-more-a" href="/2019/12/30/golang学习/#more">more >></a>
+    <a class="article-more-a" href="/2020/02/12/leetcode-median-of-two-sorted-arrays/#more">more >></a>
     
     
 
@@ -771,22 +635,22 @@
   <div class="article-info article-info-index">
     
     
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/golang//" class="article-tag-list-link color3">-golang</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">LeetCode</a>
         		</li>
       		
 		</ul>
 	</div>
 
+    
 
     
     <p class="article-more-link">
-      <a class="article-more-a" href="/2019/12/30/golang学习/">展开全文 >></a>
+      <a class="article-more-a" href="/2020/02/12/leetcode-median-of-two-sorted-arrays/">展开全文 >></a>
     </p>
     
 
@@ -816,7 +680,7 @@
 
 
   
-    <article id="post-Dockerfile" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-kubernetes-object" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -824,7 +688,7 @@
   
     <h1 itemprop="name">
 	
-	  <a class="article-title" href="/2019/12/26/Dockerfile/" target="_blank">Dockerfile</a>
+	  <a class="article-title" href="/2020/02/07/kubernetes-object/" target="_blank">Kubernetes 中的对象</a>
   
     </h1>
   
@@ -832,8 +696,8 @@
 
   
   
-<a href="/2019/12/26/Dockerfile/" class="archive-article-date">
-        <time datetime="2019-12-26T01:20:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-26</time>
+<a href="/2020/02/07/kubernetes-object/" class="archive-article-date">
+        <time datetime="2020-02-07T08:33:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-07</time>
 </a>
 
   
@@ -845,14 +709,185 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h2 id="Dockerfile"><a href="#Dockerfile" class="headerlink" title="Dockerfile"></a>Dockerfile</h2><p>虽然我们可以通过docker commit命令来手动创建镜像，但是通过Dockerfile文件，可以帮助我们自动创建镜像，并且能够自定义创建过程。本质上，Dockerfile就是由一系列命令和参数构成的脚本，这些命令应用于基础镜像并最终创建一个新的镜像。它简化了从头到尾的构建流程并极大的简化了部署工作。使用dockerfile构建镜像有以下好处：</p>
-<ul>
-<li>像编程一样构建镜像，支持分层构建及缓存</li>
-<li>可以快熟而精确地重新创建镜像以便维护和升级</li>
-<li>便于持续集成</li>
-<li>可以在任何地方快速构建镜像</li></ul>
+    <p>Kubernetes 的对象其实就是系统中持久化的实体，Kubernetes 用这些实体来表示集群中的状态，它们描述了集群中运行的容器化应用以及这些对象占用的资源和行为。<br><img src="/2020/02/07/kubernetes-object/2018-12-09-kubernetes-object.png" alt><br>不过当我们想要了解 Kubernetes 的实现原理时，绕不开的其实就是 Kubernetes 中的对象，而在 Kubernetes 中，规格（Spec）和状态（Status）是用于描述 Kubernetes 对象的两个最重要的嵌套对象，在这篇文章中会重点介绍对象的规格和状态的使用方式和实现原理。</p>
     
-    <a class="article-more-a" href="/2019/12/26/Dockerfile/#more">more >></a>
+    <a class="article-more-a" href="/2020/02/07/kubernetes-object/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Kuberentes</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/02/07/kubernetes-object/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-kubernetes" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/02/07/kubernetes/" target="_blank">Kubernetes 的架构设计与实现原理</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/02/07/kubernetes/" class="archive-article-date">
+        <time datetime="2020-02-07T07:34:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-07</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>Kubernetes 基本上是这两年最热门、最被人熟知的技术了，它为软件工程师提供了强大的容器编排能力，模糊了开发和运维之间的边界，让我们开发、管理和维护一个大型的分布式系统和项目变得更加容易。<br><img src="/2020/02/07/kubernetes/2018-11-25-kubernetes-banner.png" alt></p>
+    
+    <a class="article-more-a" href="/2020/02/07/kubernetes/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Kubernetes</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/02/07/kubernetes/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-docker" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/02/06/docker/" target="_blank">Docker 核心技术与实现原理</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/02/06/docker/" class="archive-article-date">
+        <time datetime="2020-02-06T05:55:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-06</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>Docker 的出现一定是因为目前的后端在开发和运维阶段确实需要一种虚拟化技术解决开发环境和生产环境环境一致的问题，通过 Docker 我们可以将程序运行的环境也纳入到版本控制中，排除因为环境造成不同运行结果的可能。但是上述需求虽然推动了虚拟化技术的产生，但是如果没有合适的底层技术支撑，那么我们仍然得不到一个完美的产品。本文剩下的内容会介绍几种 Docker 使用的核心技术，如果我们了解它们的使用方法和原理，就能清楚 Docker 的实现原理。</p>
+    
+    <a class="article-more-a" href="/2020/02/06/docker/#more">more >></a>
     
     
 
@@ -879,7 +914,7 @@
 
     
     <p class="article-more-link">
-      <a class="article-more-a" href="/2019/12/26/Dockerfile/">展开全文 >></a>
+      <a class="article-more-a" href="/2020/02/06/docker/">展开全文 >></a>
     </p>
     
 
@@ -909,7 +944,7 @@
 
 
   
-    <article id="post-Linux内核内存管理算法Buddy和Slab" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-sql-index" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -917,7 +952,7 @@
   
     <h1 itemprop="name">
 	
-	  <a class="article-title" href="/2019/12/25/Linux内核内存管理算法Buddy和Slab/" target="_blank">Linux内核内存管理算法Buddy和Slab</a>
+	  <a class="article-title" href="/2020/02/05/sql-index/" target="_blank">MySQL索引设计</a>
   
     </h1>
   
@@ -925,8 +960,8 @@
 
   
   
-<a href="/2019/12/25/Linux内核内存管理算法Buddy和Slab/" class="archive-article-date">
-        <time datetime="2019-12-25T08:48:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-25</time>
+<a href="/2020/02/05/sql-index/" class="archive-article-date">
+        <time datetime="2020-02-05T05:36:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-05</time>
 </a>
 
   
@@ -938,9 +973,11 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h2 id="Buddy分配算法"><a href="#Buddy分配算法" class="headerlink" title="Buddy分配算法"></a>Buddy分配算法</h2><p><img src="/2019/12/25/Linux内核内存管理算法Buddy和Slab/1.jpg" alt><br>假设这是一段连续的页框，阴影部分表示已经被使用的页框，现在需要申请一个连续的5个页框。这个时候，在这段内存上不能找到连续的5个空闲的页框，就会去另一段内存上去寻找5个连续的页框，这样子，久而久之就形成了页框的浪费。为了避免出现这种情况，Linux内核中引入了伙伴系统算法(Buddy system)。把所有的空闲页框分组为11个块链表，每个块链表分别包含大小为1，2，4，8，16，32，64，128，256，512和1024个连续页框的页框块。最大可以申请1024个连续页框，对应4MB大小的连续内存。每个页框块的第一个页框的物理地址是该块大小的整数倍，如图：<br><img src="/2019/12/25/Linux内核内存管理算法Buddy和Slab/2.jpg" alt></p>
+    <h1 id="磁盘IO"><a href="#磁盘IO" class="headerlink" title="磁盘IO"></a>磁盘IO</h1><p>一个数据库必须保证其中存储的所有数据都是可以随时读写的，同时因为 MySQL 中所有的数据其实都是以文件的形式存储在磁盘上的，而从磁盘上随机访问对应的数据非常耗时，所以数据库程序和操作系统提供了缓冲池和内存以提高数据的访问速度。</p>
+<p>除此之外，我们还需要知道数据库对数据的读取并不是以行为单位进行的，无论是读取一行还是多行，都会将该行或者多行所在的页全部加载进来，然后再读取对应的数据记录；也就是说，读取所耗费的时间与行数无关，只与页数有关。</p>
+<p>在 MySQL 中，页的大小一般为 16KB，不过也可能是 8KB、32KB 或者其他值，这跟 MySQL 的存储引擎对数据的存储方式有很大的关系，文中不会展开介绍，<strong>不过索引或行记录是否在缓存池中极大的影响了访问索引或者数据的成本</strong>。</p>
     
-    <a class="article-more-a" href="/2019/12/25/Linux内核内存管理算法Buddy和Slab/#more">more >></a>
+    <a class="article-more-a" href="/2020/02/05/sql-index/#more">more >></a>
     
     
 
@@ -952,11 +989,22 @@
   <div class="article-info article-info-index">
     
     
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
     
 
     
     <p class="article-more-link">
-      <a class="article-more-a" href="/2019/12/25/Linux内核内存管理算法Buddy和Slab/">展开全文 >></a>
+      <a class="article-more-a" href="/2020/02/05/sql-index/">展开全文 >></a>
     </p>
     
 
@@ -986,7 +1034,7 @@
 
 
   
-    <article id="post-物理地址和虚拟地址的分布" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-mysql-innodb" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -994,7 +1042,7 @@
   
     <h1 itemprop="name">
 	
-	  <a class="article-title" href="/2019/12/25/物理地址和虚拟地址的分布/" target="_blank">物理地址和虚拟地址的分布</a>
+	  <a class="article-title" href="/2020/02/04/mysql-innodb/" target="_blank">MySQL 和 Innodb</a>
   
     </h1>
   
@@ -1002,8 +1050,8 @@
 
   
   
-<a href="/2019/12/25/物理地址和虚拟地址的分布/" class="archive-article-date">
-        <time datetime="2019-12-25T07:23:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-25</time>
+<a href="/2020/02/04/mysql-innodb/" class="archive-article-date">
+        <time datetime="2020-02-04T10:50:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-04</time>
 </a>
 
   
@@ -1015,9 +1063,13 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h2 id="物理地址空间布局"><a href="#物理地址空间布局" class="headerlink" title="物理地址空间布局"></a>物理地址空间布局</h2><p>Linux系统在初始化时，会根据实际的物理内存的大小，为每个物理页面创建一个page对象，所有的page对象构成一个mem_map数组。进一步，针对不同的用途，Linux内核将所有的物理页面划分到3类内存管理区中，如图，分别为ZONE_DMA，ZONE_NORMAL，ZONE_HIGHMEM。<br><img src="/2019/12/25/物理地址和虚拟地址的分布/1.jpg" alt></p>
+    <h1 id="数据库的定义"><a href="#数据库的定义" class="headerlink" title="数据库的定义"></a>数据库的定义</h1><p>很多开发者在最开始时其实都对数据库有一个比较模糊的认识，觉得数据库就是一堆数据的集合，但是实际却比这复杂的多，数据库领域中有两个词非常容易混淆，也就是数据库和实例：</p>
+<ul>
+<li>数据库：物理操作文件系统或其他形式文件类型的集合；</li>
+<li>实例：MySQL 数据库由后台线程以及一个共享内存区组成；</li>
+</ul>
     
-    <a class="article-more-a" href="/2019/12/25/物理地址和虚拟地址的分布/#more">more >></a>
+    <a class="article-more-a" href="/2020/02/04/mysql-innodb/#more">more >></a>
     
     
 
@@ -1029,11 +1081,26 @@
   <div class="article-info article-info-index">
     
     
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Innodb</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
     
 
     
     <p class="article-more-link">
-      <a class="article-more-a" href="/2019/12/25/物理地址和虚拟地址的分布/">展开全文 >></a>
+      <a class="article-more-a" href="/2020/02/04/mysql-innodb/">展开全文 >></a>
     </p>
     
 
@@ -1065,7 +1132,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
     </nav>
   
 
@@ -1229,10 +1296,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IO</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
@@ -1242,6 +1305,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">IO</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1261,11 +1328,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+                <a href="javascript:void(0)" class="js-tag color2">Golang</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Golang</a>
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1282,6 +1349,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">动态规划</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">OpenGL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1318,10 +1389,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Kuberentes</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">OpenGL</a>
               </li>
              
               <li class="article-tag-list-item">
