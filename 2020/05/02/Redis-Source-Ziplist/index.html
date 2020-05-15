@@ -6,22 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://niconiconi233.github.io">
-  <title>Redis源码-ziplist.c | NICO</title>
+  <title>Redis中的压缩列表 | NICO</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   <meta name="description" content="ziplist是为了尽可能的节约内存而设计的特殊编码双端链表。ziplist可以存储字符串和整数值，其中整数值被保存为实际的整数，而非字符串数组。ziplist允许在两端进行push和pop操作，但是这些操作需要对整个ziplist进行内存重分配，所以实际复杂度和ziplist占用的内存大小有关。 ziplist相关的函数有： 12345678910111213unsigned char *zip">
 <meta name="keywords" content="Redis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Redis源码-ziplist.c">
+<meta property="og:title" content="Redis中的压缩列表">
 <meta property="og:url" content="https://niconiconi233.github.io/2020/05/02/Redis-Source-Ziplist/index.html">
 <meta property="og:site_name" content="NICO">
 <meta property="og:description" content="ziplist是为了尽可能的节约内存而设计的特殊编码双端链表。ziplist可以存储字符串和整数值，其中整数值被保存为实际的整数，而非字符串数组。ziplist允许在两端进行push和pop操作，但是这些操作需要对整个ziplist进行内存重分配，所以实际复杂度和ziplist占用的内存大小有关。 ziplist相关的函数有： 12345678910111213unsigned char *zip">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://niconiconi233.github.io/2020/05/02/Redis-Source-Ziplist/liststruct.PNG">
-<meta property="og:updated_time" content="2020-05-02T13:09:53.895Z">
+<meta property="og:updated_time" content="2020-05-12T15:26:46.553Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Redis源码-ziplist.c">
+<meta name="twitter:title" content="Redis中的压缩列表">
 <meta name="twitter:description" content="ziplist是为了尽可能的节约内存而设计的特殊编码双端链表。ziplist可以存储字符串和整数值，其中整数值被保存为实际的整数，而非字符串数组。ziplist允许在两端进行push和pop操作，但是这些操作需要对整个ziplist进行内存重分配，所以实际复杂度和ziplist占用的内存大小有关。 ziplist相关的函数有： 12345678910111213unsigned char *zip">
 <meta name="twitter:image" content="https://niconiconi233.github.io/2020/05/02/Redis-Source-Ziplist/liststruct.PNG">
   
@@ -205,7 +205,7 @@
   
   
     <h1 class="article-title" itemprop="name">
-      Redis源码-ziplist.c
+      Redis中的压缩列表
     </h1>
   
 
@@ -364,7 +364,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="https://niconiconi233.github.io/2020/05/02/Redis-Source-Ziplist/" title="Redis源码-ziplist.c" target="_blank">https://niconiconi233.github.io/2020/05/02/Redis-Source-Ziplist/</a>
+          <a href="https://niconiconi233.github.io/2020/05/02/Redis-Source-Ziplist/" title="Redis中的压缩列表" target="_blank">https://niconiconi233.github.io/2020/05/02/Redis-Source-Ziplist/</a>
         </li>
         <li>
           <strong>版权声明： </strong>
@@ -671,6 +671,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">IO</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
@@ -680,10 +684,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IO</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -703,15 +703,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Golang</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">-TCP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Golang</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -755,11 +755,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color1">Kubernetes</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Kubernetes</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
