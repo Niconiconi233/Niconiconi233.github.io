@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://niconiconi233.github.io/2020/05/12/Redis-Source-Object/set_ziplist.PNG">
 <meta property="og:image" content="https://niconiconi233.github.io/2020/05/12/Redis-Source-Object/sset_list.PNG">
 <meta property="og:image" content="https://niconiconi233.github.io/2020/05/12/Redis-Source-Object/share_object.PNG">
-<meta property="og:updated_time" content="2020-05-12T15:26:05.887Z">
+<meta property="og:updated_time" content="2020-05-16T05:45:36.282Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis中的对象">
 <meta name="twitter:description" content="Redis用到了诸如：简单动态字符串，双端链表，字典，压缩列表，整数集合等等。Redis并没有直接使用这些数据结构来实现键值对数据库，而是基于这些数据结构创建了一个对象系统，这个系统包含字符串对象，列表对象，哈希对象，集合对象和有序集合对象这五种类型的对象。每种对象都用到了至少一种我们前面所介绍的数据结构。除此之外，Redis的对象系统还实现了基于引用计数的内存回收机制，当程序不再使用某个对象的时">
@@ -622,7 +622,50 @@
 <li>集合对象保存的所有元素都是整数值</li>
 <li>集合对象保存的元素数量不超过512个。不能满足的需要使用hashtable编码</li>
 </ul>
-<h3 id="集合命令的实现"><a href="#集合命令的实现" class="headerlink" title="集合命令的实现"></a>集合命令的实现</h3><p>|命令|intset编码的实现方法|hashtable编码的实现方法|<br>|SADD|调用intsetAdd函数，将所有新元素添加进整数集合里面|调用dictAdd,以新元素为键，NULL为值，将键值对添加到字典里面|<br>|SCARD|调用intsetLen函数，返回整数集合所包含的元素数量，这个数量就是集合对象所包含的元素数量|调用dictSize函数，返回字典所包含的键值对数量，这个数量就是集合对象所包含的元素数量|<br>|SISMEMBER|调用intsetFind函数，在整数集合中查找给定的元素|调用dictFind函数，在字典的键中查找给定的元素|<br>|SMEMBERS|变量整个整数集合，使用intsetGet函数返回集合元素|遍历整个字典，使用dictGetKey函数返回字典的键作为集合元素|<br>|SRANDMEMBER|调用intsetRandom函数，从整数集合中随机返回一个元素|调用dictGetRandomKey函数，从字典中随机返回一个字典值|<br>|SPOP|调用intsetRandom函数，随机取出一个元素，在返回后删除该元素|调用dictGetRandomKey函数，从字典中随机取出一个字典键，返回该值后删除键值对|<br>|SREM|调用intsetRemove函数，从整数集合中删除给定的元素|调用dictDelete函数，从字典中删除所有键为给定元素的键值对|</p>
+<h3 id="集合命令的实现"><a href="#集合命令的实现" class="headerlink" title="集合命令的实现"></a>集合命令的实现</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>intset编码的实现方法</th>
+<th>hashtable编码的实现方法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SADD</td>
+<td>调用intsetAdd函数，将所有新元素添加进整数集合里面</td>
+<td>调用dictAdd,以新元素为键，NULL为值，将键值对添加到字典里面</td>
+</tr>
+<tr>
+<td>SCARD</td>
+<td>调用intsetLen函数，返回整数集合所包含的元素数量，这个数量就是集合对象所包含的元素数量</td>
+<td>调用dictSize函数，返回字典所包含的键值对数量，这个数量就是集合对象所包含的元素数量</td>
+</tr>
+<tr>
+<td>SISMEMBER</td>
+<td>调用intsetFind函数，在整数集合中查找给定的元素</td>
+<td>调用dictFind函数，在字典的键中查找给定的元素</td>
+</tr>
+<tr>
+<td>SMEMBERS</td>
+<td>变量整个整数集合，使用intsetGet函数返回集合元素</td>
+<td>遍历整个字典，使用dictGetKey函数返回字典的键作为集合元素</td>
+</tr>
+<tr>
+<td>SRANDMEMBER</td>
+<td>调用intsetRandom函数，从整数集合中随机返回一个元素</td>
+<td>调用dictGetRandomKey函数，从字典中随机返回一个字典值</td>
+</tr>
+<tr>
+<td>SPOP</td>
+<td>调用intsetRandom函数，随机取出一个元素，在返回后删除该元素</td>
+<td>调用dictGetRandomKey函数，从字典中随机取出一个字典键，返回该值后删除键值对</td>
+</tr>
+<tr>
+<td>SREM</td>
+<td>调用intsetRemove函数，从整数集合中删除给定的元素</td>
+<td>调用dictDelete函数，从字典中删除所有键为给定元素的键值对</td>
+</tr>
+</tbody></table>
 <h2 id="有序集合对象"><a href="#有序集合对象" class="headerlink" title="有序集合对象"></a>有序集合对象</h2><p>有序集合的编码可以是ziplist或者skiplist<br>ziplist编码的压缩列表对象使用压缩列表作为底层实现，每个集合元素使用两个紧挨在一起的压缩列表节点来保存，第一个节点保存元素的成员，第二个元素则保存元素的分值。<br>压缩列表内的集合按分值从小到大进行排序，分值较小的元素被放置在靠近表头的方向，而分值较大的元素则被防止在靠近表尾的方向。<br><img src="/2020/05/12/Redis-Source-Object/%E6%8D%95%E8%8E%B7.PNG" alt><br><img src="/2020/05/12/Redis-Source-Object/set_ziplist.PNG" alt><br>skiplist编码的有序集合对象使用zset结构作为底层实现，一个zset结构同时包含一个字典和跳跃表</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">zset</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  zskiplist* zsl;</span><br><span class="line">  dict* dict;</span><br><span class="line">&#125; zset;</span><br></pre></td></tr></table></figure>
 
@@ -686,7 +729,7 @@
 <td>支持从字典中取出分值</td>
 </tr>
 </tbody></table>
-<h2 id="类型检查和命令多态"><a href="#类型检查和命令多态" class="headerlink" title="类型检查和命令多态"></a>类型检查和命令多态</h2><p>Redis中用于操作键的命令基本上可以分为两种类型。<br>其中一种命令可以对任何类型的键执行， 比如说 DEL 命令、丘’l{PJRE 命令、 RENAME 命令、 TYPE命令、 OBJECT命令等。</p>
+<h2 id="类型检查和命令多态"><a href="#类型检查和命令多态" class="headerlink" title="类型检查和命令多态"></a>类型检查和命令多态</h2><p>Redis中用于操作键的命令基本上可以分为两种类型。<br>其中一种命令可以对任何类型的键执行， 比如说 DEL 命令、 RENAME 命令、 TYPE命令、 OBJECT命令等。</p>
 <p>而另一种命令只能对特定类型的键执行， 比如说：</p>
 <ul>
 <li>SET、 GET、 APPEND、 STRLEN等命令只能对字符串键执行；</li>
@@ -834,6 +877,15 @@
 
 
 <nav id="article-nav">
+  
+    <a href="/2020/05/15/Redis-Source-DB/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Redis中的数据库
+        
+      </div>
+    </a>
   
   
     <a href="/2020/05/11/LearnOpenGL-25/" id="article-nav-older" class="article-nav-link-wrap">
@@ -1068,19 +1120,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">-TCP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Golang</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
+                <a href="javascript:void(0)" class="js-tag color5">-TCP</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">CPP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1116,11 +1168,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Kubernetes</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color1">Kubernetes</a>
               </li>
              
               <li class="article-tag-list-item">
