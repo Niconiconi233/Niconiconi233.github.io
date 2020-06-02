@@ -22,7 +22,7 @@
 <meta property="og:image" content="https://niconiconi233.github.io/2020/05/19/Redis-Source-AOF/AOF_exp.PNG">
 <meta property="og:image" content="https://niconiconi233.github.io/2020/05/19/Redis-Source-AOF/AOF_exp1.PNG">
 <meta property="og:image" content="https://niconiconi233.github.io/2020/05/19/Redis-Source-AOF/AOF_exp2.PNG">
-<meta property="og:updated_time" content="2020-05-19T14:49:25.853Z">
+<meta property="og:updated_time" content="2020-05-22T14:28:52.506Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AOF持久化">
 <meta name="twitter:description" content="除了RDB持久化功能之外，Redis还提供了AOF(Append only file)持久化功能，与RDB持久化通报保存数据库中的键值对来记录数据库状态不同，AOF持久化是通过保存Redis服务器所执行的写命令来记录数据库状态的例如，如果我们对空白的数据库执行以下写命令，那么数据库中将包含三个键值对： 123set msg &quot;hello&quot;sadd fruits &quot;apple&quot; &quot;banana&quot; &quot;">
@@ -234,7 +234,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">3.5k字</span>
+      <span class="post-count">3.8k字</span>
     </span>
   </span>
 
@@ -243,7 +243,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">12分</span>
+      <span class="post-count">13分</span>
     </span>
   </span>
 </div>
@@ -332,7 +332,7 @@
 <blockquote>
 <p>在实际中，为了避免在执行命令时造成客户端输入缓冲区溢出，重写程序在处理列表，哈希表，集合，有序集合这四种可能带有多个元素的键时，会先检查保护的元素数量，如果数量超过了REDIS_AOF_REWRITE_ITEMS_PER_CMD常量的值，那么重写程序将使用多条命令来记录键的值，而不单单使用一条命令。在目前的版本中,REDIS_AOF_REWRITE_ITEMS_PER_CMD的值为64，如果一个集合元素键超过了64，那么重写程序会用多条命令来记录这个集合，并且每条命令设置的元素数量也为64个。</p>
 </blockquote>
-<h3 id="AOF后天重写"><a href="#AOF后天重写" class="headerlink" title="AOF后天重写"></a>AOF后天重写</h3><p>AOF重写程序aof_rewrite函数可以很好的完成创建一个新AOF文件，但是因为这个函数会进行大量的写入操作，所以调用这个函数的线程会被长时间阻塞，因为Redis服务器使用单个线程来处理命令请求，如果有服务器直接调用aof_rewrite函数，那么在重写AOF文件期间，服务器将无法处理客户端发来的命令请求。</p>
+<h3 id="AOF后台重写"><a href="#AOF后台重写" class="headerlink" title="AOF后台重写"></a>AOF后台重写</h3><p>AOF重写程序aof_rewrite函数可以很好的完成创建一个新AOF文件，但是因为这个函数会进行大量的写入操作，所以调用这个函数的线程会被长时间阻塞，因为Redis服务器使用单个线程来处理命令请求，如果有服务器直接调用aof_rewrite函数，那么在重写AOF文件期间，服务器将无法处理客户端发来的命令请求。</p>
 <p>因此，Redis将AOF重写程序放到子进程里执行，这样可以达到两个目的：</p>
 <ol>
 <li>子进程在进行AOF重写期间，父进程可以继续处理请求</li>
@@ -356,6 +356,19 @@
 <li>对新的AOF文件进行改名，原子地覆盖现有的AOF文件，完成新旧文件的替换</li>
 </ol>
 <p>在整个AOF后台重写过程中，只有信号处理函数执行时会对父进程造成阻塞，其他时候，AOF后台重写都不会阻塞父进程，将AOF重写对服务器性能造成的影响降到了最低。</p>
+<h2 id="触发AOF后台重写的条件"><a href="#触发AOF后台重写的条件" class="headerlink" title="触发AOF后台重写的条件"></a>触发AOF后台重写的条件</h2><p>AOF重写可以由用户通过调用BGREWRITEAOF手动触发。<br>服务器在AOF功能开启的情况下，会维持以下三个变量：</p>
+<ul>
+<li>记录当前AOF文件大小的变量aof_current_size。</li>
+<li>记录最后一个AOF重写之后，AOF文件大小的变量aof_rewrite_base_size。</li>
+<li>增长百分比变量aof_rewrite_perc。</li>
+</ul>
+<p>每次当serverCron函数执行时，它会检测以下条件是否全部满足，如果全部满足的话，就会触发自动的AOF重写操作：</p>
+<ul>
+<li>没有BGSAVE命令(RDB持久化)/AOF持久化在执行。</li>
+<li>没有BGREWRITEAOF在运行。</li>
+<li>当前AOF文件大小大于server.aof_rewrite_min_size(1MB)，或者在redis.conf配置了auto-aof-rewrite-min-size大小。</li>
+<li>当前AOF文件大小和最后一次重写后的大小之间的比率等于或者等于指定的增长百分比(在配置文件设置了auto-aof-rewrite-percentage参数，不设置默认为100%)<br>如果前面上条件都满足，并且当前AOF文件大小比最后一个AOF重写时的大小要大于指定的百分比，那么触发自动AOF重写。</li>
+</ul>
 
     
 
@@ -470,6 +483,15 @@
 
 
 <nav id="article-nav">
+  
+    <a href="/2020/05/20/Redis-Source-Event/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Redis中的事件
+        
+      </div>
+    </a>
   
   
     <a href="/2020/05/18/LearnOpenGL-26/" id="article-nav-older" class="article-nav-link-wrap">
@@ -700,11 +722,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+                <a href="javascript:void(0)" class="js-tag color2">Golang</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Golang</a>
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -712,11 +734,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CPP</a>
+                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
+                <a href="javascript:void(0)" class="js-tag color4">CPP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -725,6 +747,14 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">OpenGL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Nginx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Keepalived</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -756,11 +786,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Kubernetes</a>
+                <a href="javascript:void(0)" class="js-tag color1">Kuberentes</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Kuberentes</a>
+                <a href="javascript:void(0)" class="js-tag color1">Kubernetes</a>
               </li>
              
               <li class="article-tag-list-item">
