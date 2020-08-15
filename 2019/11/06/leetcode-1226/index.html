@@ -269,7 +269,7 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DiningPhilosophers</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    DiningPhilosophers() &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">wantsToEat</span><span class="params">(<span class="keyword">int</span> philosopher,</span></span></span><br><span class="line"><span class="function"><span class="params">                    function&lt;<span class="keyword">void</span>()&gt; pickLeftFork,</span></span></span><br><span class="line"><span class="function"><span class="params">                    function&lt;<span class="keyword">void</span>()&gt; pickRightFork,</span></span></span><br><span class="line"><span class="function"><span class="params">                    function&lt;<span class="keyword">void</span>()&gt; eat,</span></span></span><br><span class="line"><span class="function"><span class="params">                    function&lt;<span class="keyword">void</span>()&gt; putLeftFork,</span></span></span><br><span class="line"><span class="function"><span class="params">                    function&lt;<span class="keyword">void</span>()&gt; putRightFork)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> l = philosopher % <span class="number">5</span>;</span><br><span class="line">        <span class="keyword">int</span> r = (philosopher + <span class="number">1</span> ) % <span class="number">5</span>;</span><br><span class="line">        lock.lock();<span class="comment">//保护共享变量</span></span><br><span class="line">        mutexs[l].lock();</span><br><span class="line">        mutexs[r].lock();</span><br><span class="line">        pickLeftFork();</span><br><span class="line">        pickRightFork();</span><br><span class="line">        lock.unlock();</span><br><span class="line">        eat();</span><br><span class="line">        putLeftFork();</span><br><span class="line">        putRightFork();</span><br><span class="line">        mutexs[l].unlock();</span><br><span class="line">        mutexs[r].unlock();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">    mutex mutexs[<span class="number">5</span>];</span><br><span class="line">    mutex lock;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 <p>策略二:限制就餐人数</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//信号量</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">sem</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    sem(<span class="keyword">int</span> n):cnt&#123;n&#125;&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">wait</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        unique_lock&lt;mutex&gt; lock(mutex_);</span><br><span class="line">        <span class="keyword">while</span>(cnt &lt;= <span class="number">0</span>)</span><br><span class="line">            cond.wait(lock);</span><br><span class="line">        --cnt;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">release</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        unique_lock&lt;mutex&gt; lock(mutex_);</span><br><span class="line">        ++cnt;</span><br><span class="line">        cond.notify_one();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">    mutex mutex_;</span><br><span class="line">    condition_variable cond;</span><br><span class="line">    <span class="keyword">int</span> cnt;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DiningPhilosophers</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    DiningPhilosophers():s(<span class="number">4</span>) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">wantsToEat</span><span class="params">(<span class="keyword">int</span> philosopher,</span></span></span><br><span class="line"><span class="function"><span class="params">                    function&lt;<span class="keyword">void</span>()&gt; pickLeftFork,</span></span></span><br><span class="line"><span class="function"><span class="params">                    function&lt;<span class="keyword">void</span>()&gt; pickRightFork,</span></span></span><br><span class="line"><span class="function"><span class="params">                    function&lt;<span class="keyword">void</span>()&gt; eat,</span></span></span><br><span class="line"><span class="function"><span class="params">                    function&lt;<span class="keyword">void</span>()&gt; putLeftFork,</span></span></span><br><span class="line"><span class="function"><span class="params">                    function&lt;<span class="keyword">void</span>()&gt; putRightFork)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> l = philosopher % <span class="number">5</span>;</span><br><span class="line">        <span class="keyword">int</span> r = (philosopher + <span class="number">1</span>) % <span class="number">5</span>;</span><br><span class="line">        s.wait();</span><br><span class="line">        mutexs[l].lock();</span><br><span class="line">        mutexs[r].lock();</span><br><span class="line">        pickLeftFork();</span><br><span class="line">        pickRightFork();</span><br><span class="line">        eat();</span><br><span class="line">        putLeftFork();</span><br><span class="line">        putRightFork();</span><br><span class="line">        mutexs[l].unlock();</span><br><span class="line">        mutexs[r].unlock();</span><br><span class="line">        s.release();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">    mutex mutexs[<span class="number">5</span>];</span><br><span class="line">    sem s;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//信号量</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">sem</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    sem(<span class="keyword">int</span> n):cnt&#123;n&#125;&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">wait</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="function">unique_lock&lt;mutex&gt; <span class="title">lock</span><span class="params">(mutex_)</span></span>;</span><br><span class="line">        <span class="keyword">while</span>(cnt &lt;= <span class="number">0</span>)</span><br><span class="line">            cond.wait(lock);</span><br><span class="line">        --cnt;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">release</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="function">unique_lock&lt;mutex&gt; <span class="title">lock</span><span class="params">(mutex_)</span></span>;</span><br><span class="line">        ++cnt;</span><br><span class="line">        cond.notify_one();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">    mutex mutex_;</span><br><span class="line">    condition_variable cond;</span><br><span class="line">    <span class="keyword">int</span> cnt;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DiningPhilosophers</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    DiningPhilosophers():s(<span class="number">4</span>) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">wantsToEat</span><span class="params">(<span class="keyword">int</span> philosopher,</span></span></span><br><span class="line"><span class="function"><span class="params">                    function&lt;<span class="keyword">void</span>()&gt; pickLeftFork,</span></span></span><br><span class="line"><span class="function"><span class="params">                    function&lt;<span class="keyword">void</span>()&gt; pickRightFork,</span></span></span><br><span class="line"><span class="function"><span class="params">                    function&lt;<span class="keyword">void</span>()&gt; eat,</span></span></span><br><span class="line"><span class="function"><span class="params">                    function&lt;<span class="keyword">void</span>()&gt; putLeftFork,</span></span></span><br><span class="line"><span class="function"><span class="params">                    function&lt;<span class="keyword">void</span>()&gt; putRightFork)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> l = philosopher % <span class="number">5</span>;</span><br><span class="line">        <span class="keyword">int</span> r = (philosopher + <span class="number">1</span>) % <span class="number">5</span>;</span><br><span class="line">        s.wait();</span><br><span class="line">        mutexs[l].lock();</span><br><span class="line">        mutexs[r].lock();</span><br><span class="line">        pickLeftFork();</span><br><span class="line">        pickRightFork();</span><br><span class="line">        eat();</span><br><span class="line">        putLeftFork();</span><br><span class="line">        putRightFork();</span><br><span class="line">        mutexs[l].unlock();</span><br><span class="line">        mutexs[r].unlock();</span><br><span class="line">        s.release();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">    mutex mutexs[<span class="number">5</span>];</span><br><span class="line">    sem s;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 
     
@@ -596,11 +596,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
+                <a href="javascript:void(0)" class="js-tag color3">IO</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -608,7 +604,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IO</a>
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -628,11 +628,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Golang</a>
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+                <a href="javascript:void(0)" class="js-tag color2">Golang</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -640,11 +640,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
+                <a href="javascript:void(0)" class="js-tag color4">CPP</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CPP</a>
+                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -664,11 +664,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Shiro</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color1">Shiro</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -696,11 +696,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Kubernetes</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color1">Kubernetes</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -724,11 +724,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">SpringBoot</a>
+                <a href="javascript:void(0)" class="js-tag color4">TCP</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">TCP</a>
+                <a href="javascript:void(0)" class="js-tag color1">SpringBoot</a>
               </li>
             
             <div class="clearfix"></div>

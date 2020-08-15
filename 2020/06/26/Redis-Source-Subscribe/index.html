@@ -279,7 +279,7 @@
 <li>如果频道还未有任何订阅者，那么它必然不存在于pubsub_channels字典，程序首先要在pubsub channels字典中为频道创建一个键，并将这个键的值设置为空链表，然后再将客户端添加到链表，成为链表的第一个元素。</li>
 </ul>
 <p>SUBSCRIBE命令的实现可以用以下伪代码来描述：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">def subscribe(*all_input_channels):</span><br><span class="line">  <span class="keyword">for</span> channel in all_input_channels:</span><br><span class="line">    <span class="keyword">if</span> channel <span class="keyword">not</span> in server.pubsub_channels:</span><br><span class="line">      server.pubsub_channels[channel] = []</span><br><span class="line"></span><br><span class="line">    server.pubsub_channels[channel].append(client)</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">def <span class="title">subscribe</span><span class="params">(*all_input_channels)</span>:</span></span><br><span class="line"><span class="function">  <span class="keyword">for</span> channel in all_input_channels:</span></span><br><span class="line">    if channel not in server.pubsub_channels:</span><br><span class="line">      server.pubsub_channels[channel] = []</span><br><span class="line"></span><br><span class="line">    server.pubsub_channels[channel].append(client)</span><br></pre></td></tr></table></figure>
 
 <h3 id="退订频道"><a href="#退订频道" class="headerlink" title="退订频道"></a>退订频道</h3><p>UBSUBBSCRIBE命令的行为和SUBSCRIBE命令的行为正好相反，当一个客户端退订某个或某些频道的时候，服务器将从pubsub_channels中解除客户端与被退订频道之间的关联：</p>
 <ul>
@@ -287,7 +287,7 @@
 <li>如果删除退订客户端之后，频道的订阅者链表变成了空链表，那么说明这个频道已经没有任何订阅者了，程序将从pubsub_channels字典中删除频道对应的键。</li>
 </ul>
 <p>UNSUBSCRIBE命令的实现可以用以下伪代码来描述：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def unsubscribe(*all_input_channels):</span><br><span class="line">  <span class="keyword">for</span> channel in all_input_channels:</span><br><span class="line">    server.pubsub_channels[channel].remove(client)</span><br><span class="line">    <span class="function"><span class="keyword">if</span> <span class="title">len</span><span class="params">(server.pubsub_channels[channel])</span> </span>== <span class="number">0</span>:</span><br><span class="line">      server.pubsub_channels.remove(channel)</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">def <span class="title">unsubscribe</span><span class="params">(*all_input_channels)</span>:</span></span><br><span class="line"><span class="function">  <span class="keyword">for</span> channel in all_input_channels:</span></span><br><span class="line">    server.pubsub_channels[channel].remove(client)</span><br><span class="line">    <span class="function"><span class="keyword">if</span> <span class="title">len</span><span class="params">(server.pubsub_channels[channel])</span> </span>== <span class="number">0</span>:</span><br><span class="line">      server.pubsub_channels.remove(channel)</span><br></pre></td></tr></table></figure>
 
 <h2 id="模式的订阅与退订"><a href="#模式的订阅与退订" class="headerlink" title="模式的订阅与退订"></a>模式的订阅与退订</h2><p>服务器将所有模式的订阅关系都保存在服务器状态的pubsub_patterns属性里面：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">redisServer</span>&#123;</span></span><br><span class="line">  <span class="comment">//保存所有模式订阅关系</span></span><br><span class="line">  <span class="built_in">list</span>* pubsub_patterns;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
@@ -302,11 +302,11 @@
 <li>将pubsubPattern结构添加到pubsub_patterns链表的表尾。</li>
 </ol>
 <p>PSUBSCRIBE命令的实现原理可以用以下伪代码来描述:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def psubscribe(*all_input_patterns):</span><br><span class="line">  <span class="keyword">for</span> pattern in all_input_patterns:</span><br><span class="line">    pubsubPattern = create_new_pubsubPattern()</span><br><span class="line">    pubsubPattern.client = client</span><br><span class="line">    pubsubPattern.pattern = pattern</span><br><span class="line"></span><br><span class="line">    server.pubsub_patterns.append(pubsubPattern)</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">def <span class="title">psubscribe</span><span class="params">(*all_input_patterns)</span>:</span></span><br><span class="line"><span class="function">  <span class="keyword">for</span> pattern in all_input_patterns:</span></span><br><span class="line"><span class="function">    pubsubPattern </span>= create_new_pubsubPattern()</span><br><span class="line">    pubsubPattern.client = client</span><br><span class="line">    pubsubPattern.pattern = pattern</span><br><span class="line"></span><br><span class="line">    server.pubsub_patterns.append(pubsubPattern)</span><br></pre></td></tr></table></figure>
 
 <h3 id="退订模式"><a href="#退订模式" class="headerlink" title="退订模式"></a>退订模式</h3><p>模式的退订命令PUNSUBSCRIBE是PSUBSCRJBE命令的反操作：当一个客户端退订某个或某些模式的时候，服务器将在pubsub_patterns链表中查找并删除那些pattern属性为被退订模式，并且client属性为执行退订命令的客户端的pubsubPattern结构。</p>
 <p>PUNSUBSCRIBE命令的实现原理为：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def punsubscribe(*all_input_patterns):</span><br><span class="line">  <span class="keyword">for</span> pattern in all_input_patterns:</span><br><span class="line">    <span class="keyword">for</span> pubsubPattern in server.pubsub_patterns:</span><br><span class="line">      <span class="keyword">if</span> client == pubsubPattern.client <span class="keyword">and</span> pattern == pubsubPattern.pattern:</span><br><span class="line">        server.pubsub_patterns.remove(pubsubPattern)</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">def <span class="title">punsubscribe</span><span class="params">(*all_input_patterns)</span>:</span></span><br><span class="line"><span class="function">  <span class="keyword">for</span> pattern in all_input_patterns:</span></span><br><span class="line">    for pubsubPattern in server.pubsub_patterns:</span><br><span class="line">      <span class="keyword">if</span> client == pubsubPattern.client <span class="keyword">and</span> pattern == pubsubPattern.pattern:</span><br><span class="line">        server.pubsub_patterns.remove(pubsubPattern)</span><br></pre></td></tr></table></figure>
 
 <h2 id="发送消息"><a href="#发送消息" class="headerlink" title="发送消息"></a>发送消息</h2><p>当一个Redis客户端执行PUBLIST <channel> <message>命令将消息message发送给频道channel的时候，服务器需要执行以下两个动作：</message></channel></p>
 <ol>
@@ -315,12 +315,12 @@
 </ol>
 <h3 id="将消息发送给频道订阅者"><a href="#将消息发送给频道订阅者" class="headerlink" title="将消息发送给频道订阅者"></a>将消息发送给频道订阅者</h3><p>因为服务器状态中的pubsubchannels字典记录了所有频道的订阅关系，所以为了将消息发送给channel频道的所有订阅者，PUBLISH命令要做的就是在pubsub_channels字典里找到频道channel的订阅者名单（一个链表），然后将消息发送给名单上的所有客户端。</p>
 <p>PUBLISH命令实现的伪代码为：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def channel_publish(channel, message):</span><br><span class="line">  <span class="keyword">if</span> channel <span class="keyword">not</span> in server.pubsub_channels:</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  <span class="keyword">for</span> subscriber in server.pubsub_channels[channel]:</span><br><span class="line">    send_message(subscriber, message)</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">def <span class="title">channel_publish</span><span class="params">(channel, message)</span>:</span></span><br><span class="line">  if channel not in server.pubsub_channels:</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  <span class="keyword">for</span> subscriber in server.pubsub_channels[channel]:</span><br><span class="line">    send_message(subscriber, message)</span><br></pre></td></tr></table></figure>
 
 <h3 id="将消息发送给模式订阅者"><a href="#将消息发送给模式订阅者" class="headerlink" title="将消息发送给模式订阅者"></a>将消息发送给模式订阅者</h3><p>因为服务器状态中的pubsub_patterns链表记录了所有模式的订阅关系，所以为了将消息发送给所有与channel频道相匹配的模式的订阅者，PUBLISH命令要傲的就是遍历整个pubsub_patterns链表，查找那些与channel频道相匹配的模式，并将消息发送给订阅了这些模式的客户端。</p>
 <p>当客户端执行命令publish “news.it” “hello”,那么PUBLISH命令会首先将消息”hello”发送给”news.it”频道的所有订阅者，然后开始在pubsub_patterns链表中查找是否有被订阅的模式与”news.it”频道相匹配，结果发现”news.it”频道和客户端client-9订阅的”news.*”频道匹配，于是命令将消息”hello”发送给客户端client-9。</p>
 <p>PUBLISH命令将消息发送给模式订阅者的方法可以用以下伪代码来描述：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">def pattern_publish(channel, message):</span><br><span class="line">  <span class="keyword">for</span> pubsubPattern in server.pubsub_patterns:</span><br><span class="line">    if match(channel, pubsubPattern.pattern):</span><br><span class="line">      send_message(pubsubPattern.client, message)</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">def <span class="title">pattern_publish</span><span class="params">(channel, message)</span>:</span></span><br><span class="line">  for pubsubPattern in server.pubsub_patterns:</span><br><span class="line">    <span class="function"><span class="keyword">if</span> <span class="title">match</span><span class="params">(channel, pubsubPattern.pattern)</span>:</span></span><br><span class="line"><span class="function">      <span class="title">send_message</span><span class="params">(pubsubPattern.client, message)</span></span></span><br></pre></td></tr></table></figure>
 
 <h2 id="查看订阅消息"><a href="#查看订阅消息" class="headerlink" title="查看订阅消息"></a>查看订阅消息</h2><p>PUBSUB命令是Redis 2.8新增加的命令之一，客户端可以通过这个命令来查看频道或者模式的相关信息，比如某个频道目前有多少订阅者，又或者某个模式目前有多少订阅者，诸如此类。</p>
 <h3 id="PUBSUB-CHANNELS"><a href="#PUBSUB-CHANNELS" class="headerlink" title="PUBSUB CHANNELS"></a>PUBSUB CHANNELS</h3><p>PUBSUB CHANNELS [pattern]子命令用于返回服务器当前被订阅的频道，其中pattern参数是可选的：</p>
@@ -329,15 +329,15 @@
 <li>如果不给定pattern参数，那么命令返回服务器当前被订阅的频道中那些与pattern模式相匹配的频道。</li>
 </ul>
 <p>这个子命令是通过遍历服务器pubsub_channels字典的所有键，然后记录并返回所有符合条件的频道来实现的</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">def pubsub_channels(pattern=None):</span><br><span class="line">  channel_list=[]</span><br><span class="line">  <span class="keyword">for</span> channel in server.pubsub_channels:</span><br><span class="line">    <span class="keyword">if</span>(pattern is None) <span class="keyword">or</span> match(channel, pattern):</span><br><span class="line">      channel_list.append(channel)</span><br><span class="line">  <span class="keyword">return</span> channel_list</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">def <span class="title">pubsub_channels</span><span class="params">(pattern=None)</span>:</span></span><br><span class="line"><span class="function">  channel_list</span>=[]</span><br><span class="line">  <span class="keyword">for</span> channel in server.pubsub_channels:</span><br><span class="line">    <span class="keyword">if</span>(pattern is None) <span class="function"><span class="keyword">or</span> <span class="title">match</span><span class="params">(channel, pattern)</span>:</span></span><br><span class="line">      channel_list.append(channel)</span><br><span class="line">  <span class="keyword">return</span> channel_list</span><br></pre></td></tr></table></figure>
 
 <h3 id="PUBSUB-NUMSUB"><a href="#PUBSUB-NUMSUB" class="headerlink" title="PUBSUB NUMSUB"></a>PUBSUB NUMSUB</h3><p>PUBSUB NUMSUB [channel-1 channel-2 … channel-n]子命令接受任意多个频道作为输入参数，并返回这些频道的订阅者数量。</p>
 <p>这个子命令是通过在pubsub_channels字典中找到对应的订阅者链表，然后返回订阅者链表的长度来实现的</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">def pubsub_numsub(*all_input_channels):</span><br><span class="line">  #遍历输入的所有频道</span><br><span class="line">  <span class="keyword">for</span> channel in all_input_channels:</span><br><span class="line">    #如果pubsub_channel字典中没有channel这个键，说明channel频道没有任何订阅者</span><br><span class="line">    <span class="keyword">if</span> channel <span class="keyword">not</span> in server.pubsub_channels:</span><br><span class="line">      reply_channel_name(channel)</span><br><span class="line">      reply_subscribe_count(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">      reply_channel_name(channel)</span><br><span class="line">      replysubscribe_count(len(server.pubsub_channels[channel]))_</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">def <span class="title">pubsub_numsub</span><span class="params">(*all_input_channels)</span>:</span></span><br><span class="line">  #遍历输入的所有频道</span><br><span class="line">  <span class="keyword">for</span> channel in all_input_channels:</span><br><span class="line">    #如果pubsub_channel字典中没有channel这个键，说明channel频道没有任何订阅者</span><br><span class="line">    <span class="keyword">if</span> channel <span class="keyword">not</span> in server.pubsub_channels:</span><br><span class="line">      reply_channel_name(channel)</span><br><span class="line">      reply_subscribe_count(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">      reply_channel_name(channel)</span><br><span class="line">      replysubscribe_count(len(server.pubsub_channels[channel]))_</span><br></pre></td></tr></table></figure>
 
 <h3 id="PUBSUB-NUMPAT"><a href="#PUBSUB-NUMPAT" class="headerlink" title="PUBSUB NUMPAT"></a>PUBSUB NUMPAT</h3><p>PUBSUB NUMPAT子命令用于返回服务器当前被订阅模式的数量。</p>
 <p>这个子命令是通过返回pubsub_patterns链表的长度来实现的，因为这个链表的长度就是服务器被订阅模式的数量</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">def pubsub_numpat():</span><br><span class="line">  #链表的长度就是被订阅模式的数量</span><br><span class="line">  reply_pattern_count(len(server.pubsub_patterns))</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">def <span class="title">pubsub_numpat</span><span class="params">()</span>:</span></span><br><span class="line">  #链表的长度就是被订阅模式的数量</span><br><span class="line">  reply_pattern_count(len(server.pubsub_patterns))</span><br></pre></td></tr></table></figure>
 
 
     
@@ -660,11 +660,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
+                <a href="javascript:void(0)" class="js-tag color3">IO</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -672,7 +668,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IO</a>
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -692,11 +692,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Golang</a>
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+                <a href="javascript:void(0)" class="js-tag color2">Golang</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -704,11 +704,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
+                <a href="javascript:void(0)" class="js-tag color4">CPP</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CPP</a>
+                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -728,11 +728,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Shiro</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color1">Shiro</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -760,11 +760,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Kubernetes</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color1">Kubernetes</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -788,11 +788,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">SpringBoot</a>
+                <a href="javascript:void(0)" class="js-tag color4">TCP</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">TCP</a>
+                <a href="javascript:void(0)" class="js-tag color1">SpringBoot</a>
               </li>
             
             <div class="clearfix"></div>

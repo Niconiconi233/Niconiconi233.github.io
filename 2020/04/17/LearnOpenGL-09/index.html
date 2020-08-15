@@ -253,16 +253,16 @@
   <div class="article-entry" itemprop="articleBody">
     
     <p>现实世界中有无数种颜色，每一个物体都有它们自己的颜色。我们需要使用（有限的）数值来模拟真实世界中（无限）的颜色，所以并不是所有现实世界中的颜色都可以用数值来表示的。然而我们仍能通过数值来表现出非常多的颜色，甚至你可能都不会注意到与现实的颜色有任何的差异。颜色可以数字化的由红色(Red)、绿色(Green)和蓝色(Blue)三个分量组成，它们通常被缩写为RGB。仅仅用这三个值就可以组合出任意一种颜色。例如，要获取一个珊瑚红(Coral)色的话，我们可以定义这样的一个颜色向量：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">glm::<span class="function">vec3 <span class="title">coral</span><span class="params">(<span class="number">1.0f</span>, <span class="number">0.5f</span>, <span class="number">0.31f</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">glm::vec3 <span class="title">coral</span><span class="params">(<span class="number">1.0f</span>, <span class="number">0.5f</span>, <span class="number">0.31f</span>)</span></span>;</span><br></pre></td></tr></table></figure>
 
 <p>我们在现实生活中看到某一物体的颜色并不是这个物体真正拥有的颜色，而是它所反射的(Reflected)颜色。换句话说，那些不能被物体所吸收(Absorb)的颜色（被拒绝的颜色）就是我们能够感知到的物体的颜色。例如，太阳光能被看见的白光其实是由许多不同的颜色组合而成的（如下图所示）。如果我们将白光照在一个蓝色的玩具上，这个蓝色的玩具会吸收白光中除了蓝色以外的所有子颜色，不被吸收的蓝色光被反射到我们的眼中，让这个玩具看起来是蓝色的。下图显示的是一个珊瑚红的玩具，它以不同强度反射了多个颜色。</p>
 <a id="more"></a>
 <p><img src="/2020/04/17/LearnOpenGL-09/light_reflection.png" alt><br>你可以看到，白色的阳光实际上是所有可见颜色的集合，物体吸收了其中的大部分颜色。它仅反射了代表物体颜色的部分，被反射颜色的组合就是我们所感知到的颜色（此例中为珊瑚红）。</p>
 <p>这些颜色反射的定律被直接地运用在图形领域。当我们在OpenGL中创建一个光源时，我们希望给光源一个颜色。在上一段中我们有一个白色的太阳，所以我们也将光源设置为白色。当我们把光源的颜色与物体的颜色值相乘，所得到的就是这个物体所反射的颜色（也就是我们所感知到的颜色）。让我们再次审视我们的玩具（这一次它还是珊瑚红），看看如何在图形学中计算出它的反射颜色。我们将这两个颜色向量作分量相乘，结果就是最终的颜色向量了：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">glm::<span class="function">vec3 <span class="title">lightColor</span><span class="params">(<span class="number">1.0f</span>, <span class="number">1.0f</span>, <span class="number">1.0f</span>)</span></span>;</span><br><span class="line">glm::<span class="function">vec3 <span class="title">toyColor</span><span class="params">(<span class="number">1.0f</span>, <span class="number">0.5f</span>, <span class="number">0.31f</span>)</span></span>;</span><br><span class="line">glm::vec3 result = lightColor * toyColor; <span class="comment">// = (1.0f, 0.5f, 0.31f);</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">glm::vec3 <span class="title">lightColor</span><span class="params">(<span class="number">1.0f</span>, <span class="number">1.0f</span>, <span class="number">1.0f</span>)</span></span>;</span><br><span class="line"><span class="function">glm::vec3 <span class="title">toyColor</span><span class="params">(<span class="number">1.0f</span>, <span class="number">0.5f</span>, <span class="number">0.31f</span>)</span></span>;</span><br><span class="line">glm::vec3 result = lightColor * toyColor; <span class="comment">// = (1.0f, 0.5f, 0.31f);</span></span><br></pre></td></tr></table></figure>
 
 <p>我们可以看到玩具的颜色吸收了白色光源中很大一部分的颜色，但它根据自身的颜色值对红、绿、蓝三个分量都做出了一定的反射。这也表现了现实中颜色的工作原理。由此，我们可以定义<strong>物体的颜色为物体从一个光源反射各个颜色分量的大小</strong>。<br>使用深橄榄绿色(Dark olive-green)的光源：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">glm::<span class="function">vec3 <span class="title">lightColor</span><span class="params">(<span class="number">0.33f</span>, <span class="number">0.42f</span>, <span class="number">0.18f</span>)</span></span>;</span><br><span class="line">glm::<span class="function">vec3 <span class="title">toyColor</span><span class="params">(<span class="number">1.0f</span>, <span class="number">0.5f</span>, <span class="number">0.31f</span>)</span></span>;</span><br><span class="line">glm::vec3 result = lightColor * toyColor; <span class="comment">// = (0.33f, 0.21f, 0.06f);</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">glm::vec3 <span class="title">lightColor</span><span class="params">(<span class="number">0.33f</span>, <span class="number">0.42f</span>, <span class="number">0.18f</span>)</span></span>;</span><br><span class="line"><span class="function">glm::vec3 <span class="title">toyColor</span><span class="params">(<span class="number">1.0f</span>, <span class="number">0.5f</span>, <span class="number">0.31f</span>)</span></span>;</span><br><span class="line">glm::vec3 result = lightColor * toyColor; <span class="comment">// = (0.33f, 0.21f, 0.06f);</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="创建一个光照场景"><a href="#创建一个光照场景" class="headerlink" title="创建一个光照场景"></a>创建一个光照场景</h2><p>首先我们需要一个物体来作为被投光(Cast the light)的对象，我们将使用前面教程中的那个著名的立方体箱子。我们还需要一个物体来代表光源在3D场景中的位置。</p>
 <p>方块片段着色器：</p>
@@ -593,11 +593,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
+                <a href="javascript:void(0)" class="js-tag color3">IO</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -605,7 +601,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IO</a>
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -625,11 +625,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Golang</a>
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+                <a href="javascript:void(0)" class="js-tag color2">Golang</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -637,11 +637,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
+                <a href="javascript:void(0)" class="js-tag color4">CPP</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CPP</a>
+                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -661,11 +661,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Shiro</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color1">Shiro</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -693,11 +693,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Kubernetes</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color1">Kubernetes</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -721,11 +721,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">SpringBoot</a>
+                <a href="javascript:void(0)" class="js-tag color4">TCP</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">TCP</a>
+                <a href="javascript:void(0)" class="js-tag color1">SpringBoot</a>
               </li>
             
             <div class="clearfix"></div>

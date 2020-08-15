@@ -310,7 +310,7 @@
 <p>实际为</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="keyword">auto</span> __begin = <span class="built_in">std</span>::begin(range);</span><br><span class="line">    <span class="keyword">auto</span> __end = <span class="built_in">std</span>::end(range);</span><br><span class="line">    <span class="keyword">for</span> ( ; __begin != __end; ++__begin) &#123;</span><br><span class="line">        <span class="keyword">auto</span> x = *__begin;</span><br><span class="line">        code_block</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//exp</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">cstring_iterator_sentinel</span> &#123;</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">cstring_iterator</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">char</span>* s&#123; <span class="literal">nullptr</span> &#125;;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	explicit cstring_iterator(const char* str) :s(str) &#123;&#125;</span><br><span class="line">	<span class="keyword">char</span> <span class="keyword">operator</span>*() <span class="keyword">const</span> &#123; <span class="keyword">return</span> *s; &#125;</span><br><span class="line">	cstring_iterator&amp; <span class="keyword">operator</span>++()</span><br><span class="line">	&#123;</span><br><span class="line">		++s;</span><br><span class="line">		<span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">bool</span> <span class="keyword">operator</span>!=(<span class="keyword">const</span> cstring_iterator_sentinel&amp; iter) <span class="keyword">const</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> s != <span class="literal">nullptr</span> &amp;&amp; *s != <span class="string">'\0'</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">cstring_range</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">char</span>* s&#123; <span class="literal">nullptr</span> &#125;;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	explicit cstring_range(const char* str) :s(str) &#123;&#125;</span><br><span class="line">	<span class="function">cstring_iterator <span class="title">begin</span><span class="params">()</span> <span class="keyword">const</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> cstring_iterator&#123; s &#125;;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function">cstring_iterator_sentinel <span class="title">end</span><span class="params">()</span> <span class="keyword">const</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">char</span> c : cstring_range(<span class="string">"fsdjkfjsdlf"</span>))</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; c &lt;&lt; <span class="string">" "</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//exp</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">cstring_iterator_sentinel</span> &#123;</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">cstring_iterator</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">char</span>* s&#123; <span class="literal">nullptr</span> &#125;;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">explicit</span> <span class="title">cstring_iterator</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* str)</span> :<span class="title">s</span><span class="params">(str)</span> </span>&#123;&#125;</span><br><span class="line">	<span class="keyword">char</span> <span class="keyword">operator</span>*() <span class="keyword">const</span> &#123; <span class="keyword">return</span> *s; &#125;</span><br><span class="line">	cstring_iterator&amp; <span class="keyword">operator</span>++()</span><br><span class="line">	&#123;</span><br><span class="line">		++s;</span><br><span class="line">		<span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">bool</span> <span class="keyword">operator</span>!=(<span class="keyword">const</span> cstring_iterator_sentinel&amp; iter) <span class="keyword">const</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> s != <span class="literal">nullptr</span> &amp;&amp; *s != <span class="string">'\0'</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">cstring_range</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">char</span>* s&#123; <span class="literal">nullptr</span> &#125;;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">explicit</span> <span class="title">cstring_range</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* str)</span> :<span class="title">s</span><span class="params">(str)</span> </span>&#123;&#125;</span><br><span class="line">	<span class="function">cstring_iterator <span class="title">begin</span><span class="params">()</span> <span class="keyword">const</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> cstring_iterator&#123; s &#125;;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function">cstring_iterator_sentinel <span class="title">end</span><span class="params">()</span> <span class="keyword">const</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">char</span> c : cstring_range(<span class="string">"fsdjkfjsdlf"</span>))</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; c &lt;&lt; <span class="string">" "</span>;</span><br></pre></td></tr></table></figure>
 
 <h2 id="并置函数"><a href="#并置函数" class="headerlink" title="并置函数"></a>并置函数</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span>... Ts&gt;</span><br><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">concat</span><span class="params">(T t, Ts... ts)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">if</span> <span class="title">constexpr</span> <span class="params">(<span class="keyword">sizeof</span>...(ts) &gt; <span class="number">0</span>)</span></span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> [=](<span class="keyword">auto</span>... parameters)&#123;<span class="keyword">return</span> t(concat(ts...)(parameters...));&#125;;</span><br><span class="line">  &#125;<span class="keyword">else</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">return</span> [=](<span class="keyword">auto</span>... parameters)&#123;<span class="keyword">return</span> t(parameters...);&#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//func(func2(func3(2,3)))</span></span><br></pre></td></tr></table></figure>
 
@@ -937,11 +937,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
+                <a href="javascript:void(0)" class="js-tag color3">IO</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -949,7 +945,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IO</a>
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -969,11 +969,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Golang</a>
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+                <a href="javascript:void(0)" class="js-tag color2">Golang</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -981,11 +981,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
+                <a href="javascript:void(0)" class="js-tag color4">CPP</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CPP</a>
+                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1005,11 +1005,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Shiro</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color1">Shiro</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1037,11 +1037,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Kubernetes</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color1">Kubernetes</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1065,11 +1065,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">SpringBoot</a>
+                <a href="javascript:void(0)" class="js-tag color4">TCP</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">TCP</a>
+                <a href="javascript:void(0)" class="js-tag color1">SpringBoot</a>
               </li>
             
             <div class="clearfix"></div>

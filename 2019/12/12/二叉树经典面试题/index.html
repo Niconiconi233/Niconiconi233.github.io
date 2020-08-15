@@ -279,7 +279,7 @@
 
 <p>情况三：任意一棵不带父节点的二叉树<br>如果我们可以得到信息，在该结点的左右子树中找到了两个结点，那这个结点一定是他们的父节点（先不考虑是否为最近）。</p>
 <p>换句话说，我们需要在一个结点出得到的信息，应该是在它的左右子树中遍历到的两个结点的个数。同时因为要采用的是递归遍历，因此我们需要返回该结点。怎么解决“最近”的问题呢？递归给我们提供了方便，只要在一开始进行一次判断即可</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function">node* <span class="title">nearestParent</span><span class="params">(node* node1, node* node2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(root == <span class="literal">nullptr</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">  <span class="keyword">if</span>(node1 == <span class="literal">nullptr</span> || node2 == <span class="literal">nullptr</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">  pair&lt;node*, <span class="keyword">int</span>&gt; ret = nodeNearestParent(root, node1, node2);</span><br><span class="line">  <span class="keyword">return</span> ret.first;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">pair&lt;node*, <span class="keyword">int</span>&gt; nodeNearestParent(node* root, node* node1, node* node2)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">if</span>(root == <span class="literal">nullptr</span>)</span><br><span class="line">    <span class="keyword">return</span> pair&lt;node*, <span class="keyword">int</span>&gt;&#123;<span class="literal">nullptr</span>, <span class="number">0</span>&#125;;</span><br><span class="line">  pair&lt;node*, <span class="keyword">int</span>&gt; left = nodeNearestParent(root-&gt;left, node1, node2);</span><br><span class="line">  pair&lt;node*, <span class="keyword">int</span>&gt; <span class="function">right  <span class="title">nodeNearestParent</span><span class="params">(root-&gt;right, node1, node2)</span></span>;</span><br><span class="line">  <span class="keyword">if</span>(left.second == <span class="number">2</span>)</span><br><span class="line">    <span class="keyword">return</span> left;</span><br><span class="line">  <span class="keyword">if</span>(right.second == <span class="number">2</span>)</span><br><span class="line">    <span class="keyword">return</span> right;</span><br><span class="line">  <span class="keyword">int</span> x = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">if</span>(root == node1 || root == node2)</span><br><span class="line">    x = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">return</span> pair&lt;node*, <span class="keyword">int</span>&gt;&#123;root, left.second + right.second + x&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function">node* <span class="title">nearestParent</span><span class="params">(node* node1, node* node2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(root == <span class="literal">nullptr</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">  <span class="keyword">if</span>(node1 == <span class="literal">nullptr</span> || node2 == <span class="literal">nullptr</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">  pair&lt;node*, <span class="keyword">int</span>&gt; ret = nodeNearestParent(root, node1, node2);</span><br><span class="line">  <span class="keyword">return</span> ret.first;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">pair&lt;node*, int&gt; nodeNearestParent(node* root, node* node1, node* node2)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">if</span>(root == <span class="literal">nullptr</span>)</span><br><span class="line">    <span class="keyword">return</span> pair&lt;node*, <span class="keyword">int</span>&gt;&#123;<span class="literal">nullptr</span>, <span class="number">0</span>&#125;;</span><br><span class="line">  pair&lt;node*, <span class="keyword">int</span>&gt; left = nodeNearestParent(root-&gt;left, node1, node2);</span><br><span class="line">  pair&lt;node*, int&gt; right  nodeNearestParent(root-&gt;right, node1, node2);</span><br><span class="line">  <span class="keyword">if</span>(left.second == <span class="number">2</span>)</span><br><span class="line">    <span class="keyword">return</span> left;</span><br><span class="line">  <span class="keyword">if</span>(right.second == <span class="number">2</span>)</span><br><span class="line">    <span class="keyword">return</span> right;</span><br><span class="line">  <span class="keyword">int</span> x = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">if</span>(root == node1 || root == node2)</span><br><span class="line">    x = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">return</span> pair&lt;node*, <span class="keyword">int</span>&gt;&#123;root, left.second + right.second + x&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="将二叉搜索树转换成一个排序的双向链表。要求不能创建任何新的结点，只能调整树中结点指针的指向。"><a href="#将二叉搜索树转换成一个排序的双向链表。要求不能创建任何新的结点，只能调整树中结点指针的指向。" class="headerlink" title="将二叉搜索树转换成一个排序的双向链表。要求不能创建任何新的结点，只能调整树中结点指针的指向。"></a>将二叉搜索树转换成一个排序的双向链表。要求不能创建任何新的结点，只能调整树中结点指针的指向。</h2><p>对于二叉搜索树而言，它的中序遍历序列就是有序的，因此，这里依旧采用的是中序遍历来改变它。将二叉树转换为双向链表，其实就是让左孩子指针指向该结点的前一个结点，右孩子指针指向下一个结点。因此遍历的时候，需要两个指针，prev和cur。</p>
 <p>还有一点需要注意，转换为双向链表之后，二叉树的结构即不复存在，我们就不能再通过根节点去遍历二叉树，因此这里在将二叉树转换为双向链表之前，首先要做的是保存它的最左结点，因为它的最左结点是双向链表的头结点。</p>
@@ -584,11 +584,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
+                <a href="javascript:void(0)" class="js-tag color3">IO</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -596,7 +592,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IO</a>
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -616,11 +616,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Golang</a>
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+                <a href="javascript:void(0)" class="js-tag color2">Golang</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -628,11 +628,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
+                <a href="javascript:void(0)" class="js-tag color4">CPP</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CPP</a>
+                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -652,11 +652,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Shiro</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color1">Shiro</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -684,11 +684,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Kubernetes</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color1">Kubernetes</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -712,11 +712,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">SpringBoot</a>
+                <a href="javascript:void(0)" class="js-tag color4">TCP</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">TCP</a>
+                <a href="javascript:void(0)" class="js-tag color1">SpringBoot</a>
               </li>
             
             <div class="clearfix"></div>

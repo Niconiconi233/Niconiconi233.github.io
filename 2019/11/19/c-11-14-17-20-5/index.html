@@ -351,12 +351,12 @@
 <li>[a-z]+.txt:在这个正则表达式中, [a-z] 表示匹配一个小写字母, + 可以使前面的表达式匹配多次， 因此 [a-z]+ 能够匹配一个小写字母组成的字符串。 在正则表达式中一个 . 表示匹配任意字符，而 . 则表示匹配字符 .， 最后的 txt 表示严格匹配 txt 则三个字母。因此这个正则表达式的所要匹配的内容就是由纯小写字母组成的文本文件。</li>
 </ul>
 <p>std::regex_match用于匹配字符串和正则表达式，用很多类型的重载形式，最简单的是传入string和一个std::regex进行匹配，当匹配成功时返回true否则返回false</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;regex&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">string</span> fnames[] = &#123;<span class="string">"foo.txt"</span>, <span class="string">"bar.txt"</span>, <span class="string">"test"</span>, <span class="string">"a0.txt"</span>, <span class="string">"AAA.txt"</span>&#125;;</span><br><span class="line">    <span class="comment">// 在 C++ 中 \ 会被作为字符串内的转义符，为使 \. 作为正则表达式传递进去生效，需要对 \ 进行二次转义，从而有 \\.</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="function">regex <span class="title">txt_regex</span><span class="params">(<span class="string">"[a-z]+\\.txt"</span>)</span></span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;fname: fnames)</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; fname &lt;&lt; <span class="string">": "</span> &lt;&lt; <span class="built_in">std</span>::regex_match(fname, txt_regex) &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;regex&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">string</span> fnames[] = &#123;<span class="string">"foo.txt"</span>, <span class="string">"bar.txt"</span>, <span class="string">"test"</span>, <span class="string">"a0.txt"</span>, <span class="string">"AAA.txt"</span>&#125;;</span><br><span class="line">    <span class="comment">// 在 C++ 中 \ 会被作为字符串内的转义符，为使 \. 作为正则表达式传递进去生效，需要对 \ 进行二次转义，从而有 \\.</span></span><br><span class="line">    <span class="function"><span class="built_in">std</span>::regex <span class="title">txt_regex</span><span class="params">(<span class="string">"[a-z]+\\.txt"</span>)</span></span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;fname: fnames)</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; fname &lt;&lt; <span class="string">": "</span> &lt;&lt; <span class="built_in">std</span>::regex_match(fname, txt_regex) &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>另一种常用的形式就是依次传入 std::string/std::smatch/std::regex 三个参数， 其中 std::smatch 的本质其实是 std::match_results。 在标准库中， std::smatch 被定义为了 std::match_results<a href="std::string::const_iterator">std::string::const_iterator</a>， 也就是一个子串迭代器类型的 match_results。 使用 std::smatch 可以方便的对匹配的结果进行获取，例如：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="function">regex <span class="title">base_regex</span><span class="params">(<span class="string">"([a-z]+)\\.txt"</span>)</span></span>;</span><br><span class="line"><span class="built_in">std</span>::smatch base_match;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span> &amp;fname: fnames) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">std</span>::regex_match(fname, base_match, base_regex)) &#123;</span><br><span class="line">        <span class="comment">// std::smatch 的第一个元素匹配整个字符串</span></span><br><span class="line">        <span class="comment">// std::smatch 的第二个元素匹配了第一个括号表达式</span></span><br><span class="line">        <span class="keyword">if</span> (base_match.size() == <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="built_in">std</span>::<span class="built_in">string</span> base = base_match[<span class="number">1</span>].str();</span><br><span class="line">            <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"sub-match[0]: "</span> &lt;&lt; base_match[<span class="number">0</span>].str() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">            <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; fname &lt;&lt; <span class="string">" sub-match[1]: "</span> &lt;&lt; base &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">std</span>::regex <span class="title">base_regex</span><span class="params">(<span class="string">"([a-z]+)\\.txt"</span>)</span></span>;</span><br><span class="line"><span class="built_in">std</span>::smatch base_match;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span> &amp;fname: fnames) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">std</span>::regex_match(fname, base_match, base_regex)) &#123;</span><br><span class="line">        <span class="comment">// std::smatch 的第一个元素匹配整个字符串</span></span><br><span class="line">        <span class="comment">// std::smatch 的第二个元素匹配了第一个括号表达式</span></span><br><span class="line">        <span class="keyword">if</span> (base_match.size() == <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="built_in">std</span>::<span class="built_in">string</span> base = base_match[<span class="number">1</span>].str();</span><br><span class="line">            <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"sub-match[0]: "</span> &lt;&lt; base_match[<span class="number">0</span>].str() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">            <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; fname &lt;&lt; <span class="string">" sub-match[1]: "</span> &lt;&lt; base &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//解析请求头</span></span><br><span class="line"><span class="built_in">std</span>::<span class="function">regex <span class="title">e</span><span class="params">(<span class="string">"^([^ ]*) ([^ ]*) HTTP/([^ ]*)$"</span>)</span></span>;</span><br><span class="line"><span class="comment">//解析其他请求</span></span><br><span class="line">e=<span class="string">"^([^:]*): ?(.*)$"</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//解析请求头</span></span><br><span class="line"><span class="function"><span class="built_in">std</span>::regex <span class="title">e</span><span class="params">(<span class="string">"^([^ ]*) ([^ ]*) HTTP/([^ ]*)$"</span>)</span></span>;</span><br><span class="line"><span class="comment">//解析其他请求</span></span><br><span class="line">e=<span class="string">"^([^:]*): ?(.*)$"</span>;</span><br></pre></td></tr></table></figure>
 
 
     
@@ -657,11 +657,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
+                <a href="javascript:void(0)" class="js-tag color3">IO</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -669,7 +665,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IO</a>
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -689,11 +689,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Golang</a>
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+                <a href="javascript:void(0)" class="js-tag color2">Golang</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -701,11 +701,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
+                <a href="javascript:void(0)" class="js-tag color4">CPP</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CPP</a>
+                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -725,11 +725,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Shiro</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color1">Shiro</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -757,11 +757,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Kubernetes</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color1">Kubernetes</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -785,11 +785,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">SpringBoot</a>
+                <a href="javascript:void(0)" class="js-tag color4">TCP</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">TCP</a>
+                <a href="javascript:void(0)" class="js-tag color1">SpringBoot</a>
               </li>
             
             <div class="clearfix"></div>

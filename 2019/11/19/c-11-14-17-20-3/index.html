@@ -274,13 +274,13 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;tuple&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">get_student</span><span class="params">(<span class="keyword">int</span> id)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="comment">// 返回类型被推断为 std::tuple&lt;double, char, std::string&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (id == <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">std</span>::make_tuple(<span class="number">3.8</span>, <span class="string">'A'</span>, <span class="string">"张三"</span>);</span><br><span class="line"><span class="keyword">if</span> (id == <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">std</span>::make_tuple(<span class="number">2.9</span>, <span class="string">'C'</span>, <span class="string">"李四"</span>);</span><br><span class="line"><span class="keyword">if</span> (id == <span class="number">2</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">std</span>::make_tuple(<span class="number">1.7</span>, <span class="string">'D'</span>, <span class="string">"王五"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">std</span>::make_tuple(<span class="number">0.0</span>, <span class="string">'D'</span>, <span class="string">"null"</span>);</span><br><span class="line">    <span class="comment">// 如果只写 0 会出现推断错误, 编译失败</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">auto</span> student = get_student(<span class="number">0</span>);</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"ID: 0, "</span></span><br><span class="line">    &lt;&lt; <span class="string">"GPA: "</span> &lt;&lt; <span class="built_in">std</span>::get&lt;<span class="number">0</span>&gt;(student) &lt;&lt; <span class="string">", "</span></span><br><span class="line">    &lt;&lt; <span class="string">"成绩: "</span> &lt;&lt; <span class="built_in">std</span>::get&lt;<span class="number">1</span>&gt;(student) &lt;&lt; <span class="string">", "</span></span><br><span class="line">    &lt;&lt; <span class="string">"姓名: "</span> &lt;&lt; <span class="built_in">std</span>::get&lt;<span class="number">2</span>&gt;(student) &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">double</span> gpa;</span><br><span class="line">    <span class="keyword">char</span> grade;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">string</span> name;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 元组进行拆包</span></span><br><span class="line">    <span class="built_in">std</span>::tie(gpa, grade, name) = get_student(<span class="number">1</span>);</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"ID: 1, "</span></span><br><span class="line">    &lt;&lt; <span class="string">"GPA: "</span> &lt;&lt; gpa &lt;&lt; <span class="string">", "</span></span><br><span class="line">    &lt;&lt; <span class="string">"成绩: "</span> &lt;&lt; grade &lt;&lt; <span class="string">", "</span></span><br><span class="line">    &lt;&lt; <span class="string">"姓名: "</span> &lt;&lt; name &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>std::get 除了使用常量获取元组对象外，C++14 增加了使用类型来获取元组中的对象：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::tuple&lt;<span class="built_in">std</span>::<span class="built_in">string</span>, <span class="keyword">double</span>, <span class="keyword">double</span>, <span class="keyword">int</span>&gt; t(<span class="string">"123"</span>, <span class="number">4.5</span>, <span class="number">6.7</span>, <span class="number">8</span>);</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="built_in">std</span>::get&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt;(t) &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="built_in">std</span>::get&lt;<span class="keyword">double</span>&gt;(t) &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>; <span class="comment">// 非法, 引发编译期错误</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="built_in">std</span>::get&lt;<span class="number">3</span>&gt;(t) &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">std::tuple&lt;std::string, double, double, int&gt; t("123", 4.5, 6.7, 8);</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="built_in">std</span>::get&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt;(t) &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="built_in">std</span>::get&lt;<span class="keyword">double</span>&gt;(t) &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>; <span class="comment">// 非法, 引发编译期错误</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="built_in">std</span>::get&lt;<span class="number">3</span>&gt;(t) &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
 
 <h3 id="运行期索引"><a href="#运行期索引" class="headerlink" title="运行期索引"></a>运行期索引</h3><p>如果你仔细思考一下可能就会发现上面代码的问题，std::get&lt;&gt; 依赖一个编译期的常量，所以下面的方式是不合法的：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> index = <span class="number">1</span>;</span><br><span class="line"><span class="built_in">std</span>::get&lt;index&gt;(t);</span><br></pre></td></tr></table></figure>
 
 <p>那么要怎么处理？答案是，使用 std::variant&lt;&gt;（C++ 17 引入），提供给 variant&lt;&gt; 的类型模板参数 可以让一个 variant&lt;&gt; 从而容纳提供的几种类型的变量（在其他语言，例如 Python/JavaScript 等，表现为动态类型）：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;variant&gt;</span></span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">size_t</span> n, <span class="keyword">typename</span>... T&gt;</span><br><span class="line"><span class="keyword">constexpr</span> <span class="built_in">std</span>::variant&lt;T...&gt; _tuple_index(<span class="keyword">const</span> <span class="built_in">std</span>::tuple&lt;T...&gt;&amp; tpl, <span class="keyword">size_t</span> i) &#123;</span><br><span class="line">    <span class="function"><span class="keyword">if</span> <span class="title">constexpr</span> <span class="params">(n &gt;= <span class="keyword">sizeof</span>...(T))</span></span></span><br><span class="line">        throw std::out_of_range("越界.");</span><br><span class="line">    <span class="keyword">if</span> (i == n)</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">std</span>::variant&lt;T...&gt;&#123; <span class="built_in">std</span>::in_place_index&lt;n&gt;, <span class="built_in">std</span>::get&lt;n&gt;(tpl) &#125;;</span><br><span class="line">    <span class="keyword">return</span> _tuple_index&lt;(n &lt; <span class="keyword">sizeof</span>...(T)<span class="number">-1</span> ? n+<span class="number">1</span> : <span class="number">0</span>)&gt;(tpl, i);<span class="comment">//递归展开</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span>... T&gt;</span><br><span class="line"><span class="keyword">constexpr</span> <span class="built_in">std</span>::variant&lt;T...&gt; tuple_index(<span class="keyword">const</span> <span class="built_in">std</span>::tuple&lt;T...&gt;&amp; tpl, <span class="keyword">size_t</span> i) &#123;</span><br><span class="line">    <span class="keyword">return</span> _tuple_index&lt;<span class="number">0</span>&gt;(tpl, i);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T0, <span class="keyword">typename</span> ... Ts&gt;</span><br><span class="line"><span class="built_in">std</span>::ostream &amp; <span class="keyword">operator</span>&lt;&lt; (<span class="built_in">std</span>::ostream &amp; s, <span class="built_in">std</span>::variant&lt;T0, Ts...&gt; <span class="keyword">const</span> &amp; v) &#123;</span><br><span class="line">    <span class="built_in">std</span>::visit([&amp;](<span class="keyword">auto</span> &amp;&amp; x)&#123; s &lt;&lt; x;&#125;, v);</span><br><span class="line">    <span class="keyword">return</span> s;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;variant&gt;</span></span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">size_t</span> n, <span class="keyword">typename</span>... T&gt;</span><br><span class="line"><span class="keyword">constexpr</span> <span class="built_in">std</span>::variant&lt;T...&gt; _tuple_index(<span class="keyword">const</span> <span class="built_in">std</span>::tuple&lt;T...&gt;&amp; tpl, <span class="keyword">size_t</span> i) &#123;</span><br><span class="line">    <span class="function"><span class="keyword">if</span> <span class="title">constexpr</span> <span class="params">(n &gt;= <span class="keyword">sizeof</span>...(T))</span></span></span><br><span class="line"><span class="function">        <span class="keyword">throw</span> <span class="title">std::out_of_range</span><span class="params">(<span class="string">"越界."</span>)</span></span>;</span><br><span class="line">    <span class="keyword">if</span> (i == n)</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">std</span>::variant&lt;T...&gt;&#123; <span class="built_in">std</span>::in_place_index&lt;n&gt;, <span class="built_in">std</span>::get&lt;n&gt;(tpl) &#125;;</span><br><span class="line">    <span class="keyword">return</span> _tuple_index&lt;(n &lt; <span class="keyword">sizeof</span>...(T)<span class="number">-1</span> ? n+<span class="number">1</span> : <span class="number">0</span>)&gt;(tpl, i);<span class="comment">//递归展开</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span>... T&gt;</span><br><span class="line">constexpr std::variant&lt;T...&gt; tuple_index(const std::tuple&lt;T...&gt;&amp; tpl, size_t i) &#123;</span><br><span class="line">    <span class="keyword">return</span> _tuple_index&lt;<span class="number">0</span>&gt;(tpl, i);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T0, <span class="keyword">typename</span> ... Ts&gt;</span><br><span class="line"><span class="built_in">std</span>::ostream &amp; <span class="keyword">operator</span>&lt;&lt; (<span class="built_in">std</span>::ostream &amp; s, <span class="built_in">std</span>::variant&lt;T0, Ts...&gt; <span class="keyword">const</span> &amp; v) &#123;</span><br><span class="line">    <span class="built_in">std</span>::visit([&amp;](<span class="keyword">auto</span> &amp;&amp; x)&#123; s &lt;&lt; x;&#125;, v);</span><br><span class="line">    <span class="keyword">return</span> s;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="元组合并与遍历"><a href="#元组合并与遍历" class="headerlink" title="元组合并与遍历"></a>元组合并与遍历</h3><p>合并两个元组</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> new_tuple = <span class="built_in">std</span>::tuple_cat(get_student(<span class="number">1</span>), <span class="built_in">std</span>::move(t));</span><br></pre></td></tr></table></figure>
@@ -601,11 +601,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
+                <a href="javascript:void(0)" class="js-tag color3">IO</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -613,7 +609,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IO</a>
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -633,11 +633,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Golang</a>
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+                <a href="javascript:void(0)" class="js-tag color2">Golang</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -645,11 +645,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
+                <a href="javascript:void(0)" class="js-tag color4">CPP</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CPP</a>
+                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -669,11 +669,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Shiro</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color1">Shiro</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -701,11 +701,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Kubernetes</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color1">Kubernetes</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -729,11 +729,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">SpringBoot</a>
+                <a href="javascript:void(0)" class="js-tag color4">TCP</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">TCP</a>
+                <a href="javascript:void(0)" class="js-tag color1">SpringBoot</a>
               </li>
             
             <div class="clearfix"></div>

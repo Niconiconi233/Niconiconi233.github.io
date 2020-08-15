@@ -265,7 +265,7 @@
 <li>事务执行</li>
 </ol>
 <h3 id="事务开始"><a href="#事务开始" class="headerlink" title="事务开始"></a>事务开始</h3><p>MULTI命令的执行标志着事务的开始。<br>MULTI命令可以将执行该命令的客户端从非事务状态切换至事务状态，这一切换是通过在客户端状态的flags属性中打开REDIS_MULTI标识来完成的，MULTI命令的实现可以表示为：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">def MULTI():</span><br><span class="line">  client.flags |= REDIS_MULTI</span><br><span class="line">  replyOK()</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">def <span class="title">MULTI</span><span class="params">()</span>:</span></span><br><span class="line">  client.flags |= REDIS_MULTI</span><br><span class="line">  replyOK()</span><br></pre></td></tr></table></figure>
 
 <h3 id="命令入队"><a href="#命令入队" class="headerlink" title="命令入队"></a>命令入队</h3><p>当一个客户端处于非事务状态时，这个客户端发送的命令会被服务器立即执行；与此不同的是，当一个客户端切换到事务状态之后，服务器会根据这个客户端发来的不同命令执行不同的操作：</p>
 <ul>
@@ -285,7 +285,7 @@
 <p>事务队列以先进先出（FIFO）的方式保存入队的命令，较先人队的命令会被放到数组的前面，而较后入队的命令则会被放到数组的后面。</p>
 <h3 id="执行事务"><a href="#执行事务" class="headerlink" title="执行事务"></a>执行事务</h3><p>当一个处于事务状态的客户端向服务器发送EXEC命令时，这个EXEC命令将立即被服务器执行。服务器会遍历这个客户端的事务队列，执行队列中保存的所有命令，最后将执行命令所得的结果全部返回给客户端。</p>
 <p>EXEC命令的实现原理可以用以下伪代码来描述：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">def EXEC():</span><br><span class="line">  reply_queue=[]</span><br><span class="line">  <span class="keyword">for</span> argv, argc, cmd in client.mstate.commands:</span><br><span class="line">    reply = execute_command(cmd, argv, argc)</span><br><span class="line">    reply_queue-append(reply)</span><br><span class="line"></span><br><span class="line">  client.flags &amp;= ~REDIS_MULTI</span><br><span class="line">  client.mstate.count=<span class="number">0</span></span><br><span class="line">  release_transaction_queue(client.mstate.commands)</span><br><span class="line">  send_reply_to_client(client, reply_queue)</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">def <span class="title">EXEC</span><span class="params">()</span>:</span></span><br><span class="line"><span class="function">  reply_queue</span>=[]</span><br><span class="line">  <span class="keyword">for</span> argv, argc, cmd in client.mstate.commands:</span><br><span class="line">    reply = execute_command(cmd, argv, argc)</span><br><span class="line">    reply_queue-append(reply)</span><br><span class="line"></span><br><span class="line">  client.flags &amp;= ~REDIS_MULTI</span><br><span class="line">  client.mstate.count=<span class="number">0</span></span><br><span class="line">  release_transaction_queue(client.mstate.commands)</span><br><span class="line">  send_reply_to_client(client, reply_queue)</span><br></pre></td></tr></table></figure>
 
 <h2 id="WATCH命令的实现"><a href="#WATCH命令的实现" class="headerlink" title="WATCH命令的实现"></a>WATCH命令的实现</h2><p>WATCH命令是一个乐观锁，他可以在EXEC命令执行之前，监视任意数量的数据库键，并在EXEC命令执行时，检查被监视的键是否至少有一个已经被修改过了，如果是的话，服务器将拒绝执行事务，并向客户端返回代表事务执行失败的空回复。<br><img src="/2020/06/27/Redis-Source-transaction/image3.PNG" alt></p>
 <h3 id="使用WATCH命令监视数据库键"><a href="#使用WATCH命令监视数据库键" class="headerlink" title="使用WATCH命令监视数据库键"></a>使用WATCH命令监视数据库键</h3><p>每个Redis数据库都保存着一个watched_keys字典，这个字典的键是某个被WATCH命令监视的数据库键，而字典的值则是一个链表，链表中记录了所有监视响应数据库键的客户端</p>
@@ -294,7 +294,7 @@
 <p>通过watched_keys字典，服务器可以清楚的知道那些数据库键正在被监视，以及那些客户端正在监视这些数据库键。<br><img src="/2020/06/27/Redis-Source-transaction/image4.PNG" alt></p>
 <h3 id="监视机制的触发"><a href="#监视机制的触发" class="headerlink" title="监视机制的触发"></a>监视机制的触发</h3><p>所有对数据库进行修改的命令，比如SET,LPUSH,SADD,ZREM,DEL,FLUSHDB等等，在执行之后都会调用multi.c/touchWatchKey函数对watched_keys字典进行检查，查看是否有客户端正在监视刚刚被命令修改过的数据库键，如果有的话，那么touchWatchKey函数会将监视被修改的客户端的REDIS_DIRTY_CAS标识打开，标识事务的安全性已经被破坏。</p>
 <p>touchWatchKey函数的定义可以用以下伪代码来描述：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">def touchWatchKey(db, key):</span><br><span class="line">  <span class="keyword">if</span> key in db.watched_keys:</span><br><span class="line">    <span class="keyword">for</span> client in db.watched_keys[key]:</span><br><span class="line">      client.flags |= REDIS_DIRTY_CAS</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">def <span class="title">touchWatchKey</span><span class="params">(db, key)</span>:</span></span><br><span class="line">  if key in db.watched_keys:</span><br><span class="line">    <span class="keyword">for</span> client in db.watched_keys[key]:</span><br><span class="line">      client.flags |= REDIS_DIRTY_CAS</span><br></pre></td></tr></table></figure>
 
 <h3 id="判断事务是否安全"><a href="#判断事务是否安全" class="headerlink" title="判断事务是否安全"></a>判断事务是否安全</h3><p>当服务器接收到一个客户端发来的EXEC命令时，服务器会根据这个客户端是否打开了REDIS_DIRTY_CAS标识来决定是否执行事务：</p>
 <ul>
@@ -654,11 +654,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
+                <a href="javascript:void(0)" class="js-tag color3">IO</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -666,7 +662,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IO</a>
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -686,11 +686,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Golang</a>
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+                <a href="javascript:void(0)" class="js-tag color2">Golang</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -698,11 +698,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
+                <a href="javascript:void(0)" class="js-tag color4">CPP</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CPP</a>
+                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -722,11 +722,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Shiro</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color1">Shiro</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -754,11 +754,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Kubernetes</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color1">Kubernetes</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -782,11 +782,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">SpringBoot</a>
+                <a href="javascript:void(0)" class="js-tag color4">TCP</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">TCP</a>
+                <a href="javascript:void(0)" class="js-tag color1">SpringBoot</a>
               </li>
             
             <div class="clearfix"></div>

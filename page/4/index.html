@@ -201,6 +201,206 @@
             
 
   
+    <article id="post-LearnOpenGL-22" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/05/07/LearnOpenGL-22/" target="_blank">立方体贴图</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/05/07/LearnOpenGL-22/" class="archive-article-date">
+        <time datetime="2020-05-06T16:21:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-07</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>我们已经使用2D纹理很长时间了，但除此之外仍有更多的纹理类型等着我们探索。在本节中，我们将讨论的是将多个纹理组合起来映射到一张纹理上的一种纹理类型：立方体贴图(Cube Map)。</p>
+<p>简单来说，立方体贴图就是一个包含了6个2D纹理的纹理，每个2D纹理都组成了立方体的一个面：一个有纹理的立方体。你可能会奇怪，这样一个立方体有什么用途呢？为什么要把6张纹理合并到一张纹理中，而不是直接使用6个单独的纹理呢？立方体贴图有一个非常有用的特性，它可以通过一个方向向量来进行索引/采样。假设我们有一个1x1x1的单位立方体，方向向量的原点位于它的中心。使用一个橘黄色的方向向量来从立方体贴图上采样一个纹理值会像是这样：<br><img src="/2020/05/07/LearnOpenGL-22/cubemaps_sampling.png" alt></p>
+    
+    <a class="article-more-a" href="/2020/05/07/LearnOpenGL-22/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">OpenGL</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/技术笔记//" class="article-tag-list-link color5">技术笔记</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/05/07/LearnOpenGL-22/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Redis-Source-T-zset" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/05/06/Redis-Source-T-zset/" target="_blank">Redis中的skipList</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/05/06/Redis-Source-T-zset/" class="archive-article-date">
+        <time datetime="2020-05-06T06:02:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-06</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>跳跃表（skiplist）是一种有序数据结构， 它通过在每个节点中维持多个指向其他节点的指针， 从而达到快速访问节点的目的。</p>
+<p>跳跃表支持平均 O(\log N) 最坏 O(N) 复杂度的节点查找， 还可以通过顺序性操作来批量处理节点。<br>Redis 的跳跃表由 redis.h/zskiplistNode 和 redis.h/zskiplist 两个结构定义， 其中 zskiplistNode 结构用于表示跳跃表节点， 而 zskiplist 结构则用于保存跳跃表节点的相关信息， 比如节点的数量， 以及指向表头节点和表尾节点的指针， 等等。</p>
+    
+    <a class="article-more-a" href="/2020/05/06/Redis-Source-T-zset/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/源码//" class="article-tag-list-link color3">源码</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/05/06/Redis-Source-T-zset/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-LearnOpenGL-21" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -636,7 +836,7 @@
     
     <p>ziplist是为了尽可能的节约内存而设计的特殊编码双端链表。ziplist可以存储字符串和整数值，其中整数值被保存为实际的整数，而非字符串数组。ziplist允许在两端进行push和pop操作，但是这些操作需要对整个ziplist进行内存重分配，所以实际复杂度和ziplist占用的内存大小有关。</p>
 <p>ziplist相关的函数有：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span> *<span class="title">ziplistNew</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span> *<span class="title">ziplistPush</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zl, <span class="keyword">unsigned</span> <span class="keyword">char</span> *s, <span class="keyword">unsigned</span> <span class="keyword">int</span> slen, <span class="keyword">int</span> where)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span> *<span class="title">ziplistIndex</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zl, <span class="keyword">int</span> index)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span> *<span class="title">ziplistNext</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zl, <span class="keyword">unsigned</span> <span class="keyword">char</span> *p)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span> *<span class="title">ziplistPrev</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zl, <span class="keyword">unsigned</span> <span class="keyword">char</span> *p)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">ziplistGet</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *p, <span class="keyword">unsigned</span> <span class="keyword">char</span> **sval, <span class="keyword">unsigned</span> <span class="keyword">int</span> *slen, <span class="keyword">long</span> <span class="keyword">long</span> *lval)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span> *<span class="title">ziplistInsert</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zl, <span class="keyword">unsigned</span> <span class="keyword">char</span> *p, <span class="keyword">unsigned</span> <span class="keyword">char</span> *s, <span class="keyword">unsigned</span> <span class="keyword">int</span> slen)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span> *<span class="title">ziplistDelete</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zl, <span class="keyword">unsigned</span> <span class="keyword">char</span> **p)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span> *<span class="title">ziplistDeleteRange</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zl, <span class="keyword">unsigned</span> <span class="keyword">int</span> index, <span class="keyword">unsigned</span> <span class="keyword">int</span> num)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">ziplistCompare</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *p, <span class="keyword">unsigned</span> <span class="keyword">char</span> *s, <span class="keyword">unsigned</span> <span class="keyword">int</span> slen)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span> *<span class="title">ziplistFind</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *p, <span class="keyword">unsigned</span> <span class="keyword">char</span> *vstr, <span class="keyword">unsigned</span> <span class="keyword">int</span> vlen, <span class="keyword">unsigned</span> <span class="keyword">int</span> skip)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">ziplistLen</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zl)</span></span>;</span><br><span class="line"><span class="keyword">size_t</span> ziplistBlobLen(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zl);</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span> *<span class="title">ziplistNew</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span> *<span class="title">ziplistPush</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zl, <span class="keyword">unsigned</span> <span class="keyword">char</span> *s, <span class="keyword">unsigned</span> <span class="keyword">int</span> slen, <span class="keyword">int</span> where)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span> *<span class="title">ziplistIndex</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zl, <span class="keyword">int</span> index)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span> *<span class="title">ziplistNext</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zl, <span class="keyword">unsigned</span> <span class="keyword">char</span> *p)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span> *<span class="title">ziplistPrev</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zl, <span class="keyword">unsigned</span> <span class="keyword">char</span> *p)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">ziplistGet</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *p, <span class="keyword">unsigned</span> <span class="keyword">char</span> **sval, <span class="keyword">unsigned</span> <span class="keyword">int</span> *slen, <span class="keyword">long</span> <span class="keyword">long</span> *lval)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span> *<span class="title">ziplistInsert</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zl, <span class="keyword">unsigned</span> <span class="keyword">char</span> *p, <span class="keyword">unsigned</span> <span class="keyword">char</span> *s, <span class="keyword">unsigned</span> <span class="keyword">int</span> slen)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span> *<span class="title">ziplistDelete</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zl, <span class="keyword">unsigned</span> <span class="keyword">char</span> **p)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span> *<span class="title">ziplistDeleteRange</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zl, <span class="keyword">unsigned</span> <span class="keyword">int</span> index, <span class="keyword">unsigned</span> <span class="keyword">int</span> num)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">ziplistCompare</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *p, <span class="keyword">unsigned</span> <span class="keyword">char</span> *s, <span class="keyword">unsigned</span> <span class="keyword">int</span> slen)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span> *<span class="title">ziplistFind</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *p, <span class="keyword">unsigned</span> <span class="keyword">char</span> *vstr, <span class="keyword">unsigned</span> <span class="keyword">int</span> vlen, <span class="keyword">unsigned</span> <span class="keyword">int</span> skip)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">ziplistLen</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zl)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">size_t</span> <span class="title">ziplistBlobLen</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zl)</span></span>;</span><br></pre></td></tr></table></figure>
     
     <a class="article-more-a" href="/2020/05/02/Redis-Source-Ziplist/#more">more >></a>
     
@@ -736,7 +936,7 @@
   <div class="article-entry" itemprop="articleBody">
     
     <p>redis压缩键值对的函数有：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span> *<span class="title">zipmapNew</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span> *<span class="title">zipmapSet</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zm, <span class="keyword">unsigned</span> <span class="keyword">char</span> *key, <span class="keyword">unsigned</span> <span class="keyword">int</span> klen, <span class="keyword">unsigned</span> <span class="keyword">char</span> *val, <span class="keyword">unsigned</span> <span class="keyword">int</span> vlen, <span class="keyword">int</span> *update)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span> *<span class="title">zipmapDel</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zm, <span class="keyword">unsigned</span> <span class="keyword">char</span> *key, <span class="keyword">unsigned</span> <span class="keyword">int</span> klen, <span class="keyword">int</span> *deleted)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span> *<span class="title">zipmapRewind</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zm)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span> *<span class="title">zipmapNext</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zm, <span class="keyword">unsigned</span> <span class="keyword">char</span> **key, <span class="keyword">unsigned</span> <span class="keyword">int</span> *klen, <span class="keyword">unsigned</span> <span class="keyword">char</span> **value, <span class="keyword">unsigned</span> <span class="keyword">int</span> *vlen)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">zipmapGet</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zm, <span class="keyword">unsigned</span> <span class="keyword">char</span> *key, <span class="keyword">unsigned</span> <span class="keyword">int</span> klen, <span class="keyword">unsigned</span> <span class="keyword">char</span> **value, <span class="keyword">unsigned</span> <span class="keyword">int</span> *vlen)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">zipmapExists</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zm, <span class="keyword">unsigned</span> <span class="keyword">char</span> *key, <span class="keyword">unsigned</span> <span class="keyword">int</span> klen)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">zipmapLen</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zm)</span></span>;</span><br><span class="line"><span class="keyword">size_t</span> zipmapBlobLen(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zm);</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">zipmapRepr</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *p)</span></span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span> *<span class="title">zipmapNew</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span> *<span class="title">zipmapSet</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zm, <span class="keyword">unsigned</span> <span class="keyword">char</span> *key, <span class="keyword">unsigned</span> <span class="keyword">int</span> klen, <span class="keyword">unsigned</span> <span class="keyword">char</span> *val, <span class="keyword">unsigned</span> <span class="keyword">int</span> vlen, <span class="keyword">int</span> *update)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span> *<span class="title">zipmapDel</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zm, <span class="keyword">unsigned</span> <span class="keyword">char</span> *key, <span class="keyword">unsigned</span> <span class="keyword">int</span> klen, <span class="keyword">int</span> *deleted)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span> *<span class="title">zipmapRewind</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zm)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span> *<span class="title">zipmapNext</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zm, <span class="keyword">unsigned</span> <span class="keyword">char</span> **key, <span class="keyword">unsigned</span> <span class="keyword">int</span> *klen, <span class="keyword">unsigned</span> <span class="keyword">char</span> **value, <span class="keyword">unsigned</span> <span class="keyword">int</span> *vlen)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">zipmapGet</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zm, <span class="keyword">unsigned</span> <span class="keyword">char</span> *key, <span class="keyword">unsigned</span> <span class="keyword">int</span> klen, <span class="keyword">unsigned</span> <span class="keyword">char</span> **value, <span class="keyword">unsigned</span> <span class="keyword">int</span> *vlen)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">zipmapExists</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zm, <span class="keyword">unsigned</span> <span class="keyword">char</span> *key, <span class="keyword">unsigned</span> <span class="keyword">int</span> klen)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">zipmapLen</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zm)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">size_t</span> <span class="title">zipmapBlobLen</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *zm)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">zipmapRepr</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *p)</span></span>;</span><br></pre></td></tr></table></figure>
     
     <a class="article-more-a" href="/2020/05/01/Redis-Source-Zipmap/#more">more >></a>
     
@@ -836,7 +1036,7 @@
   <div class="article-entry" itemprop="articleBody">
     
     <p>Redis内存分配相关的函数有：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">zmalloc</span><span class="params">(<span class="keyword">size_t</span> size)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">zcalloc</span><span class="params">(<span class="keyword">size_t</span> size)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">zrealloc</span><span class="params">(<span class="keyword">void</span> *ptr, <span class="keyword">size_t</span> size)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">zfree</span><span class="params">(<span class="keyword">void</span> *ptr)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">char</span> *<span class="title">zstrdup</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *s)</span></span>;</span><br><span class="line"><span class="keyword">size_t</span> zmalloc_used_memory(<span class="keyword">void</span>);</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">zmalloc_enable_thread_safeness</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">zmalloc_set_oom_handler</span><span class="params">(<span class="keyword">void</span> (*oom_handler)(<span class="keyword">size_t</span>))</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">float</span> <span class="title">zmalloc_get_fragmentation_ratio</span><span class="params">(<span class="keyword">size_t</span> rss)</span></span>;</span><br><span class="line"><span class="keyword">size_t</span> zmalloc_get_rss(<span class="keyword">void</span>);</span><br><span class="line"><span class="keyword">size_t</span> zmalloc_get_private_dirty(<span class="keyword">void</span>);</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">zlibc_free</span><span class="params">(<span class="keyword">void</span> *ptr)</span></span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">zmalloc</span><span class="params">(<span class="keyword">size_t</span> size)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">zcalloc</span><span class="params">(<span class="keyword">size_t</span> size)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">zrealloc</span><span class="params">(<span class="keyword">void</span> *ptr, <span class="keyword">size_t</span> size)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">zfree</span><span class="params">(<span class="keyword">void</span> *ptr)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">char</span> *<span class="title">zstrdup</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *s)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">size_t</span> <span class="title">zmalloc_used_memory</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">zmalloc_enable_thread_safeness</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">zmalloc_set_oom_handler</span><span class="params">(<span class="keyword">void</span> (*oom_handler)(<span class="keyword">size_t</span>))</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">float</span> <span class="title">zmalloc_get_fragmentation_ratio</span><span class="params">(<span class="keyword">size_t</span> rss)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">size_t</span> <span class="title">zmalloc_get_rss</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">size_t</span> <span class="title">zmalloc_get_private_dirty</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">zlibc_free</span><span class="params">(<span class="keyword">void</span> *ptr)</span></span>;</span><br></pre></td></tr></table></figure>
     
     <a class="article-more-a" href="/2020/05/01/Redis-Source-Zmalloc/#more">more >></a>
     
@@ -977,207 +1177,6 @@
     
     <p class="article-more-link">
       <a class="article-more-a" href="/2020/04/30/LearnOpenGL-18/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-LearnOpenGL-17" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/04/29/LearnOpenGL-17/" target="_blank">深度测试</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/04/29/LearnOpenGL-17/" class="archive-article-date">
-        <time datetime="2020-04-29T13:40:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-29</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>在坐标系统小节中，我们渲染了一个3D箱子，并且运用了深度缓冲(Depth Buffer)来防止被阻挡的面渲染到其它面的前面。在这一节中，我们将会更加深入地讨论这些储存在深度缓冲（或z缓冲(z-buffer)）中的深度值(Depth Value)，以及它们是如何确定一个片段是处于其它片段后方的。</p>
-<p>深度缓冲就像颜色缓冲(Color Buffer)（储存所有的片段颜色：视觉输出）一样，在每个片段中储存了信息，并且（通常）和颜色缓冲有着一样的宽度和高度。深度缓冲是由窗口系统自动创建的，它会以16、24或32位float的形式储存它的深度值。在大部分的系统中，深度缓冲的精度都是24位的。</p>
-<p>当深度测试(Depth Testing)被启用的时候，OpenGL会将一个片段的的深度值与深度缓冲的内容进行对比。OpenGL会执行一个深度测试，如果这个测试通过了的话，深度缓冲将会更新为新的深度值。如果深度测试失败了，片段将会被丢弃。</p>
-<p>深度缓冲是在片段着色器运行之后（以及模板测试(Stencil Testing)运行之后，我们将在下一节中讨论）在屏幕空间中运行的。屏幕空间坐标与通过OpenGL的glViewport所定义的视口密切相关，并且可以直接使用GLSL内建变量gl_FragCoord从片段着色器中直接访问。gl_FragCoord的x和y分量代表了片段的屏幕空间坐标（其中(0, 0)位于左下角）。gl_FragCoord中也包含了一个z分量，它包含了片段真正的深度值。z值就是需要与深度缓冲内容所对比的那个值。</p>
-    
-    <a class="article-more-a" href="/2020/04/29/LearnOpenGL-17/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">OpenGL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术笔记//" class="article-tag-list-link color5">技术笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/04/29/LearnOpenGL-17/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-LearnOpenGL-16" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/04/27/LearnOpenGL-16/" target="_blank">模型</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/04/27/LearnOpenGL-16/" class="archive-article-date">
-        <time datetime="2020-04-27T13:12:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-27</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>现在是时候接触Assimp并创建实际的加载和转换代码了。这个教程的目标是创建另一个类来完整地表示一个模型，或者说是包含多个网格，甚至是多个物体的模型。一个包含木制阳台、塔楼、甚至游泳池的房子可能仍会被加载为一个模型。我们会使用Assimp来加载模型，并将它转换(Translate)至多个在上一节中创建的Mesh对象。</p>
-    
-    <a class="article-more-a" href="/2020/04/27/LearnOpenGL-16/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">OpenGL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术笔记//" class="article-tag-list-link color5">技术笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/04/27/LearnOpenGL-16/">展开全文 >></a>
     </p>
     
 
@@ -1373,11 +1372,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
+                <a href="javascript:void(0)" class="js-tag color3">IO</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1385,7 +1380,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IO</a>
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1405,11 +1404,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Golang</a>
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+                <a href="javascript:void(0)" class="js-tag color2">Golang</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1417,11 +1416,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
+                <a href="javascript:void(0)" class="js-tag color4">CPP</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CPP</a>
+                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1441,11 +1440,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Shiro</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color1">Shiro</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1473,11 +1472,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Kubernetes</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color1">Kubernetes</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1501,11 +1500,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">SpringBoot</a>
+                <a href="javascript:void(0)" class="js-tag color4">TCP</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">TCP</a>
+                <a href="javascript:void(0)" class="js-tag color1">SpringBoot</a>
               </li>
             
             <div class="clearfix"></div>
