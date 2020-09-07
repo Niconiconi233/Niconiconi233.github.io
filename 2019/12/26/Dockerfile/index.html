@@ -349,7 +349,7 @@
 <h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3></li>
 </ul>
 <p>Docker镜像并非只是一个文件，而是由一堆文件组成，最主要的文件是层</p>
-<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 示例一，foo 镜像的Dockerfile</span></span><br><span class="line"><span class="comment"># 基础镜像中已经存在若干个层了</span></span><br><span class="line"><span class="keyword">FROM</span> ubuntu:<span class="number">16.04</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># RUN指令会增加一层，在这一层中，安装了 git 软件</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> apt-get update \</span></span><br><span class="line"><span class="bash">  &amp;&amp; apt-get install -y --no-install-recommends git \</span></span><br><span class="line"><span class="bash">  &amp;&amp; apt-get clean \</span></span><br><span class="line"><span class="bash">  &amp;&amp; rm -rf /var/lib/apt/lists/*</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例二，bar 镜像的Dockerfile</span></span><br><span class="line"><span class="keyword">FROM</span> foo</span><br><span class="line"></span><br><span class="line"><span class="comment"># RUN指令会增加一层，在这一层中，安装了 nginx</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> apt-get update \</span></span><br><span class="line"><span class="bash">  &amp;&amp; apt-get install -y --no-install-recommends nginx \</span></span><br><span class="line"><span class="bash">  &amp;&amp; apt-get clean \</span></span><br><span class="line"><span class="bash">  &amp;&amp; rm -rf /var/lib/apt/lists/*</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 示例一，foo 镜像的Dockerfile</span></span><br><span class="line"><span class="comment"># 基础镜像中已经存在若干个层了</span></span><br><span class="line"><span class="keyword">FROM</span> ubuntu:<span class="number">16.04</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># RUN指令会增加一层，在这一层中，安装了 git 软件</span></span><br><span class="line"><span class="keyword">RUN</span> apt-get update \</span><br><span class="line">  &amp;&amp; apt-get install -y --no-install-recommends git \</span><br><span class="line">  &amp;&amp; apt-get clean \</span><br><span class="line">  &amp;&amp; rm -rf /var/lib/apt/lists/*</span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例二，bar 镜像的Dockerfile</span></span><br><span class="line"><span class="keyword">FROM</span> foo</span><br><span class="line"></span><br><span class="line"><span class="comment"># RUN指令会增加一层，在这一层中，安装了 nginx</span></span><br><span class="line"><span class="keyword">RUN</span> apt-get update \</span><br><span class="line">  &amp;&amp; apt-get install -y --no-install-recommends nginx \</span><br><span class="line">  &amp;&amp; apt-get clean \</span><br><span class="line">  &amp;&amp; rm -rf /var/lib/apt/lists/*</span><br></pre></td></tr></table></figure>
 
 <p>假设基础镜像 ubuntu:16.04 已经存在5层，使用第一个Dockerfile打包成镜像 foo，则foo有6层，又使用第二个Dockerfile打包成镜像bar，则bar中有7层。</p>
 <p>如果 ubuntu:16.04 等其他镜像不算，如果系统中只存在 foo 和 bar 两个镜像，那么系统中一共保存了多少层呢？</p>
@@ -358,21 +358,21 @@
 <p>Docker的各个层是有相关性的，在联合挂载的过程中，系统需要知道在什么样的基础上再增加新的文件。那么这就要求一个Docker镜像只能有一个起始层，只能有一个根。所以，Dockerfile中，就只允许一个 FROM指令。因为多个 FROM 指令会造成多根，则是无法实现的。但为什么 Docker 17.05 版本以后允许 Dockerfile支持多个 FROM 指令了呢，莫非已经支持了多根？</p>
 <h4 id="多个FROM指令的意义"><a href="#多个FROM指令的意义" class="headerlink" title="多个FROM指令的意义"></a>多个FROM指令的意义</h4><p>多个 FROM 指令并不是为了生成多根的层关系，最后生成的镜像，仍以最后一条 FROM 为准，之前的 FROM 会被抛弃，那么之前的FROM 又有什么意义呢？</p>
 <p>每一条 FROM 指令都是一个构建阶段，多条 FROM 就是多阶段构建，虽然最后生成的镜像只能是最后一个阶段的结果，但是，能够将前置阶段中的文件拷贝到后边的阶段中，这就是多阶段构建的最大意义。</p>
-<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Go语言环境基础镜像</span></span><br><span class="line"><span class="keyword">FROM</span> golang:<span class="number">1.10</span>.<span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将源码拷贝到镜像中</span></span><br><span class="line"><span class="keyword">COPY</span><span class="bash"> server.go /build/</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定工作目录</span></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="bash"> /build</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译镜像时，运行 go build 编译生成 server 程序</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GOARM=6 go build -ldflags <span class="string">'-w -s'</span> -o server</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定容器运行时入口程序 server</span></span><br><span class="line"><span class="keyword">ENTRYPOINT</span><span class="bash"> [<span class="string">"/build/server"</span>]</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Go语言环境基础镜像</span></span><br><span class="line"><span class="keyword">FROM</span> golang:<span class="number">1.10</span>.<span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将源码拷贝到镜像中</span></span><br><span class="line"><span class="keyword">COPY</span> server.go /build/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定工作目录</span></span><br><span class="line"><span class="keyword">WORKDIR</span> /build</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译镜像时，运行 go build 编译生成 server 程序</span></span><br><span class="line"><span class="keyword">RUN</span> CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GOARM=6 go build -ldflags '-w -s' -o server</span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定容器运行时入口程序 server</span></span><br><span class="line"><span class="keyword">ENTRYPOINT</span> ["/build/server"]</span><br></pre></td></tr></table></figure>
 
 <p>基础镜像 golang:1.10.3 是非常庞大的，因为其中包含了所有的Go语言编译工具和库，而运行时候我们仅仅需要编译后的 server 程序就行了，不需要编译时的编译工具，最后生成的大体积镜像就是一种浪费。</p>
 <p>解决方法就是将打包和构建分开，将编译后的文件拷贝到镜像中就行了</p>
-<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 不需要Go语言编译环境</span></span><br><span class="line"><span class="keyword">FROM</span> scratch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将编译结果拷贝到容器中</span></span><br><span class="line"><span class="keyword">COPY</span><span class="bash"> server /server</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定容器运行时入口程序 server</span></span><br><span class="line"><span class="keyword">ENTRYPOINT</span><span class="bash"> [<span class="string">"/server"</span>]</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 不需要Go语言编译环境</span></span><br><span class="line"><span class="keyword">FROM</span> scratch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将编译结果拷贝到容器中</span></span><br><span class="line"><span class="keyword">COPY</span> server /server</span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定容器运行时入口程序 server</span></span><br><span class="line"><span class="keyword">ENTRYPOINT</span> ["/server"]</span><br></pre></td></tr></table></figure>
 
 <p><strong>scratch 是内置关键词，并不是一个真实存在的镜像。 FROM scratch 会使用一个完全干净的文件系统，不包含任何文件。 因为Go语言编译后不需要运行时，也就不需要安装任何的运行库。 FROM scratch 可以使得最后生成的镜像最小化，其中只包含了 server 程序。</strong></p>
 <p>Docker 17.05版本以后，有了新的解决方案，直接一个Dockerfile就可以解决</p>
-<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 编译阶段</span></span><br><span class="line"><span class="keyword">FROM</span> golang:<span class="number">1.10</span>.<span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">COPY</span><span class="bash"> server.go /build/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="bash"> /build</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GOARM=6 go build -ldflags <span class="string">'-w -s'</span> -o server</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行阶段</span></span><br><span class="line"><span class="keyword">FROM</span> scratch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从编译阶段的中拷贝编译结果到当前镜像中</span></span><br><span class="line"><span class="keyword">COPY</span><span class="bash"> --from=0 /build/server /</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">ENTRYPOINT</span><span class="bash"> [<span class="string">"/server"</span>]</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 编译阶段</span></span><br><span class="line"><span class="keyword">FROM</span> golang:<span class="number">1.10</span>.<span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">COPY</span> server.go /build/</span><br><span class="line"></span><br><span class="line"><span class="keyword">WORKDIR</span> /build</span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span> CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GOARM=6 go build -ldflags '-w -s' -o server</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行阶段</span></span><br><span class="line"><span class="keyword">FROM</span> scratch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从编译阶段的中拷贝编译结果到当前镜像中</span></span><br><span class="line"><span class="keyword">COPY</span> --from=0 /build/server /</span><br><span class="line"></span><br><span class="line"><span class="keyword">ENTRYPOINT</span> ["/server"]</span><br></pre></td></tr></table></figure>
 
 <p>这个 Dockerfile 的玄妙之处就在于 COPY 指令的 –from=0 参数，从前边的阶段中拷贝文件到当前阶段中，多个FROM语句时，0代表第一个阶段。除了使用数字，我们还可以给阶段命名，比如：</p>
-<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 编译阶段 命名为 builder</span></span><br><span class="line"><span class="keyword">FROM</span> golang:<span class="number">1.10</span>.<span class="number">3</span> as builder</span><br><span class="line"></span><br><span class="line"><span class="comment"># ... 省略</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行阶段</span></span><br><span class="line"><span class="keyword">FROM</span> scratch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从编译阶段的中拷贝编译结果到当前镜像中</span></span><br><span class="line"><span class="keyword">COPY</span><span class="bash"> --from=builder /build/server /</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 编译阶段 命名为 builder</span></span><br><span class="line"><span class="keyword">FROM</span> golang:<span class="number">1.10</span>.<span class="number">3</span> as builder</span><br><span class="line"></span><br><span class="line"><span class="comment"># ... 省略</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行阶段</span></span><br><span class="line"><span class="keyword">FROM</span> scratch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从编译阶段的中拷贝编译结果到当前镜像中</span></span><br><span class="line"><span class="keyword">COPY</span> --from=builder /build/server /</span><br></pre></td></tr></table></figure>
 
 <p>更为强大的是，COPY –from 不但可以从前置阶段中拷贝，还可以直接从一个已经存在的镜像中拷贝。比如，</p>
-<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> ubuntu:<span class="number">16.04</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">COPY</span><span class="bash"> --from=quay.io/coreos/etcd:v3.3.9 /usr/<span class="built_in">local</span>/bin/etcd /usr/<span class="built_in">local</span>/bin/</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> ubuntu:<span class="number">16.04</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">COPY</span> --from=quay.io/coreos/etcd:v3.3.9 /usr/local/bin/etcd /usr/local/bin/</span><br></pre></td></tr></table></figure>
 
 <p>我们直接将etcd镜像中的程序拷贝到了我们的镜像中，这样，在生成我们的程序镜像时，就不需要源码编译etcd了，直接将官方编译好的程序文件拿过来就行了。</p>
 <p>有些程序要么没有apt源，要么apt源中的版本太老，要么干脆只提供源码需要自己编译，使用这些程序时，我们可以方便地使用已经存在的Docker镜像作为我们的基础镜像。但是我们的软件有时候可能需要依赖多个这种文件，我们并不能同时将 nginx 和 etcd 的镜像同时作为我们的基础镜像（不支持多根），这种情况下，使用 COPY –from 就非常方便实用了</p>
@@ -682,15 +682,11 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">TCP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">调试</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IO</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -702,7 +698,19 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">IO</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">链表</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">原码</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -714,11 +722,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">MongoDB</a>
+                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+                <a href="javascript:void(0)" class="js-tag color3">进程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">UDP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">DNS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -726,7 +742,39 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">MongoDB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">MYSQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">B+树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Innodb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">-TCP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Kubernetes</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -734,7 +782,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
+                <a href="javascript:void(0)" class="js-tag color1">Kuberentes</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -754,6 +806,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">TensorFlow</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
@@ -762,63 +818,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">原码</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">UDP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DNS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MYSQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">B+树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Kubernetes</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Kuberentes</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">TensorFlow</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">进程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Innodb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">TCP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">SpringBoot</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">GitLab</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">CI/CD</a>
               </li>
             
             <div class="clearfix"></div>
