@@ -18,23 +18,23 @@
 <meta property="og:site_name" content="NICO">
 <meta property="og:description" content="ELK是一个应用套件，由ElasticSearch，Logstash和Kibana三部分组成，简称ELK，是一款开源免费，功能强大的日志分析管理系统。ELK可以将我们的系统日志，网站日志，应用日志等各种日志进行收集，过滤，清洗，然后进行集中存放并可用于实时检索，分析">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://niconiconi233.github.io/2020/09/10/ELK/hexo/新建文件夹/source/_posts/2020-09-10-ELK/ELK_stack.PNG">
-<meta property="og:image" content="https://niconiconi233.github.io/2020/09/10/ELK/hexo/新建文件夹/source/_posts/2020-09-10-ELK/logstash.PNG">
-<meta property="og:image" content="https://niconiconi233.github.io/2020/09/10/ELK/hexo/新建文件夹/source/_posts/2020-09-10-ELK/kafka_cluster.PNG">
-<meta property="og:image" content="https://niconiconi233.github.io/2020/09/10/ELK/hexo/新建文件夹/source/_posts/2020-09-10-ELK/ELK.PNG">
-<meta property="og:image" content="https://niconiconi233.github.io/2020/09/10/ELK/hexo/新建文件夹/source/_posts/2020-09-10-ELK/zookeeper.PNG">
-<meta property="og:image" content="https://niconiconi233.github.io/2020/09/10/ELK/hexo/新建文件夹/source/_posts/2020-09-10-ELK/ELK1.PNG">
-<meta property="og:image" content="https://niconiconi233.github.io/2020/09/10/ELK/hexo/新建文件夹/source/_posts/2020-09-10-ELK/ELK2.PNG">
-<meta property="og:image" content="https://niconiconi233.github.io/2020/09/10/ELK/hexo/新建文件夹/source/_posts/2020-09-10-ELK/ELK3.PNG">
-<meta property="og:image" content="https://niconiconi233.github.io/2020/09/10/ELK/D:%5Chexo%5C%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9%5Csource_posts%5C2020-09-10-ELK%5Ccluster.PNG">
-<meta property="og:image" content="https://niconiconi233.github.io/2020/09/10/ELK/hexo/新建文件夹/source/_posts/2020-09-10-ELK/filebeat.png">
-<meta property="og:image" content="https://niconiconi233.github.io/2020/09/10/ELK/D:%5Chexo%5C%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9%5Csource_posts%5C2020-09-10-ELK%5Cmodules.PNG">
-<meta property="og:image" content="https://niconiconi233.github.io/2020/09/10/ELK/D:%5Chexo%5C%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9%5Csource_posts%5C2020-09-10-ELK%5Csyslog.PNG">
-<meta property="og:updated_time" content="2020-09-20T16:13:21.864Z">
+<meta property="og:image" content="https://niconiconi233.github.io/2020/09/10/ELK/ELK_stack.PNG">
+<meta property="og:image" content="https://niconiconi233.github.io/2020/09/10/ELK/logstash.PNG">
+<meta property="og:image" content="https://niconiconi233.github.io/2020/09/10/ELK/kafka_cluster.PNG">
+<meta property="og:image" content="https://niconiconi233.github.io/2020/09/10/ELK/ELK.PNG">
+<meta property="og:image" content="https://niconiconi233.github.io/2020/09/10/ELK/zookeeper.PNG">
+<meta property="og:image" content="https://niconiconi233.github.io/2020/09/10/ELK/ELK1.PNG">
+<meta property="og:image" content="https://niconiconi233.github.io/2020/09/10/ELK/ELK2.PNG">
+<meta property="og:image" content="https://niconiconi233.github.io/2020/09/10/ELK/ELK3.PNG">
+<meta property="og:image" content="https://niconiconi233.github.io/2020/09/10/ELK/cluster.PNG">
+<meta property="og:image" content="https://niconiconi233.github.io/2020/09/10/ELK/filebeat.png">
+<meta property="og:image" content="https://niconiconi233.github.io/2020/09/10/ELK/modules.PNG">
+<meta property="og:image" content="https://niconiconi233.github.io/2020/09/10/ELK/syslog.PNG">
+<meta property="og:updated_time" content="2020-09-21T08:01:53.620Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ELK志实时处理系统">
 <meta name="twitter:description" content="ELK是一个应用套件，由ElasticSearch，Logstash和Kibana三部分组成，简称ELK，是一款开源免费，功能强大的日志分析管理系统。ELK可以将我们的系统日志，网站日志，应用日志等各种日志进行收集，过滤，清洗，然后进行集中存放并可用于实时检索，分析">
-<meta name="twitter:image" content="https://niconiconi233.github.io/2020/09/10/ELK/hexo/新建文件夹/source/_posts/2020-09-10-ELK/ELK_stack.PNG">
+<meta name="twitter:image" content="https://niconiconi233.github.io/2020/09/10/ELK/ELK_stack.PNG">
   
   
     <link rel="icon" href="/img/logo.ico">
@@ -263,7 +263,7 @@
   <div class="article-entry" itemprop="articleBody">
     
     <p>ELK是一个应用套件，由ElasticSearch，Logstash和Kibana三部分组成，简称ELK，是一款开源免费，功能强大的日志分析管理系统。ELK可以将我们的系统日志，网站日志，应用日志等各种日志进行收集，过滤，清洗，然后进行集中存放并可用于实时检索，分析</p>
-<img src="/2020/09/10/ELK/hexo\新建文件夹\source\_posts\2020-09-10-ELK\ELK_stack.PNG" alt="ELK_stack" style="zoom:80%;">
+<img src="/2020/09/10/ELK/ELK_stack.PNG" alt="ELK_stack" style="zoom:80%;">
 
 <a id="more"></a>
 
@@ -274,7 +274,7 @@
 <li>output：数据输出</li>
 </ul>
 <p>Logstash内部运行逻辑如图： </p>
-<img src="/2020/09/10/ELK/hexo\新建文件夹\source\_posts\2020-09-10-ELK\logstash.PNG" alt="logstash" style="zoom:50%;">
+<img src="/2020/09/10/ELK/logstash.PNG" alt="logstash" style="zoom:50%;">
 
 <ul>
 <li>Shipper：主要用来收集日志数据，负责监控本地日志文件的变化，及时把日志文件的最新内容收集起来，然后经过加工，过滤输出到Broker</li>
@@ -298,14 +298,14 @@
 <li>topic的partition的个数和同一个消费组的消费者个数最好一致，如果消费之个数多个partition个数，则会存在有点消费者消费不到数据。</li>
 <li>服务器会记录每个consumer的在每个topic的每个partition下的消费的offset，然后每次去消费拉取数据时，都会从上次记录的位置开始拉取数据。 </li>
 </ol>
-<img src="/2020/09/10/ELK/hexo\新建文件夹\source\_posts\2020-09-10-ELK\kafka_cluster.PNG" alt="kafka_cluster" style="zoom:65%;">
+<img src="/2020/09/10/ELK/kafka_cluster.PNG" alt="kafka_cluster" style="zoom:65%;">
 
 <h2 id="三、ELK工作流程"><a href="#三、ELK工作流程" class="headerlink" title="三、ELK工作流程"></a>三、ELK工作流程</h2><p>一般都是在需要收集日志的所有服务器上部署logstash，作为logstash shipper用于监控并收集，过滤日志，接着将过滤后的日志发送给broker，然后logstash indexer将存放在broker中的数据写入elasticsearch，elasticsearch对这些数据创建索引，最后由kibana对其进行各种分析并以图表的形式展现：</p>
-<img src="/2020/09/10/ELK/hexo\新建文件夹\source\_posts\2020-09-10-ELK\ELK.PNG" alt="ELK" style="zoom: 67%;">
+<img src="/2020/09/10/ELK/ELK.PNG" alt="ELK" style="zoom: 67%;">
 
 <p>有些时候，如果收集的日志量较大，为了保证日志收集的性能和数据的完整性，Broker经常采用kafka来实现。</p>
 <h2 id="四、ZooKeeper基础和入门"><a href="#四、ZooKeeper基础和入门" class="headerlink" title="四、ZooKeeper基础和入门"></a>四、ZooKeeper基础和入门</h2><p>ZooKeeper一般是通过机器架构来提供服务的：</p>
-<img src="/2020/09/10/ELK/hexo\新建文件夹\source\_posts\2020-09-10-ELK\zookeeper.PNG" alt="zookeeper" style="zoom:67%;">
+<img src="/2020/09/10/ELK/zookeeper.PNG" alt="zookeeper" style="zoom:67%;">
 
 <ul>
 <li>Leader：领导者角色，主要负责投票的发起和决议，以及更新系统状态</li>
@@ -318,21 +318,21 @@
 <h2 id="五、ELK常见架构"><a href="#五、ELK常见架构" class="headerlink" title="五、ELK常见架构"></a>五、ELK常见架构</h2><ol>
 <li>典型ELK架构</li>
 </ol>
-<img src="/2020/09/10/ELK/hexo\新建文件夹\source\_posts\2020-09-10-ELK\ELK1.PNG" alt="ELK1" style="zoom:65%;">
+<img src="/2020/09/10/ELK/ELK1.PNG" alt="ELK1" style="zoom:65%;">
 
 <p>此架构主要是将Logstash部署在各个节点上收集相关日志，数据，并经过分析，过滤后发送给远端服务器上的ElasticSearch进行存储，ElasticSearch在将数据以分片的形式压缩存储，并提供多种API供用户查询，操作。</p>
 <p>此架构的优点是搭建简单，易于上手，缺点是Logstash消耗系统资源大，运行时占用CPU和内存资源较高，另外由于没有消息队列缓存，可能存在数据丢失的风险。此架构建议供初学者或数据量小的环境使用。</p>
 <ol start="2">
 <li>经典ELK架构</li>
 </ol>
-<img src="/2020/09/10/ELK/hexo\新建文件夹\source\_posts\2020-09-10-ELK\ELK2.PNG" alt="ELK2" style="zoom:67%;">
+<img src="/2020/09/10/ELK/ELK2.PNG" alt="ELK2" style="zoom:67%;">
 
 <p>此架构主要特点是引入了消息队列机制，位于各个节点上的Logstash Agent(一级logstash,主要用来传输数据)先将数据传递给消息队列，接着Logstash Server(二级logstash,主要用来拉取消息队列数据，过滤并分享数据)将格式化的数据传递给ElasticSearch进行存储。最后由Kibana将日志和数据呈现给用户。由于引入了Kafka缓存机制，即使远端Logstash Server因故障停止运行，数据也不会丢失，应为数据已经被存储下来了。</p>
 <p>这种架构适合于较大集群，数据量一般的应用环境，但由于二级Logstash要分析处理大量数据，同时ElasticSearch也要存储和索引大量数据，因此他们的负荷会比较重，解决的方法是将他们配置为集群模式，以分担负载。此架构的有点在于引入了消息队列机制，均衡了网络传输，从而降低了网络闭塞尤其是丢失数据的可能性，但依然存在Logstach占用系统资源过多的问题，在海量数据应用场景下，可能会出现性能瓶颈。</p>
 <ol start="3">
 <li>ELK集群架构</li>
 </ol>
-<img src="/2020/09/10/ELK/hexo\新建文件夹\source\_posts\2020-09-10-ELK\ELK3.PNG" alt="ELK3" style="zoom:67%;">
+<img src="/2020/09/10/ELK/ELK3.PNG" alt="ELK3" style="zoom:67%;">
 
 <p>这个架构是在第二个架构基础上改进而来的，主要是将前端收集数据的Logstash Agent换成了FileBeat，消息队列使用了Kafka集群，然后将Logstash和Elastic Search都通过集群模式进行构建，此架构适合大型集群，海量数据的业务场景，通过将前端Logstash Agent替换成Filebeat，有效降低了收集日志对业务系统资源的消耗。消息队列使用Kafka集群，有效保障了收集数据的安全性和稳定性，而后端Logstash和Elastic Search均采用集群模式搭建，从整体上提高了ELK系统的高效性，扩展性和吞吐量。</p>
 <h2 id="六、ElasticSearch安装及集群搭建"><a href="#六、ElasticSearch安装及集群搭建" class="headerlink" title="六、ElasticSearch安装及集群搭建"></a>六、ElasticSearch安装及集群搭建</h2><p>下载ElasticSearch安装包：</p>
@@ -376,7 +376,7 @@
 <ol start="4">
 <li>启动各个节点，结果如图：</li>
 </ol>
-<p><img src="/2020/09/10/ELK/D:%5Chexo%5C%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9%5Csource_posts%5C2020-09-10-ELK%5Ccluster.PNG" alt="cluster"></p>
+<p><img src="/2020/09/10/ELK/cluster.PNG" alt="cluster"></p>
 <p><strong>注意：</strong></p>
 <p>ElasticSearch配置了一个elasticsearch用户，通过elasticsearch来启动elasticsearch，可能需要修改<code>/etc/passwd</code>中的elasticsearch用户由<code>/sbin/nologin</code>改为<code>/bin/bash</code>即可登录，同时还要修改<code>/etc/sudoers</code>中的配置，将该用户设置为可以使用sudo命令。</p>
 <p><strong>记录一个问题:</strong></p>
@@ -427,7 +427,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./kafka-topics.sh --zookeeper (zookeeper地址,用逗号分隔) --delete --topic test-topic</span><br></pre></td></tr></table></figure>
 
 <h2 id="九、Filebeat安装和配置"><a href="#九、Filebeat安装和配置" class="headerlink" title="九、Filebeat安装和配置"></a>九、Filebeat安装和配置</h2><p>下载Filebeat安装包，使用rpm进行安装(Centos)。filebeat常用架构为：</p>
-<img src="/2020/09/10/ELK/hexo\新建文件夹\source\_posts\2020-09-10-ELK\filebeat.png" alt="Filebeat架构" style="zoom:60%;">
+<img src="/2020/09/10/ELK/filebeat.png" alt="Filebeat架构" style="zoom:60%;">
 
 <ol>
 <li>配置Filebeat</li>
@@ -451,7 +451,7 @@
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ============================== Filebeat inputs ===============================</span></span><br><span class="line"></span><br><span class="line"><span class="attr">filebeat.inputs:</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">type:</span> <span class="string">log</span></span><br><span class="line">  <span class="comment"># Change to true to enable this input configuration.</span></span><br><span class="line">  <span class="attr">enabled:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Paths that should be crawled and fetched. Glob based paths.</span></span><br><span class="line">  <span class="attr">paths:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">/var/log/messages</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">/var/log/secure</span></span><br><span class="line">  <span class="comment">#exclude_lines: ['^DBG']</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">#include_lines: ['^ERR', '^WARN']</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">#exclude_files: ['.gz$']</span></span><br><span class="line">  <span class="attr">fields:</span></span><br><span class="line">    <span class="attr">log_topic:</span> <span class="string">osmessages</span></span><br><span class="line">    </span><br><span class="line"><span class="comment"># ================================== General ===================================</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># The name of the shipper that publishes the network data. It can be used to group</span></span><br><span class="line"><span class="comment"># all the transactions sent by a single shipper in the web interface.</span></span><br><span class="line"><span class="attr">name:</span> <span class="string">"192.168.56.134"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ================================== Outputs ===================================</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Configure what output to use when sending the data collected by the beat.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ------------------------------ Kafka Output -------------------------------</span></span><br><span class="line"><span class="attr">output.kafka:</span></span><br><span class="line">  <span class="attr">enabled:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">version:</span> <span class="number">2.0</span><span class="number">.0</span></span><br><span class="line">  <span class="attr">hosts:</span> <span class="string">["192.168.56.135:9092",</span> <span class="string">"192.168.56.136:9092"</span><span class="string">,</span> <span class="string">"192.168.56.137:9092"</span><span class="string">]</span></span><br><span class="line">  <span class="attr">topic:</span> <span class="string">'<span class="template-variable">%&#123;[fields.log_topic]&#125;</span>'</span></span><br><span class="line">  <span class="attr">partition.round_robin:</span></span><br><span class="line">    <span class="attr">reachable_only:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">required_acks:</span> <span class="number">1</span></span><br><span class="line">  <span class="attr">worker:</span> <span class="number">2</span></span><br><span class="line">  <span class="attr">compression:</span> <span class="string">gzip</span></span><br><span class="line">  <span class="attr">max_message_bytes:</span> <span class="number">1000000</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ================================= Processors =================================</span></span><br><span class="line"><span class="comment">#配置丢弃消息中的字段</span></span><br><span class="line"><span class="attr">processors:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">drop_fields:</span></span><br><span class="line">      <span class="attr">fields:</span> <span class="string">["beat",</span> <span class="string">"host"</span><span class="string">,</span> <span class="string">"input"</span><span class="string">,</span> <span class="string">"source"</span><span class="string">,</span> <span class="string">"offset"</span><span class="string">,</span> <span class="string">"prospector"</span><span class="string">]</span></span><br><span class="line">      <span class="attr">ignore_missing:</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ================================== Logging ===================================</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Sets log level. The default log level is info.</span></span><br><span class="line"><span class="comment"># Available log levels are: error, warning, info, debug</span></span><br><span class="line"><span class="attr">logging.level:</span> <span class="string">info</span></span><br><span class="line"><span class="attr">logging.to_file:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">logging.files:</span></span><br><span class="line">  <span class="attr">path:</span> <span class="string">/var/log/filebeat</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">filebeat</span></span><br><span class="line">  <span class="attr">keepfiles:</span> <span class="number">7</span></span><br><span class="line">  <span class="attr">permissions:</span> <span class="number">0644</span></span><br></pre></td></tr></table></figure>
 
 <p><strong>此处使用在配置文件中指定日志目录的方式，还可以通过使用module的方式来配置监听日志</strong></p>
-<p><img src="/2020/09/10/ELK/D:%5Chexo%5C%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9%5Csource_posts%5C2020-09-10-ELK%5Cmodules.PNG" alt="modules"></p>
+<p><img src="/2020/09/10/ELK/modules.PNG" alt="modules"></p>
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#nginx module文件内容</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">module:</span> <span class="string">nginx</span></span><br><span class="line">  <span class="attr">access:</span></span><br><span class="line">    <span class="attr">enabled:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">var.paths:</span> <span class="string">["/path/to/log/nginx/access.log*"]</span></span><br><span class="line">  <span class="attr">error:</span></span><br><span class="line">    <span class="attr">enabled:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">var.paths:</span> <span class="string">["/path/to/log/nginx/error.log*"]</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="十、Logstash安装和配置"><a href="#十、Logstash安装和配置" class="headerlink" title="十、Logstash安装和配置"></a>十、Logstash安装和配置</h2><p>Logstash是一个开源的，服务端的数据处理pipline，它可以接受多个源的数据，然后对他们进行转换、最终将他们发送到指定类型的目的地，Logstash通过插件机制实现各种功能的，可以在<a href="https://github.com/logstash-plugins"><code>https://github.com/logstash-plugins</code></a>下载各种插件，也可以自行编写插件。</p>
@@ -501,7 +501,7 @@
 </li>
 </ol>
 <p>syslog插件会对发送过来的数据进行字段的划分</p>
-<p><img src="/2020/09/10/ELK/D:%5Chexo%5C%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9%5Csource_posts%5C2020-09-10-ELK%5Csyslog.PNG" alt="syslog"></p>
+<p><img src="/2020/09/10/ELK/syslog.PNG" alt="syslog"></p>
 <h4 id="10-1-3-读取TCP数据"><a href="#10-1-3-读取TCP数据" class="headerlink" title="10.1.3 读取TCP数据"></a>10.1.3 读取TCP数据</h4><p>下面的事件配置文件就是通过logstash::inputs::TCP和logstash::filters::Grok实现syslog功能的例子：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">input&#123;</span><br><span class="line">  tcp&#123;</span><br><span class="line">    port =&gt; "5514"</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">filter&#123;</span><br><span class="line">  grok&#123;</span><br><span class="line">    match =&gt; &#123;"message" =&gt; "%&#123;SYSLOGLINE&#125;"&#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">output&#123;</span><br><span class="line">  stdout&#123;</span><br><span class="line">    codec =&gt; rubydebug</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -621,7 +621,7 @@
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Union-Find
+          Union-Find(并查集)算法
         
       </div>
     </a>
