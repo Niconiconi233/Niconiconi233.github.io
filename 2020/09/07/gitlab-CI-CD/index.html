@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://niconiconi233.github.io/2020/09/07/gitlab-CI-CD/timeout1.PNG">
 <meta property="og:image" content="https://niconiconi233.github.io/2020/09/07/gitlab-CI-CD/parallel.PNG">
 <meta property="og:image" content="https://niconiconi233.github.io/2020/09/07/gitlab-CI-CD/cache-policy.PNG">
-<meta property="og:updated_time" content="2020-09-07T16:21:59.696Z">
+<meta property="og:updated_time" content="2020-09-08T12:17:10.445Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GitLab-CI&#x2F;CD">
 <meta name="twitter:description" content="从最初的 瀑布模型， 到后来的 敏捷开发， 再到今天的 DevOps， 这是现代开发人员构建出色产品的技术路线。 随着 DevOps 的兴起，出现了持续集成，持续交付（CI/CD）和持续部署的新方法， 而传统的软件开发和交付方式在迅速变得过时。过去的敏捷时代里， 大多数公司的软件发布周期是每月、每季度甚至每年（还记得那些日子吗？）， 而在现在 DevOps 时代，每周、每天甚至每天多次都是常态。">
@@ -244,7 +244,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">3.3k字</span>
+      <span class="post-count">4.1k字</span>
     </span>
   </span>
 
@@ -253,7 +253,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">12分</span>
+      <span class="post-count">15分</span>
     </span>
   </span>
 </div>
@@ -308,6 +308,101 @@
 <h3 id="2-1-Job"><a href="#2-1-Job" class="headerlink" title="2.1 Job"></a>2.1 Job</h3><p>文件中可以定义一个或多个作业(job)，每个作业必须包含唯一的名称，每个作业是独立执行的，作业定义了在约束条件下进行相关操作，每个作业至少要包含一个script。</p>
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">job1:</span></span><br><span class="line">  <span class="attr">script:</span> <span class="string">"execute-script-for-job1"</span></span><br><span class="line"></span><br><span class="line"><span class="attr">job2:</span></span><br><span class="line">  <span class="attr">script:</span> <span class="string">"execute-script-forjob2"</span></span><br></pre></td></tr></table></figure>
 
+<p>Job 的保留字</p>
+<table>
+<thead>
+<tr>
+<th>关键字</th>
+<th>是否必须</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>script</td>
+<td>yes</td>
+<td>Runner执行的命令或脚本。可以包含多条命令</td>
+</tr>
+<tr>
+<td>image</td>
+<td>no</td>
+<td>使用的docker镜像。<a href="https://links.jianshu.com/go?to=https%3A%2F%2Fdocs.gitlab.com%2Fce%2Fci%2Fdocker%2FREADME.html">详见</a></td>
+</tr>
+<tr>
+<td>services</td>
+<td>no</td>
+<td>使用的docker服务。<a href="https://links.jianshu.com/go?to=https%3A%2F%2Fdocs.gitlab.com%2Fce%2Fci%2Fdocker%2FREADME.html">详见</a></td>
+</tr>
+<tr>
+<td>stage</td>
+<td>no</td>
+<td>定义job stage（默认：test）</td>
+</tr>
+<tr>
+<td>type</td>
+<td>no</td>
+<td>stage的别名（已弃用）</td>
+</tr>
+<tr>
+<td>variables</td>
+<td>no</td>
+<td>定义job级别的变量</td>
+</tr>
+<tr>
+<td>only</td>
+<td>no</td>
+<td>定义一列git分支，并为其创建job</td>
+</tr>
+<tr>
+<td>except</td>
+<td>no</td>
+<td>定义一列git分支，不创建job</td>
+</tr>
+<tr>
+<td>tags</td>
+<td>no</td>
+<td>定义一列tags，用来指定选择哪个Runner（同时Runner也要设置tags）</td>
+</tr>
+<tr>
+<td>allow_failure</td>
+<td>no</td>
+<td>允许job失败。失败的job不影响commit状态</td>
+</tr>
+<tr>
+<td>when</td>
+<td>no</td>
+<td>定义何时开始job。可以是on_success，on_failure，always或者manual</td>
+</tr>
+<tr>
+<td>dependencies</td>
+<td>no</td>
+<td>定义job依赖关系，这样他们就可以互相传递artifacts</td>
+</tr>
+<tr>
+<td>cache</td>
+<td>no</td>
+<td>定义应在后续运行之间缓存的文件列表</td>
+</tr>
+<tr>
+<td>before_script</td>
+<td>no</td>
+<td>重写一组在作业前执行的命令</td>
+</tr>
+<tr>
+<td>after_script</td>
+<td>no</td>
+<td>重写一组在作业后执行的命令</td>
+</tr>
+<tr>
+<td>environment</td>
+<td>no</td>
+<td>定义此作业完成部署的环境名称</td>
+</tr>
+<tr>
+<td>coverage</td>
+<td>no</td>
+<td>定义给定作业的代码覆盖率设置</td>
+</tr>
+</tbody></table>
 <h3 id="2-2-Script"><a href="#2-2-Script" class="headerlink" title="2.2 Script"></a>2.2 Script</h3><p>每个作业至少要包含一个script</p>
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">job:</span></span><br><span class="line">  <span class="attr">script:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">uname</span> <span class="string">-a</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">echo</span> <span class="string">"hello world"</span></span><br></pre></td></tr></table></figure>
 
@@ -406,8 +501,8 @@
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">workflow:</span></span><br><span class="line">  <span class="attr">rules:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">if:</span> <span class="string">xxx</span></span><br><span class="line">      <span class="attr">when:</span> <span class="string">never</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">when:</span> <span class="string">always</span></span><br></pre></td></tr></table></figure>
 
 <p>如果条件不满足，则不创建管道，默认创建管道</p>
-<h3 id="2-16-cache-缓存"><a href="#2-16-cache-缓存" class="headerlink" title="2.16 cache 缓存"></a>2.16 cache 缓存</h3><ul>
-<li>存储编译项目所需的运行时依赖性，指定项目工作空间中需要在job之间缓存的文件和目录</li>
+<h3 id="2-16-Cache-缓存"><a href="#2-16-Cache-缓存" class="headerlink" title="2.16 Cache 缓存"></a>2.16 Cache 缓存</h3><ul>
+<li><strong>存储编译项目所需的运行时依赖性，指定项目工作空间中需要在job之间缓存的文件和目录</strong></li>
 <li>全局cache定义在job之外，针对所有job生效，job中cache优先于全局</li>
 <li>在job中定义缓存，将会缓存target目录下的所有.jar文件</li>
 <li>当在全局定义了cache:paths会被job中覆盖</li>
@@ -427,7 +522,8 @@
 <p>定义了全局的cache，如果文件发生变化值为job_name + SHA，没有变化则为job_name + default</p>
 <h4 id="2-16-3-cache-policy-缓存策略"><a href="#2-16-3-cache-policy-缓存策略" class="headerlink" title="2.16.3 cache-policy 缓存策略"></a>2.16.3 cache-policy 缓存策略</h4><blockquote>
 <p>默认 在执行开始时下载文件，并在结束时重新上传文件</p>
-<p>policy: pull 跳过下载步骤；policy: push 跳过删除步骤</p>
+<p>某个 job 只是使用的其他 job 改变的文件，自身并无改变对应路径的文件，那么就不需要进行文件上传操作，采用<code>pull</code> 策略即可。</p>
+<p>某个 job 不依赖于其他 job 改变的文件，自身改变的文件被其他 job 所依赖，那么就不需要在 job 开始前进行文件下载操作，采用<code>push</code> 策略。这样减少了不必要的操作，在一定程度上节约了时间。</p>
 </blockquote>
 <p><img src="/2020/09/07/gitlab-CI-CD/cache-policy.PNG" alt="cache-policy"></p>
 <p>例如：第一个job不需要下载上一次生存的文件，可以跳过下载步骤</p>
@@ -451,6 +547,73 @@
 </ul>
 </li>
 </ul>
+<h3 id="2-18-Only-amp-amp-Except"><a href="#2-18-Only-amp-amp-Except" class="headerlink" title="2.18 Only &amp;&amp; Except"></a>2.18 Only &amp;&amp; Except</h3><p><code>only</code>和<code>except</code>是两个参数用分支策略来限制jobs构建：</p>
+<ol>
+<li><code>only</code>定义哪些分支和标签的git项目将会被job执行。</li>
+<li><code>except</code>定义哪些分支和标签的git项目将不会被job执行。</li>
+</ol>
+<p>下面是refs策略的使用规则：</p>
+<ul>
+<li><code>only</code>和<code>except</code>可同时使用。如果<code>only</code>和<code>except</code>在一个job配置中同时存在，则以<code>only</code>为准，跳过<code>except。</code></li>
+<li><code>only</code>和<code>except</code>可以使用正则表达式。</li>
+<li><code>only</code>和<code>except</code>允许使用特殊的关键字：<code>branches</code>，<code>tags</code>和<code>triggers</code>。</li>
+<li><code>only</code>和<code>except</code>允许使用指定仓库地址但不是forks的仓库。</li>
+</ul>
+<p>在下面这个例子中，<code>job</code>将只会运行以<code>issue-</code>开始的refs(分支)，然而except中设置将被跳过。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">job:</span></span><br><span class="line">  <span class="comment"># use regexp</span></span><br><span class="line">  <span class="attr">only:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">/^issue-.*$/</span></span><br><span class="line">  <span class="comment"># use special keyword</span></span><br><span class="line">  <span class="attr">except:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">branches</span></span><br></pre></td></tr></table></figure>
+
+<p>在下面这个例子中，<code>job</code>将只会执行有tags的refs，或者通过API触发器明确地请求构建。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">job:</span></span><br><span class="line">  <span class="comment"># use special keywords</span></span><br><span class="line">  <span class="attr">only:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">tags</span>		<span class="comment">#tag 分支 commit之后触发</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">triggers</span>  <span class="comment"># api触发</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">schedules</span> <span class="comment">#每日构建触发</span></span><br></pre></td></tr></table></figure>
+
+<p>仓库路径只能用于父级仓库执行jobs，而不是forks：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">job:</span></span><br><span class="line">  <span class="attr">only:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">branches@gitlab-org/gitlab-ce</span></span><br><span class="line">  <span class="attr">except:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">master@gitlab-org/gitlab-ce</span></span><br></pre></td></tr></table></figure>
+
+<p>上面这个例子将会为所有的分支执行<code>job</code>，但master分支除外。</p>
+<p><strong>only</strong> and <strong>except</strong> 保留字</p>
+<table>
+<thead>
+<tr>
+<th>关键字</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>branches</td>
+<td>当一个分支被push上来</td>
+</tr>
+<tr>
+<td>tags</td>
+<td>当一个打了tag的分支被push上来</td>
+</tr>
+<tr>
+<td>api</td>
+<td>当一个pipline被piplines api所触发调起，详见piplines api</td>
+</tr>
+<tr>
+<td>external</td>
+<td>当使用了GitLab以外的CI服务</td>
+</tr>
+<tr>
+<td>pipelines</td>
+<td>针对多项目触发器而言，当使用CI_JOB_TOKEN并使用gitlab所提供的api创建多个pipelines的时候</td>
+</tr>
+<tr>
+<td>pushes</td>
+<td>当pipeline被用户的git push操作所触发的时候</td>
+</tr>
+<tr>
+<td>schedules</td>
+<td>针对预定好的pipline而言（每日构建一类）</td>
+</tr>
+<tr>
+<td>triggers</td>
+<td>用token创建piplines的时候</td>
+</tr>
+<tr>
+<td>web</td>
+<td>在GitLab页面上Pipelines标签页下，你按了run pipline的时候</td>
+</tr>
+</tbody></table>
 
     
 
@@ -558,6 +721,15 @@
 
 
 <nav id="article-nav">
+  
+    <a href="/2020/09/10/ELK/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          ELK志实时处理系统
+        
+      </div>
+    </a>
   
   
     <a href="/2020/08/31/JVM/" id="article-nav-older" class="article-nav-link-wrap">
@@ -808,11 +980,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Golang</a>
+                <a href="javascript:void(0)" class="js-tag color3">MongoDB</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">MongoDB</a>
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -824,7 +996,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+                <a href="javascript:void(0)" class="js-tag color2">Golang</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -840,6 +1012,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Kuberentes</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
               </li>
              
@@ -852,14 +1028,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Kuberentes</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">动态规划</a>
               </li>
              
@@ -868,15 +1036,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Nginx</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Keepalived</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">TensorFlow</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -889,6 +1057,22 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">SpringBoot</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">TensorFlow</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ElasticSearch</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Kibana</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Logstash</a>
               </li>
              
               <li class="article-tag-list-item">
