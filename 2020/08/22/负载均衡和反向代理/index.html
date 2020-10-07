@@ -19,7 +19,8 @@
 <meta property="og:description" content="对于负载均衡我们要关心的几个方面如下：  上游服务器配置：使用upstream server配置上游服务器。 负载均衡算法：配置多个上游服务器时的负载均衡机制。 失败重试机制：配置当超时或上游服务器不存活时，是否需要重试其他上游服务器。 服务器心跳检查：上游服务器的健康检查/心跳检查。  Nginx提供的负载均衡可以实现上游服务器的负载均衡，故障转移，失败重试，容错，健康检查等。当某些上游服务器出">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://niconiconi233.github.io/2020/08/22/负载均衡和反向代理/server.PNG">
-<meta property="og:updated_time" content="2020-08-22T14:06:39.785Z">
+<meta property="og:image" content="https://niconiconi233.github.io/2020/08/22/负载均衡和反向代理/consul-template.PNG">
+<meta property="og:updated_time" content="2020-10-07T08:32:33.025Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="负载均衡和反向代理">
 <meta name="twitter:description" content="对于负载均衡我们要关心的几个方面如下：  上游服务器配置：使用upstream server配置上游服务器。 负载均衡算法：配置多个上游服务器时的负载均衡机制。 失败重试机制：配置当超时或上游服务器不存活时，是否需要重试其他上游服务器。 服务器心跳检查：上游服务器的健康检查/心跳检查。  Nginx提供的负载均衡可以实现上游服务器的负载均衡，故障转移，失败重试，容错，健康检查等。当某些上游服务器出">
@@ -231,7 +232,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">2k字</span>
+      <span class="post-count">6.8k字</span>
     </span>
   </span>
 
@@ -240,7 +241,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">7分</span>
+      <span class="post-count">27分</span>
     </span>
   </span>
 </div>
@@ -262,7 +263,18 @@
 <p><img src="/2020/08/22/负载均衡和反向代理/server.PNG" alt="server"></p>
 <a id="more"></a>
 
-<h2 id="2-1-upstream配置"><a href="#2-1-upstream配置" class="headerlink" title="2.1 upstream配置"></a>2.1 upstream配置</h2><p>第一步需要给Nginx配置上游服务器，即负载均衡到的真实处理业务的服务器，通过在http指令下配置upstream即可</p>
+<h1 id="一、Nginx部分配置"><a href="#一、Nginx部分配置" class="headerlink" title="一、Nginx部分配置"></a>一、Nginx部分配置</h1><h2 id="1-0-Location正则表达式"><a href="#1-0-Location正则表达式" class="headerlink" title="1.0 Location正则表达式"></a>1.0 Location正则表达式</h2><p><strong>location指令的作用是根据用户请求的URI来执行不同的应用，也就是根据用户请求的网站URL进行匹配，匹配成功即进行相关的操作。</strong></p>
+<ol>
+<li>location的语法</li>
+</ol>
+<ul>
+<li>=开头表示精确匹配</li>
+<li>^~开头表示url以某个常规字符串开头，不是正则匹配</li>
+<li>~开头表示区分大小写的正则匹配</li>
+<li>~*开头表示不区分大小写的正则匹配</li>
+<li>/通用匹配，如果没有其他匹配，任何请求都会匹配</li>
+</ul>
+<h2 id="1-1-upstream配置"><a href="#1-1-upstream配置" class="headerlink" title="1.1 upstream配置"></a>1.1 upstream配置</h2><p>第一步需要给Nginx配置上游服务器，即负载均衡到的真实处理业务的服务器，通过在http指令下配置upstream即可</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">upstream backend&#123;</span><br><span class="line">	server 127.0.0.1:8080 weight=1;</span><br><span class="line">	server 127.0.0.1:8081 weight=2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <ul>
@@ -271,7 +283,7 @@
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">	proxy_pass http://backend;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="2-2-负载均衡算法"><a href="#2-2-负载均衡算法" class="headerlink" title="2.2 负载均衡算法"></a>2.2 负载均衡算法</h2><p>复制均衡用来解决用户请求到来时如何选择upstream server进行处理，默认采用round-robin，同时支持其他几种算法。</p>
+<h2 id="1-2-负载均衡算法"><a href="#1-2-负载均衡算法" class="headerlink" title="1.2 负载均衡算法"></a>1.2 负载均衡算法</h2><p>复制均衡用来解决用户请求到来时如何选择upstream server进行处理，默认采用round-robin，同时支持其他几种算法。</p>
 <ul>
 <li><p><strong>round-robin</strong>：轮询，默认负载均衡算法，通过配合weight配置可以实现基于权重的轮询。</p>
 </li>
@@ -298,14 +310,14 @@
 
 </li>
 </ul>
-<h2 id="2-3-失败重试"><a href="#2-3-失败重试" class="headerlink" title="2.3 失败重试"></a>2.3 失败重试</h2><p>主要有两部分配置: upstream server和proxy_pass</p>
+<h2 id="1-3-失败重试"><a href="#1-3-失败重试" class="headerlink" title="1.3 失败重试"></a>1.3 失败重试</h2><p>主要有两部分配置: upstream server和proxy_pass</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">upstream backend&#123;</span><br><span class="line">	server xxx max_fails=2 fail_timeout=10s weight=1;</span><br><span class="line">	server xxx max_fails=2 fail_timeout=10s weight=2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>通过配置上游服务器的max_fails和fail_timeout，来指定每个上游服务器，当fail_timeout时间内失败了max_fails次请求，则认为该上游服务器不可用，然后</p>
 <p>将摘掉该上游服务器，fail_timeout时间后会财产将该服务器将入到存活上游服务器列表进行重试。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">location /test &#123;</span><br><span class="line">	proxy_connect_timeout 5s;</span><br><span class="line">	proxy_read_timeout 5s;</span><br><span class="line">	proxy_send_timeout 5s;</span><br><span class="line">	</span><br><span class="line">	proxy_next_upstream error timeout;</span><br><span class="line">	</span><br><span class="line">*************************注释******************************</span><br><span class="line">    proxy_next_upstream error | timeout | invalid_header | http_500 | http_502 | http_503 | http_504 | http_403 | http_404 | http_429 | non_idempotent | off ...;</span><br><span class="line">    Default:    proxy_next_upstream error timeout;</span><br><span class="line">    Context:    http, server, location</span><br><span class="line"></span><br><span class="line">    指定应将请求传递到下一个服务器的情况：</span><br><span class="line">    error             # 与服务器建立连接，向其传递请求或读取响应头时发生错误;</span><br><span class="line">    timeout           # 在与服务器建立连接，向其传递请求或读取响应头时发生超时;</span><br><span class="line">    invalid_header    # 服务器返回空的或无效的响应;</span><br><span class="line">    http_500          # 服务器返回代码为500的响应;</span><br><span class="line">    http_502          # 服务器返回代码为502的响应;</span><br><span class="line">    http_503          # 服务器返回代码为503的响应;</span><br><span class="line">    http_504          # 服务器返回代码504的响应;</span><br><span class="line">    http_403          # 服务器返回代码为403的响应;</span><br><span class="line">    http_404          # 服务器返回代码为404的响应;</span><br><span class="line">    http_429          # 服务器返回代码为429的响应（1.11.13）;</span><br><span class="line">    non_idempotent    # 通常，请求与 非幂等 方法（POST，LOCK，PATCH）不传递到请求是否已被发送到上游服务器（1.9.13）的下一个服务器; 启用此选项显式允许重试此类请求;</span><br><span class="line">    off               # 禁用将请求传递给下一个服务器。</span><br><span class="line">********************END**************************************    </span><br><span class="line">	proxy_next_upstream_timeout 10s;</span><br><span class="line">	proxy_next_upstream_tries 2;</span><br><span class="line"></span><br><span class="line">	proxy_pass http://backend;</span><br><span class="line">	add_header upstream_addr $upstream_addr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="2-4-健康检查"><a href="#2-4-健康检查" class="headerlink" title="2.4 健康检查"></a>2.4 健康检查</h2><p>Nginx对上游服务器的健康检查默认采用的是惰性策略，Nginx商业版提供了health_check进行主动健康检查，当然也可以集成nginx_upstream_check_module模块来进行主动健康检查。</p>
+<h2 id="1-4-健康检查"><a href="#1-4-健康检查" class="headerlink" title="1.4 健康检查"></a>1.4 健康检查</h2><p>Nginx对上游服务器的健康检查默认采用的是惰性策略，Nginx商业版提供了health_check进行主动健康检查，当然也可以集成nginx_upstream_check_module模块来进行主动健康检查。</p>
 <p>nginx_upstream_check_module支持TCP心跳和HTTP心跳来实现健康检查。</p>
 <h3 id="TCP心跳检查"><a href="#TCP心跳检查" class="headerlink" title="TCP心跳检查"></a>TCP心跳检查</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">upstream backend&#123;</span><br><span class="line">	server xxx weight=1;</span><br><span class="line">	server xxx weight=2;</span><br><span class="line">	check interval=3000 rise=1 fall=3 timeout=2000 type-tcp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -328,17 +340,17 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">patch -p0 ../nginx_upstream_check_module-master/check_1.16.1+.patch</span><br></pre></td></tr></table></figure>
 
 <p>如果不安装补丁，那么nginx_upstream_check_module模块是不工作的，建议使用wireshark抓包查看其是否工作。</p>
-<h2 id="2-5-其他配置"><a href="#2-5-其他配置" class="headerlink" title="2.5 其他配置"></a>2.5 其他配置</h2><h3 id="域名上游服务器"><a href="#域名上游服务器" class="headerlink" title="域名上游服务器"></a>域名上游服务器</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">upstream backend&#123;</span><br><span class="line">	server c0.3.cn;</span><br><span class="line">	server xxxx.cn;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="1-5-其他配置"><a href="#1-5-其他配置" class="headerlink" title="1.5 其他配置"></a>1.5 其他配置</h2><h3 id="域名上游服务器"><a href="#域名上游服务器" class="headerlink" title="域名上游服务器"></a>域名上游服务器</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">upstream backend&#123;</span><br><span class="line">	server c0.3.cn;</span><br><span class="line">	server xxxx.cn;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>在社区版中，在nginx解析配置文件阶段将域名解析为IP地址并记录到upstream上，当域名对应的IP地址发生变化时，该upstream不会更新，Nginx商业版才支持动态更新。</p>
 <p>不过，proxy_pass <a href="http://c0.3.cn是支持动态域名解析的。">http://c0.3.cn是支持动态域名解析的。</a></p>
-<h2 id="备份上游服务器"><a href="#备份上游服务器" class="headerlink" title="备份上游服务器"></a>备份上游服务器</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">upstream backend&#123;</span><br><span class="line">	server xxx weight=1;</span><br><span class="line">	server xxx weight=2 backup;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="1-6-备份上游服务器"><a href="#1-6-备份上游服务器" class="headerlink" title="1.6 备份上游服务器"></a>1.6 备份上游服务器</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">upstream backend&#123;</span><br><span class="line">	server xxx weight=1;</span><br><span class="line">	server xxx weight=2 backup;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>将第二个服务器配置为备份上游服务器，当所有上游服务器都不可用是，请求会转发给备份服务器。</p>
 <h3 id="不可用上游服务器"><a href="#不可用上游服务器" class="headerlink" title="不可用上游服务器"></a>不可用上游服务器</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">upstream backend&#123;</span><br><span class="line">	server xxx weight=1;</span><br><span class="line">	server xxx weight=2 down;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>第二个服务器配置为永久不可用，当测试或者机器出现故障时，暂时通过该配置临时摘掉机器。</p>
-<h2 id="2-6-长连接"><a href="#2-6-长连接" class="headerlink" title="2.6 长连接"></a>2.6 长连接</h2><p>此处只涉及如何配置Nginx与上游服务器的长连接，通过keepalive指令配置长连接数量。</p>
+<h2 id="1-7-长连接"><a href="#1-7-长连接" class="headerlink" title="1.7 长连接"></a>1.7 长连接</h2><p>此处只涉及如何配置Nginx与上游服务器的长连接，通过keepalive指令配置长连接数量。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">upstream backend&#123;</span><br><span class="line">	server xxx weight=1;</span><br><span class="line">	server xxx weight=2 backup;</span><br><span class="line">	keepalive 100</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>通过giant指令配置了每个Worker进程与上游服务器可缓存的空闲连接的最大数量。当超出这个数量时，最近最少使用的连接将被关闭，keepalive指令不小之Worker进程与上游服务器的总连接。</p>
@@ -352,6 +364,110 @@
 <li>空闲连接池太大，空闲连接太多，没使用就超时。</li>
 </ul>
 <p>建议只对小报文开启长连接。</p>
+<h2 id="1-9-HTTP反向代理示例"><a href="#1-9-HTTP反向代理示例" class="headerlink" title="1.9 HTTP反向代理示例"></a>1.9 HTTP反向代理示例</h2><ol>
+<li>全局配置(proxy cache)</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">http&#123;</span><br><span class="line">  ...</span><br><span class="line">  #该参数设置是否开启proxy的buffer功能，参数的值为on或者off。</span><br><span class="line">  #如果这个设置为off，那么proxy_buffers和proxy_busy_buffers_size这两个指令将会失效。 </span><br><span class="line">  #但是无论proxy_buffering是否开启，proxy_buffer_size都是生效的</span><br><span class="line">  proxy_buffering	on;</span><br><span class="line">  #该参数用来设置一个特殊的buffer大小的。</span><br><span class="line">  #从被代理服务器（C）上获取到的第一部分响应数据内容到代理服务器（B）上，通常是header，就存到了这个buffer中。</span><br><span class="line">  proxy_buffer_size 4k;</span><br><span class="line">  #这个参数设置存储被代理服务器上的数据所占用的buffer的个数和每个buffer的大小。</span><br><span class="line">  #所有buffer的大小为这两个数字的乘积。</span><br><span class="line">  proxy_buffers 512 4k;</span><br><span class="line">  #在所有的buffer里，我们需要规定一部分buffer把自己存的数据传给A，这部分buffer就叫做busy_buffer。</span><br><span class="line">  proxy_busy_buffers_size 64k;</span><br><span class="line">  proxy_temp_file_write_size 256k;</span><br><span class="line">  proxy_cache_lock on;</span><br><span class="line">  proxy_cache_lock_timeout 200ms;</span><br><span class="line">  #定义proxy的临时文件存在目录以及目录的层级。</span><br><span class="line">  proxy_temp_path /var/lib/nginx/proxy_temp 1 2;</span><br><span class="line">  proxy_cache_path /var/lib/nginx/proxy_cache levels=1:2 keys_zone=cache:512m inactive=5m max_size=8g;</span><br><span class="line">	</span><br><span class="line">  proxy_connect_timeout 3s;</span><br><span class="line">  proxy_read_timeout 5s;</span><br><span class="line">  proxy_send_timeout 5s;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>proxy_cache_path配置说明如下：</p>
+<ul>
+<li>path：本地路径，用来设置Nginx缓存资源的存放地址</li>
+<li>levels：默认所有缓存文件都放在同一个path下，但是会影响缓存的性能，因此通常会在path下面建立子目录用来分别存放不同的文件。假设levels=1:2，Nginx为将要缓存的资源生成的key为f4cd0fbc769e94925ec5540b6a4136d0，那么key的最后一位0，以及倒数第2-3位6d作为两级的子目录，也就是该资源最终会被缓存到/path/to/cache/0/6d目录中</li>
+<li>key_zone：在共享内存中设置一块存储区域来存放缓存的key和metadata（类似使用次数），这样nginx可以快速判断一个request是否命中或者未命中缓存，1m可以存储8000个key，10m可以存储80000个key</li>
+<li>max_size：最大cache空间，如果不指定，会使用掉所有disk space，当达到配额后，会删除最少使用的cache文件</li>
+<li>inactive：未被访问文件在缓存中保留时间，本配置中如果60分钟未被访问则不论状态是否为expired，缓存控制程序会删掉文件。inactive默认是10分钟。需要注意的是，inactive和expired配置项的含义是不同的，expired只是缓存过期，但不会被删除，inactive是删除指定时间内未被访问的缓存文件</li>
+</ul>
+<ol start="2">
+<li>location配置</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">location ~ ^/backend/(.*)$ &#123;</span><br><span class="line">    #失败重试配置</span><br><span class="line">	proxy_next_upstream error timeout http_500 http_502 http_504;</span><br><span class="line">	proxy_next_upstream_timeout 2s;</span><br><span class="line">	proxy_next_upstream_tries 2;</span><br><span class="line">	</span><br><span class="line">	#请求上游服务器使用GET方法(不管请求是什么方法)</span><br><span class="line">	proxy_method GET;</span><br><span class="line">	#不给上游服务器传递请求体</span><br><span class="line">	proxy_pass_request_body off;</span><br><span class="line">	#不给上游服务器传递请求头</span><br><span class="line">	proxy_pass_request_headers off;</span><br><span class="line">	#设置上游服务器的那些响应头不发给客户端</span><br><span class="line">	proxy_hide_header Vary;</span><br><span class="line">	#支持keep-alive</span><br><span class="line">	proxy_http_version 1.1;</span><br><span class="line">	proxy_set_header Connection &quot;&quot;;</span><br><span class="line">	#给上游服务器传递Referer,Cookie和Host(按需传递)</span><br><span class="line">	proxy_set_header Referer $http_referer;</span><br><span class="line">	proxy_set_header Cookie $http_cookie;</span><br><span class="line">	proxy_set_header Host web.c.3.local;</span><br><span class="line">	proxy_pass http://backend /$1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当客户端请求 /api 这个路径下的资源时服务器就会帮助我们去 127.0.0.1 的 1234 端口上取资源，解决了跨域的问题。proxy_pass 会将当前的 $uri 带过去，所以如果 /api 这个路由是我们擅自加的，在发送到目标服务前可以使用 rewrite 来处理掉这个多余的路由，比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">location /api/ &#123; </span><br><span class="line">	rewrite ^/api/(.*) /$1 break; </span><br><span class="line">	proxy_pass http://127.0.0.1:1234;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>rewrite 的作用是修改 <code>$uri</code>，但要注意 rewrite 要有个重新匹配 location 的副作用。由于 proxy_pass 的处理阶段比 location 处理更晚，所以这里需要 break 掉，以防止 rewrite 进入下一次 location 匹配而丢失 proxy_pass。$1表示第一个括号内匹配的正则参数。</p>
+<p>在nginx中配置proxy_pass时，当在后面的url加上了/，相当于是绝对根路径，则nginx不会把location中匹配的路径部分代理走;如果没有/，则会把匹配的路径部分也给代理走。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">若访问 http://nginx_server/test/index.html</span><br><span class="line"></span><br><span class="line">1,若 location /test/ &#123;</span><br><span class="line">		proxy_pass http://192.168.1.1/   #有斜杠</span><br><span class="line">	 &#125;</span><br><span class="line">则该请求被代理到  http://192.168.1.1/index.html</span><br><span class="line"></span><br><span class="line">2,若 location /test/ &#123;</span><br><span class="line">		proxy_pass http://192.168.1.1   #没有斜杠</span><br><span class="line">	 &#125;</span><br><span class="line">则该请求被代理到  http://192.168.1.1/test/index.html</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>gzip配置，减少网络传输的数据包大</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">http &#123;</span><br><span class="line">    include       /etc/nginx/mime.types;</span><br><span class="line">    default_type  application/octet-stream;</span><br><span class="line"></span><br><span class="line">    log_format  main  &apos;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &apos;</span><br><span class="line">                      &apos;$status $body_bytes_sent &quot;$http_referer&quot; &apos;</span><br><span class="line">                      &apos;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&apos;;</span><br><span class="line"></span><br><span class="line">    access_log  /var/log/nginx/access.log  main;</span><br><span class="line"></span><br><span class="line">    sendfile        on;</span><br><span class="line">    #tcp_nopush     on;</span><br><span class="line"></span><br><span class="line">    keepalive_timeout  65;</span><br><span class="line"></span><br><span class="line">    gzip  on;</span><br><span class="line">	gzip_min_length 1k;</span><br><span class="line">	gzip_buffers 16 16k;</span><br><span class="line">	gzip_http_version 1.0;</span><br><span class="line">	gzip_proxied any;</span><br><span class="line">	gzip_comp_level 2;</span><br><span class="line">	gzip_types text/plain application/x-javascript text/css application/xml;</span><br><span class="line">	gzip_vary on;</span><br><span class="line"></span><br><span class="line">    include /etc/nginx/conf.d/*.conf;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-10-HTTP动态负载均衡"><a href="#1-10-HTTP动态负载均衡" class="headerlink" title="1.10 HTTP动态负载均衡"></a>1.10 HTTP动态负载均衡</h2><p>如上的负载均衡实现中，每次upstream列表有变更，都需要到服务器进行修改，首先是管理容易出现错误，而且对于upstream服务器上线无法自动注册早nginx upstream列表，因此，我们需要一种服务注册，可以将upstream动态注册到Nginx上，从而实现upstream服务的自动发现。</p>
+<p>Consul是一款开源的分布式服务注册与发现系统，通过HTTP API使得服务注册，发现实现起来非常简单，它支持如下特性。</p>
+<ul>
+<li>服务注册：服务实现者可以通过HTTP API或DNS方式，将服务注册到Consul</li>
+<li>服务发现：服务消费者可以通过HTTP API或DNS方式，从consul获取服务的IP和PORT。</li>
+<li>故障检测：支持如TPC，HTTP等方式的健康检查机制，从而当服务有故障时自动摘除。</li>
+<li>K/V配置：使用K/V存储实现动态配置中心，其使用HTTP长轮询实现变更触发和配置更改。</li>
+<li>多数据中心：支持多数据中心，可以按照数据中心注册和发现服务，级支持只消费本地机房服务，使用多数据中心集群还可以避免但数据中心的单点故障。</li>
+<li>Raft算法：Consul使用Raft算法实现集群数据一致性。</li>
+</ul>
+<p>通过Consul可以管理服务注册与发现，接下来需要有一个与Nginx部署在同一台机器的Agent来实现Nginx更改和Nginx重启功能。我们有confd或者consul-emplate两个选择，而consul-template是consul官方提供的，其使用HTTP长轮询实现变更触发和配置更改，也就是说我们使用consul-template实现配置模板，然后篮球consul配置渲染模板来生成nginx实际配置。</p>
+<h3 id="1-10-1-Consul-Consul-template"><a href="#1-10-1-Consul-Consul-template" class="headerlink" title="1.10.1 Consul+Consul-template"></a>1.10.1 Consul+Consul-template</h3><p><img src="/2020/08/22/负载均衡和反向代理/consul-template.PNG" alt></p>
+<p>首先，upstream服务启动，我们通过管理后台向Consul注册服务。</p>
+<p>我们需要在Nginx机器上部署并启动Consul-template Agent，其通过长轮询监听服务变更。</p>
+<p>Consul-template监听到边跟后，动态修改upstream列表。</p>
+<p>Consul-template修改完upstream列表后，调用重启Nginx脚本重启Nginx.</p>
+<ol>
+<li>Consul-Server</li>
+</ol>
+<p>首先要启动Consul-Server</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./consul agent -server -bootstrap-expect 1 -data-dir /tmp/consul -bind 0.0.0.0 -client 0.0.0.0 -ui</span><br></pre></td></tr></table></figure>
+
+<p>data-dir指定了Agent状态存储位置，bind指定集群通信的地址，client指定客户端通信的地址(如consul-template与consul通信)。在启动时还可以使用-ui启动ui界面，实现通过web ui管理consul，通过<code>http://ip:8500/ui</code>访问ui界面。</p>
+<p>Consul命令行配置：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">-bootstrap：启动模式，此模式下，节点可以选举自己为leader，一个数据中心只能有一个此模式启动的节点。机群启动后，新启动的节点不建议使用这种模式。</span></span><br><span class="line"><span class="string">-bootstrap-expect：设定一个数据中心需要的服务节点数，可以不设置，设置的数字必须和实际的服务节点数匹配。consul会等待直到数据中心下的服务节点满足设定才会启动集群服务。初始化leader选举，不能和bootstrap混用。必须配合-server配置。</span></span><br><span class="line"><span class="string">-bind：绑定的内部通讯地址，默认0.0.0.0，即，所有的本地地址，会将第一个可用的ip地址散播到集群中，如果有多个可用的ipv4，则consul启动报错。[::]ipv6，TCP</span> <span class="string">UDP协议，相同的端口。防火墙配置。</span></span><br><span class="line"><span class="string">-client：客户端模式，http</span> <span class="string">dns，默认127.0.0.1，回环令牌网址</span></span><br><span class="line"><span class="string">-config-file：配置文件位置</span></span><br><span class="line"><span class="string">-config-dir：配置文件所在文件夹，会加载其下所有配置文件，.json或者.hcl文件，加载顺序为字母表顺序；可用配置多个此配置，从而加载多个文件夹，子文件夹的配置不会被加载。</span></span><br><span class="line"><span class="string">-config-format：配置文件格式，配置了，则加载相应个是的文件。不配置，则consul自动识别。</span></span><br><span class="line"><span class="string">-data-dir：状态数据存储文件夹，所有的节点都需要。文件夹位置需要不收consul节点重启影响，必须能够使用操作系统文件锁，unix-based系统下，文件夹文件权限为0600，注意做好账户权限控制，</span></span><br><span class="line"><span class="string">-datacenter：数据中心名称，默认dc1，一个数据中心的所有节点都必须在一个LAN中。</span></span><br><span class="line"><span class="string">-dev：开发模式，去掉所有持久化选项，内存服务器模式。</span></span><br><span class="line"><span class="string">-disable-host-node-id：不使用host信息生成node</span> <span class="string">ID，适用于同一台服务器部署多个实例用于测试的情况。随机生成nodeID</span></span><br><span class="line"><span class="string">-dns-port：v7.0以后，自定义dns</span> <span class="string">端口，覆盖默认8600</span></span><br><span class="line"><span class="string">-enable-script-checks：是否允许使用脚本进行健康检查，默认false，最好配置enable</span> <span class="string">acl</span></span><br><span class="line"><span class="string">-encrypt：consul网络通讯加密key，base64加密，16比特；consul</span> <span class="string">keygen产生。集群中的每个实例必须提供相同的，只需提供一次，然后会保存到数据文件。重启自动加载。consul节点启动后提供，会被忽略。</span></span><br><span class="line"><span class="string">-hcl：添加hcl格式配置，和已有的配置合并。可以使用多个此配置。</span></span><br><span class="line"><span class="string">-http-port：http</span> <span class="string">api端口，覆盖默认的8500。适用于云环境指定。</span></span><br><span class="line"><span class="string">-log-file：日志记录文件，如果没有提供文件名，则默认Consul-时间戳.log</span></span><br><span class="line"><span class="string">-log-level：日志级别，默认info，包含：trace，debug，info，warn，err；consul</span> <span class="string">monitor监控</span></span><br><span class="line"><span class="string">-log-rotate-bytes：新日志文件生成大小阈值。</span></span><br><span class="line"><span class="string">-log-rotate-rotation：新日志生成时间阈值</span></span><br><span class="line"><span class="string">-join：需要加入的其它节点地址，可以多次使用，加入多个节点。</span></span><br><span class="line"><span class="string">-retry-join：会进行加入重试，适用于认定加入节点最终会正常的情况。ipv4，ipv6，dns</span></span><br><span class="line"><span class="string">-retry-interval：上述，重试间隔，默认30s</span></span><br><span class="line"><span class="string">-retry-max：重试次数，默认0，无限次重试</span></span><br><span class="line"><span class="string">-join-wan，</span> <span class="string">-retry-join-wan，</span> <span class="string">-retry-interval-wan，</span> <span class="string">-retry-max-wan</span> </span><br><span class="line"><span class="string">-node：节点名称，默认主机名</span></span><br><span class="line"><span class="string">-node-id：节点ID，</span></span><br><span class="line"><span class="string">-pid-file：consul</span> <span class="string">存储</span> <span class="string">pid</span> <span class="string">的文件位置，用于主动发信号。如停止节点，重载配置等。</span></span><br><span class="line"><span class="string">-protocol：使用的协议，升级时使用。consul</span> <span class="string">-v查看协议版本</span></span><br><span class="line"><span class="string">-raft-protocol：使用raft协议版本，默认3</span></span><br><span class="line"><span class="string">-raft-snapshot-threshold：raft执行快照，提交次数阈值。一般不需要设置，io密集型应用可以调高。避免所有的节点同一时间快照。此值过大，会造成相应日志文件变大，节点重启恢复会耗费更长时间。1.1.0后，默认16384，之前8192.</span></span><br><span class="line"><span class="string">-raft-snapshot-interval：执行快照间隔，影响类似上个配置，1.1.0后默认30s，之前5s。</span></span><br><span class="line"><span class="string">-rejoin：节点会尝试重新加入集群。</span></span><br><span class="line"><span class="string">-server：服务端节点模式。</span></span><br><span class="line"><span class="string">-server-port：服务端RPC端口，v1.2.2后提供。</span></span><br><span class="line"><span class="string">-non-voting-server：服务节点不参与选举，接受日志复制，用于横向扩展，服务查询请求。（类比zookeeper</span> <span class="string">观察者节点）</span></span><br><span class="line"><span class="string">-syslog：linux</span> <span class="string">OSX系统，配置日志输出到系统日志。</span></span><br><span class="line"><span class="string">-ui：内置web</span> <span class="string">ui界面。</span></span><br><span class="line"><span class="string">-ui-dir：web</span> <span class="string">ui</span> <span class="string">资源文件夹，使用此配置，则不需也不能使用再-ui配置。</span></span><br></pre></td></tr></table></figure>
+
+<p>使用如下HTTP API注册服务：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">PUT</span> <span class="string">http://172.23.204.30:8500/v1/catalog/register</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line">    <span class="string">"Datacenter"</span><span class="string">:"dc1",</span></span><br><span class="line">    <span class="string">"Node"</span><span class="string">:"tomcat",</span></span><br><span class="line">    <span class="string">"Address"</span><span class="string">:"127.0.0.1",</span></span><br><span class="line">    <span class="string">"Service"</span><span class="string">:&#123;"Id":"127.0.0.1:8081",</span> <span class="string">"Service"</span><span class="string">:"dev-tomcat",</span> <span class="string">"tags"</span><span class="string">:["dev"],</span> <span class="string">"Port"</span><span class="string">:8081&#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>Datacenter指定数据中心，Address指定服务IP，Service.Id指定服务唯一标识，Service。Service指定服务分组，Service.tag指定服务标签(如测试环境，预发环境等)，Service.Port指定服务器端口。</p>
+<p>通过如下HTTP API摘除服务：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">PUT</span> <span class="string">http://172.23.204.30:8500/v1/catalog/deregister</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line">    <span class="string">"Datacenter"</span><span class="string">:"dc1",</span></span><br><span class="line">    <span class="string">"Node"</span><span class="string">:"tomcat",</span></span><br><span class="line">    <span class="string">"ServiceID"</span><span class="string">:"127.0.0.1:8080"</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>通过如下HTTP API发现服务：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">GET</span> <span class="string">http://172.23.204.30:8500/v1/catalog/service/dev-tomcat</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>Consul-template</li>
+</ol>
+<p><a href="https://github.com/hashicorp/consul-template">Consul-template下载地址</a></p>
+<p>接下来我们需要在Consul-template机器上添加一份配置模板tomcat.ctmpl。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#修改upstream结构</span></span><br><span class="line">	<span class="string">upstream</span> <span class="string">tomcat&#123;</span></span><br><span class="line">        <span class="string">server</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span><span class="string">:8080</span> <span class="string">weight=1;</span></span><br><span class="line">        <span class="string">&#123;&#123;range</span> <span class="string">service</span> <span class="string">"dev.dev-tomcat@dc1"</span><span class="string">&#125;&#125;</span></span><br><span class="line">            <span class="string">server</span> <span class="string">&#123;&#123;.Address&#125;&#125;:&#123;&#123;.Port&#125;&#125;</span> <span class="string">weight=1;</span></span><br><span class="line">        <span class="string">&#123;&#123;end&#125;&#125;</span></span><br><span class="line">    <span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>service指定格式为：标签.服务@数据中心，然后通过循环输出Address和Port,从而生成Nginx upstream配置。</p>
+<p>启动Consul-template:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./consul-template -consul-addr 127.0.0.1:8500 -template ./tomcat.ctmpl:/usr/local/nginx/conf/nginx.conf:"./restart.sh"</span><br></pre></td></tr></table></figure>
+
+<p>通过consul指定consul服务器客户端通信地址，template格式是”配置模板:目标配置文件:脚本”，通过配置模板更新目标文件，然后调用脚本重启nginx。</p>
+<p>直接通过Nginx include将配置文件包含到nginx.conf配置文件即可，restart.sh代码为：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/bash</span><br><span class="line">ps -ef| grep nginx | grep -v grep</span><br><span class="line">if [ $? -ne 0]</span><br><span class="line">then</span><br><span class="line">  sudo /usr/local/nginx/sbin/nginx</span><br><span class="line">  echo "nginx start"</span><br><span class="line"> else</span><br><span class="line">  sudo /usr/local/nginx/sbin/nginx -s reload</span><br><span class="line">  echo "nginx reload"</span><br><span class="line"> fi</span><br></pre></td></tr></table></figure>
+
+<p>即如果Nginx没有启动，则启动，否则重启。</p>
+<p>Consul-template常用参数和作用:</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">-consul-auth=&lt;username[:password]&gt;</span>      <span class="string">设置基本的认证用户名和密码。</span></span><br><span class="line"><span class="string">-consul-addr=&lt;address&gt;</span>                  <span class="string">设置Consul实例的地址。</span></span><br><span class="line"><span class="string">-max-stale=&lt;duration&gt;</span>                   <span class="string">查询过期的最大频率，默认是1s。</span></span><br><span class="line"><span class="string">-dedup</span>                                  <span class="string">启用重复数据删除，当许多consul</span> <span class="string">template实例渲染一个模板的时候可以降低consul的负载。</span></span><br><span class="line"><span class="string">-consul-ssl</span>                             <span class="string">使用https连接Consul。</span></span><br><span class="line"><span class="string">-consul-ssl-verify</span>                      <span class="string">通过SSL连接的时候检查证书。</span></span><br><span class="line"><span class="string">-consul-ssl-cert</span>                        <span class="string">SSL客户端证书发送给服务器。</span></span><br><span class="line"><span class="string">-consul-ssl-key</span>                         <span class="string">客户端认证时使用的SSL/TLS私钥。</span></span><br><span class="line"><span class="string">-consul-ssl-ca-cert</span>                     <span class="string">验证服务器的CA证书列表。</span></span><br><span class="line"><span class="string">-consul-token=&lt;token&gt;</span>                   <span class="string">设置Consul</span> <span class="string">API的token。</span></span><br><span class="line"><span class="string">-syslog</span>                                 <span class="string">把标准输出和标准错误重定向到syslog，syslog的默认级别是local0。</span></span><br><span class="line"><span class="string">-syslog-facility=&lt;facility&gt;</span>             <span class="string">设置syslog级别，默认是local0，必须和-syslog配合使用。</span></span><br><span class="line"><span class="string">-template=&lt;template&gt;</span>                    <span class="string">增加一个需要监控的模板，格式是：'templatePath:outputPath(:command)'，多个模板则可以设置多次。</span></span><br><span class="line"><span class="string">-wait=&lt;duration&gt;</span>                        <span class="string">当呈现一个新的模板到系统和触发一个命令的时候，等待的最大最小时间。如果最大值被忽略，默认是最小值的4倍。</span></span><br><span class="line"><span class="string">-retry=&lt;duration&gt;</span>                       <span class="string">当在和consul</span> <span class="string">api交互的返回值是error的时候，等待的时间，默认是5s。</span></span><br><span class="line"><span class="string">-config=&lt;path&gt;</span>                          <span class="string">配置文件或者配置目录的路径。</span></span><br><span class="line"><span class="string">-pid-file=&lt;path&gt;</span>                        <span class="string">PID文件的路径。</span></span><br><span class="line"><span class="string">-log-level=&lt;level&gt;</span>                      <span class="string">设置日志级别，可以是"debug","info",</span> <span class="string">"warn"</span> <span class="string">(default),</span> <span class="string">and</span> <span class="string">"err"</span><span class="string">。</span></span><br><span class="line"><span class="string">-dry</span>                                    <span class="string">Dump生成的模板到标准输出，不会生成到磁盘。</span></span><br><span class="line"><span class="string">-once</span>                                   <span class="string">运行consul-template一次后退出，不以守护进程运行。</span></span><br></pre></td></tr></table></figure>
+
+<p>Consul-template模板语法：</p>
+<p><a href="https://github.com/hashicorp/consul-template#templating-language">官方文档</a></p>
+<p>tree例子：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#123;&#123;range</span> <span class="string">key</span> <span class="string">"service/redis@east-aws"</span><span class="string">&#125;&#125;</span></span><br><span class="line"><span class="string">&#123;&#123;.Key&#125;&#125;</span> <span class="string">&#123;&#123;.Value&#125;&#125;</span> <span class="string">&#123;&#123;end&#125;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>ls例子：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#123;&#123;range</span> <span class="string">ls</span> <span class="string">"service/redis@east-aws"</span><span class="string">&#125;&#125;</span></span><br><span class="line"><span class="string">&#123;&#123;.Key&#125;&#125;</span> <span class="string">&#123;&#123;.Value&#125;&#125;</span> <span class="string">&#123;&#123;end&#125;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">datacenters，在Consul目录中查询所有数据中心，使用以下语法`&#123;&#123;datacenters&#125;&#125;`。</span></span><br><span class="line"></span><br><span class="line"><span class="string">file，读取并输出磁盘上的本地文件，如果无法读取将产生一个错误，使用以下语法`&#123;&#123;file</span> <span class="string">"/path/to/local/file"</span><span class="string">&#125;&#125;`。</span></span><br><span class="line"></span><br><span class="line"><span class="string">key，查询consul中指定的key的值，如果key的值不能被转换成字符串，将产生错误，使用以下语法`&#123;&#123;key</span> <span class="string">"service/redis/maxconns"</span><span class="string">&#125;&#125;`。</span></span><br><span class="line"></span><br><span class="line"><span class="string">keyOrDefault，查询consul中指定的key的值，如果Key不存在，则返回默认值，使用以下语法`&#123;&#123;keyOrDefault</span> <span class="string">"service/redis/maxconns@east-asw"</span> <span class="string">"5"</span><span class="string">&#125;&#125;`。</span></span><br><span class="line"></span><br><span class="line"><span class="string">ls，查看consul的所有指定前缀开头的key-value对。如果有的值无法转换成字符串将产生一个错误。</span></span><br><span class="line"></span><br><span class="line"><span class="string">node，查询目录中的一个节点信息。`&#123;&#123;node</span> <span class="string">"node1"</span><span class="string">&#125;&#125;`，如果未指定任何参数，则当前Agent所在的节点将会被返回。还可以指定一个可选的参数来指定数据中心`&#123;&#123;node</span> <span class="string">"node1"</span> <span class="string">"@east-aws"</span><span class="string">&#125;&#125;`。</span></span><br><span class="line"></span><br><span class="line"><span class="string">nodes，查询consul目录中的全部节点，使用以下语法`&#123;&#123;nodes&#125;&#125;`还可以指定数据中心`&#123;&#123;nodes</span> <span class="string">"@east-aws"</span><span class="string">&#125;&#125;`。</span></span><br><span class="line"></span><br><span class="line"><span class="string">service，查询consul中匹配表达式的服务，使用以下语法`&#123;&#123;service</span> <span class="string">"release.web@east-aws"</span><span class="string">&#125;&#125;`，返回在数据中心存在并且健康的web服务，如果想获取所有服务，添加any选项`&#123;&#123;service</span> <span class="string">"web"</span> <span class="string">"any"</span><span class="string">&#125;&#125;`，如果想过滤指定的一个或多个健康状态，可以使用逗号隔开`&#123;&#123;service</span> <span class="string">"web"</span> <span class="string">"passing, waring"</span><span class="string">&#125;&#125;`。</span></span><br><span class="line"></span><br><span class="line"><span class="string">services，查询consul目录中的所有服务，使用以下语法`&#123;&#123;services&#125;&#125;`指定数据中心`&#123;&#123;services</span> <span class="string">"@east-aws"</span><span class="string">&#125;&#125;`。</span></span><br><span class="line"></span><br><span class="line"><span class="string">tree，查询所有指定前缀的key-value值对，如果无法转换成字符串则引发错误。</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>Java服务，使用SpringBoot+Consul java client实现</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    SpringApplication.run(DemoApplication<span class="class">.<span class="keyword">class</span>, <span class="title">args</span>)</span>;</span><br><span class="line">    <span class="comment">//服务注册</span></span><br><span class="line">    <span class="keyword">final</span> Consul build = Consul.builder().withHostAndPort(HostAndPort.fromParts(<span class="string">"172.23.197.58"</span>, <span class="number">8500</span>)).build();</span><br><span class="line">    <span class="keyword">final</span> AgentClient agentClient = build.agentClient();</span><br><span class="line"></span><br><span class="line">    String service = <span class="string">"test_demo_tomcat"</span>;</span><br><span class="line">    String address = <span class="string">"127.0.0.1"</span>;</span><br><span class="line">    String tag = <span class="string">"dev"</span>;</span><br><span class="line">    <span class="keyword">int</span> port = <span class="number">8080</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">final</span> String servicedId = address + <span class="string">":"</span> + port;</span><br><span class="line">    <span class="keyword">final</span> ImmutableRegistration.Builder builder = ImmutableRegistration.builder();</span><br><span class="line">    builder.id(servicedId).name(service).address(address).port(port).addTags(tag);</span><br><span class="line">    agentClient.register(builder.build());</span><br><span class="line">    <span class="comment">//关闭时取消注册</span></span><br><span class="line">    Runtime.getRuntime().addShutdownHook(<span class="keyword">new</span> Thread()&#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">            agentClient.deregister(servicedId);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在springboot 启动后进行服务注册，在JVM停止后进行服务摘除。</p>
+<blockquote>
+<p>通过consul + consul-template方式每次配置变更都需要reload nginx，而reload是有一定损耗的，而且需要长连接支持的话，那么当reload nginx时长连接所在的worker进程会进行优雅退出，并当该worker上的所有连接都释放时，进程才真正推出，如果能做到不reload就能动态更改upstream，就完美了，对于社区版nginx目前有三个选择：Tengine的Dyups模块，微博的Upsync和使用OpenResty的balancer_by_lua，微博使用Upsync + Consul实现动态负载均衡，而又拍云使用其开源的slardar（Consul + balancer_by_lua）实现动态负载均衡。</p>
+</blockquote>
 
     
 
@@ -658,11 +774,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">TCP</a>
+                <a href="javascript:void(0)" class="js-tag color3">IO</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">调试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">TCP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -671,14 +795,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IO</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -730,10 +846,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Golang</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
@@ -742,15 +854,11 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Golang</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">-TCP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Kuberentes</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -758,7 +866,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">CPP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Kuberentes</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -794,7 +910,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">TensorFlow</a>
+                <a href="javascript:void(0)" class="js-tag color2">GitLab</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">CI/CD</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">K8s</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -810,11 +934,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">GitLab</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">CI/CD</a>
+                <a href="javascript:void(0)" class="js-tag color1">TensorFlow</a>
               </li>
             
             <div class="clearfix"></div>

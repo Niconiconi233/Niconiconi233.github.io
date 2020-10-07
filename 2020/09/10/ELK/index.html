@@ -30,7 +30,10 @@
 <meta property="og:image" content="https://niconiconi233.github.io/2020/09/10/ELK/filebeat.png">
 <meta property="og:image" content="https://niconiconi233.github.io/2020/09/10/ELK/modules.PNG">
 <meta property="og:image" content="https://niconiconi233.github.io/2020/09/10/ELK/syslog.PNG">
-<meta property="og:updated_time" content="2020-09-21T08:01:53.620Z">
+<meta property="og:image" content="https://niconiconi233.github.io/2020/09/10/ELK/patterns.PNG">
+<meta property="og:image" content="https://niconiconi233.github.io/2020/09/10/ELK/pattern_redis.PNG">
+<meta property="og:image" content="https://niconiconi233.github.io/2020/09/10/ELK/geoip.PNG">
+<meta property="og:updated_time" content="2020-09-28T08:10:30.530Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ELK志实时处理系统">
 <meta name="twitter:description" content="ELK是一个应用套件，由ElasticSearch，Logstash和Kibana三部分组成，简称ELK，是一款开源免费，功能强大的日志分析管理系统。ELK可以将我们的系统日志，网站日志，应用日志等各种日志进行收集，过滤，清洗，然后进行集中存放并可用于实时检索，分析">
@@ -242,7 +245,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">5.6k字</span>
+      <span class="post-count">7.8k字</span>
     </span>
   </span>
 
@@ -251,7 +254,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">23分</span>
+      <span class="post-count">33分</span>
     </span>
   </span>
 </div>
@@ -486,7 +489,8 @@
 <p>logstash配置文件示例</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#================================= input kafka, output： es 示例 =============================#</span><br><span class="line">input &#123;</span><br><span class="line">    kafka &#123;</span><br><span class="line">        bootstrap_servers =&gt; [&quot;10.101.15.163:9092&quot;]</span><br><span class="line">	        group_id =&gt; &quot;deepcogni_qa&quot;</span><br><span class="line">	        topics =&gt; [&quot;deepcogni&quot;]</span><br><span class="line">	        consumer_threads =&gt; 5</span><br><span class="line">	        decorate_events =&gt; true</span><br><span class="line">	        codec =&gt; &quot;json&quot;</span><br><span class="line">	        #type用来标记事件类型，通常会在输入区域通过type标记事件类型</span><br><span class="line">	        #type =&gt; &quot;xxx&quot;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line">output &#123;</span><br><span class="line">    elasticsearch &#123;</span><br><span class="line">        hosts =&gt; [&quot;10.101.15.163:9200&quot;]</span><br><span class="line">        index =&gt; &quot;deepcogni:qa&quot;</span><br><span class="line">        codec =&gt; &quot;json&quot;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">#================================= input logfile, output es =============================#</span><br><span class="line"># Sample Logstash configuration for creating a simple</span><br><span class="line"># Beats -&gt; Logstash -&gt; Elasticsearch pipeline.</span><br><span class="line"> </span><br><span class="line">input &#123;</span><br><span class="line">  #beats &#123;</span><br><span class="line">   # port =&gt; 5044</span><br><span class="line">  #&#125;</span><br><span class="line">  file &#123;</span><br><span class="line">    path =&gt; &quot;/var/log/httpd/access_log&quot;</span><br><span class="line">    start_position =&gt; beginning</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">output &#123;</span><br><span class="line">  elasticsearch &#123;</span><br><span class="line">    hosts =&gt; [&quot;http://localhost:9200&quot;]</span><br><span class="line">    index =&gt; &quot;%&#123;[@metadata][logstash]&#125;-%&#123;[@metadata][version]&#125;-%&#123;+YYYY.MM.dd&#125;&quot;</span><br><span class="line">    #user =&gt; &quot;elastic&quot;</span><br><span class="line">    #password =&gt; &quot;changeme&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">#================================= input: log file, output: redis =============================#</span><br><span class="line">input &#123;</span><br><span class="line">    file &#123;</span><br><span class="line">        path =&gt; [</span><br><span class="line">            # 这里填写需要监控的文件</span><br><span class="line">            &quot;/data/log/php/php_fetal.log&quot;,</span><br><span class="line">            &quot;/data/log/service1/access.log&quot;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">output &#123;</span><br><span class="line">    # 输出到控制台</span><br><span class="line">    # stdout &#123; &#125;</span><br><span class="line"> </span><br><span class="line">    # 输出到redis</span><br><span class="line">    redis &#123;</span><br><span class="line">        host =&gt; &quot;10.140.45.190&quot;   # redis主机地址</span><br><span class="line">        port =&gt; 6379              # redis端口号</span><br><span class="line">        db =&gt; 8                   # redis数据库编号</span><br><span class="line">        data_type =&gt; &quot;channel&quot;    # 使用发布/订阅模式</span><br><span class="line">        key =&gt; &quot;logstash_list_0&quot;  # 发布通道名称</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">#================================= input: redis, output: log file  =============================#</span><br><span class="line">input &#123;</span><br><span class="line">    redis &#123; </span><br><span class="line">        host      =&gt; &quot;10.140.45.190&quot;    # redis主机地址</span><br><span class="line">        port      =&gt; 6379               # redis端口号</span><br><span class="line">        db        =&gt; 8                  # redis数据库编号</span><br><span class="line">        data_type =&gt; &quot;channel&quot;          # 使用发布/订阅模式</span><br><span class="line">        key       =&gt; &quot;logstash_list_0&quot;  # 发布通道名称</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br><span class="line">output &#123; </span><br><span class="line">    file &#123; </span><br><span class="line">        path           =&gt; &quot;/data/log/logstash/all.log&quot; # 指定写入文件路径</span><br><span class="line">        message_format =&gt; &quot;%&#123;host&#125; %&#123;message&#125;&quot;         # 指定写入格式</span><br><span class="line">        flush_interval =&gt; 0                            # 指定刷新间隔，0代表实时写入</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">#================================= input 样式系列 =============================#</span><br><span class="line">input &#123;</span><br><span class="line">    file &#123;</span><br><span class="line">        codec =&gt; json</span><br><span class="line">        path =&gt; [</span><br><span class="line">            &quot;/opt/build/*.json&quot;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">input &#123;</span><br><span class="line">    file &#123;</span><br><span class="line">        path =&gt; [</span><br><span class="line">            # 这里填写需要监控的文件</span><br><span class="line">            &quot;/data/log/php/php_fetal.log&quot;,</span><br><span class="line">            &quot;/data/log/service1/access.log&quot;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">input &#123;</span><br><span class="line">  beats &#123;</span><br><span class="line">    port =&gt; 5000</span><br><span class="line">    type =&gt; &quot;logs&quot;</span><br><span class="line">    ssl =&gt; true</span><br><span class="line">    ssl_certificate =&gt; &quot;/etc/pki/tls/certs/logstash-forwarder.crt&quot;</span><br><span class="line">    ssl_key =&gt; &quot;/etc/pki/tls/private/logstash-forwarder.key&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">#================================= filter样式系列 =============================#</span><br><span class="line">filter &#123; </span><br><span class="line">  grok &#123;</span><br><span class="line">      match =&gt; &#123; &quot;message&quot; =&gt; &quot;%&#123;SYSLOGTIMESTAMP:syslog_timestamp&#125; %&#123;SYSLOGHOST:syslog_hostname&#125; %&#123;DATA:syslog_program&#125;(?:\[%&#123;POSINT:syslog_pid&#125;\])?: %&#123;GREEDYDATA:syslog_message&#125;&quot; &#125;</span><br><span class="line">      add_field =&gt; [ &quot;received_at&quot;, &quot;%&#123;@timestamp&#125;&quot; ]</span><br><span class="line">      add_field =&gt; [ &quot;received_from&quot;, &quot;%&#123;host&#125;&quot; ]</span><br><span class="line">    &#125;    </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">filter &#123;</span><br><span class="line">  if [type] == &quot;syslog-beat&quot; &#123;</span><br><span class="line">    grok &#123;</span><br><span class="line">      match =&gt; &#123; &quot;message&quot; =&gt; &quot;%&#123;SYSLOGTIMESTAMP:syslog_timestamp&#125; %&#123;SYSLOGHOST:syslog_hostname&#125; %&#123;DATA:syslog_program&#125;(?:\[%&#123;POSINT:syslog_pid&#125;\])?: %&#123;GREEDYDATA:syslog_message&#125;&quot; &#125;</span><br><span class="line">      add_field =&gt; [ &quot;received_at&quot;, &quot;%&#123;@timestamp&#125;&quot; ]</span><br><span class="line">      add_field =&gt; [ &quot;received_from&quot;, &quot;%&#123;host&#125;&quot; ]</span><br><span class="line">    &#125;</span><br><span class="line">    geoip &#123;</span><br><span class="line">      source =&gt; &quot;clientip&quot;</span><br><span class="line">    &#125;</span><br><span class="line">    syslog_pri &#123;&#125;</span><br><span class="line">    date &#123;</span><br><span class="line">      match =&gt; [ &quot;syslog_timestamp&quot;, &quot;MMM d HH:mm:ss&quot;, &quot;MMM dd HH:mm:ss&quot; ]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">#================================= output 样式系列 =============================#</span><br><span class="line">output &#123;</span><br><span class="line">    # 输出到控制台</span><br><span class="line">    # stdout &#123; &#125;</span><br><span class="line"> </span><br><span class="line">    # 输出到redis</span><br><span class="line">    redis &#123;</span><br><span class="line">        host =&gt; &quot;10.140.45.190&quot;   # redis主机地址</span><br><span class="line">        port =&gt; 6379              # redis端口号</span><br><span class="line">        db =&gt; 8                   # redis数据库编号</span><br><span class="line">        data_type =&gt; &quot;channel&quot;    # 使用发布/订阅模式</span><br><span class="line">        key =&gt; &quot;logstash_list_0&quot;  # 发布通道名称</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">#写入本地文件。</span><br><span class="line">output &#123; </span><br><span class="line">    file &#123; </span><br><span class="line">        path           =&gt; &quot;/data/log/logstash/all.log&quot; # 指定写入文件路径</span><br><span class="line">        message_format =&gt; &quot;%&#123;host&#125; %&#123;message&#125;&quot;         # 指定写入格式</span><br><span class="line">        flush_interval =&gt; 0                            # 指定刷新间隔，0代表实时写入</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">output &#123;</span><br><span class="line">  elasticsearch &#123; </span><br><span class="line">      hosts =&gt; &quot;elasticsearch:9200&quot; #改成你的elasticsearch地址 </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">output &#123;</span><br><span class="line">  elasticsearch &#123; &#125;</span><br><span class="line">  stdout &#123; codec =&gt; rubydebug &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="10-1-Logstash输入插件"><a href="#10-1-Logstash输入插件" class="headerlink" title="10.1 Logstash输入插件"></a>10.1 Logstash输入插件</h3><h4 id="10-1-1-读取文件"><a href="#10-1-1-读取文件" class="headerlink" title="10.1.1 读取文件"></a>10.1.1 读取文件</h4><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">input</span> <span class="string">&#123;</span></span><br><span class="line">    <span class="string">file</span> <span class="string">&#123;</span></span><br><span class="line">        <span class="string">codec</span> <span class="string">=&gt;</span> <span class="string">json</span></span><br><span class="line">        <span class="string">path</span> <span class="string">=&gt;</span> <span class="string">[</span></span><br><span class="line">            <span class="string">"/opt/build/*.json"</span></span><br><span class="line">        <span class="string">]</span></span><br><span class="line">        <span class="comment">#type用来标记事件类型，通常会在输入区域通过type标记事件类型</span></span><br><span class="line">	    <span class="comment">#type =&gt; "xxx"</span></span><br><span class="line">	    <span class="comment">#添加一个tag字段</span></span><br><span class="line">	    <span class="comment">#tags =&gt; ["add1"]</span></span><br><span class="line">	    <span class="comment">#添加一个key为key,value为value的字段</span></span><br><span class="line">	    <span class="comment">#add_field =&gt; &#123;"key"=&gt;"value"&#125;</span></span><br><span class="line">    <span class="string">&#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+<h3 id="10-1-Logstash输入插件"><a href="#10-1-Logstash输入插件" class="headerlink" title="10.1 Logstash输入插件"></a>10.1 Logstash输入插件</h3><p><a href="https://www.elastic.co/guide/en/logstash/current/input-plugins.html">logstash输入插件文档</a></p>
+<h4 id="10-1-1-读取文件"><a href="#10-1-1-读取文件" class="headerlink" title="10.1.1 读取文件"></a>10.1.1 读取文件</h4><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">input</span> <span class="string">&#123;</span></span><br><span class="line">    <span class="string">file</span> <span class="string">&#123;</span></span><br><span class="line">        <span class="string">codec</span> <span class="string">=&gt;</span> <span class="string">json</span></span><br><span class="line">        <span class="string">path</span> <span class="string">=&gt;</span> <span class="string">[</span></span><br><span class="line">            <span class="string">"/opt/build/*.json"</span></span><br><span class="line">        <span class="string">]</span></span><br><span class="line">        <span class="comment">#type用来标记事件类型，通常会在输入区域通过type标记事件类型</span></span><br><span class="line">	    <span class="comment">#type =&gt; "xxx"</span></span><br><span class="line">	    <span class="comment">#添加一个tag字段</span></span><br><span class="line">	    <span class="comment">#tags =&gt; ["add1"]</span></span><br><span class="line">	    <span class="comment">#添加一个key为key,value为value的字段</span></span><br><span class="line">	    <span class="comment">#add_field =&gt; &#123;"key"=&gt;"value"&#125;</span></span><br><span class="line">    <span class="string">&#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
 
 <h4 id="10-1-2-读取syslog日志"><a href="#10-1-2-读取syslog日志" class="headerlink" title="10.1.2 读取syslog日志"></a>10.1.2 读取syslog日志</h4><p>如何将rsyslog收集到的日志信息发送到logstash中，以centos7.5为例，需要做以下步骤：</p>
 <ol>
@@ -504,6 +508,290 @@
 <p><img src="/2020/09/10/ELK/syslog.PNG" alt="syslog"></p>
 <h4 id="10-1-3-读取TCP数据"><a href="#10-1-3-读取TCP数据" class="headerlink" title="10.1.3 读取TCP数据"></a>10.1.3 读取TCP数据</h4><p>下面的事件配置文件就是通过logstash::inputs::TCP和logstash::filters::Grok实现syslog功能的例子：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">input&#123;</span><br><span class="line">  tcp&#123;</span><br><span class="line">    port =&gt; "5514"</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">filter&#123;</span><br><span class="line">  grok&#123;</span><br><span class="line">    match =&gt; &#123;"message" =&gt; "%&#123;SYSLOGLINE&#125;"&#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">output&#123;</span><br><span class="line">  stdout&#123;</span><br><span class="line">    codec =&gt; rubydebug</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="10-1-4-读取exec执行程序的输出"><a href="#10-1-4-读取exec执行程序的输出" class="headerlink" title="10.1.4 读取exec执行程序的输出"></a>10.1.4 读取exec执行程序的输出</h4><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">input</span> <span class="string">&#123;</span></span><br><span class="line">  <span class="string">exec</span> <span class="string">&#123;</span></span><br><span class="line">    <span class="string">command</span> <span class="string">=&gt;</span> <span class="string">"ls"</span></span><br><span class="line">    <span class="string">interval</span> <span class="string">=&gt;</span> <span class="number">30</span></span><br><span class="line">  <span class="string">&#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>input type</th>
+<th>required</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>command</td>
+<td>string</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>interval</td>
+<td>number</td>
+<td>no</td>
+</tr>
+<tr>
+<td>schedule</td>
+<td>string</td>
+<td>no</td>
+</tr>
+</tbody></table>
+<p>schedule例子</p>
+<table>
+<thead>
+<tr>
+<th><code>* 5 * 1-3 *</code></th>
+<th>will execute every minute of 5am every day of January through March.</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>0 * * * *</code></td>
+<td>will execute on the 0th minute of every hour every day.</td>
+</tr>
+<tr>
+<td><code>0 6 * * * America/Chicago</code></td>
+<td>will execute at 6:00am (UTC/GMT -5) every day.</td>
+</tr>
+</tbody></table>
+<h3 id="10-2-Logstash编码插件-Codec"><a href="#10-2-Logstash编码插件-Codec" class="headerlink" title="10.2 Logstash编码插件(Codec)"></a>10.2 Logstash编码插件(Codec)</h3><p>rubydebug是一个codec，虽然它一般只会用在stdout插件中，作为配置测试或者调试的工具。</p>
+<p>编码插件可以在Logstash输入或输出时处理不同类型的数据，因此，Logstash不只是一个input-&gt;filter-&gt;output的数据流，而是一个input-&gt;decode-&gt;filter-&gt;encode-&gt;output的数据流。</p>
+<p>codec支持的编码常见格式有plain，json，json_lines等</p>
+<p><a href="https://www.elastic.co/guide/en/logstash/current/codec-plugins.html">Codec插件文档</a></p>
+<h4 id="10-2-1-plain"><a href="#10-2-1-plain" class="headerlink" title="10.2.1 plain"></a>10.2.1 plain</h4><p>plain是一个空的解析器，它可以让用户自己指定格式，也就是说输入是什么格式，输出就是什么格式。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">input&#123;</span></span><br><span class="line">  <span class="string">stdin&#123;&#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="string">output&#123;</span></span><br><span class="line">  <span class="string">stdout&#123;</span></span><br><span class="line">    <span class="string">codec</span> <span class="string">=&gt;</span> <span class="string">"plain"</span></span><br><span class="line">  <span class="string">&#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="10-2-2-json-json-lines"><a href="#10-2-2-json-json-lines" class="headerlink" title="10.2.2 json,json_lines"></a>10.2.2 json,json_lines</h4><p>如果发送给logstash的数据内容为json格式，可以在input字段加入codec=&gt;json来进行解析，这样就可以根据具体内容生成字段，方便分析和存储。如果想让logstash输出为json格式，可以在output字段加入codec=&gt;json</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">input&#123;</span></span><br><span class="line">  <span class="string">stdin&#123;</span></span><br><span class="line">  </span><br><span class="line">  <span class="string">&#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="string">output&#123;</span></span><br><span class="line">  <span class="string">stdout&#123;</span></span><br><span class="line">    <span class="string">codec</span> <span class="string">=&gt;</span> <span class="string">json</span></span><br><span class="line">  <span class="string">&#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>json每个字段是key:value格式，多个字段之间通过逗号分隔。如果json文件较长，需要换行，就需要使用json_lines编码格式了。</p>
+<h3 id="10-3-Logstash过滤器插件"><a href="#10-3-Logstash过滤器插件" class="headerlink" title="10.3 Logstash过滤器插件"></a>10.3 Logstash过滤器插件</h3><p><a href="https://www.elastic.co/guide/en/logstash/current/filter-plugins.html">logstash filter插件文档</a></p>
+<h4 id="10-3-1-Grok正则捕获"><a href="#10-3-1-Grok正则捕获" class="headerlink" title="10.3.1 Grok正则捕获"></a>10.3.1 Grok正则捕获</h4><p>Grok是一个十分强大的logstash filter插件，它可以通过正则解析任意文本，将非结构化日志弄成结构化和方便查询的结构。他是目前logstash中解析非结构化日志数据最好的方式。</p>
+<p>Grok的语法规则是：<code>%{语法:语义}</code></p>
+<p>语法指的是匹配的模式，例如使用NUMBER模式可以匹配出数字，IP模式则会匹配出127.0.0.1这样的IP地址：</p>
+<p>例如输入的内容为<code>55.3.244.1 GET /index.html 15824 0.043</code></p>
+<p>匹配列表为<code>%{IP:client} %{WORD:method} %{URIPATHPARAM:request} %{NUMBER:bytes} %{NUMBER:duration}</code></p>
+<p>匹配模式的定义方法在路径<code>/usr/share/logstash/vendor/bundle/jruby/2.5.0/gems/logstash-patterns-core-4.1.2/patterns</code>中</p>
+<p><img src="/2020/09/10/ELK/patterns.PNG" alt></p>
+<p>其中定义了许多的正则表达式，例如：</p>
+<p><img src="/2020/09/10/ELK/pattern_redis.PNG" alt></p>
+<p><a href="http://grokdebug.herokuapp.com/">grok匹配在线调试地址</a>,通过这个地址，可以在线调试gork的表达式。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">input</span> <span class="string">&#123;</span></span><br><span class="line">  <span class="string">file</span> <span class="string">&#123;</span></span><br><span class="line">    <span class="string">path</span> <span class="string">=&gt;</span> <span class="string">"/var/log/http.log"</span></span><br><span class="line">  <span class="string">&#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">filter</span> <span class="string">&#123;</span></span><br><span class="line">  <span class="string">grok</span> <span class="string">&#123;</span></span><br><span class="line">    <span class="string">match</span> <span class="string">=&gt;</span> <span class="string">&#123;</span> <span class="string">"message"</span> <span class="string">=&gt;</span> <span class="string">"<span class="template-variable">%&#123;IP:client&#125;</span> <span class="template-variable">%&#123;WORD:method&#125;</span> <span class="template-variable">%&#123;URIPATHPARAM:request&#125;</span> <span class="template-variable">%&#123;NUMBER:bytes&#125;</span> <span class="template-variable">%&#123;NUMBER:duration&#125;</span>"</span> <span class="string">&#125;</span></span><br><span class="line">  <span class="string">&#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="10-3-2-Date"><a href="#10-3-2-Date" class="headerlink" title="10.3.2 Date"></a>10.3.2 Date</h4><p>通过使用date过滤器可以将日志中的时间字段作为事件的logstash时间戳(@timestamp)。对于<code>Apr 17 09:32:01</code>可以使用<code>MMM dd HH:mm:ss</code>进行解析。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">filter</span> <span class="string">&#123;</span></span><br><span class="line">  <span class="string">date</span> <span class="string">&#123;</span></span><br><span class="line">    <span class="string">match</span> <span class="string">=&gt;</span> <span class="string">[</span> <span class="string">"logdate"</span><span class="string">,</span> <span class="string">"MMM dd yyyy HH:mm:ss"</span> <span class="string">]</span></span><br><span class="line">  <span class="string">&#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>如果日志中的字段由多种格式，还可以使用：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">match</span> <span class="string">=&gt;</span> <span class="string">[</span> <span class="string">"logdate"</span><span class="string">,</span> <span class="string">"MMM dd yyyy HH:mm:ss"</span><span class="string">,</span></span><br><span class="line">             <span class="string">"MMM  d yyyy HH:mm:ss"</span><span class="string">,</span> <span class="string">"ISO8601"</span> <span class="string">]</span></span><br></pre></td></tr></table></figure>
+
+<p>匹配规则为：</p>
+<p>y(年)</p>
+<ul>
+<li>yyyy：完整的年份</li>
+<li>yy：不完整的年份15匹配2015</li>
+</ul>
+<p>M(月)</p>
+<ul>
+<li>M：最小位数月份。示例：<code>1</code>一月和<code>12</code>十二月。</li>
+<li>MM：两位数的月份。如果需要，请补零。示例：<code>01</code>一月和<code>12</code>十二月</li>
+<li>MMM：缩写的月份文本。示例：一<code>Jan</code>月份。</li>
+<li>MMMM：整月文字，例如：<code>January</code>。</li>
+</ul>
+<p>d(天)</p>
+<ul>
+<li>d：最小位数的一天。示例：<code>1</code>每月的1号。</li>
+<li>dd：两位数的日期，如有必要，请补零。示例：<code>01</code>每月的1号。</li>
+</ul>
+<p>H(小时)</p>
+<ul>
+<li>H：最小位数小时。例如0。</li>
+<li>HH：两位数小时。例如00。</li>
+</ul>
+<p>m(分钟)</p>
+<ul>
+<li>m：最小位数分钟。例如0。</li>
+<li>mm：两位数分钟。例如00。</li>
+</ul>
+<p>s(秒)</p>
+<ul>
+<li>s：最小位数秒。例如0。</li>
+<li>ss：两位数秒。例如00。</li>
+</ul>
+<p>S(秒的其他精度)</p>
+<ul>
+<li>S：十分之一秒</li>
+<li>SS：百分之一秒</li>
+<li>SSS：千分之一秒</li>
+</ul>
+<p>Z(时区)</p>
+<ul>
+<li>Z：时区偏移的结构为HHmm。范例：<code>-0700</code>。</li>
+<li>ZZ：移量结构为HH：mm（小时和分钟偏移量之间的冒号）。范例：<code>-07:00</code>。</li>
+<li>ZZZ：时区标识。范例：<code>America/Los_Angeles</code>。</li>
+</ul>
+<p>w(星期)</p>
+<ul>
+<li>w：最小位数星期，例如1.</li>
+<li>ww：两位数星期，例如01。</li>
+</ul>
+<p>D(一年中的第几天)</p>
+<p>e(一星期中的第几天)</p>
+<p>E</p>
+<ul>
+<li>E, EE, EEE：星期几的缩写。例如： <code>Mon</code>，<code>Tue</code>，<code>Wed</code>，<code>Thu</code>，<code>Fri</code>，<code>Sat</code>，<code>Sun</code>。</li>
+<li>EEEE：一周中的全文。示例：<code>Monday</code>，，<code>Tuesday</code>……</li>
+</ul>
+<h4 id="10-3-3-Mutate-数据修改"><a href="#10-3-3-Mutate-数据修改" class="headerlink" title="10.3.3 Mutate(数据修改)"></a>10.3.3 Mutate(数据修改)</h4><ol>
+<li>正则表达式替换匹配字段</li>
+</ol>
+<p>gsub可以通过正则表达式替换字段中匹配到的值，只对字符串字段有效，下面是关于mutate插件中gsub的示例</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">filter&#123;</span></span><br><span class="line">  <span class="string">mutate&#123;</span></span><br><span class="line">    <span class="string">gsub</span> <span class="string">=&gt;</span> <span class="string">["filed_name_1",</span> <span class="string">"/"</span><span class="string">,</span> <span class="string">"_"</span><span class="string">]</span></span><br><span class="line">  <span class="string">&#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>表示将filed_name_1字段中的所有”/“替换成”_”。</p>
+<ol start="2">
+<li>分隔符分割字符串为数组</li>
+</ol>
+<p>split可以通过指定的分隔符分割字段中的字符串为数组，下面是关于mutate插件中的split的示例。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">filter&#123;</span></span><br><span class="line">  <span class="string">mutate&#123;</span></span><br><span class="line">    <span class="string">split</span> <span class="string">=&gt;</span> <span class="string">["filed_name_2",</span> <span class="string">"|"</span><span class="string">]</span></span><br><span class="line">  <span class="string">&#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>这个示例表示将filed_name_2字段以”|”为间隔分隔为数组。</p>
+<ol start="3">
+<li>重命名字段</li>
+</ol>
+<p>rename可以实现重命名某个字段的功能。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">filter&#123;</span></span><br><span class="line">  <span class="string">mutate&#123;</span></span><br><span class="line">    <span class="string">rename</span> <span class="string">=&gt;</span> <span class="string">&#123;"old_field"</span> <span class="string">=&gt;</span> <span class="string">"new_field"</span><span class="string">&#125;</span></span><br><span class="line">  <span class="string">&#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>这个示例表示将字段old_field重命名为new_field。</p>
+<ol start="4">
+<li>删除字段</li>
+</ol>
+<p>remove_field可以实现删除某个字段的功能。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">filter&#123;</span></span><br><span class="line">  <span class="string">mutate&#123;</span></span><br><span class="line">    <span class="string">remove_field</span> <span class="string">=&gt;</span> <span class="string">["timestamp"]</span></span><br><span class="line">  <span class="string">&#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>这个示例表示将字段timestamp删除。</p>
+<h4 id="10-3-4-GeoIP地址查询归类"><a href="#10-3-4-GeoIP地址查询归类" class="headerlink" title="10.3.4 GeoIP地址查询归类"></a>10.3.4 GeoIP地址查询归类</h4><p>GeoIP是最常见的免费IP地址归类查询库，GeoIP可以根据IP地址提供对应的地域信息，包括国别，省市，经纬度等，此插件对于可视化地图和区域统计非常有用。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">filter&#123;</span></span><br><span class="line">  <span class="string">geoip&#123;</span></span><br><span class="line">    <span class="string">source</span> <span class="string">=&gt;</span> <span class="string">"ip_field"</span></span><br><span class="line">    <span class="comment">#指定展示那些字段</span></span><br><span class="line">    <span class="string">fields</span> <span class="string">=&gt;</span> <span class="string">["city_name",</span> <span class="string">"region_name"</span><span class="string">,</span> <span class="string">"country_name"</span><span class="string">,</span> <span class="string">"ip"</span><span class="string">,</span> <span class="string">"latitude"</span><span class="string">,</span> <span class="string">"longtitude"</span><span class="string">,</span> <span class="string">"timezone"</span><span class="string">]</span></span><br><span class="line">  <span class="string">&#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>其中，ip_field字段是输出IP地址的一个字段。</p>
+<p><img src="/2020/09/10/ELK/geoip.PNG" alt></p>
+<h4 id="10-3-5-filter插件综合应用实例"><a href="#10-3-5-filter插件综合应用实例" class="headerlink" title="10.3.5 filter插件综合应用实例"></a>10.3.5 filter插件综合应用实例</h4><ol>
+<li>例如nginx下的日志格式为：</li>
+</ol>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">192.168</span><span class="number">.56</span><span class="number">.134</span> <span class="bullet">-</span> <span class="bullet">-</span> <span class="string">[02/Jun/2020:18:36:04</span> <span class="string">+0800]</span> <span class="string">"GET //group2/M00/00/00/wKg4il7WK32AJhNQAA-Lp2K4AmU772.jpg HTTP/1.0"</span> <span class="number">200</span> <span class="number">1018791</span> <span class="string">"-"</span> <span class="string">"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36"</span></span><br></pre></td></tr></table></figure>
+
+<p>则对应的匹配为：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">%&#123;IP:client&#125;\</span> <span class="string">\-\</span> <span class="string">\-\</span> <span class="string">\[%&#123;HTTPDATE:date&#125;\]\</span> <span class="string">\"%&#123;WORD:method&#125;\</span> <span class="string">%&#123;URIPATHPARAM:request&#125;\</span> <span class="string">HTTP/%&#123;NUMBER:version&#125;\"\</span> <span class="string">%&#123;NUMBER:status&#125;\</span> <span class="string">%&#123;NUMBER:size&#125;\</span> <span class="string">\"\-\"</span> <span class="string">\"%&#123;GREEDYDATA:agent&#125;\"</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>Apache日志的filter配置</li>
+</ol>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">filter&#123;</span></span><br><span class="line">  <span class="string">if</span> <span class="string">[@metadata][myid]</span> <span class="string">==</span> <span class="string">"apacheaccess_log"</span> <span class="string">&#123;</span></span><br><span class="line">  	<span class="string">mutate&#123;</span></span><br><span class="line">  		<span class="string">gsub</span> <span class="string">=&gt;</span> <span class="string">["message",</span> <span class="string">"\\x"</span><span class="string">,</span> <span class="string">"\\\x"</span><span class="string">]#编码转换</span></span><br><span class="line">  	<span class="string">&#125;</span></span><br><span class="line">  	<span class="string">if(</span> <span class="string">'method":"HEAD'</span> <span class="string">in</span> <span class="string">[message])</span> <span class="string">&#123;#删除head请求</span></span><br><span class="line">  		<span class="string">drop&#123;&#125;</span></span><br><span class="line">  	<span class="string">&#125;</span></span><br><span class="line">  	<span class="string">json</span> <span class="string">&#123;</span></span><br><span class="line">  		<span class="string">source</span> <span class="string">=&gt;</span> <span class="string">"message"</span></span><br><span class="line">  		<span class="string">remove_field</span> <span class="string">=&gt;</span> <span class="string">"message"</span></span><br><span class="line">  		<span class="string">add_field</span> <span class="string">=&gt;</span> <span class="string">"prospector"</span></span><br><span class="line">  		<span class="string">add_field</span> <span class="string">=&gt;</span> <span class="string">"beat"</span></span><br><span class="line">  		<span class="string">add_field</span> <span class="string">=&gt;</span> <span class="string">"source"</span></span><br><span class="line">  		<span class="string">add_field</span> <span class="string">=&gt;</span> <span class="string">"input"</span></span><br><span class="line">  		<span class="string">add_field</span> <span class="string">=&gt;</span> <span class="string">"offset"</span></span><br><span class="line">  		<span class="string">add_field</span> <span class="string">=&gt;</span> <span class="string">"fields"</span></span><br><span class="line">  		<span class="string">add_field</span> <span class="string">=&gt;</span> <span class="string">"host"</span></span><br><span class="line">  		<span class="string">add_field</span> <span class="string">=&gt;</span> <span class="string">"@version"</span></span><br><span class="line">  	<span class="string">&#125;</span></span><br><span class="line">  	<span class="string">mutate</span> <span class="string">&#123;</span></span><br><span class="line">  		<span class="string">split</span> <span class="string">=&gt;</span> <span class="string">["client_ip",</span> <span class="string">","</span><span class="string">]</span></span><br><span class="line">  	<span class="string">&#125;</span></span><br><span class="line">  	<span class="string">mutate</span> <span class="string">&#123;</span></span><br><span class="line">  		<span class="string">replace</span> <span class="string">=&gt;</span> <span class="string">&#123;"client_ip"</span> <span class="string">=&gt;</span> <span class="string">"<span class="template-variable">%&#123;client_ip[0]&#125;</span>"</span><span class="string">&#125;#设置真实地址(经过代理后第一个为客户端真实ip，其他的为代理的地址)</span></span><br><span class="line">  	<span class="string">&#125;</span></span><br><span class="line">  	<span class="string">if</span> <span class="string">[c;oemt_ip]</span> <span class="string">==</span> <span class="string">"-"</span> <span class="string">&#123;</span></span><br><span class="line">  		<span class="string">if</span> <span class="string">[@metadata][direct_ip]</span> <span class="string">not</span> <span class="string">in</span> <span class="string">["%&#123;direct_ip&#125;",</span> <span class="string">"-"</span><span class="string">]</span> <span class="string">&#123;</span></span><br><span class="line">  			<span class="string">mutate</span> <span class="string">&#123;</span></span><br><span class="line">  				<span class="string">replace</span> <span class="string">=&gt;</span> <span class="string">&#123;"client_ip"</span> <span class="string">=&gt;</span> <span class="string">"<span class="template-variable">%&#123;direct_ip&#125;</span>"</span><span class="string">&#125;</span></span><br><span class="line">  			<span class="string">&#125;</span></span><br><span class="line">  		<span class="string">&#125;else</span> <span class="string">&#123;</span></span><br><span class="line">  			<span class="string">drop&#123;&#125;</span></span><br><span class="line">  		<span class="string">&#125;</span></span><br><span class="line">  	<span class="string">&#125;</span></span><br><span class="line">  <span class="string">&#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>Nginx日志的配置</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$remote_addr</td>
+<td>客户端地址</td>
+<td>211.28.65.253</td>
+</tr>
+<tr>
+<td>$remote_user</td>
+<td>客户端用户名称</td>
+<td>–</td>
+</tr>
+<tr>
+<td>$time_local</td>
+<td>访问时间和时区</td>
+<td>18/Jul/2012:17:00:01 +0800</td>
+</tr>
+<tr>
+<td>$request</td>
+<td>请求的URI和HTTP协议</td>
+<td>“GET /article-10000.html HTTP/1.1”</td>
+</tr>
+<tr>
+<td>$http_host</td>
+<td>请求地址，即浏览器中你输入的地址（IP或域名）</td>
+<td><a href="http://www.it300.com/192.168.100.100">www.it300.com/192.168.100.100</a></td>
+</tr>
+<tr>
+<td>$status</td>
+<td>HTTP请求状态</td>
+<td>200</td>
+</tr>
+<tr>
+<td>$upstream_status</td>
+<td>upstream状态</td>
+<td>200</td>
+</tr>
+<tr>
+<td>$body_bytes_sent</td>
+<td>发送给客户端文件内容大小</td>
+<td>1547</td>
+</tr>
+<tr>
+<td>$http_referer</td>
+<td>url跳转来源</td>
+<td><a href="https://www.baidu.com/">https://www.baidu.com/</a></td>
+</tr>
+<tr>
+<td>$http_user_agent</td>
+<td>用户终端浏览器等信息</td>
+<td>“Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0; SV1; GTB7.0; .NET4.0C;</td>
+</tr>
+<tr>
+<td>$ssl_protocol</td>
+<td>SSL协议版本</td>
+<td>TLSv1</td>
+</tr>
+<tr>
+<td>$ssl_cipher</td>
+<td>交换数据中的算法</td>
+<td>RC4-SHA</td>
+</tr>
+<tr>
+<td>$upstream_addr</td>
+<td>后台upstream的地址，即真正提供服务的主机地址</td>
+<td>10.10.10.100:80</td>
+</tr>
+<tr>
+<td>$request_time</td>
+<td>整个请求的总时间</td>
+<td>0.205</td>
+</tr>
+<tr>
+<td>$upstream_response_time</td>
+<td>请求过程中，upstream响应时间</td>
+<td>0.002</td>
+</tr>
+</tbody></table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">map $http_x_forwarded_for $clientRealIp &#123;</span><br><span class="line">	&quot;&quot; $remote_addr;#如果http_x_forwarded_for为空，那么设置为remote_addr(没有使用代理)</span><br><span class="line">	~^(?P&lt;firstAddr&gt;[0-9\.]+),?.*$ $firstAddr;#如果不为空，则设置为第一个ip地址</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用nginx map方法，获取客户端ip地址</p>
+<h3 id="10-4-Lostash输出插件"><a href="#10-4-Lostash输出插件" class="headerlink" title="10.4 Lostash输出插件"></a>10.4 Lostash输出插件</h3><p><a href="https://www.elastic.co/guide/en/logstash/current/output-plugins.html">output插件文档</a></p>
+<p>output是Logstash的最后阶段，一个事件可以经过多个输出，而一旦所有输出处理完成，整个事件就执行完成。常用的输出包括：</p>
+<ul>
+<li>file：将日志写入文件。</li>
+<li>elasticsearch：将日志发送给elasticsearch。</li>
+<li>graphite：将日志发送给graphite，graphite是一个流行的开源工具，用于存储和绘制数据指标。</li>
+<li>此外，logstash还支持输出到nagios，hdfs，email，和exec。</li>
+</ul>
+<ol>
+<li>输出到stdout</li>
+</ol>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">output&#123;</span></span><br><span class="line">  <span class="string">stdout&#123;</span></span><br><span class="line">    <span class="string">codec</span> <span class="string">=&gt;</span> <span class="string">rubydebug</span></span><br><span class="line">  <span class="string">&#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>保存为文件</li>
+</ol>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">output&#123;</span></span><br><span class="line">  <span class="string">file&#123;</span></span><br><span class="line">    <span class="string">path</span> <span class="string">=&gt;</span> <span class="string">"/data/logs/<span class="template-variable">%&#123;+yyyy-MM-dd&#125;</span>/<span class="template-variable">%&#123;host&#125;</span>_<span class="template-variable">%&#123;+HH&#125;</span>.log"</span></span><br><span class="line">  <span class="string">&#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
 
 
     
@@ -819,11 +1107,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">TCP</a>
+                <a href="javascript:void(0)" class="js-tag color3">IO</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">调试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">TCP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -832,14 +1128,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IO</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -891,10 +1179,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Golang</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
@@ -903,15 +1187,11 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Golang</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">-TCP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Kuberentes</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -919,7 +1199,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">CPP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Kuberentes</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -955,7 +1243,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">TensorFlow</a>
+                <a href="javascript:void(0)" class="js-tag color2">GitLab</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">CI/CD</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">K8s</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -971,11 +1267,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">GitLab</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">CI/CD</a>
+                <a href="javascript:void(0)" class="js-tag color1">TensorFlow</a>
               </li>
             
             <div class="clearfix"></div>
