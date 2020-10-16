@@ -18,10 +18,15 @@
 <meta property="og:site_name" content="NICO">
 <meta property="og:description" content="一、HarborHarbor是构建企业级私有docker镜像的仓库的开源解决方案，它是Docker Registry的更高级封装，它除了提供友好的Web UI界面，角色和用户权限管理，用户操作审计等功能外，它还整合了K8s的插件(Add-ons)仓库，即Helm通过chart方式下载，管理，安装K8s插件，而chartmuseum可以提供存储chart数据的仓库【注:helm就相当于k8s的yum">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-10-07T08:36:03.168Z">
+<meta property="og:image" content="https://niconiconi233.github.io/2020/10/07/Harbor/index.PNG">
+<meta property="og:image" content="https://niconiconi233.github.io/2020/10/07/Harbor/dashbord.PNG">
+<meta property="og:image" content="https://niconiconi233.github.io/2020/10/07/Harbor/nginx.PNG">
+<meta property="og:image" content="https://niconiconi233.github.io/2020/10/07/Harbor/nginx1.PNG">
+<meta property="og:updated_time" content="2020-10-11T07:16:39.556Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Harbor">
 <meta name="twitter:description" content="一、HarborHarbor是构建企业级私有docker镜像的仓库的开源解决方案，它是Docker Registry的更高级封装，它除了提供友好的Web UI界面，角色和用户权限管理，用户操作审计等功能外，它还整合了K8s的插件(Add-ons)仓库，即Helm通过chart方式下载，管理，安装K8s插件，而chartmuseum可以提供存储chart数据的仓库【注:helm就相当于k8s的yum">
+<meta name="twitter:image" content="https://niconiconi233.github.io/2020/10/07/Harbor/index.PNG">
   
   
     <link rel="icon" href="/img/logo.ico">
@@ -229,7 +234,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">281字</span>
+      <span class="post-count">562字</span>
     </span>
   </span>
 
@@ -238,7 +243,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">1分</span>
+      <span class="post-count">2分</span>
     </span>
   </span>
 </div>
@@ -256,6 +261,37 @@
 <p>命令就能安装完成</p>
 <p><strong>注意</strong></p>
 <p>Harbor依赖于Docker和Docker-compose，如果需要安装这些软件可以参考<a href="/2020/02/07/kubernetes/">k8s集群安装</a></p>
+<a id="more"></a>
+
+<h2 id="三、修改配置文件"><a href="#三、修改配置文件" class="headerlink" title="三、修改配置文件"></a>三、修改配置文件</h2><p>修改文件夹中的harbor.yml文件</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">hostname:</span> <span class="string">hub.atguigu.com</span> <span class="comment">#修改为自己的域名</span></span><br><span class="line"></span><br><span class="line"><span class="attr">http:</span></span><br><span class="line">  <span class="comment"># port for http, default is 80. If https enabled, this port will redirect to https port</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">80</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># https related config</span></span><br><span class="line"><span class="attr">https:</span></span><br><span class="line">  <span class="comment"># https port for harbor, default is 443</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">443</span></span><br><span class="line">  <span class="comment"># The path of cert and key files for nginx</span></span><br><span class="line">  <span class="attr">certificate:</span> <span class="string">/data/cert/server.crt</span> <span class="comment">#创建https密钥</span></span><br><span class="line">  <span class="attr">private_key:</span> <span class="string">/data/cert/server.key</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-1-创建密钥"><a href="#3-1-创建密钥" class="headerlink" title="3.1 创建密钥"></a>3.1 创建密钥</h3><ol>
+<li><code>openssl genrsa -des3 -out server.key 2048</code>需要输入密码</li>
+<li><code>openssl req -new -key server.key -out server.csr</code>需要输入密码和地区信息</li>
+<li><code>cp server.key server.key.org</code></li>
+<li><code>openssl rsa -in server.key.org -out server.key</code>清楚其中的密码</li>
+<li>openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt</li>
+<li>chmod a+x *</li>
+<li>设置完成后运行harbor中的install.sh就可以完成安装。访问ip地址就能看到首页</li>
+</ol>
+<img src="/2020/10/07/Harbor/index.PNG" style="zoom:60%;">
+
+<img src="/2020/10/07/Harbor/dashbord.PNG" style="zoom:60%;">
+
+<h2 id="四、-测试"><a href="#四、-测试" class="headerlink" title="四、 测试"></a>四、 测试</h2><p>尝试推送一个镜像到Harbor仓库中</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker tag SOURCE_IMAGE[:TAG] hub.atguigu.com/official/REPOSITORY[:TAG]</span><br><span class="line">docker push hub.atguigu.com/official/REPOSITORY[:TAG]</span><br></pre></td></tr></table></figure>
+
+<p>在k8s中使用仓库中的镜像构建服务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl create deployment nginx-deployment --image=hub.atguigu.com/official/nginx:1.19.2 --port=80 --replicas=1</span><br></pre></td></tr></table></figure>
+
+<p>查看状态</p>
+<p><img src="/2020/10/07/Harbor/nginx.PNG" alt></p>
+<p>调整服务数量</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl scale --replicas=3 deployment/nginx-deployment</span><br></pre></td></tr></table></figure>
+
+<p>此时状态为</p>
+<p><img src="/2020/10/07/Harbor/nginx1.PNG" alt></p>
 
     
 
@@ -553,11 +589,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IO</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
+                <a href="javascript:void(0)" class="js-tag color4">TCP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -565,7 +597,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">TCP</a>
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -574,6 +606,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">IO</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -625,14 +661,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Innodb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Golang</a>
               </li>
              
@@ -642,6 +670,14 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Kubernetes</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Innodb</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -661,11 +697,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">OpenGL</a>
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+                <a href="javascript:void(0)" class="js-tag color2">OpenGL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -674,6 +710,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Keepalived</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">TensorFlow</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -697,10 +737,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">K8s</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">ElasticSearch</a>
               </li>
              
@@ -713,7 +749,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">TensorFlow</a>
+                <a href="javascript:void(0)" class="js-tag color4">K8s</a>
               </li>
             
             <div class="clearfix"></div>
