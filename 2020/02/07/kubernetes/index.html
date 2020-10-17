@@ -38,11 +38,11 @@
 <meta property="og:image" content="https://niconiconi233.github.io/2020/02/07/kubernetes/87116f056e9071a1d76dc71a2b93c126.jpg">
 <meta property="og:image" content="https://niconiconi233.github.io/2020/02/07/kubernetes/06794486d035874ef620b98b069f9d68.jpg">
 <meta property="og:image" content="https://niconiconi233.github.io/2020/02/07/kubernetes/ea0faab259a6d5a6ec1178e12e6cd295.jpg">
-<meta property="og:image" content="https://niconiconi233.github.io/2020/02/07/kubernetes/D:%5Chexo%5C%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9%5Csource_posts%5C2020-02-07-kubernetes%5C2915374-c5c16b994b4fd71c.png">
+<meta property="og:image" content="https://niconiconi233.github.io/2020/02/07/kubernetes/2915374-c5c16b994b4fd71c.png">
 <meta property="og:image" content="https://niconiconi233.github.io/2020/02/07/kubernetes/e3a3ac2d7720431dcffc16a4ae3ea497.jpg">
 <meta property="og:image" content="https://niconiconi233.github.io/2020/02/07/kubernetes/auth.PNG">
 <meta property="og:image" content="https://niconiconi233.github.io/2020/02/07/kubernetes/configmap-1.PNG">
-<meta property="og:updated_time" content="2020-10-16T15:30:02.787Z">
+<meta property="og:updated_time" content="2020-10-17T12:45:20.429Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kubernetes 的架构设计与实现原理">
 <meta name="twitter:description" content="Kubernetes 基本上是这两年最热门、最被人熟知的技术了，它为软件工程师提供了强大的容器编排能力，模糊了开发和运维之间的边界，让我们开发、管理和维护一个大型的分布式系统和项目变得更加容易。">
@@ -254,7 +254,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">12.9k字</span>
+      <span class="post-count">13.7k字</span>
     </span>
   </span>
 
@@ -263,7 +263,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">53分</span>
+      <span class="post-count">57分</span>
     </span>
   </span>
 </div>
@@ -585,46 +585,6 @@
 <td align="center">Boolean</td>
 <td align="left">定义是否使用主机网络模式，默认是false，设置为true表示使用主机网络，不适用docker网桥，同时设置为true将无法在同一台主机上启动第二个副本</td>
 </tr>
-<tr>
-<td align="center"></td>
-<td align="center"></td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center"></td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center"></td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center"></td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center"></td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center"></td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center"></td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center"></td>
-<td align="left"></td>
-</tr>
 </tbody></table>
 <h1 id="八、容器生命周期"><a href="#八、容器生命周期" class="headerlink" title="八、容器生命周期"></a>八、容器生命周期</h1><p><img src="/2020/02/07/kubernetes/life.PNG" alt></p>
 <h2 id="8-1-Init容器"><a href="#8-1-Init容器" class="headerlink" title="8.1 Init容器"></a>8.1 Init容器</h2><p>Pod能够具有多个容器，应用运行在容器里面，但是它也可能有一个或多个先于应用容器启动的Init容器。</p>
@@ -638,7 +598,7 @@
 <ul>
 <li>他们可以包含并运行实用工具，但是出于安全考虑，是不建议在应用程序容器镜像中包含这些工具。</li>
 <li>他们可以包含使用工具和定制化代码来安装，但是不能出现在应用程序镜像中。例如，创建镜像没必要FROM另一个镜像，只需要在安装过程中使用类似sed，awk，python，或dig这样的工具。</li>
-<li>应用晨曦镜像可以分离出创建和部署的角色，而没有必要联合它们构建一个单独的镜像。</li>
+<li>应用程序镜像可以分离出创建和部署的角色，而没有必要联合它们构建一个单独的镜像。</li>
 <li>Init容器使用Linux namespace，所以对容器来说具有不同的文件系统视图。因此，他们能够具有访问Secret的权限，而应用程序容器则不能。</li>
 <li>他们必须在应用程序容器启动前完成，而应用程序容器是并行运行的，所以Init容器能够提供一种简单的阻塞或延迟应用容器的启动的方法，直到满足了一组先决条件。</li>
 <li>在Pod启动过程中，Init容器会按顺序在网络和数据卷初始化之后启动，每个容器必须在下一个容器启动之前成功退出。</li>
@@ -885,7 +845,7 @@
 <li>deploy的yaml</li>
 </ol>
 <p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2Fkubernetes%2Fingress-nginx%2Ftree%2Fnginx-0.30.0%2Fdeploy%2Fstatic">项目地址</a>，通过切换tag来获取不同的版本</p>
-<p><img src="/2020/02/07/kubernetes/D:%5Chexo%5C%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9%5Csource_posts%5C2020-02-07-kubernetes%5C2915374-c5c16b994b4fd71c.png" alt></p>
+<p><img src="/2020/02/07/kubernetes/2915374-c5c16b994b4fd71c.png" alt></p>
 <p>configmap.yaml  存储配置信息，key/value值<br> namespace.yaml  建命名空间<br> mandatory.yaml  包含部署deploy相关所有资源(configmap.yaml,namespace.yaml,rbac.yaml,with-rbac.yaml)<br> rbac.yaml  rbac授权配置,创建Ingress需要使用的ServiceAccount,ClusterRole,Role,RoleBinding,ClusterRoleBinding<br> with-rbac.yaml  能使用rbac授权的deploy配置，用于构建ingress-controller</p>
 <p><strong>部署</strong></p>
 <p>部署集群</p>
@@ -1005,6 +965,59 @@
 
 <p><strong>而使用volume挂载的ConfigMap更新后可以触发Deployment的更新</strong></p>
 <p><strong>ENV 是在容器启动的时候注入的，启动之后 kubernetes 就不会再改变环境变量的值</strong>，且同一个 namespace 中的 pod 的环境变量是不断累加的。但是Volume不同，<strong>kubelet的源码里KubeletManager中是有Volume Manager</strong>的，这就说明Kubelet会监控管理每个Pod中的Volume资源，当发现配置的Volume更新后，就会重建Pod，以更新所用的Volume，但是会有一定延迟，大概10秒以内。</p>
+<h2 id="11-2-Secret"><a href="#11-2-Secret" class="headerlink" title="11.2 Secret"></a>11.2 Secret</h2><p>Secret解决了密码，Token，密钥等敏感数据的配置问题，而不需要把这些敏感数据暴露到镜像或者Pod Spec中。Secret可以以Volume或者环境变量的方式使用。 </p>
+<p><strong>Secret有三种类型</strong></p>
+<ul>
+<li>Service Account：用来访问Kubernetes API，由Kubernetes自动创建，并且会自动挂载到Pod的<code>/run/secrets/kubernetes.io/serviceaccount</code>目录中。</li>
+<li>Opaque：Base64编码格式的Secret，用来存储密码，密钥等。</li>
+<li>Kubernetes.io/dockerconfigjson：用来存储私有docker registry的认证信息。</li>
+</ul>
+<h3 id="11-2-1-Service-Account"><a href="#11-2-1-Service-Account" class="headerlink" title="11.2.1 Service Account"></a>11.2.1 Service Account</h3><p>service account 用来访问kubernetes api，由kubernetes自动创建，并且自动挂载到Pod的<code>/run/secrets/kubernetes.io/serviceaccount</code>目录中。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@demo-dep-db8b684b7-z6cwm:~# cd /run/secrets/kubernetes.io/serviceaccount/</span><br><span class="line">root@demo-dep-db8b684b7-z6cwm:/run/secrets/kubernetes.io/serviceaccount# ls</span><br><span class="line">ca.crt	namespace  token</span><br></pre></td></tr></table></figure>
+
+<h3 id="11-2-2-Opaque-Secret"><a href="#11-2-2-Opaque-Secret" class="headerlink" title="11.2.2 Opaque Secret"></a>11.2.2 Opaque Secret</h3><p>opaque类型是一个map类型，要求value是Base64格式编码，首先获取自动的Base64编码：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo -n "admin" | base64</span><br><span class="line">echo -n "passwd" | base64</span><br></pre></td></tr></table></figure>
+
+<p>secrets.yaml</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: Secret</span><br><span class="line">metadata:</span><br><span class="line">  name: mysecret</span><br><span class="line">type: Opaque</span><br><span class="line">data:</span><br><span class="line">  password: xxx</span><br><span class="line">  username: xxx</span><br></pre></td></tr></table></figure>
+
+<p><strong>将Secret挂载到Volume中</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: Pod</span><br><span class="line">metadata:</span><br><span class="line">  name: opaque-test</span><br><span class="line">  labels:</span><br><span class="line">    name: seret-test</span><br><span class="line">  namespace: default</span><br><span class="line">spec:</span><br><span class="line">  volumes:</span><br><span class="line">    - name: secret</span><br><span class="line">      secret:</span><br><span class="line">        secretName: mysecret</span><br><span class="line">  containers:</span><br><span class="line">    - name: test</span><br><span class="line">      image: nginx:1.19.2</span><br><span class="line">      volumeMounts:</span><br><span class="line">        - name: secret</span><br><span class="line">          mountPath: "/etc/serets"</span><br><span class="line">          readOnly: true</span><br></pre></td></tr></table></figure>
+
+<p>进入容器查看目录为;</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@opaque-test:/etc/serets# ls</span><br><span class="line">password  username</span><br></pre></td></tr></table></figure>
+
+<p>查看文件内容为：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">root@opaque-test:/etc/serets# cat password </span><br><span class="line">passwd</span><br><span class="line">root@opaque-test:/etc/serets# cat username </span><br><span class="line">admin</span><br></pre></td></tr></table></figure>
+
+<p>可以存储的内容已经经过了解码。</p>
+<p><strong>将Secret挂载早ENV中</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: Pod</span><br><span class="line">metadata:</span><br><span class="line">  name: config-test</span><br><span class="line">spec:</span><br><span class="line">  containers:</span><br><span class="line">    - name: test-container</span><br><span class="line">      image: nginx:1.19.2</span><br><span class="line">      command: ["/bin/sh", "-c", "env"]</span><br><span class="line">      env:</span><br><span class="line">        - name: USER</span><br><span class="line">          valueFrom:</span><br><span class="line">            secretKeyRef:</span><br><span class="line">              name: mysecret</span><br><span class="line">              key: username</span><br><span class="line">        - name: passwd</span><br><span class="line">          valueFrom:</span><br><span class="line">            secretMapKeyRef:</span><br><span class="line">              name: mysecret</span><br><span class="line">              key: password</span><br><span class="line">  restartPolicy: Never</span><br></pre></td></tr></table></figure>
+
+<h3 id="11-2-3-kubernetes-io-dockerconfigjson"><a href="#11-2-3-kubernetes-io-dockerconfigjson" class="headerlink" title="11.2.3 kubernetes.io/dockerconfigjson"></a>11.2.3 kubernetes.io/dockerconfigjson</h3><p> 使用kuberctl创建docker registry认证的secret</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubectl create secret docker-registry myregistrykey --docker-server=DOCKER_REGISTRY_SERVER --docker-username=DOCKER_USER --docker-password=DOCKER_PASSWORD --docker-email=DOCKER_EMAIL</span><br><span class="line"><span class="meta">&gt;</span>secret "myregistrykey" created</span><br></pre></td></tr></table></figure>
+
+<p>在创建Pod的时候，通过imagePullSecrets来引用创建的myregistrykey</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: Pod</span><br><span class="line">metadata:</span><br><span class="line">  name: foo</span><br><span class="line">spec:</span><br><span class="line">  containers:</span><br><span class="line">    - name: foo</span><br><span class="line">      image: someImage:latest</span><br><span class="line">  imagePullSecrets:</span><br><span class="line">    - name: myregistrykey</span><br></pre></td></tr></table></figure>
+
+<h2 id="11-3-Volume"><a href="#11-3-Volume" class="headerlink" title="11.3 Volume"></a>11.3 Volume</h2><p>kubernetes支持以下类型的卷：</p>
+<ul>
+<li><code>awsElasitcBlockStore</code> <code>azureDisk</code> <code>azureFile</code> <code>cephfs</code> <code>downwardAPI</code> <code>emptyDir</code></li>
+<li><code>fc</code> <code>flocker</code> <code>gcePersistentDisk</code> <code>gitRepo</code> <code>glusterfs</code> <code>hostPath</code> <code>iscsi</code> <code>local</code> <code>nfs</code></li>
+<li><code>persistentVolumeClaim</code> <code>projected</code> <code>protworxVolume</code> <code>quobyte</code> <code>rbd</code> <code>scaleIO</code> <code>secret</code></li>
+<li><code>storageos</code> <code>vsphereVolume</code></li>
+</ul>
+<h3 id="11-3-1-emptyDir"><a href="#11-3-1-emptyDir" class="headerlink" title="11.3.1 emptyDir"></a>11.3.1 emptyDir</h3><p>当Pod被分配节点时，首先创建emptyDir卷，并且只要该Pod在该节点上运行，该卷就会存在。正如卷的名字所述，它最初是空的。Pod中的容器可以读取和写入emptyDir卷中的相同文件，尽管该卷可以挂载早每个容器中的相同或不同路径上。当处于任何原因从节点中删除Pod时，emptyDir中的数据将永久删除。</p>
+<p><strong>容器崩溃不会从节点中删除pod，因此emptyDir卷中的数据在容器崩溃时是安全的</strong></p>
+<p>emptyDir的用法有：</p>
+<ul>
+<li>暂存空间，例如计算基于磁盘的合并排序</li>
+<li>用作长时间计算崩溃恢复时的检查点</li>
+<li>web服务容器提供数据时，保存内容管理器容器提取的文件</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: Pod</span><br><span class="line">metadata:</span><br><span class="line">  name: test-emptydir</span><br><span class="line">spec:</span><br><span class="line">  restartPolicy: Never</span><br><span class="line">  containers:</span><br><span class="line">    - name: app1</span><br><span class="line">      image: nginx:1.19.2</span><br><span class="line">      command: ["/bin/sh", "-c", "touch /cache/app1.obj"]</span><br><span class="line">      volumeMounts:</span><br><span class="line">        - name: cache-volume</span><br><span class="line">          mountPath: /cache</span><br><span class="line">    - name: app2</span><br><span class="line">      image: nginx:1.19.2</span><br><span class="line">      command: ["/bin/sh", "-c", "touch /cache/app2.obj"]</span><br><span class="line">      volumeMounts:</span><br><span class="line">        - name: cache-volume</span><br><span class="line">          mountPath: /cache</span><br><span class="line">    - name: app3</span><br><span class="line">      image: nginx:1.19.2</span><br><span class="line">      command: ["/bin/sh", "-c", "ls /cache"]</span><br><span class="line">      volumeMounts:</span><br><span class="line">        - name: cache-volume</span><br><span class="line">          mountPath: /cache</span><br><span class="line">  volumes:</span><br><span class="line">    - name: cache-volume</span><br><span class="line">      emptyDir: &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>例子中三个容器共享一个emptydir都可以访问到相同的数据。 </p>
 
     
 
